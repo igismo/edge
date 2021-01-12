@@ -1,0 +1,73 @@
+<html lang="en">
+<head>
+<title>pick - Geomview Manual</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Geomview Manual">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="GCL-Reference.html#GCL-Reference" title="GCL Reference">
+<link rel="prev" href="or.html#or" title="or">
+<link rel="next" href="pick_002dinvisible.html#pick_002dinvisible" title="pick-invisible">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="pick"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="pick_002dinvisible.html#pick_002dinvisible">pick-invisible</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="or.html#or">or</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="GCL-Reference.html#GCL-Reference">GCL Reference</a>
+<hr>
+</div>
+
+<h4 class="subsection">7.2.99 pick</h4>
+
+<p><a name="index-pick-106"></a>
+     <dl>
+<dt><code>(pick COORDSYS GEOMID G V E F P VI EI FI)</code><dd>The pick command is executed internally in response to pick
+events (right mouse double click).
+
+          <dl>
+<dt><var>COORDSYS</var><dd>= coordinate system in which coordinates of the following
+arguments are specified.   This can be:
+               <dl>
+<dt><code>world</code><dd>world coord sys
+<br><dt><code>self</code><dd>coord sys of the picked geom (<var>GEOMID</var>)
+<br><dt><code>primitive</code><dd>coord sys of the actual primitive within the picked geom where the pick
+occurred. 
+</dl>
+          <br><dt><var>GEOMID</var><dd> = id of picked geom
+<br><dt><var>G</var><dd> = picked point (actual intersection of pick ray with object)
+<br><dt><var>V</var><dd> = picked vertex, if any
+<br><dt><var>E</var><dd> = picked edge, if any
+<br><dt><var>F</var><dd> = picked face
+<br><dt><var>P</var><dd> = path to picked primitive [0 or more]
+<br><dt><var>VI</var><dd> = index of picked vertex in primitive
+<br><dt><var>EI</var><dd> = list of indices of endpoints of picked edge, if any
+<br><dt><var>FI</var><dd> = index of picked face
+</dl>
+
+     <p>External modules can find out about pick events by registering
+interest in calls to <code>pick</code> via the <code>interest</code> command.
+
+     <p>In the ND-viewing context the co-ordinates are actually ND-points. They
+correspond to the 3D points of the pick relative to the sub-space
+defined by the viewport of the camera where the pick occurred. The
+co-ordinates are then padded with zeroes and transformed back to the
+co-ordinate system defined by <var>COORDSYS</var>. 
+</dl>
+
+   </body></html>
+

@@ -1,0 +1,67 @@
+<html lang="en">
+<head>
+<title>transform - Geomview Manual</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Geomview Manual">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="GCL-Reference.html#GCL-Reference" title="GCL Reference">
+<link rel="prev" href="time_002dinterests.html#time_002dinterests" title="time-interests">
+<link rel="next" href="transform_002dincr.html#transform_002dincr" title="transform-incr">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="transform"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="transform_002dincr.html#transform_002dincr">transform-incr</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="time_002dinterests.html#time_002dinterests">time-interests</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="GCL-Reference.html#GCL-Reference">GCL Reference</a>
+<hr>
+</div>
+
+<h4 class="subsection">7.2.137 transform</h4>
+
+<p><a name="index-transform-145"></a>
+     <dl>
+<dt><code>(transform objectID centerID frameID [rotate|translate|translate-scaled|scale] x y z [dt [smooth]])</code><dd>Apply a motion (rotation, translation, scaling) to object
+<code>objectID</code>; that is, construct and concatenate a transformation
+matrix with objectID's transform The 3 IDs involved are the object that
+moves, the center of motion, and the frame of reference in which to
+apply the motion.  The center is easiest understood for rotations: if
+centerID is the same as objectID then it will spin around its own axes;
+otherwise the moving object will orbit the center object. There is the
+special keyword <code>bbox-center</code> which may be used for
+<code>centerID</code>. As a result the motion will be relative to the center
+of the bounding box of <code>objectID</code>. Normally frameID, in whose
+coordinate system the (mouse) motions are interpreted, is <code>focus</code>,
+the current camera.  Translations can be scaled proportional to the
+distance between the target and the center. Support for spherical and
+hyperbolic as well as Euclidean space is built-in: use the <code>space</code>
+command to change spaces.  With type <code>rotate</code> x, y, and z are
+floats specifying angles in RADIANS.  For types <code>translate</code> and
+<code>translate-scaled</code> x, y, and z are floats specifying distances in
+the coordinate system of the center object.
+
+     <p>The optional <code>dt</code> field allows a simple form of
+animation; if present, the object moves by just that amount during
+approximately <code>dt</code> seconds, then stops.  If present and followed by
+the <code>smooth</code> keyword, the motion is animated with a 3t^2-2t^3
+function, so as to start and stop smoothly.  If absent, the motion is
+applied immediately. 
+</dl>
+
+   </body></html>
+

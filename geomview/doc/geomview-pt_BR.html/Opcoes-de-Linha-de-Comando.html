@@ -1,0 +1,138 @@
+<html lang="en">
+<head>
+<title>Opcoes de Linha de Comando - Manual do Geomview</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Manual do Geomview">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Interacao.html#Interacao" title="Interacao">
+<link rel="prev" href="Iniciando-o-Geomview.html#Iniciando-o-Geomview" title="Iniciando o Geomview">
+<link rel="next" href="Interacao-Basica.html#Interacao-Basica" title="Interacao Basica">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Opcoes-de-Linha-de-Comando"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Interacao-Basica.html#Interacao-Basica">Interacao Basica</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Iniciando-o-Geomview.html#Iniciando-o-Geomview">Iniciando o Geomview</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Interacao.html#Interacao">Interacao</a>
+<hr>
+</div>
+
+<h3 class="section">3.2 Op&ccedil;&otilde;es de Linha de Comando</h3>
+
+<p>Aqui est&atilde;o as op&ccedil;&otilde;es de linha de comando que o Geomview permite:
+
+     <dl>
+<dt>&lsquo;<samp><span class="samp">-b </span><var>r</var> <var>g</var> <span class="samp">b</span></samp>&rsquo;<dd>Escolhe a cor de fundo da janela de c&acirc;mera para valores fornecidos de
+<var>r</var> <var>g</var> b. 
+<!-- added by jorge -->
+<!-- b 0 0 1 - azul -->
+<!-- b 0 0 0 - preto -->
+<!-- b 1 1 1 - branco -->
+<!-- b 0.5 0.5 0.5 - cinza -->
+<br><dt>&lsquo;<samp><span class="samp">-c </span><var>arquivo</var></samp>&rsquo;<dd>Interpreta os comandos GCL em <var>arquivo</var>, que pode ser o s&iacute;mbolo
+especial <samp><span class="file">-</span></samp> para a entrada padr&atilde;o.  Para uma descri&ccedil;&atilde;o de GCL,
+veja <a href="GCL.html#GCL">GCL</a>.
+
+     <br><dt>&lsquo;<samp><span class="samp">-c </span><var>comando</var></samp>&rsquo;<dd>Comandos podem tamb&eacute;m serem fornecidos literalmente, como em
+     <pre class="example">          -c "(ui-panel main off)"
+</pre>
+     <p>Uma vez que <var>comando</var> inclui par&ecirc;ntesis, que possuem significado especial para
+o shell, <var>comando</var> deve receber ap&oacute;strofo.  Multiplas op&ccedil;&otilde;es <var>-c</var> s&atilde;o permitidas.
+
+     <br><dt>&lsquo;<samp><span class="samp">-wins </span><var>n</var></samp>&rsquo;<dd>Faz com que Geomview mostre inicialmente <var>n</var> janelas de c&acirc;mera.
+
+     <br><dt>&lsquo;<samp><span class="samp">-wpos </span><var>largura</var><span class="samp">,</span><var>altura</var><span class="samp">[@</span><var>xmin</var><span class="samp">,</span><var>ymin</var><span class="samp">]</span></samp>&rsquo;<dd>Especifica a localiza&ccedil;&atilde;o inicial e o tamanho da primeira janela de c&acirc;mera.  Os
+valores para <var>largura</var>, <var>altura</var>, <var>xmin</var>, e <var>ymin</var> est&atilde;o em
+coordenadas de tela (pixel).
+
+     <br><dt>&lsquo;<samp><span class="samp">-M[cg][ps[un|in|in6]] </span><var>PIPENOME</var><span class="samp">|</span><var>TCPPORT</var></samp>&rsquo;<dd>A op&ccedil;&atilde;o &lsquo;<samp><span class="samp">-M</span></samp>&rsquo; aceita modificadores: um sufixo &lsquo;<samp><span class="samp">g</span></samp>&rsquo; espera
+dados geom&eacute;tricos (o padr&atilde;o), enquanto um sufixo &lsquo;<samp><span class="samp">c</span></samp>&rsquo; espera comandos
+GCL. Um &lsquo;<samp><span class="samp">p</span></samp>&rsquo; implica que a conec&ccedil;&atilde;o pode usar um pipe nomeado (o
+padr&atilde;o para tudo exceto para "NeXT"), enquanto &lsquo;<samp><span class="samp">s</span></samp>&rsquo; implica no uso de
+um "UNIX-domain socket" (o padr&atilde;o em "NeXT"). Uma vez que na vers&atilde;o 1.9 do
+Geomview "Internet domain sockets" s&atilde;o tamb&eacute;m suportados; use &lsquo;<samp><span class="samp">sin</span></samp>&rsquo; para
+fazer o Geomview escutar uma porta IPv4 fornecida por <var>TCPPORT</var>, ou use
+&lsquo;<samp><span class="samp">sin6</span></samp>&rsquo; para fazer Geomview escute uma porta IPv6 (tamb&eacute;m como especificado
+em <var>TCPPORT</var>). &lsquo;<samp><span class="samp">sun</span></samp>&rsquo; &eacute; um sin&ocirc;nimo para &lsquo;<samp><span class="samp">s</span></samp>&rsquo;, i.e. use o
+"Unix domain socket" com o nome <var>PIPENOME</var>. Se <var>PIPENOME</var>
+inicia com uma barra ('/'), ent&atilde;o esse nome &eacute; assumido ser um caminho
+absoluto, de outra forma o pipe nomeado  ou socket &eacute; criado sob o diret&oacute;rio
+<samp><span class="file">${TMPDIR}/geomview/</span></samp>.
+
+     <p><b>Escutando fluxo de comando em portas TCP pode ser um risco de seguran&ccedil;a,
+como Geomview por si mesmo n&atilde;o toma nenhum tipo de precau&ccedil;&atilde;o de seguran&ccedil;a, Geomview simplesmente
+executa todos os comandos alimentados a ele atrav&eacute;s do socket de rede. Isso
+tamb&eacute;m implica entrada e sa&iacute;da para unidades de armazenamento locais devem ser permitidas remotamente.</b>
+
+     <p>Exemplos:
+          <dl>
+<dt><code>-M </code><var>nome_de_objeto</var><dd>Mostra (possivelmente mudando dinamicamente) geometria enviada de
+programas <code>geomstuff</code> ou <code>togeomview</code>.  Essa op&ccedil;&atilde;o "-M" escuta o
+pipe nomeado <samp><span class="file">/tmp/geomview/nome_de_objeto</span></samp>; voc&ecirc; pode conseguir o mesmo
+efeito com os comandos de shell abaixo:
+          <pre class="example">               mkdir /tmp/geomview
+               mknod /tmp/geomview/nome_de_objeto p
+</pre>
+          <p>(assumindo que o diret&oacute;rio e o pipe nomeado n&atilde;o existam atualmente), ent&atilde;o
+executando o comando GCL:
+          <pre class="example">               (geometry nome_de_objeto  &lt;
+               /tmp/geomview/nome_de_objeto)
+</pre>
+          <p>(veja <a href="geometry.html#geometry"><code>(geometry ...)</code></a>)
+
+          <br><dt><code>-Mc </code><var>pipenome</var><dd>Como &lsquo;<samp><span class="samp">-M</span></samp>&rsquo; acima, mas espera comandos GCL, em lugar de dados
+geom&eacute;tricos OOGL, na conec&ccedil;&atilde;o.
+
+          <br><dt><code>-Mcs nome</code><dd>L&ecirc; comandos a partir do "UNIX-domain socket" nomeado. 
+<samp><span class="file">/tmp/geomview/nome</span></samp>
+
+          <br><dt><code>-Mcsin 40000</code><dd>L&ecirc; comandos a partir da porta IPv4 &lsquo;<samp><span class="samp">40000</span></samp>&rsquo;. Geomview por si mesmo n&atilde;o
+toma qualquer precau&ccedil;&atilde;o de seguran&ccedil;a, de forma que "-Mcsin 40000" pode ser um risco de seguran&ccedil;a. 
+</dl>
+
+     <br><dt>&lsquo;<samp><span class="samp">-noopengl</span></samp>&rsquo;<dd>Desabilita o uso de OpenGL para (possivelmente) convers&atilde;o acelerada de hardware,
+mesmo que o bin&aacute;rio do Geomview tenha suporte a OpenGL compilado internamente. "-noopengl"
+tamb&eacute;m desabilita o suporte a transpar&ecirc;ncia e texturas na
+janelas de c&acirc;mera. Instant&acirc;neos "RenderMan" ainda ter&atilde;o a transpar&ecirc;ncia correta
+e suporte a alguma textura limitada.
+
+     <br><dt>&lsquo;<samp><span class="samp">-nopanels</span></samp>&rsquo;<dd>Inicia sem mostrar nenhum painel, somente a janelas gr&aacute;ficas.  Pain&eacute;is podem ser
+invocados mais tarde da forma usual com as teclas de atalho <kbd>Px</kbd> ou com
+comando <code>ui-panel</code>. Veja <a href="ui_002dpanel.html#ui_002dpanel"><code>(ui-panel ...)</code></a>.
+
+     <br><dt>&lsquo;<samp><span class="samp">-noinit</span></samp>&rsquo;<dd>N&atilde;o l&ecirc; nenhum arquivo de inicializa&ccedil;&atilde;o. Por padr&atilde;o, Geomview l&ecirc; o arquivo
+<samp><span class="file">.geomview</span></samp> do sistema, seguido daqueles em <samp><span class="file">${HOME}/.geomview</span></samp> e em
+<samp><span class="file">./.geomview</span></samp>.
+
+     <br><dt>&lsquo;<samp><span class="samp">-e </span><var>modulo</var></samp>&rsquo;<dd>Inicial um m&oacute;dulo externo; <var>modulo</var> &eacute; o nome associado ao
+m&oacute;dulo chamado, aparecendo no painel principal no navegador de "Applications", como definido
+pelo comando <code>emodule-define</code>. Veja <a href="emodule_002ddefine.html#emodule_002ddefine"><code>(emodule-define ...)</code></a>.
+
+     <br><dt>&lsquo;<samp><span class="samp">-start </span><var>module</var> <var>args</var><span class="samp"> ...</span></samp>&rsquo;<dd>Como -e mas permite a voc&ecirc; enviar argumentos para o m&oacute;dulo externo.  "&ndash;"
+sinaliza o fim da lista de argumentos; o "&ndash;" pode ser omitido se for
+o &uacute;ltimo argumento na linha de comando do Geomview.
+
+     <br><dt>&lsquo;<samp><span class="samp">-run </span><var>coamando-shell</var> <var>args</var><span class="samp"> ...</span></samp>&rsquo;<dd>Como "-start" mas toma o caminho de arquivos do execut&aacute;vel do m&oacute;dulo externo
+em lugar do nome do m&oacute;dulo.  Os caminhos de arquivo de todos os diret&oacute;rios de m&oacute;dulos conhecidos
+s&atilde;o anexados ao final do caminho de busca do UNIX quando for invocado o <var>comando-shell</var>.
+
+   </dl>
+
+<!-- ================================================================ -->
+   </body></html>
+

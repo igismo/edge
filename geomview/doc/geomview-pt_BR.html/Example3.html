@@ -1,0 +1,528 @@
+<html lang="en">
+<head>
+<title>Example3 - Manual do Geomview</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Manual do Geomview">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Modulos.html#Modulos" title="Modulos">
+<link rel="prev" href="XForms.html#XForms" title="XForms">
+<link rel="next" href="Example4.html#Example4" title="Example4">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Example3"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Example4.html#Example4">Example4</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="XForms.html#XForms">XForms</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Modulos.html#Modulos">Modulos</a>
+<hr>
+</div>
+
+<h3 class="section">6.5 Exemplo 3: M&oacute;dulo Externo com Comunica&ccedil;&atilde;o Bi-Direcional</h3>
+
+<p>Os dois m&oacute;dulos exemplo anteriores simplesmente enviam comandos ao Geomview sem
+receber nada de volta do Geomview.  Esta se&ccedil;&atilde;o descreve um m&oacute;dulo
+que se comuica em ambas as dire&ccedil;&otilde;es.  Existe dois tipos de
+comunica&ccedil;&atilde;o que podem ir do Geomview para um m&oacute;dulo externo.  Esse
+exemplo mostra comunica&ccedil;&atilde;o <em>sem sincronismo</em> &mdash; o m&oacute;dulo precisa estar
+apto a responder a qualquer momento a express&otilde;es que o Geomview possa emitir
+as quais informam ao m&oacute;dulo de alguma modifica&ccedil;&atilde;o de estado dentro do Geomview.
+
+   <p>(O outro tipo de comunica&ccedil;&atilde;o &eacute; <em>com sincronismo</em>, onde um m&oacute;dulo
+envia uma requisi&ccedil;&atilde;o ao Geomview sobre alguma pe&ccedil;a de informa&ccedil;&atilde;o e espera por
+uma resposta venha de volta antes de fazer qualquer coisa a mais.  O principal comando
+GCL para requisitar informa&ccedil;&atilde;o desse tipo &eacute;
+<a href="write.html#write"><code>(write ...)</code></a>.  Esse m&oacute;dulo exemplo n&atilde;o faz nada com comunica&ccedil;&atilde;o
+sincronizada.)
+
+   <p>Na comnica&ccedil;&atilde;o sem sincronismo, Geomview envia express&otilde;es que s&atilde;o
+essencialmente ecos de comandos GCL.  O m&oacute;dulo externo envia ao
+Geomview um comando expressando interesse em um certo comando, e ent&atilde;o
+toda vez que Geomview executar o referido comando, o m&oacute;dulo recebe uma c&oacute;pia
+dele.  O envio de informa&ccedil;&atilde;o ocorre independentemente de que envia o comando ao Geomview; a requisi&ccedil;&atilde;o pode
+ser resultado do usu&aacute;rio fazendo alguma coisa com o painel do Geomview, ou
+pode vir de outro m&oacute;dulo ou de um arquivo que o Geomview leu. 
+&Eacute; dessa forma que um m&oacute;dulo descobre informa&ccedil;&otilde;es e age sobre coisas que ocorrem no
+Geomview.
+
+   <p>Esse exemplo usa a biblioteca em lisp da OOGL para analisar e agir sobre as
+express&otilde;es que Geomview escreve para a entrada padr&atilde;o do m&oacute;dulo.  Essa
+biblioteca faz atualmente parte do Geomview propriamente dito &mdash; escrevemos a biblioteca no
+processo de implementa&ccedil;&atilde;o da GCL.  Essa biblioteca lisp da OOGL tamb&eacute;m &eacute; conveniente para ser usada em
+m&oacute;dulos externos que devem entender um subconjunto da GCL &mdash;
+especificamente, aqueles comandos que o m&oacute;dulo tem interesse expresso.
+
+   <p>Esse exemplo mostra como um m&oacute;dulo pode receber eventos de sele&ccedil;&atilde;o de usu&aacute;rio, i.e. 
+quando o usu&aacute;rio clicar  com o bot&atilde;o direito do mouse com o cursor sobre um geom
+em uma janela de c&acirc;mera do Geomview.  Quando isso ocorrer Geomview gera uma
+chamada interna a um procedimento chamado <code>pick</code>; o argumento para o
+procedimento fornece informa&ccedil;&atilde;o sobre a sele&ccedil;&atilde;o, tal como o objeto que foi
+selecionado, as coordenadas co ponto selecionado, etc.  Se um m&oacute;dulo externo
+tiver expressado  interesse em chamadas ao procdimento <code>pick</code>, ent&atilde;o sempre que
+o procedimento <code>pick</code> for chamado Geomview ir&aacute; ecoar a chamada &agrave; entrada padr&atilde;o do
+m&oacute;dulo que manifestou o interesse.  O m&oacute;dulo que recebe o echo pode ent&atilde;o fazer o que desejar caom a informa&ccedil;&atilde;o
+do procedimento pick.
+
+   <p>Esse m&oacute;dulo &eacute; o mesmo que o m&oacute;dulo <em>Nose</em> que vem com o
+Geomview.  Seu prop&oacute;sito &eacute; ilustrar processos de sele&ccedil;&atilde;o.  Qualquer coisa que voc&ecirc; selecionar sobre um
+geom por meio de um clique do bot&atilde;o direito do mouse sobre esse geom, o m&oacute;dulo desenha uma pequena
+caixa na localiza&ccedil;&atilde;o onde voc&ecirc; tiver clicado.  De forma geral a caixa &eacute; amarela.  Caso voc&ecirc;
+selecione um v&eacute;rtice, a caixa &eacute; da cor magenta.  Se voc&ecirc; selecionar um ponto sobre uma
+aresta de um objeto, o m&oacute;dulo ir&aacute; tamb&eacute;m ressaltar a aresta desenhando
+caixas da cor ciano em suas extremidades e desenhar uma linha amarela ao lonfo da aresta.
+
+   <p>Note que para esse m&oacute;dulo fazer alguma coisa voc&ecirc; deve ter
+um geom carregado no Geomview e voc&ecirc; deve cicar com o bot&atilde;o direito do mouse
+com o cursor sobre uma parte do geom.
+
+<pre class="example">     <!-- #include "example3.c" -->
+     /*
+      * example3.c: external module with bi-directional communication
+      *
+      * This example module is distributed with the Geomview manual.
+      * If you are not reading this in the manual, see the "External
+      * Modules" chapter of the manual for an explanation.
+      *
+      * This module is the same as the "Nose" program that is distributed
+      * with Geomview.  It illustrates how a module can find out about
+      * and respond to user pick events in Geomview.  It draws a little box
+      * at the point where a pick occurrs.  The box is yellow if it is not
+      * at a vertex, and magenta if it is on a vertex.  If it is on an edge,
+      * the program also marks the edge.
+      *
+      * To compile:
+      *
+      *   cc -I/u/gcg/ngrap/include -g -o example3 example3.c \
+      *      -L/u/gcg/ngrap/lib/sgi -loogl -lm
+      *
+      * You should replace "/u/gcg/ngrap" above with the pathname of the
+      * Geomview distribution directory on your system.
+      */
+     
+     #include &lt;stdio.h&gt;
+     #include "lisp.h"               /* We use the OOGL lisp library */
+     #include "pickfunc.h"           /* for PICKFUNC below */
+     #include "3d.h"                 /* for 3d geometry library */
+     
+     /* boxstring gives the OOGL data to define the little box that
+      * we draw at the pick point.  NOTE:  It is very important to
+      * have a newline at the end of the OFF objeto in this string.
+      */
+     char boxstring[] = "\
+     INST\n\
+     transform\n\
+     .04 0 0 0\n\
+     0 .04 0 0\n\
+     0 0 .04 0\n\
+     0 0 0 1\n\
+     geom\n\
+     OFF\n\
+     8 6 12\n\
+     \n\
+     -.5 -.5 -.5     # 0   \n\
+     .5 -.5 -.5      # 1   \n\
+     .5  .5 -.5      # 2   \n\
+     -.5  .5 -.5     # 3   \n\
+     -.5 -.5  .5     # 4   \n\
+     .5 -.5  .5      # 5   \n\
+     .5  .5  .5      # 6   \n\
+     -.5  .5  .5     # 7   \n\
+     \n\
+     4 0 1 2 3\n\
+     4 4 5 6 7\n\
+     4 2 3 7 6\n\
+     4 0 1 5 4\n\
+     4 0 4 7 3\n\
+     4 1 2 6 5\n";
+     
+     progn()
+     {
+       printf("(progn\n");
+     }
+     
+     endprogn()
+     {
+       printf(")\n");
+       fflush(stdout);
+     }
+     
+     Initialize()
+     {
+       extern LObject *Lpick();  /* This is defined by PICKFUNC below but must */
+       			    /* be used in the following LDefun() call */
+       LInit();
+       LDefun("pick", Lpick, NULL);
+     
+       progn(); {
+         /* Define handle "littlebox" for use later
+          */
+         printf("(read geometry { define littlebox { %s }})\n", boxstring);
+     
+         /* Express interest in pick events; see Geomview manual for explanation.
+          */
+         printf("(interest (pick world * * * * nil nil nil nil nil))\n");
+     
+         /* Define "pick" objeto, initially the empty list (= null objeto).
+          * We replace this later upon receiving a pick event.
+          */
+         printf("(geometry \"pick\" { LIST } )\n");
+     
+         /* Make the "pick" objeto be non-pickable.
+          */
+         printf("(pickable \"pick\" no)\n");
+     
+         /* Turn off normalization, so that our pick objeto will appear in the
+          * right place.
+          */
+         printf("(normalization \"pick\" none)\n");
+     
+         /* Don't draw the pick objeto's bounding box.
+          */
+         printf("(bbox-draw \"pick\" off)\n");
+     
+       } endprogn();
+     }
+     
+     /* The following is a macro call that defines a procedure called
+      * Lpick().  The reason for doing this in a macro is that that macro
+      * encapsulates a lot of necessary stuff that would be the same for
+      * this procedure in any program.  If you write a Geomview module that
+      * wants to know about user pick events you can just copy this macro
+      * call and change the body to suit your needs; the body is the last
+      * argument to the macro and is delimited by curly braces.
+      *
+      * The first argument to the macro is the name of the procedure to
+      * be defined, "Lpick".
+      *
+      * The next two arguments are numbers which specify the sizes that
+      * certain arrays inside the body of the procedure should have.
+      * These arrays are used for storing the face and path information
+      * of the picked objeto.  In this module we don't care about this
+      * information so we declare them to have length 1, the minimum
+      * allowed.
+      *
+      * The last argument is a block of code to be executed when the module
+      * receives a pick event.  In this body you can refer to certain local
+      * variables that hold information about the pick.  For details see
+      * Example 3 in the Extenal Modules chapter of the Geomview manual.
+      */
+     PICKFUNC(Lpick, 1, 1,
+     {
+       handle_pick(pn&gt;0, &amp;point, vn&gt;0, &amp;vertex, en&gt;0, edge);
+     },
+     /* version for picking Nd-objects (not documented here) */)
+     
+     handle_pick(picked, p, vert, v, edge, e)
+          int picked;                /* was something actually picked?     */
+          int vert;                  /* was the pick near a vertex?        */
+          int edge;                  /* was the pick near an edge?         */
+          HPoint3 *p;                /* coords of pick point               */
+          HPoint3 *v;                /* coords of picked v&eacute;rtice            */
+          HPoint3 e[2];              /* coords of endpoints of picked edge */
+     {
+       Normalize(&amp;e[0]);             /* Normalize makes 4th coord 1.0 */
+       Normalize(&amp;e[1]);
+       Normalize(p);
+       progn(); {
+         if (!picked) {
+           printf("(geometry \"pick\" { LIST } )\n");
+         } else {
+           /*
+            * Put the box in place, and color it magenta if it's on a v&eacute;rtice,
+            * yellow if not.
+            */
+           printf("(xform-set pick { 1 0 0 0  0 1 0 0  0 0 1 0  %g %g %g 1 })\n",
+                  p-&gt;x, p-&gt;y, p-&gt;z);
+           printf("(geometry \"pick\"\n");
+           if (vert) printf("{ appearance { material { diffuse 1 0 1 } }\n");
+           else printf("{ appearance { material { diffuse 1 1 0 } }\n");
+           printf("  { LIST { :littlebox }\n");
+     
+           /*
+            * If it's on an edge and not a vertex, mark the edge
+            * with cyan boxes at the endpoins and a black line
+            * along the edge.
+            */
+           if (edge &amp;&amp; !vert) {
+             e[0].x -= p-&gt;x; e[0].y -= p-&gt;y; e[0].z -= p-&gt;z;
+             e[1].x -= p-&gt;x; e[1].y -= p-&gt;y; e[1].z -= p-&gt;z;
+             printf("{ appearance { material { diffuse 0 1 1 } }\n\
+       LIST\n\
+        { INST transform 1 0 0 0 0 1 0 0 0 0 1 0 %f %f %f 1 geom :littlebox }\n\
+        { INST transform 1 0 0 0 0 1 0 0 0 0 1 0 %f %f %f 1 geom :littlebox }\n\
+        { VECT\n\
+               1 2 1\n\
+               2\n\
+               1\n\
+               %f %f %f\n\
+               %f %f %f\n\
+               1 1 0 1\n\
+        }\n\
+       }\n",
+                    e[0].x, e[0].y, e[0].z,
+                    e[1].x, e[1].y, e[1].z,
+                    e[0].x, e[0].y, e[0].z,
+                    e[1].x, e[1].y, e[1].z);
+           }
+           printf("    }\n  }\n)\n");
+         }
+     
+       } endprogn();
+     
+     }
+     
+     Normalize(HPoint3 *p)
+     {
+       if (p-&gt;w != 0) {
+         p-&gt;x /= p-&gt;w;
+         p-&gt;y /= p-&gt;w;
+         p-&gt;z /= p-&gt;w;
+         p-&gt;w = 1;
+       }
+     }
+     
+     main()
+     {
+       Lake *lake;
+       LObject *lit, *val;
+       extern char *getenv();
+     
+       Initialize();
+     
+       lake = LakeDefine(stdin, stdout, NULL);
+       while (!feof(stdin)) {
+     
+         /* Parse next lisp expression from stdin.
+          */
+         lit = LSexpr(lake);
+     
+         /* Evaluate that expression; this is where Lpick() gets called.
+          */
+         val = LEval(lit);
+     
+         /* Free the two expressions from above.
+          */
+         LFree(lit);
+         LFree(val);
+       }
+     }
+     <!-- #end include -->
+</pre>
+   <p>The code begins by defining procedures <code>progn()</code> and
+<code>endprogn()</code> which begin and end a Geomview <code>progn</code> group. 
+The purpose do Geomview <code>progn</code> command is to group commands
+together and cause Geomview to execute them all at once, without
+refreshing any graphics windows until the end.  It is a good idea to
+group blocks of commands that a module sends to Geomview like this so
+that the user sees their cumulative effect all at once.
+
+   <p>Procedure <code>Initialize()</code> does various things needed at program
+startup time.  It initializes the lisp library by calling
+<code>LInit()</code>.  Any program that uses the lisp library should call this
+once before calling any other lisp library functions.  It then calls
+<code>LDefun</code> to tell the library about our <code>pick</code> procedure, which
+is defined further down with a call to the <code>PICKFUNC</code> macro.  Then
+it sends a bunch of setup commands to Geomview, grouped in a
+<code>progn</code> block.  This includes defining a handle called
+<code>littlebox</code> that stores the geometry da little box.  Next it
+sends the command
+
+<pre class="example">     (interest (pick world * * * * nil nil nil nil nil))
+</pre>
+   <p class="noindent">which tells Geomview to notify us when a pick event happens.
+
+   <p>The syntax of this <code>interest</code> statement merece some explanation. 
+In general <code>interest</code> takes one argument which is a (parenthesized)
+expression representing a Geomview function call.  It especifica a type
+of call that the module is interested in knowing about.  The arguments
+can be any particular argument values, ou the special symbols <code>*</code>
+or <code>nil</code>.  For example, the first argument in the <code>pick</code>
+expression above is <code>world</code>.  This means that the module is
+interested in calls to <code>pick</code> where the first argument, which
+especifica the coordinate system, is <code>world</code>.  A <code>*</code> is like a
+wild-card; it means that the module is interested in calls where the
+corresponding argument has any value.  The word <code>nil</code> is like
+<code>*</code>, except that the argument's value is not reported to the
+module.  This is useful for cutting down on the amount of data that must
+be transmitted in cases where there are arguments that the module
+doesn't care about.
+
+   <p>The second, third, fourth, and fifth arguments to the <code>pick</code>
+command give the name, pick point coordenadas, coordenadas do v&eacute;rtice, and
+edge coordenadas of a pick event.  We specify these by <code>*</code>'s above. 
+The remaining five arguments to the <code>pick</code> command give other
+information about the pick event that we do not care about in this
+module, so we specify these with <code>nil</code>'s.  For the details dos
+arguments to <code>pick</code>, See <a href="GCL.html#GCL">GCL</a>.
+
+   <p>The <code>geometry</code> statement defines a geom called <code>pick</code> that is
+initially an empty list, specified as <code> { LIST } </code>; this is the
+best way of specifying a null geom.  The module will replace this with
+something useful by sending Geomview another <code>geometry</code> command
+when the user picks something.  Next we arrange for the <code>pick</code>
+objeto to be non-pickable, and turn normalization off for it so that
+Geomview will display it in the size and location where we put it,
+rather than resizing and relocating it to fit into the unit cube.
+
+   <p>The next function in the file, <code>Lpick</code>, is defined with a strange
+looking call to a macro called <code>PICKFUNC</code>, defined in the header
+file <samp><span class="file">pickfunc.h</span></samp>.  This is the function for handling pick events. 
+The reason we provide a macro for this is that that macro encapsulates a
+lot of necessary stuff that would be the same for the pick-handling
+function in any program.  If you write a Geomview module that wants to
+know about user pick events you can just copy this macro call and change
+it to suit yours needs.
+
+   <p>In general the syntax for <code>PICKFUNC</code> is
+<pre class="example">     PICKFUNC(<var>name</var>, <var>block</var>, <var>NDblock</var>)
+</pre>
+   <p class="noindent">where <var>name</var> is the name do procedure to be defined, in this
+case <code>Lpick</code>. The next argument, <var>block</var>, is a block of code to
+be executed when a pick event occurs.  If <var>block</var> contains a return
+statement, then the returned value must be a pointer to a Lisp-objeto,
+that is of type <code>LObject *</code>. The last argument has the same
+functionality as the <var>block</var> argument, but is only invoked when
+picking objetos in a higher dimensional world.
+
+   <p><code>PICKFUNC</code> declares certain local variables in the body do
+procedure. When the module receives a <code>(pick ...)</code> statement
+from Geomview, the procedure assigns values to these variables based on
+the information in the <code>pick</code> call (variables corresponding to
+<code>nil</code>'s in the <code>(interest (pick ...))</code> are not given
+values).
+
+   <p>There is also a second variant da <code>PICKFUNC</code> macro with a
+slightly different syntax:
+<pre class="example">     DEFPICKFUNC(<var>helpstr</var>, <var>coordsys</var>, <var>id</var>,
+       <var>point</var>, <var>pn</var>, <var>vertex</var>, <var>vn</var>, <var>edge</var>, <var>en</var>, <var>face</var>, <var>fn</var>, <var>ppath</var>, <var>ppn</var>,
+       <var>vi</var>, <var>ei</var>, <var>ein</var>, <var>fi</var>,
+       <var>body</var>, <var>NDbody</var>)
+</pre>
+   <p><code>DEFPICKFUNC</code> can be used as well as <code>PICKFUNC</code>, there is no
+functional differene with the exception that the name da C-function
+is tied to <code>Lpick</code> when using <code>DEFPICKFUNC</code> and that the
+<code>(help pick)</code> GCL-command (see <a href="help.html#help"><code>(help ...)</code></a>)
+would respond with echoing <var>helpstr</var>.
+
+   <p>The table below lists all variables defined in <code>PICKFUNC</code> In the
+context of ND-viewing <code>float</code> variants dos arguments apply: the
+<var>body</var> execution block sees the <code>HPoint3</code> variables, and the
+<var>NDbody</var> block sees only flat one-dimensional arrays of
+<code>float</code>-type.
+
+   <p>In the ND-viewing context the co-ordinates passed to the pick function
+are still the 3-dimensional co-ordinates da c&acirc;mera view-port where
+the pick occurred, but padded with zeroes on transformed back to the
+co-ordinate system specified by the second argument do <code>pick</code>
+command.
+
+     <dl>
+<dt><code>char *coordsys;</code><dd>A string specifying the coordinate system in which coordenadas are
+given.  In this example, this will always be <code>world</code> because
+do <code>interest</code> call above.
+
+     <br><dt><code>char *id;</code><dd>A string specifying the name do picked geom.
+
+     <br><dt><code>HPoint3 point; int pn;</code>
+<br><dt><code>float *point; int pn;</code><dd><code>point</code> is an <code>HPoint3</code> structure giving the coordenadas of
+the picked point.  <code>HPoint3</code> is a homogeneous point coordinate
+representation equivalent to an array of 4 floats. <code>pn</code> tells how
+many coordenadas have been written into this array; it will always be
+either <code>0</code>, <code>4</code> ou greater than <code>4</code>. If it is greater
+than <code>4</code>, then the <var>NDbody</var> instruction block is invoked and in
+this case <code>point</code> is a flat array of <code>pn</code> many <code>float</code>s. 
+A value of zero means no point was picked, i.e. the user clicado the
+bot&atilde;o direito do mouse while the cursor was not pointing at a geom. In this
+case the ordinary <var>block</var> 3d instruction block is executed.
+
+     <br><dt><code>HPoint3 vertex; int vn;</code>
+<br><dt><code>float *vertex; int vn;</code><dd><code>vertex</code> is an <code>HPoint3</code> structure giving the coordenadas of
+the v&eacute;rtice selecionado, if the pick point was near a v&eacute;rtice.  <code>vn</code> tells
+how many coordenadas have been written into this array; it will always
+be either <code>0</code> ou greater equal <code>4</code>. A value of zero means the
+pick point was not near a v&eacute;rtice. In the context of ND-viewing
+<code>vertex</code> will be an array of <code>vn</code> <code>float</code>s and <code>vn</code>
+will be equal to <code>pn</code>.
+
+     <br><dt><code>HPoint3 edge[2]; int en;</code>
+<br><dt><code>float *edge; int en;</code><dd><code>edge</code> is an array of two <code>HPoint3</code> structures giving the
+coordenadas do endpoints da picked edge, if the pick point was
+near an edge.  <code>en</code> tells how many coordenadas have been written
+into this array; it will always be <code>0</code> ou greater equal <code>8</code>. 
+A value of zero means the pick point was not near an edge. In the
+context of ND-viewing <code>edge</code> will be a flat one-dimensional array
+of <code>en</code> many <code>float</code>s: the first <code>pn</code> <code>float</code>s
+define the first v&eacute;rtice, and the second <code>pn</code> many <code>float</code>s
+define the second v&eacute;rtice; <code>en</code> will be two times <code>pn</code>.
+
+   </dl>
+
+   <p>In this example module, the remaining variables will never be given
+values because their values in the <code>interest</code> statement were
+specified as <code>nil</code>.
+
+     <dl>
+<dt><code>HPoint3 face[]; int fn;</code>
+<br><dt><code>float *face; int fn;</code><dd><code>face</code> is a variable length array of <var>fn</var> <code>HPoint3</code>'s. 
+<code>face</code> gives the coordenadas dos v&eacute;rtices da picked face. 
+<code>fn</code> tells how many coordenadas have been written into this array;
+it will always be either <code>0</code> ou a multiple of <code>pn</code>. A value of
+zero means the pick point was not near a face. In the context of
+ND-viewing <code>face</code> is a flat one-dimensional array of <code>fn</code> many
+floats of which each v&eacute;rtice occupies <code>pn</code> many componentes.
+
+     <br><dt><code>int ppath[]; int ppn;</code><dd><code>ppath</code> is an array of <var>maxpathlen</var> <code>int</code>'s.  <code>ppath</code>
+gives the path through the OOGL heirarchy to the picked primitive. 
+<code>pn</code> tells how many integers have been written into this array; it
+will be at most <var>maxpathlen</var>.  A path of {3,1,2}, for example,
+means that the picked primitive is "subobjeto number 2 of subobjeto
+number 1 of objeto 3 in the world".
+
+     <br><dt><code>int vi;</code><dd><code>vi</code> gives the index do v&eacute;rtice selecionado in the picked primitive,
+if the pick point was near a v&eacute;rtice.
+
+     <br><dt><code>int ei[2]; int ein</code><dd>The <code>ei</code> array gives the indices dos endpoints da picked
+edge, if the pick point was near a v&eacute;rtice.  <code>ein</code> tells how many
+integers were written into this array.  It will always be either 0 ou 2;
+a value of 0 means the pick point was not near an edge.
+
+     <br><dt><code>int fi;</code><dd><code>fi</code> gives the index da picked face in the picked primitive, if
+the pick point was near a face.
+
+   </dl>
+
+   <p>The <code>handle_pick</code> procedure actually does the work of dealing with
+the pick event.  It begins by normalizing the homogeneous coordenadas
+passed in as arguments so that we can assume the fourth coordinate is 1. 
+It then sends GCL commands to define the <code>pick</code> objeto to be
+whatever is appropriate for the kind of pick recieved.  Veja <a href="Formatos-dos-Arquivos-da-OOGL.html#Formatos-dos-Arquivos-da-OOGL">Formatos dos Arquivos da OOGL</a>, and veja <a href="GCL.html#GCL">GCL</a>, for an explanation do
+format dos data in these commands.
+
+   <p>The main program, at the bottom do file, first calls
+<code>Initialize()</code>.  Next, the call to <code>LakeDefine</code> defines the
+<code>Lake</code> that the lisp library will use.  A <code>Lake</code> is a
+structure that the lisp library uses internally as a type of
+communiation vehicle.  (It is like a unix stream but more general, hence
+the name.)  This call to <code>LakeDefine</code> defines a <code>Lake</code>
+structure for doing I/O with <code>stdin</code> and <code>stdout</code>.  The third
+argument to <code>LakeDefine</code> should be <code>NULL</code> for external modules
+(it is used by Geomview).  Finally, the program enters its main loop
+which parses and evaluates expressions from standard input.
+
+<!-- **************************************************************** -->
+   </body></html>
+

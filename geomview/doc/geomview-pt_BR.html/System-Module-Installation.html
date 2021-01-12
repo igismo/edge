@@ -1,0 +1,65 @@
+<html lang="en">
+<head>
+<title>System Module Installation - Manual do Geomview</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Manual do Geomview">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Module-Installation.html#Module-Installation" title="Module Installation">
+<link rel="prev" href="Private-Module-Installation.html#Private-Module-Installation" title="Private Module Installation">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="System-Module-Installation"></a>
+<p>
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Private-Module-Installation.html#Private-Module-Installation">Private Module Installation</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Module-Installation.html#Module-Installation">Module Installation</a>
+<hr>
+</div>
+
+<h4 class="subsection">6.7.2 System Module Installation</h4>
+
+<p>Para instalar um m&oacute;dulo de forma que esse m&oacute;dulo esteja dispon&iacute;vel para todos os usu&aacute;rios do Geomview fa&ccedil;a
+o seguinte
+
+     <dl>
+<dt>1.<dd>Crie um arquivo chamado <samp><span class="file">.geomview-</span><var>m&oacute;dulo</var></samp>
+<samp><var>m&oacute;dulo</var></samp> &eacute; o nome do m&oacute;dulo.  Esse arquivo deve conter
+uma linha simples que &eacute; um comando <code>emodule-define</code> para aquele m&oacute;dulo:
+     <pre class="example">          (emodule-define "Novo M&oacute;dulo" "novomodulo")
+</pre>
+     <p>O primeiro argumento, <code>"Novo M&oacute;dulo"</code> acima, &eacute; a sequ&ecirc;ncia de caracteres que ir&aacute;
+aparecer no navegador de m&oacute;dulo (<em>Modules</em>).  A segunda sequ&ecirc;ncia de caracteres,
+<code>"novomodulo"</code> acima, &eacute; o comando de Bourne shell para invocar o m&oacute;dulo. 
+Esse comando de shell pode incluir argumentos, e voc&ecirc; pode assumir que o m&oacute;dulo encontra-se localizado em
+$PATH que representa os locais de busca do shell.
+
+     <br><dt>2.<dd>Coloque uma c&oacute;pia do <samp><span class="file">.geomview-</span><var>m&oacute;dulo</var></samp> e o execut&aacute;vel do
+m&oacute;dulo propriamente dito no diret&oacute;rio <samp><span class="file">/usr/local/libexec/geomview</span></samp>.
+
+   </dl>
+
+   <p>Ap&oacute;s esses passos, o novo m&oacute;dulo deve aparecer, em ordem
+alfab&eacute;tica, no navegador de m&oacute;dulos (<em>Modules</em>) do Geomview do painel
+principal (<em>Main</em>) da pr&oacute;xima vez que o Geomview for inicializado.  A raz&atilde;o desse trabalho &eacute; que quando
+Geomview for invocado processar&aacute; todos os arquivos <samp><span class="file">.geomview-*</span></samp> em seu
+diret&oacute;rio de <samp><span class="file">m&oacute;dulos</span></samp>.  Geomview tamb&eacute;m lembra o caminho desse
+diret&oacute;rio e coloca aquele caminho em $PATH do shell no qual Geomview
+invoca tal m&oacute;dulo.
+
+<!-- **************************************************************** -->
+   </body></html>
+

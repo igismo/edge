@@ -1,0 +1,87 @@
+#!version 2.2.6
+surface
+#!parameters:
+uniform	float	Ka	=	1
+uniform	float	Kd	=	.5
+uniform	float	Ks	=	.5
+uniform	float	roughness	=	.1
+uniform	color	specularcolor	=	1
+uniform	string	texturename	=	""
+uniform	float	At	=	1
+#!variables:
+varying	vector	Nf
+varying	vector	V
+varying	vector	Ct
+varying	float	Ot
+varying	float	channels
+varying	float	temporary_0
+varying	float	temporary_1
+uniform	float	temporary_2
+varying	float	temporary_3
+varying	float	temporary_4
+varying	float	temporary_5
+varying	vector	temporary_6
+varying	vector	temporary_7
+varying	vector	temporary_8
+varying	vector	temporary_9
+uniform	vector	temporary_10
+varying	vector	temporary_11
+varying	vector	temporary_12
+uniform	vector	temporary_13
+#!Init:
+	return            
+#!Code:
+	movevv            	Ci Cs
+	movevv            	Oi Os
+	sneql             	temporary_2 texturename ""
+	vufloat            temporary_1 temporary_2
+	textureinfo	("f=SSF")  temporary_4  texturename  "channels"  channels 
+	vufloat            temporary_5 1.0
+	feql              	temporary_3 temporary_4 temporary_5
+	and               	temporary_0 temporary_1 temporary_3
+	if                	temporary_0 #!Label5
+	vufloat            temporary_3 3
+	flt               	temporary_1 channels temporary_3
+	if                	temporary_1 #!Label8
+	texture	("f=SFffSf")  temporary_3  texturename  0  s  t  "width"  0.0 
+	vfromf            	Ct temporary_3
+	texture	("f=SFffSfsf")  Ot  texturename  1  s  t  "fill"  1.0  "width"  0.0 
+#!Label8:
+	else              	#!Label7
+	texture	("c=SFffSf")  Ct  texturename  0  s  t  "width"  0.0 
+	texture	("f=SFffSfsf")  Ot  texturename  3  s  t  "fill"  1.0  "width"  0.0 
+#!Label7:
+	endif             
+	subff             	temporary_2 1.0 At
+	vufloat            temporary_1 temporary_2
+	vufloat            temporary_4 At
+	mulff             	temporary_3 temporary_4 Ot
+	addff             	Ot temporary_1 temporary_3
+	mulvv             	Ci Ci Ct
+	vfromf            	temporary_6 Ot
+	mulvv             	Oi Oi temporary_6
+#!Label5:
+	endif             
+	normalize	("v=v")  temporary_6  N 
+	faceforward	("v=vv")  Nf  temporary_6  I 
+	normalize	("v=v")  temporary_6  I 
+	negv              	V temporary_6
+	vfromf            	temporary_10 Ka
+	vuvector           temporary_9 temporary_10
+	ambient	("c=")  temporary_11 
+	mulvv             	temporary_8 temporary_9 temporary_11
+	vfromf            	temporary_10 Kd
+	vuvector           temporary_11 temporary_10
+	diffuse	("c=n")  temporary_12  Nf 
+	mulvv             	temporary_9 temporary_11 temporary_12
+	addvv             	temporary_7 temporary_8 temporary_9
+	mulvv             	temporary_6 Ci temporary_7
+	vfromf            	temporary_13 Ks
+	mulvv             	temporary_10 specularcolor temporary_13
+	vuvector           temporary_8 temporary_10
+	vufloat            temporary_0 roughness
+	specular	("c=nvf")  temporary_9  Nf  V  temporary_0 
+	mulvv             	temporary_7 temporary_8 temporary_9
+	addvv             	Ci temporary_6 temporary_7
+	mulvv             	Ci Ci Oi
+	return            

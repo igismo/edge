@@ -1,0 +1,54 @@
+<html lang="en">
+<head>
+<title>time-interests - Geomview Manual</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Geomview Manual">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="GCL-Reference.html#GCL-Reference" title="GCL Reference">
+<link rel="prev" href="stereowin.html#stereowin" title="stereowin">
+<link rel="next" href="transform.html#transform" title="transform">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="time-interests"></a>
+<a name="time_002dinterests"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="transform.html#transform">transform</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="stereowin.html#stereowin">stereowin</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="GCL-Reference.html#GCL-Reference">GCL Reference</a>
+<hr>
+</div>
+
+<h4 class="subsection">7.2.136 time-interests</h4>
+
+<p><a name="index-time_002dinterests-144"></a>
+     <dl>
+<dt><code>(time-interests deltatime initial prefix [suffix])</code><dd>Indicates that all interest-related messages, when separated by at
+least <code>deltatime</code> seconds of real time, should be preceded by
+the string <code>prefix</code> and followed by <code>suffix</code>; the first message
+is preceded by <code>initial</code>.  All three are printf format strings,
+whose argument is the current clock time (in seconds) on that stream. 
+A <code>deltatime</code> of zero timestamps every message.  Typical usage:<br>
+(time-interests .1 <code>(set-clock %g)</code> <code>(sleep-until %g)</code>)  or<br>
+(time-interests .1 <code>(set-clock %g)</code>
+        "(sleep-until %g) (progn (set-clock %g)" ")")    or<br>
+(time-interests .1 "(set-clock %g)"
+                   "(if (&gt; 0 (sleep-until %g)) (" "))". 
+</dl>
+
+   </body></html>
+

@@ -1,0 +1,49 @@
+<html lang="en">
+<head>
+<title>real-id - Geomview Manual</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Geomview Manual">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="GCL-Reference.html#GCL-Reference" title="GCL Reference">
+<link rel="prev" href="read.html#read" title="read">
+<link rel="next" href="redraw.html#redraw" title="redraw">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="real-id"></a>
+<a name="real_002did"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="redraw.html#redraw">redraw</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="read.html#read">read</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="GCL-Reference.html#GCL-Reference">GCL Reference</a>
+<hr>
+</div>
+
+<h4 class="subsection">7.2.112 real-id</h4>
+
+<p><a name="index-real_002did-119"></a>
+     <dl>
+<dt><code>(real-id ID)</code><dd>Returns a string canonically identifying the given ID,
+or <code>nil</code> if the object does not exist.  Examples:
+ (if (real-id fred) (delete fred))
+deletes <code>fred</code> if it exists but reports no error if it doesn't, and
+ (if (= (real-id targetgeom) (real-id World)) () (delete targetgeom))
+deletes <code>targetgeom</code> if it is different from the World. 
+</dl>
+
+   </body></html>
+

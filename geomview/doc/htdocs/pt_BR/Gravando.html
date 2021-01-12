@@ -1,0 +1,144 @@
+<html lang="en">
+<head>
+<title>Gravando - Manual do Geomview</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Manual do Geomview">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Interacao.html#Interacao" title="Interacao">
+<link rel="prev" href="Cameras.html#Cameras" title="Cameras">
+<link rel="next" href="Comandos.html#Comandos" title="Comandos">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Gravando"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Comandos.html#Comandos">Comandos</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Cameras.html#Cameras">Cameras</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Interacao.html#Interacao">Interacao</a>
+<hr>
+</div>
+
+<h3 class="section">3.8 Gravando Seu Trabalho</h3>
+
+<p>O painel <em>Save</em> do Geomview permite a voc&ecirc; armazenar objetos do Geomview e outra
+informa&ccedil;&atilde;o em arquivos que voc&ecirc; pode recuperar dentro do Geomview ou a partir de outros
+programas. 
+<div class="float">
+<a name="figsavepanel"></a><img src="figs/save.png" alt="figs/save.png">
+
+   <p><strong class="float-caption">Figura 3.9: O Painel Gravar.</strong></p></div>
+Para usar o painel <em>Save</em> voc&ecirc; seleciona o formato desejado no
+navegador perto da palavra <em>Save</em>, informe o nome do objeto que voc&ecirc;
+quer gravar no campo de texto perto da palavra <em>for</em>, e informe
+o nome do local no qual voc&ecirc; deseja gravar o arquivo no campo longo de texto perto
+da palavra <em>in</em>.  Voc&ecirc; pode ou pressionar <kbd>&lt;Enter&gt;</kbd> ou clicar
+sobre o bot&atilde;o <em>OK</em>.  Quando o arquivo tiver sido gravado no local desejado, o painel
+<em>Save</em> desaparecer&aacute;.  Caso voc&ecirc; queira dispensar o painel <em>Save</em> sem
+gravar um arquivo, clique no bot&atilde;o <em>Cancel</em>.
+
+   <p>Caso voc&ecirc; especifique <samp><span class="file">-</span></samp> como nome de arquivo, Geomview mostra o arquivo
+na sa&iacute;da padr&atilde;o, i.e. na janela de shell a partir da qual voc&ecirc; invocou o
+Geomview.
+
+   <p>Os poss&iacute;veis formatos s&atilde;o fornecidos abaixo.  O tipo de objeto que pode
+ser escrito com cada formato &eacute; fornecido entre par&ecirc;ntesis.
+
+     <dl>
+<dt><em>Commands (qualquer objeto)</em><dd>A op&ccedil;&atilde;o "Commands" escreve um arquivo de comandos GCL contendo todas as informa&ccedil;&otilde;es sobre
+o objeto.  Chamando o arquivo posteriormente ir&aacute; restaurar o objeto bem como
+todas as outras informa&ccedil;&otilde;es sobre o referido objeto, tais como apar&ecirc;ncia, transforma&ccedil;&otilde;es,
+etc.
+
+     <br><dt><em>Geometry alone (geom)</em><dd>A op&ccedil;&atilde;o "Geometry alone" escreve um arquivo OOGL contendo apenas a geo-metria do objeto.
+
+     <br><dt><em>Geometry [in world] (geom)</em><dd>A op&ccedil;&atilde;o "Geometry [in world]" escreve um arquivo OOGL contendo a geometria do objeto,
+transformado sob a transforma&ccedil;&atilde;o atual do Geomview para esse objeto. 
+Use a op&ccedil;&atilde;o "Geometry [in world]" caso voc&ecirc; tenha movido o objeto de sua posi&ccedil;&atilde;o inicial e queira
+a nova posi&ccedil;&atilde;o em rela&ccedil;&atilde;o ao objeto mundo.
+
+     <br><dt><em>Geometry [in universe] (geom)</em><dd>A op&ccedil;&atilde;o "Geometry [in universe]" grava um arquivo OOGL contendo apenas a geometria do geom,
+transformado sob transforma&ccedil;&otilde;es sofridas pelo objeto e tamb&eacute;m sob transforma&ccedil;&otilde;es sofridas
+pelo objeto mundo.
+
+     <br><dt><em>RMan [-&gt;tiff] (camera)</em><dd>A op&ccedil;&atilde;o "RMan [-&gt;tiff]" escreve um arquivo que quando for renderizado cria uma imagem
+tiff. Transpar&ecirc;ncia e textura (a mais recente somente at&eacute; certo ponto) estar&aacute;
+dispon&iacute;vel.
+
+     <br><dt><em>RMan [-&gt;frame] (camera)</em><dd>A op&ccedil;&atilde;o "RMan [-&gt;frame]" escreve um arquivo RenderMan que quando for rede-rizado faz com que uma imagem apare&ccedil;a em
+uma janela na tela. Transpar&ecirc;ncia e textura (a mais recente somente at&eacute;
+certo ponto) estar&aacute; dispon&iacute;vel.
+
+     <br><dt><em>SGI snapshot (camera)</em><dd>A op&ccedil;&atilde;o "SGI snapshot" escreve um arquivo de varredura SGI.  Uma campainha toca quando o instant&acirc;neo for completado. 
+Somente dispon&iacute;vel em sistemas SGI.
+
+     <br><dt><em>PPM GLX-offscreen snapshot (camera)</em><dd>Renderiza uma cena completa novamente dentro da mem&oacute;ria off-screen; GLX fornece os
+meios para usar um Pixmap como &aacute;rea de renderiza&ccedil;&atilde;o. A vantagem de renderizar dentro
+da mem&oacute;ria <em>off</em>-screen em rela&ccedil;&atilde;o a pegar um instant&acirc;neo de tela &eacute; que a janela
+de c&acirc;mera n&atilde;o precisa ser mapeada e tamb&eacute;m n&atilde;o precisa aparece na hora do intant&acirc;neo &eacute;
+realizado. De forma que com o intant&acirc;neo off-screen se pode seguramente colocar a janela de c&acirc;mera no formato
+de &iacute;cone (mas n&atilde;o fech&aacute;-la!), ativar a prote&ccedil;&atilde;o de tela e ir dormir
+enquanto algum script avan&ccedil;a as cenas e grava os instant&acirc;neos.
+
+     <br><dt><em>PPM Screen snapshot (camera)</em><dd>Grava os instant&acirc;neos a partir da janela fornecida e grava no formato de imagem PPM. 
+Se voc&ecirc; especificar uma sequ&ecirc;ncia de caracteres come&ccedil;ando com um barra vertical (<kbd>|</kbd>)
+como nome de arquivo, isso &eacute; interpretado com um comando de redirecionamento do shell
+para o qual os dados do PPM dever&atilde;o ser canalizados, como em
+&lsquo;<samp><span class="samp">| pnmtotiff &gt; snap.tiff</span></samp>&rsquo; ou em &lsquo;<samp><span class="samp">| convert -geometry 50% ppm:- snap.gif</span></samp>&rsquo;.
+
+     <p>Instant&acirc;neos de tela PPM est&atilde;o somente dispon&iacute;veis com GL e open GL, n&atilde;o com gr&aacute;ficos
+X somente.  A janela pode ocupar inteiramente tela.  Geomview ir&aacute;
+garantir que n&atilde;o haja outras janelas reproduzindo-a enquanto o instant&acirc;neo &eacute; gravado. &Eacute;
+provavelmente melhor usar instant&acirc;neos GLX-<em>off-screen</em>, como
+acima exposto.
+
+     <br><dt><em>PPM software snapshot (camera)</em><dd>Escreve um instant&acirc;neo da janela atualmente visualizada, como uma imagem PPM, apra o
+arquivo fornecido.  O nome do arquivo pode ser um comando do shell Bourne precedido por uma barra
+vertical (<kbd>|</kbd>), da mesma forma que com o inst&acirc;nt&acirc;neo de tela PPM (PPM screen snapshot).  O instant&acirc;neo de software, apesar disso,
+&eacute; produzido atrav&eacute;s do uso de software renderizador interno (relacionado ao renderizador do
+sistema X-window).  N&atilde;o &eacute; importante se a janela est&aacute; vis&iacute;vel ou n&atilde;o,
+e &eacute; independente do GL ou do OpenGL.  Tamb&eacute;m essa op&ccedil;&atilde;o n&atilde;o suporta alguns recursos,
+tais como mapeamento de textura.
+
+     <br><dt><em>Postscript snapshot (camera)</em><dd>Escreve um instant&acirc;neo Postscript da vis&atilde;o da c&acirc;mera.  O instant&acirc;neo &eacute; feito atrav&eacute;s
+da decomposi&ccedil;&atilde;o da cena em linhas e pol&iacute;gonos, ordenando por intensidade, e
+gerando linhas no formato Postscript e pol&iacute;gonos para cada uma.  Vantagens desse processo sobre
+o processo baseado em pixes do instant&acirc;neo de imagens: a resolu&ccedil;&atilde;o &eacute; muito alta, de forma que arestas
+parecem na posi&ccedil;&atilde;o correta mesmo em impressoras de alta resolu&ccedil;&atilde;o, ou imagens de resolu&ccedil;&atilde;o compar&aacute;vel
+s&atilde;o tipicamente muito mais compactas.  Desvantagens: ordena&ccedil;&atilde;o por intensidade
+fornece bons resultados em algumas cenas, mas pode ser grandemente ruim como no algor&iacute;tmo de remo&ccedil;&atilde;o
+de cenas ocultas em outras cenas.  Tamb&eacute;m, Postscript n&atilde;o oferece
+sombreamento interpolado linear, somente sombreamento linear simples para cada faceta.
+
+     <br><dt><em>Camera (camera)</em><dd>Escreve um arquivo OOGL de uma c&acirc;mera.
+
+     <br><dt><em>Transform [to world] (qualquerobjeto)</em><dd>Escreve um arquivo de transforma&ccedil;&atilde;o OOGL fornecendo transforma&ccedil;&atilde;o do Geomview para o objeto.
+
+     <br><dt><em>Transform [to universe] (qualquerobjeto)</em><dd>Escreve um arquivo de transforma&ccedil;&atilde;o OOGL fornecendo uma transforma&ccedil;&atilde;o que &eacute; a
+composi&ccedil;&atilde;o de transforma&ccedil;&atilde;o do Geomview para o objeto e a transforma&ccedil;&atilde;o sofrida
+pelo objeto mundo.
+
+     <br><dt><em>Window (camera)</em><dd>Escreve um arquivo de janela OOGL para uma c&acirc;mera.
+
+     <br><dt><em>Panels</em><dd>Escreve um arquivo GCL contendo comandos que gravam
+o estado de todos os pain&eacute;is do Geomview.  Chamando esse arquivo posteriormente ir&aacute;
+restaurar as posi&ccedil;&otilde;es de todos os pain&eacute;is.
+
+   </dl>
+
+<!-- ================================================================ -->
+   </body></html>
+

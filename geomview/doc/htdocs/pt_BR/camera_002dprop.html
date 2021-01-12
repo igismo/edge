@@ -1,0 +1,50 @@
+<html lang="en">
+<head>
+<title>camera-prop - Manual do Geomview</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Manual do Geomview">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="GCL-Reference.html#GCL-Reference" title="GCL Reference">
+<link rel="prev" href="camera_002ddraw.html#camera_002ddraw" title="camera-draw">
+<link rel="next" href="camera_002dreset.html#camera_002dreset" title="camera-reset">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="camera-prop"></a>
+<a name="camera_002dprop"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="camera_002dreset.html#camera_002dreset">camera-reset</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="camera_002ddraw.html#camera_002ddraw">camera-draw</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="GCL-Reference.html#GCL-Reference">GCL Reference</a>
+<hr>
+</div>
+
+<h4 class="subsection">7.2.21 camera-prop</h4>
+
+<p><a name="index-camera_002dprop-27"></a>
+     <dl>
+<dt><code>(camera-prop { geometry object } [projective])</code><dd>Especifica o objeto a ser mostrado quando desenhando outras c&acirc;meras. 
+Por padr&atilde;o, esse objeto &eacute; desenhado com sua or&iacute;gem na camera,
+e com a c&acirc;mera olhando adiante do eixo -Z do objeto. 
+Com a palavra chave <code>projective</code>, a proje&ccedil;&atilde;o da vis&atilde;o da c&acirc;mera &eacute;
+tamb&eacute;m aplicada ao objeto; isso coloca o Z=-1 e o Z=+1 do objeto
+perto e distante dos planos de corte, com a &aacute;rea de vis&atilde;o -1&lt;={X,Y}&lt;=+1. 
+Exemplo:  (camera-prop { &lt; cube } projective)
+</dl>
+
+   </body></html>
+

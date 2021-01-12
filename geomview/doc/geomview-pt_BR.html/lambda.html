@@ -1,0 +1,60 @@
+<html lang="en">
+<head>
+<title>lambda - Manual do Geomview</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Manual do Geomview">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="GCL-Reference.html#GCL-Reference" title="GCL Reference">
+<link rel="prev" href="interest.html#interest" title="interest">
+<link rel="next" href="let.html#let" title="let">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="lambda"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="let.html#let">let</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="interest.html#interest">interest</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="GCL-Reference.html#GCL-Reference">GCL Reference</a>
+<hr>
+</div>
+
+<h4 class="subsection">7.2.68 lambda</h4>
+
+<p><a name="index-lambda-75"></a>
+     <dl>
+<dt><code>(lambda (ARG1 ...) EXPR1 ... EXPRN)</code><dd>Uma express&atilde;o lambda &eacute; como uma fun&ccedil;&atilde;o. Para &ldquo;chamar&rdquo; uma express&atilde;o lambda,
+a express&atilde;o lambda tem de ser chamada como uma fun&ccedil;&atilde;o: <code>((lambda (arg) (+ 1 arg))
+2)</code>. Nesse exemplo, o valor completo da express&atilde;o deve ser 3.  Em
+geral, o valor da chamada ir&aacute; ser o valor de <var>EXPRN</var>. A
+primeira lista serve para definir os par&acirc;metros formais. A express&atilde;o lambda
+propriamente dita &eacute; apenas uma lista, iniciando-se com a palavra chava lambda, seguida por
+muitas listas entre aspas duplas.  See <a href="defun.html#defun"><code>(defun ...)</code></a>. 
+See <a href="setq.html#setq"><code>(setq ...)</code></a>.  See <a href="let.html#let"><code>(let ...)</code></a>. 
+Note que a lista argumento pode conter as palavras chaves especiais
+          <dl>
+<dt><code>&amp;optional</code><dd>fornecimento de valores aos identificadores seguintes &eacute; opcional,
+seus valores padr&atilde;o ir&atilde;o ser <code>nil</code>
+<br><dt><code>&amp;rest</code><dd>todos os argumentos excedentes ir&atilde;o ser coletados em uma lista, e essa lista ir&aacute; ser
+atribu&iacute;da ao argumento seginte, da seguinte forma:
+          <pre class="example">               ((lambda (&amp;rest rest) (echo rest)) a b c d)
+</pre>
+          <p>A sa&iacute;da ir&aacute; ser <code>(a b c d)</code>. 
+</dl>
+     </dl>
+
+   </body></html>
+

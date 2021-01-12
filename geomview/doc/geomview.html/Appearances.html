@@ -1,0 +1,232 @@
+<html lang="en">
+<head>
+<title>Appearances - Geomview Manual</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Geomview Manual">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Conventions.html#Conventions" title="Conventions">
+<link rel="prev" href="References.html#References" title="References">
+<link rel="next" href="Texture-Mapping.html#Texture-Mapping" title="Texture Mapping">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Appearances"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Texture-Mapping.html#Texture-Mapping">Texture Mapping</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="References.html#References">References</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Conventions.html#Conventions">Conventions</a>
+<hr>
+</div>
+
+<h4 class="subsection">4.1.10 Appearances</h4>
+
+<p>Geometric objects can have associated "appearance" information,
+specifying shading, lighting, color, wire-frame vs. shaded-surface
+display, and so on.  Appearances are inherited through object
+hierarchies, e.g. attaching an appearance to a <code>LIST</code> means that the
+appearance is applied to all the <code>LIST</code>'s members.
+
+   <p>Some appearance-related properties are relegated to "material",
+"lighting" and "texture" substructures. Take care to note which
+properties belong to which structure. Any geometric object can be
+preceded by an appearance definition like in the following example:
+
+<pre class="example">     {
+        appearance { +edge }
+        LIST { &lt; "file1" } { QUAD 1 0 0  0 0 1  0 1 0  1 0 0 }
+     }
+</pre>
+   <p>Appearances are also OOGL objects in their own right and can be given
+symbolic names and referenced by them
+(see <a href="References.html#References">References</a>). See <a href="appearance-objects.html#appearance-objects">Appearance objects</a>.
+
+     <dl>
+<dt><b>Texture Mapping</b><dd>There is a separate section concerning the definition of textures
+(see <a href="Texture-Mapping.html#Texture-Mapping">Texture Mapping</a>).
+
+     <br><dt><b>Transparency</b><dd>Rendering translucent objects is not supported by all drawing back
+ends. The OpenGL renderer has limited support for it: top-level objects
+(i.e. those which appear in the object browser of the main panel
+(see <a href="Basic-Interaction.html#Basic-Interaction">The Main Panel</a>) are rendered correctly by
+means of alpha-blending). Also, the RenderMan snapshots will include
+opacity values. 
+</dl>
+
+   <p>Here's an example appearance structure including values for all
+attributes.  Order of attributes is unimportant.  As usual, white space
+is irrelevant.  Boolean attributes may be preceded by "+" or "-" to turn
+them on or off; "+" is assumed if only the attribute name appears. 
+Other attributes expect values.
+
+   <p>A "*" prefix on any attribute, e.g. "*+edge" or "*linewidth 2"
+or "material { *diffuse 1 1 .25 }", selects "override" status for
+that attribute.
+
+<pre class="example">     appearance {
+       +face               # (Do) draw faces of polygons.  On by default.
+       -edge               # (Don't) draw edges of polygons
+       +vect               # (Do) draw VECTs.  On by default.
+       transparent screendoor
+                           # (Enable) transparency. Enabling transparency
+                           # does not (necessarily) result in a correct Geomview
+                           # pictures, but alpha values are used in RenderMan
+                           # snapshots.
+                           # The allowed keywords are ``screendoor'' (masking out
+                           # out pixels by means of a stipple pattern),
+                           # ``blending'' for alpha-blending with BSP-tree
+                           # space paritioning and depth-sorting (slow) and
+                           # ``naive'' for alpha-blending without even
+                           # depth-sorting, not to talk about space
+                           # partioning. Omitting the keyword will default to
+                           # alpha-blending with BSP-tree space-partioning
+                           # and depth-sorting.
+       -normal             # (Do) draw surface-normal vectors
+       normscale 1         # ... with length 1.0 in object coordinates
+     
+       +evert              # do evert polygon normals where needed so as
+                           #   to always face the camera
+     
+       +texturing          # (Enable) texture mapping
+       +linear             # (Enable) linear average of closest texture elements
+       +mipmap             # (Enable) texture mip-mapping
+       +mipinterp          # (Enable) linear mip-mapping
+       -backcull           # (Don't) discard clockwise-oriented faces
+       -concave            # (Don't) expect and handle concave polygons
+       -shadelines         # (Don't) shade lines as if they were lighted cylinders
+                           # These four are only effective where the graphics system
+                           # supports them, namely on GL and Open GL.
+     
+       -keepcolor          # Normally, when N-D positional coloring is enabled as
+                           # with geomview's (ND-color ...) command, all
+                           # objects' colors are affected.  But, objects with the
+                           # "+keepcolor" attribute are immune to N-D coloring.
+     
+       shading smooth      # or ``shading constant'' or ``shading flat'' or
+                           # or ``shading csmooth'' or ``shading vcflat''.
+                           # smooth = Gouraud shading, flat = faceted,
+                           # csmooth = smoothly interpolated but unlighted,
+                           # vcflat = flat shading, but smoothly interpolated colors.
+     
+       linewidth 1         # lines, points, and edges are 1 pixel wide.
+     
+       patchdice 10 10     # subdivide Bezier patches this finely in u and v
+     
+       material {         # Here's a material definition;
+                           # it could also be read from a file as in
+                           #  ``material &lt; file.mat''
+     
+           ka  1.0         # ambient reflection coefficient.
+           ambient .3 .5 .3 # ambient color (red, green, blue components)
+                           # The ambient contribution to the shading is
+                           # the product of ka, the ambient color,
+                           # and the color of the ambient light.
+     
+           kd  0.8         # diffuse-reflection coefficient.
+           diffuse .9 1 .4 # diffuse color.
+                             # (In ``shading constant'' mode, the surface
+                             # is colored with the diffuse color.)
+     
+           ks 1.0          # specular reflection coefficient.
+           specular 1 1 1  # specular (highlight) color.
+           shininess  25   # specular exponent; larger values give
+                           # sharper highlights.
+     
+           backdiffuse .7 .5 0 # back-face color for two-sided surfaces
+                             # If defined, this field determines the diffuse
+                             # color for the back side of a surface.
+                             # It's implemented by the software shader, and
+                             # by hardware shading on GL systems which support
+                             # two-sided lighting, and under Open GL.
+     
+           alpha   1.0     # opacity; 0 = transparent (invisible), 1 = opaque.
+                           # Ignored when transparency is disabled.
+     
+           edgecolor   1 1 0  # line &amp; edge color
+     
+           normalcolor 0 0 0  # color for surface-normal vectors
+       }
+     
+       lighting {         # Lighting model
+     
+           ambient  .3 .3 .3  # ambient light
+     
+           replacelights   # ``Use only the following lights to
+                           # illuminate the objects under this
+                           # appearance.''
+                           # Without "replacelights", any lights listed
+                           # are added to those already in the scene.
+     
+                           # Now a collection of sample lights:
+           light {
+               color  1 .7 .6      # light color
+               position  1 0 .5 0  # light position [distant light]
+                                   # given in homogeneous coordinates.
+                                   # With fourth component = 0,
+                                   # this means a light coming from
+                                   # direction (1,0,.5).
+           }
+     
+           light {                        # Another light.
+               color 1 1 1
+               position  0 0 .5 1  # light at finite position ...
+               location camera     # specified in camera coordinates.
+                                   # (Since the camera looks toward -Z,
+                                   # this example places the light
+                                   # .5 unit behind the eye.)
+               # Possible "location" keywords:
+               #  global    light position is in world (well, universe) coordinates
+               #             This is the default if no location specified.
+               #  camera   position is in the camera's coordinate system
+               #  local    position is in the coordinate system where
+               #                   the appearance was defined
+           }
+       }                   # end lighting model
+       texture {
+             clamp st               # or ``s'' or ``t'' or ``none''
+             file lump.tiff         # file supplying texture-map image
+             alphafile mask.pgm.Z   # file supplying transparency-mask image
+             apply blend            # or ``modulate'' or ``decal''
+             transform  1 0 0 0     # surface (s,t,0,1) * tfm -&gt; texture coords
+                        0 1 0 0
+                        0 0 1 0
+                       .5 0 0 1
+     
+             background 1 0 0 1     # relevant for ``apply blend''
+       }
+     }                     # end appearance
+</pre>
+   <p>There are rules for inheritance of appearance attributes when several
+are imposed at different levels in the hierarchy.
+
+   <p>For example, Geomview installs a backstop appearance which provides
+default values for most parameters; its control panels install other
+appearances which supply new values for a few attributes; user-supplied
+geometry may also contain appearances.
+
+   <p>The general rule is that the child's appearance (the one closest to the
+geometric primitives) wins.  Further, appearance controls with
+"override" status (e.g. <code>*+face or material { *diffuse 1 1 0 }</code>)
+win over those without it.
+
+   <p>Geomview's appearance controls use the "override" feature so as to be
+effective even if user-supplied objects contain their own appearance settings. 
+However, if a user-supplied object contains an appearance field with
+override status set, that property will be immune to Geomview's controls.
+
+<!--  -->
+   </body></html>
+

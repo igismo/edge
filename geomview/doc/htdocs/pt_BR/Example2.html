@@ -1,0 +1,263 @@
+<html lang="en">
+<head>
+<title>Example2 - Manual do Geomview</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Manual do Geomview">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Modulos.html#Modulos" title="Modulos">
+<link rel="prev" href="Example1.html#Example1" title="Example1">
+<link rel="next" href="XForms.html#XForms" title="XForms">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Example2"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="XForms.html#XForms">XForms</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Example1.html#Example1">Example1</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Modulos.html#Modulos">Modulos</a>
+<hr>
+</div>
+
+<h3 class="section">6.3 Exemplo 2: M&oacute;dulo Externo Simples Usando o Painel de Controle FORMS</h3>
+
+<p>Nota de tradu&ccedil;&atilde;o: Este exemplo &eacute; muito antigo e n&atilde;o compila
+nas m&aacute;quinas atuais. At&eacute; o momento de digita&ccedil;&atilde;o destas linhas de tradu&ccedil;&atilde;o
+ele n&atilde;o tinha sido atualizado permanecendo portanto inoperante.
+
+   <p>Essa se&ccedil;&atilde;o fornece uma nova vers&atilde;o do m&oacute;dulo acima &mdash; uma vers&atilde;o que
+inclue uma interface de usu&aacute;rio para controlar a velocidade da
+oscila&ccedil;&atilde;o.  Usamos a biblioteca FORMS criada por Mark Overmars para o painel de
+controle.  A biblioteca FORMS &eacute; uma cole&ccedil;&atilde;o de ferramentas para interface de usu&aacute;rio de dom&iacute;nio p&uacute;blico para
+IRISes. <!-- Para mais informa@,{c}@~{o}es veja @ref{Forms}. -->
+
+   <p>Para experimentar esse exemplo, fa&ccedil;a uma c&oacute;pia do arquivo
+<samp><span class="file">example2.c</span></samp> (distribu&iacute;do com Geomview no subdiret&oacute;rio
+<samp><span class="file">doc</span></samp>) no seu diret&oacute;rio e compile-o com o comando
+
+<pre class="example">     cc -I/u/gcg/ngrap/include -o example2 example2.c \
+       -L/u/gcg/ngrap/lib/sgi -lforms -lfm_s -lgl_s -lm
+</pre>
+   <p>Voc&ecirc; pode
+substituir a sequ&ecirc;ncia de caracteres <samp><span class="file">/u/gcg/ngrap</span></samp> acima com o nome do caminho do
+diret&oacute;rio de distribui&ccedil;&atilde;o do Geomview em seu sistema.  (A biblioteca forms &eacute;
+distribu&iacute;da com Geomview e as op&ccedil;&otilde;es <code>-I</code> e <code>-L</code> acima
+dizem ao compilador onde encontr&aacute;-las.)
+
+   <p>Ent&atilde;o coloque a linha
+
+<pre class="example">     (emodule-define "Example 2" "./example2")
+</pre>
+   <p class="noindent">em um arquivo chamado <samp><span class="file">.geomview</span></samp> no diret&oacute;rio e chame
+Geomview do mesmo diret&oacute;rio.  Clique sobre a entrada "Example 2" no
+navegador de m&oacute;dulos (<em>Modules</em>) para chamar o m&oacute;dulo.  Um pequeno painel de controle
+dever&aacute; aparecer.  Voc&ecirc; pode ent&atilde;o controlar a velocidade da oscila&ccedil;&atilde;o
+da malha movendo o bot&atilde;o deslizante.
+
+<pre class="example">     <!-- #include "example2.c" -->
+     /*
+      * example2.c: oscillating mesh with FORMS control panel
+      *
+      * This example module is distributed with the Geomview manual.
+      * If you are not reading this in the manual, see the "External
+      * Modules" chapter of the manual for an explanation.
+      *
+      * This module creates an oscillating mesh and has a FORMS control
+      * panel that lets you change the speed of the oscillation with a
+      * slider.
+      */
+     
+     #include &lt;math.h&gt;
+     #include &lt;stdio.h&gt;
+     #include &lt;sys/time.h&gt;           /* for struct timeval below */
+     
+     #include "forms.h"              /* for FORMS library */
+     
+     FL_FORM *OurForm;
+     FL_OBJECT *VelocitySlider;
+     float dt;
+     
+     /* F is the function that we plot
+      */
+     float F(x,y,t)
+          float x,y,t;
+     {
+       float r = sqrt(x*x+y*y);
+       return(sin(r + t)*sqrt(r));
+     }
+     
+     /* SetVelocity is the slider callback procedure; FORMS calls this
+      * when the user moves the slider bar.
+      */
+     void SetVelocity(FL_OBJECT *obj, long val)
+     {
+       dt = fl_get_slider_value(VelocitySlider);
+     }
+     
+     /* Quit is the "Quit" bot&atilde;o callback procedure; FORMS calls this
+      * when the user cliques the "Quit" bot&atilde;o.
+      */
+     void Quit(FL_OBJECT *obj, long val)
+     {
+       exit(0);
+     }
+     
+     /* create_form_OurForm() creates the FORMS panel by calling a bunch of
+      * procedures in the FORMS library.  This code was generated
+      * automatically by the FORMS designer program; normally this code
+      * would be in a separate file which you would not edit by hand.  For
+      * simplicity of this example, however, we include this code here.
+      */
+     create_form_OurForm()
+     {
+       FL_OBJECT *obj;
+       FL_FORM *form;
+       OurForm = form = fl_bgn_form(FL_NO_BOX,380.0,120.0);
+       obj = fl_add_box(FL_UP_BOX,0.0,0.0,380.0,120.0,"");
+       VelocitySlider = obj = fl_add_valslider(FL_HOR_SLIDER,20.0,30.0,
+                                               340.0,40.0,"Velocity");
+         fl_set_object_lsize(obj,FL_LARGE_FONT);
+         fl_set_object_align(obj,FL_ALIGN_TOP);
+         fl_set_call_back(obj,SetVelocity,0);
+       obj = fl_add_button(FL_NORMAL_BUTTON,290.0,75.0,70.0,35.0,"Quit");
+         fl_set_object_lsize(obj,FL_LARGE_FONT);
+         fl_set_call_back(obj,Quit,0);
+       fl_end_form();
+     }
+     
+     main(argc, argv)
+          char **argv;
+     {
+       int xdim, ydim;
+       float xmin, xmax, ymin, ymax, dx, dy, t;
+       int fdmask;
+       static struct timeval timeout = {0, 200000};
+     
+       xmin = ymin = -5;             /* Set x and y            */
+       xmax = ymax = 5;              /*    plot ranges         */
+       xdim = ydim = 24;             /* Set x and y resolution */
+       dt = 0.1;                     /* Time increment is 0.1  */
+     
+       /* Forms panel setup.
+        */
+       foreground();
+       create_form_OurForm();
+       fl_set_slider_bounds(VelocitySlider, 0.0, 1.0);
+       fl_set_slider_value(VelocitySlider, dt);
+       fl_show_form(OurForm, FL_PLACE_SIZE, TRUE, "Example 2");
+     
+     
+       /* Geomview setup.
+        */
+       printf("(geometry example { : foo })\n");
+       fflush(stdout);
+     
+       /* Loop until killed.
+        */
+       for (t=0; ; t+=dt) {
+         fdmask = (1 &lt;&lt; fileno(stdin)) | (1 &lt;&lt; qgetfd());
+         select(qgetfd()+1, &amp;fdmask, NULL, NULL, &amp;timeout);
+         fl_check_forms();
+         UpdateMesh(xmin, xmax, ymin, ymax, xdim, ydim, t);
+       }
+     }
+     
+     /* UpdateMesh sends one mesh iteration to Geomview
+      */
+     UpdateMesh(xmin, xmax, ymin, ymax, xdim, ydim, t)
+          float xmin, xmax, ymin, ymax, t;
+          int xdim, ydim;
+     {
+       int i,j;
+       float x,y, dx,dy;
+     
+       dx = (xmax-xmin)/(xdim-1);
+       dy = (ymax-ymin)/(ydim-1);
+     
+       printf("(read geometry { define foo \n");
+       printf("MESH\n");
+       printf("%1d %1d\n", xdim, ydim);
+       for (j=0, y = ymin; j&lt;ydim; ++j, y += dy) {
+         for (i=0, x = xmin; i&lt;xdim; ++i, x += dx) {
+           printf("%f %f %f\t", x, y, F(x,y,t));
+         }
+         printf("\n");
+       }
+       printf("})\n");
+       fflush(stdout);
+     }
+     <!-- #end include -->
+</pre>
+   <p>O C&oacute;digo inicia-se pela inclus&atilde;o de alguns arquivos de cabe&ccedil;alho necass&aacute;rios para o evento c&iacute;clico
+e para a biblioteca FORMS.  O c&oacute;digo ent&atilde;o declara vari&aacute;veis globais para manter um
+ponteiro para o objeto FORMS do tipo bot&atilde;o deslizante e a velocidade <code>dt</code>.  Essas duas vari&aacute;veis
+s&atilde;o do tipo global porque elas s&atilde;o necess&aacute;rias no procedimento de retorno do bot&atilde;o deslizante
+chamado <code>SetVelocity</code>, que faz todas as chamadas a cada vez que o usu&aacute;rio move a
+barra do bot&atilde;o deslizante. <code>SetVelocity</code> atualiza o valor da vari&aacute;vel <code>dt</code> com o novo valor do
+bot&atilde;o deslizante.
+
+   <p><code>Quit</code> &eacute; o procedimento de chamada de retorno para o bot&atilde;o <em>Quit</em>;
+esse bot&atilde;o fornece um caminho elegante para o usu&aacute;rio encerrar o programa.
+
+   <p>O procedimento <code>create_panel</code> chama um conjunto de procedimentos da biblioteca
+FORMS para ajustar o painel de controle com o bot&atilde;o deslizante e o bot&atilde;o simples.  Para mais
+informa&ccedil;&atilde;o sobre o uso de FORMS para criar pain&eacute;is de interface veja a documenta&ccedil;&atilde;o de
+FORMS.  Em particular, FORMS vem com um desenhista de painel gr&aacute;fico
+que conduz voc&ecirc; a desenhar seus pain&eacute;is de forma interativa e a gerar
+c&oacute;digos como o c&oacute;digo em <code>create_panel</code>.
+
+   <p>Esse programa principal exemplo &eacute; similar ao exemplo anterior, mas
+inclui codifica&ccedil;&atilde;o extra para lidar com ajustes e gerenciamento o painel
+FORMS.
+
+   <p>Para ajustar o painel chamamos o procedimento GL <code>foreground</code> para fazer com que
+o processo execute em primeiro plano.  Por padr&atilde;o programas GL executam em
+segundo plano, e por v&aacute;rias raz&otilde;es m&oacute;dulos externos que usam FORMS
+(que &eacute; baseado em GL) precisa executar em primeiro plano.  Chamamos ent&atilde;o
+<code>create_panel</code> para criar o painel e <code>fl_set_slider_value</code>
+para ajustar o valor inicial do bot&atilde;o deslizante.  A chamada a <code>fl_show_form</code>
+faz com que o painel apare&ccedil;a na tela.
+
+   <p>As primeiras tr&ecirc;s linhas do ciclo principal, iniciam-se com
+<pre class="example">     fdmask = (1 &lt;&lt; fileno(stdin)) | (1 &lt;&lt; qgetfd());
+</pre>
+   <p class="noindent">monitora e conduz os eventos no painel.  A chamada a <code>select</code>
+imp&otilde;e uma espera a cada passagem pelo ciclo principal.  Essa chamada retorna
+ou ap&oacute;s uma espera de 1/5 de segundo ou quando o evento GL seguinte ocorrer, ou
+quando dados aparecerem na entrada padr&atilde;o, o que acontecer primeiro.  A
+vari&aacute;vel <code>timeout</code> especifica a quantidade de tempo a esperar nessa
+chamada; o primeiro n&uacute;mero (0 nesse exemplo) fornece o n&uacute;mero de segundos,
+e o segundo n&uacute;mero (200000 nesse exemplo) fornece o n&uacute;mero de
+microsegundos.  Finalmente, <code>fl_check_forms()</code> procura e executa
+quaisquer eventos FORMS que tenham ocorridos; nesse caso isso significa uma chamada a
+<code>SetVelocity</code> se o usu&aacute;rio iver movido o bot&atilde;o deslizante ou uma chamada a
+<code>Quit</code> se o usu&aacute;rio tiver clicado no bot&atilde;o <em>Quit</em>.
+
+   <p>O prop&oacute;sito da espera no ciclo &eacute; para prevenir que o programa use
+excessivamente o tempo da CPU executando seu ciclo pincipal quando n&atilde;o
+hoverem eventos a serem processados.  Isso n&atilde;o &eacute; t&atilde;o crucial nesse exemplo,
+e de fato pode tornar a anima&ccedil;&atilde;o mais lenta at&eacute; certo ponto, mas em
+geral com m&oacute;dulos extrnos que possuirem eventos c&iacute;clicos essa espera &eacute; importante para
+do something like this because otherwise the module will needlessly take
+que os ciplos da CPU sigam adiante para outros programamas que estejam sendo executados (tais como Geomview!) mesmo
+quando estes n&atilde;o estiverem fazendo nada.
+
+   <p>A &uacute;ltima linha do ciclo principal ensse exemplo, a chamada a
+<code>UpdateMesh</code>, &eacute; a mesma que no exemplo anterior.
+
+<!-- ================================================================ -->
+   </body></html>
+

@@ -1,0 +1,68 @@
+#!version 2.2.6
+surface
+#!parameters:
+uniform	float	Ka	=	1
+uniform	float	Kd	=	.5
+uniform	float	Ks	=	.5
+uniform	float	roughness	=	.1
+uniform	color	specularcolor	=	1
+uniform	string	texturename	=	""
+#!variables:
+varying	vector	Nf
+varying	vector	V
+varying	vector	Ct
+varying	float	Ot
+varying	vector	temporary_0
+varying	vector	temporary_1
+varying	vector	temporary_2
+varying	vector	temporary_3
+uniform	vector	temporary_4
+varying	vector	temporary_5
+varying	vector	temporary_6
+uniform	vector	temporary_7
+varying	float	temporary_8
+uniform	float	temporary_9
+varying	float	temporary_10
+varying	float	temporary_11
+#!Init:
+	return            
+#!Code:
+	movevv            	Ci Cs
+	movevv            	Oi Os
+	normalize	("v=v")  temporary_0  N 
+	faceforward	("v=vv")  Nf  temporary_0  I 
+	normalize	("v=v")  temporary_0  I 
+	negv              	V temporary_0
+	vfromf            	temporary_4 Ka
+	vuvector           temporary_3 temporary_4
+	ambient	("c=")  temporary_5 
+	mulvv             	temporary_2 temporary_3 temporary_5
+	vfromf            	temporary_4 Kd
+	vuvector           temporary_5 temporary_4
+	diffuse	("c=n")  temporary_6  Nf 
+	mulvv             	temporary_3 temporary_5 temporary_6
+	addvv             	temporary_1 temporary_2 temporary_3
+	mulvv             	temporary_0 Ci temporary_1
+	vfromf            	temporary_7 Ks
+	mulvv             	temporary_4 specularcolor temporary_7
+	vuvector           temporary_2 temporary_4
+	vufloat            temporary_8 roughness
+	specular	("c=nvf")  temporary_3  Nf  V  temporary_8 
+	mulvv             	temporary_1 temporary_2 temporary_3
+	addvv             	Ci temporary_0 temporary_1
+	sneql             	temporary_9 texturename ""
+	vufloat            temporary_8 temporary_9
+	if                	temporary_8 #!Label3
+	texture	("c=SFffSf")  Ct  texturename  0  s  t  "width"  0.0 
+	texture	("f=SFffSfsf")  Ot  texturename  3  s  t  "fill"  1.0  "width"  0.0 
+	vufloat            temporary_11 1
+	subff             	temporary_10 temporary_11 Ot
+	vfromf            	temporary_1 temporary_10
+	mulvv             	temporary_0 temporary_1 Ci
+	vfromf            	temporary_2 Ot
+	mulvv             	temporary_1 temporary_2 Ct
+	addvv             	Ci temporary_0 temporary_1
+#!Label3:
+	endif             
+	mulvv             	Ci Ci Os
+	return            

@@ -1,0 +1,113 @@
+<html lang="en">
+<head>
+<title>Argument Conventions - Manual do Geomview</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Manual do Geomview">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="GCL.html#GCL" title="GCL">
+<link rel="prev" href="GCL.html#GCL" title="GCL">
+<link rel="next" href="GCL-Reference.html#GCL-Reference" title="GCL Reference">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Argument-Conventions"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="GCL-Reference.html#GCL-Reference">GCL Reference</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="GCL.html#GCL">GCL</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="GCL.html#GCL">GCL</a>
+<hr>
+</div>
+
+<h3 class="section">7.1 Conventions Used In Describing Argument Types</h3>
+
+<p>Os seguintes s&iacute;mbolos s&atilde;o usados para descrever tipos de argumentos
+na documenta&ccedil;&atilde;o para fun&ccedil;&otilde;es GCL.
+
+     <dl>
+<dt><var>apar&ecirc;ncia</var><dd>&eacute; uma especifica&ccedil;&atilde;o de apar&ecirc;ncia OOGL.
+
+     <br><dt><var>cam-id</var><dd>&eacute; uma <var>id</var>entifica&ccedil;&atilde;o que refre-se a uma c&acirc;mera.
+
+     <br><dt><var>c&acirc;mera</var><dd>&eacute; uma especifica&ccedil;&atilde;o de c&acirc;mera do OOGL.
+
+     <br><dt><var>geom-id</var><dd>&eacute; uma <var>id</var>entifica&ccedil;&atilde;o que se refere a um objeto geom&eacute;trico.
+
+     <br><dt><var>geometry</var><dd>&eacute; uma especifica&ccedil;&atilde;o de objeto geom&eacute;trico do OOGL.
+
+     <br><dt><var>id</var><dd>&eacute; uma sequ&ecirc;ncia de caracteres que nomeia um objeto geom&eacute;trico ou c&acirc;mera.  Como
+aqueles que voc&ecirc; cria, os valores permitidos s&atilde;o:
+
+          <dl>
+<dt><code>World, world, worldgeom, g0</code><dd>a cole&ccedil;&atilde;o de todos os objetos geom&eacute;tricos
+
+          <br><dt><code>target</code><dd>objeto alvo selecionado (c&acirc;mera ou objeto geom&eacute;trico)
+
+          <br><dt><code>center</code><dd>objeto central do movimento selecionado
+
+          <br><dt><code>targetcam</code><dd>a &uacute;ltima c&acirc;mera alvo selecionada
+
+          <br><dt><code>targetgeom</code><dd>o &uacute;ltimo objeto geom&eacute;trico alvo selecionado
+
+          <br><dt><code>focus</code><dd>c&acirc;mera onde o cursor est&aacute; (ou mais recentemente esteve)
+
+          <br><dt><code>allgeoms</code><dd>todos os objetos geom&eacute;tricos
+
+          <br><dt><code>allcams</code><dd>todas as c&acirc;meras
+
+          <br><dt><code>default, defaultcam, prototype</code><dd>c&acirc;meras futuras que herdar&atilde;o as escolhas padronizadas
+
+     </dl>
+
+     <p>As seguintes <var>id</var>s s&atilde;o usadas para nomear sistemas de coordenadas,
+e.g. em comandos <code>pick</code> e <code>write</code>:
+
+          <dl>
+<dt><code>World, world, worldgeom, g0</code><dd>o objeto mundo, dentro do qual todos os objetos geom&eacute;tricos vivem.
+
+          <br><dt><code>universe</code><dd>o universo, no qual o no qual o objeto mundo, as luzes e as c&acirc;meras vivem.  Transforma&ccedil;&otilde;es
+world2cam das c&acirc;meras podem melhor serem chamadas universe2cam, etc.
+
+          <br><dt><code>self</code><dd>"esse objeto do Geomview".  Transforma de um objeto para <code>si mesmo</code> &eacute; a
+identidade; escrevendo seu objeto geom&eacute;trico fornece o bojeto em si mesmo sem
+executar nenhuma transforma&ccedil;&atilde;o; pontos selecionados aparecem nas coordenadas do objeto.
+
+          <br><dt><code>primitive</code><dd>(para objetos selecionados (<code>pick</code>) somente) Pontos selecionados aparecem no sistema de coordenadas da
+primitiva de menor n&iacute;vel do OOGL.
+
+     </dl>
+
+     <p>Um nome tamb&eacute;m &eacute; uma <code>id</code>entifica&ccedil;&atilde;o aceit&aacute;vel.  Fornecimento de nomes &eacute; feito &uacute;nico pela
+anexa&ccedil;&atilde;o de n&uacute;meros se necess&aacute;rio (i.e. <code>foo&lt;2&gt;</code>). Todo objeto geom&eacute;trico &eacute; tamb&eacute;m
+chamado g[n] e toda c&acirc;mera &eacute; tamb&eacute;m chamada c[n] (<code>g0</code> &eacute; sempre o
+objeto geom&eacute;trico mundo - worldgeom): esse nome &eacute; usado como um prefixo a comandos de teclado e pode
+tamb&eacute;m ser usado como uma identifica&ccedil;&atilde;o GCL.  N&uacute;meros s&atilde;o usados ap&oacute;s um
+objeto ser deletado. Ambos os nomes s&atilde;o mostrados no navegador de Objeto.
+
+     <br><dt><var>declara&ccedil;&atilde;o</var><dd>representa uma chamada de fun&ccedil;&atilde;o.  Chamadas a fun&ccedil;&otilde;es possuem a forma <code>(func arg1
+arg2 ... )</code>, onde <code>func</code> &eacute; o nome da fun&ccedil;&agrave;o e <code>arg1</code>,
+<code>arg2</code>, <small class="dots">...</small> s&atilde;o os argumentos.
+
+     <br><dt><var>transforma&ccedil;&atilde;o</var><dd>&eacute; uma matriz de transforma&ccedil;&atilde;o OOGL 4x4.
+
+     <br><dt><var>ntransform</var><dd>&eacute; uma matriz de transforma&ccedil;&atilde;o OOGL (N+1)x(N+1).
+
+     <br><dt><var>janela</var><dd>&eacute; uma especifica&ccedil;&atilde;o de janela do OOGL.
+
+   </dl>
+
+   </body></html>
+

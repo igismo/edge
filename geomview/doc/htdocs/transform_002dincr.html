@@ -1,0 +1,51 @@
+<html lang="en">
+<head>
+<title>transform-incr - Geomview Manual</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Geomview Manual">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="GCL-Reference.html#GCL-Reference" title="GCL Reference">
+<link rel="prev" href="transform.html#transform" title="transform">
+<link rel="next" href="transform_002dset.html#transform_002dset" title="transform-set">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="transform-incr"></a>
+<a name="transform_002dincr"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="transform_002dset.html#transform_002dset">transform-set</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="transform.html#transform">transform</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="GCL-Reference.html#GCL-Reference">GCL Reference</a>
+<hr>
+</div>
+
+<h4 class="subsection">7.2.138 transform-incr</h4>
+
+<p><a name="index-transform_002dincr-146"></a>
+     <dl>
+<dt><code>(transform-incr objectID centerID frameID [rotate|translate|translate-scaled|scale] x y z [origin|bbox-center] [dt [smooth]])</code><dd>Apply continuing motion: construct a transformation matrix and
+concatenate it with the current transform of objectID every
+refresh (sets objectID's incremental transform). Same syntax
+as transform.  If optional <code>dt</code> argument is present,
+the object is moved at each time step such that its average motion
+equals one instance of the motion per <code>dt</code> seconds.  E.g. 
+  (transform-incr  World World World  rotate  6.28318 0 0  10.0)
+rotates the World about its X axis at 1 turn (2pi radians) per 10 seconds. 
+</dl>
+
+   </body></html>
+

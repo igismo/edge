@@ -1,0 +1,64 @@
+<html lang="en">
+<head>
+<title>ND-axes - Geomview Manual</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Geomview Manual">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="GCL-Reference.html#GCL-Reference" title="GCL Reference">
+<link rel="prev" href="name_002dobject.html#name_002dobject" title="name-object">
+<link rel="next" href="ND_002dcolor.html#ND_002dcolor" title="ND-color">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="ND-axes"></a>
+<a name="ND_002daxes"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="ND_002dcolor.html#ND_002dcolor">ND-color</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="name_002dobject.html#name_002dobject">name-object</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="GCL-Reference.html#GCL-Reference">GCL Reference</a>
+<hr>
+</div>
+
+<h4 class="subsection">7.2.85 ND-axes</h4>
+
+<p><a name="index-ND_002daxes-92"></a>
+     <dl>
+<dt><code>(ND-axes CAMID [CLUSTERNAME [Xindex Yindex Zindex [Windex]]])</code><dd>In our model for N-D viewing (enabled by (dimension)), objects in
+N-space are viewed by N-dimensional <em>camera clusters</em>. 
+Each real camera window belongs to some cluster, and shows &amp;
+manipulates a 3-D axis-aligned projected subspace of the N-space seen
+by its cluster.  Moving one camera in a cluster affects its siblings.
+
+     <p>The ND-axes command configures all this.  It specifies a camera's
+cluster membership, and the set of N-space axes which become the 3-D
+camera's X, Y, and Z axes.  Axes are specified by their indices, from 1
+to N for an N-dimensional space.  Cluster CLUSTERNAME is implicitly
+created if not previously known.
+
+     <p>In principle it is possible to map the homogeneous component of a
+conformal 4 point to some other index; this would be done by specifying
+0 for one of <code>Xindex</code>, <code>Yindex</code> or <code>Zindex</code> and giving
+<code>Windex</code> some positive value. This is probably not useful because
+Geomview does not support non-Euclidean geometries for in higher
+dimensions.
+
+     <p>To read a camera's configuration, use <code>(echo (ND-axes CAMID))</code>. 
+The return value is an array of 4 integers, the last one should 0. 
+</dl>
+
+   </body></html>
+

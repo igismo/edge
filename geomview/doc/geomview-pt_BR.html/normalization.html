@@ -1,0 +1,60 @@
+<html lang="en">
+<head>
+<title>normalization - Manual do Geomview</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Manual do Geomview">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="GCL-Reference.html#GCL-Reference" title="GCL Reference">
+<link rel="prev" href="NeXT.html#NeXT" title="NeXT">
+<link rel="next" href="not.html#not" title="not">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="normalization"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="not.html#not">not</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="NeXT.html#NeXT">NeXT</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="GCL-Reference.html#GCL-Reference">GCL Reference</a>
+<hr>
+</div>
+
+<h4 class="subsection">7.2.96 normalization</h4>
+
+<p><a name="index-normalization-103"></a>
+     <dl>
+<dt><code>(normalization GEOM-ID {each|none|all|keep})</code><dd>Ajusta a situa&ccedil;&atilde;o atual da normaliza&ccedil;&atilde;o de GEOM-ID.
+          <dl>
+<dt><code>none</code><dd>suprime toda normaliza&ccedil;&atilde;o. 
+<br><dt><code>each</code><dd>normaliza a caixa associada ao objeto para ajustar-se dentro da esfera
+unit&aacute;ria, com o centro de sua caixa associada transladado
+para a or&iacute;gem.  A caixa &eacute; alterada proprocionalmente de forma que sua diagonal maior,
+sqrt((xmax-xmin)^2 + (ymax-ymin)^2 + (zmax-zmin)^2), seja 2. 
+<br><dt><code>all</code><dd>assemelha-se a <code>each</code>, exceto quando um objeto est&aacute; mudando
+(e.g. quando seu objeto geom&eacute;trico est&aacute; sendo modificado por um programa externo). 
+Ent&atilde;o, <code>each</code> precisamente ajusta a caixa associada em torno do
+objeto quando esse objeto muda e faz as normaliza&ccedil;&otilde;es de acordo com as mudan&ccedil;as,
+enquanto <code>all</code> normaliza a uni&atilde;o de todas as variantes do objeto
+e normaliza conforme essa uni&atilde;o. 
+<br><dt><code>keep</code><dd>mant&eacute;m a transforma&ccedil;&atilde;o de normaliza&ccedil;&atilde;o atual intocada
+quando o objeto muda.  Essa intocabilidade pode ser &uacute;til para aplicar a normaliza&ccedil;&atilde;o
+<code>each</code> ou <code>all</code> &agrave; primeira vers&atilde;o de um ojeto que est&aacute;
+mudando de forma a trazer esse objeto para o campo de vis&atilde;o, a seguir alternar para <code>keep</code>. 
+</dl>
+     </dl>
+
+   </body></html>
+

@@ -1,0 +1,89 @@
+<html lang="en">
+<head>
+<title>Point of Interest - Geomview Manual</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Geomview Manual">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Mouse-Motions.html#Mouse-Motions" title="Mouse Motions">
+<link rel="prev" href="Mouse-Motions.html#Mouse-Motions" title="Mouse Motions">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Point-of-Interest"></a>
+<p>
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Mouse-Motions.html#Mouse-Motions">Mouse Motions</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Mouse-Motions.html#Mouse-Motions">Mouse Motions</a>
+<hr>
+</div>
+
+<h4 class="subsection">3.5.1 Selecting a Point of Interest</h4>
+
+<p>It is sometimes useful to specify a particular point on some object in a
+geomview window as the center point for mouse motions.  You can do this
+by shift-clicking the right mouse button (i.e. click it once
+while holding down the shift key on the keyboard) with the cursor over
+the desired point.  This point then becomes the <em>point of
+interest</em>.  The point of interest must be on an existing object.
+
+   <p>Selecting a point of interest simplifies examining a small portion of a
+larger object.  Shift-right-click on an interesting point, and select
+<em>Orbit</em> mode.  Use the middle mouse button to approach, and the
+left mouse to orbit the point, examining the region from different
+directions.
+
+   <p>When you have selected a point of interest, the current center object
+changes to an object named "CENTER", which is an invisible object
+located at the point of interest.  In addition, mouse motions for the
+window in which you made the selection are adjusted so that the point of
+interest follows the mouse.
+
+   <p>You can change the point of interest at any time by selecting a new one
+by shift-clicking the right mouse button again.  You can cancel
+the point of interest altogether by shift-clicking the right
+mouse button with the cursor on the background (i.e. not on any object). 
+This changes the center object back to its default value, "target".
+
+   <p>The object named "CENTER", which serves as the center object for the
+point of interest, is a special kind of geom called an "alien".  It does
+not appear in the <em>Targets</em> browser.  By default it has no geometry
+associated with it and hence is invisible.  You can, however, explicitly
+give it some geometry using a GCL command, causing it to appear.  Use
+the <code>geometry</code> command for this: <code>(geometry CENTER
+</code><var>geometry</var><code>)</code>, where <var>geometry</var> is any valid geometry.  For
+example, <code>(geometry CENTER { &lt; xyz.vect })</code> causes the file
+<samp><span class="file">xyz.vect</span></samp>, which is one of the standard example files distributed
+with geomview, to be used at the geometry for CENTER. See <a href="geometry.html#geometry"><code>(geometry ...)</code></a>.
+
+   <p>What happens internally when you select a point of interest is
+that the center is set to the object called CENTER, and that object is
+positioned at the point of interest.  In addition, in order for mouse
+motions to track the point of interest, the current camera's focal
+length is set to be the distance from the camera to the point of
+interest.  You can accomplish this via GCL with the following commands:
+<pre class="example">     (if (real-id CENTER) nil (new-alien CENTER {}))
+     (ui-center CENTER)
+     (transform-set CENTER universe universe translate <var>x</var> <var>y</var> <var>z</var>)
+     (merge camera <var>cam-id</var> { focus <var>d</var> })
+</pre>
+   <p class="noindent">where <code>(</code><var>x</var><code>,</code><var>y</var><code>,</code><var>z</var><code>)</code> are the (universe) coordinates of
+the point of interest, and <var>d</var> is the distance from that point to
+the current camera, <var>cam-id</var>.  The first command above creates the
+"alien" CENTER if it does not yet exist.
+
+<!-- ================================================================ -->
+   </body></html>
+

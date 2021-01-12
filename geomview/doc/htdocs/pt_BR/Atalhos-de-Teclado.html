@@ -1,0 +1,208 @@
+<html lang="en">
+<head>
+<title>Atalhos de Teclado - Manual do Geomview</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Manual do Geomview">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Interacao.html#Interacao" title="Interacao">
+<link rel="prev" href="Comandos.html#Comandos" title="Comandos">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Atalhos-de-Teclado"></a>
+<p>
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Comandos.html#Comandos">Comandos</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Interacao.html#Interacao">Interacao</a>
+<hr>
+</div>
+
+<h3 class="section">3.10 Atalhos de Teclado</h3>
+
+<p>A maioria das a&ccedil;&otilde;es que voc&ecirc; pode fazer atrav&eacute;s dos pain&eacute;is do Geomview possui as equivalentes
+teclas de atalho de forma que voc&ecirc; pode fazer a mesma a&ccedil;&atilde;o digitando uma
+sequ&ecirc;ncia de teclas usando o teclado.  Isso &eacute; &uacute;til para usu&aacute;rios avan&ccedil;ados que
+forem familiarizados com as capacidades do Geomview e que queiram trabalhar rapidamente
+sem ter montes de pain&eacute;is confundindo a tela. 
+Teclas de atalho comumente s&atilde;o indicadas entre colch&ecirc;tes ([ ]) pr&oacute;ximo
+ao item correspondente em um painel.  Por exemplo, a tecla de atalho
+para o modo de rota&ccedil;&atilde;o (<em>Rotate</em>) &eacute; 'r'; isso &eacute; indicado por "[r]" aparecendo
+antes da palavra "Rotate" no navegador <em>MOTION MODE</em>.  Para
+utilizar essa tecla de atalho apenas pressione a tecla <kbd>r</kbd> enquanto o cursor do
+mouse estiver sobre qualquer janela do Geomview.  Voc&ecirc; n&atilde;o precisa pressionar a tecla <kbd>&lt;Enter&gt;</kbd>
+ou teclas de <kbd>&lt;SPACE&gt;</kbd>.
+
+   <p>Alguns atalhos consistem de mais que uma tecla.  Nesses casos
+apenas digite as teclas indicadas uma ap&oacute;s a outra e na ordem indicada, sem <kbd>&lt;Enter&gt;</kbd>
+ap&oacute;s cada tecla.  Atalhos de teclado s&atilde;o sens&iacute;veis &agrave; caixa alta/baixa.  Voc&ecirc; pode cancelar
+atalhos compostos por v&aacute;rias teclas que voc&ecirc; tiver iniciado a digita&ccedil;&atilde;o digitando qualquer tecla
+inv&aacute;lida como de atalho, por exemplo a barra de espa&ccedil;o.
+
+   <p>Comandos de teclado aplicam-se enquanto o cursor estiver em qualquer janela de c&acirc;mera e
+na maioria dos pain&eacute;is de controle.
+
+   <p>Muitas teclas de atalho permitem argumentos num&eacute;ricos que voc&ecirc; digitar como um
+prefixo a tecla(s) de comando.  Por exemplo, a tecla de atalho para
+<em>Near clip</em> no painel de c&acirc;mera &eacute; <kbd>v n</kbd>.  Para escolher o pr&oacute;ximo
+plano de corte para &lsquo;<samp><span class="samp">0.5</span></samp>&rsquo;, digite <kbd>0.5vn</kbd>.  Comandos que n&atilde;o recebem um
+prefixo num&eacute;rico modificam ou mudam para zero o valor atual.
+
+   <p>A maioria dos comando permitem um dos seguintes prefixos de sele&ccedil;&atilde;o.  Se nenhum objeto for
+fornecido o comando aplica-se ao objeto alvo.
+
+     <dl>
+<dt><kbd>g</kbd><dd>objeto geom&eacute;trico mundo ("world")
+<br><dt><kbd>g#</kbd><dd>#'&eacute;simo objeto geom&eacute;trico ("geom")
+<br><dt><kbd>g*</kbd><dd>Todos os objetos geom&eacute;tricos ("geoms")
+<br><dt><kbd>c</kbd><dd>c&acirc;mera atual
+<br><dt><kbd>c#</kbd><dd>#'&eacute;sima c&acirc;mera
+<br><dt><kbd>c*</kbd><dd>Todas as c&acirc;meras
+</dl>
+
+   <p>Por exemplo, <kbd>g4af</kbd> significa modifique a face desenhada do objeto
+<em>g4</em>.
+
+   <p>Simplesmente digitando um prefixo de sele&ccedil;&atilde;o, como <kbd>g4</kbd>, n&atilde;o seleciona um objeto ainda;
+isso somente acontece quando um comando, como <kbd>ae</kbd>, segue o prefixo. 
+Para selecionar um objeto como alvo sem fazer nada mais para isso,
+use o comando <kbd>p</kbd>.  Ent&atilde;o <kbd>g3p</kbd> seleciona o objeto g3.
+
+   <p>O campo de texto no canto superior esquerdo faz o painel principal (<em>Main</em>)
+mostrar o estado da tecla de atalho atual.
+
+   <p>Para adi&ccedil;&atilde;o de teclas de atalho ao painel de comandos, existe
+tamb&eacute;m um atalho para selecionar um objeto alvo: digite o nome curto do
+objeto seguido por <kbd>p</kbd>.  Por exemplo, para selecionar o objeto <em>g3</em>,
+digite <kbd>g 3 p</kbd>.  Essa forma funciona somente com nomes curtos &mdash; aqueles
+que aparecem entre colch&ecirc;tes ([ ]) no navegador de alvos (<em>Targets</em>) do
+painel principal <em>Main</em>.
+
+   <p>Abaixo encontra-se um sum&aacute;rio de todas as teclas de atalho.
+
+     <dl>
+<dt>Desenho<dd>
+          <dl>
+    <dt><kbd>af</kbd><dd>    Faces
+    <br><dt><kbd>ae</kbd><dd>    Arestas
+    <br><dt><kbd>an</kbd><dd>    Normais
+    <br><dt><kbd>ab</kbd><dd>    Caixas Associadas
+    <br><dt><kbd>aV</kbd><dd>    Vetores
+    </dl>
+     <br><dt>Sombreamento<dd>
+          <dl>
+    <dt><kbd>0as</kbd><dd>    Constante
+    <br><dt><kbd>1as</kbd><dd>    Mon&oacute;tono
+    <br><dt><kbd>2as</kbd><dd>    Linear
+    <br><dt><kbd>3as</kbd><dd>    Linear, n&atilde;o iluminado
+    <br><dt><kbd>aT</kbd><dd>    permite transpar&ecirc;ncia
+    <br><dt><kbd>at</kbd><dd>    mapeamento de textura
+    </dl>
+     <br><dt>Outro<dd>
+          <dl>
+    <dt><kbd>av</kbd><dd>    vira as normais pelo avesso: sempre visualizador de face
+    <br><dt><kbd>#aw</kbd><dd>    Espessura da linha (em pixels)
+    <br><dt><kbd>aC</kbd><dd>    manuseia pol&iacute;gonos c&ocirc;ncavos
+    <br><dt><kbd>#vc</kbd><dd>    fechador de arestas que n&atilde;o pertencem a faces (tente 5-100)
+    </dl>
+     <br><dt>Cor<dd>
+          <dl>
+    <dt><kbd>Cf</kbd><dd>    faces
+    <br><dt><kbd>Ce</kbd><dd>    arestas
+    <br><dt><kbd>Cn</kbd><dd>    normais
+    <br><dt><kbd>Cb</kbd><dd>    caixas associadas
+    <br><dt><kbd>CB</kbd><dd>    fundo
+    </dl>
+     <br><dt>Movimentos<dd>
+          <dl>
+    <dt><kbd>r</kbd><dd>    rota&ccedil;&atilde;o
+    <br><dt><kbd>t</kbd><dd>    transla&ccedil;&atilde;o
+    <br><dt><kbd>z</kbd><dd>    modifica&ccedil;&otilde;es proporcionais de tamanho (FOV - campo de vis&atilde;o)
+    <br><dt><kbd>f</kbd><dd>    v&ocirc;o
+    <br><dt><kbd>o</kbd><dd>    orbita
+    <br><dt><kbd>s</kbd><dd>    homotetia
+    <br><dt><kbd>w</kbd><dd>    recentralizar o alvo
+    <br><dt><kbd>W</kbd><dd>    recentralizar tudo
+    <br><dt><kbd>h</kbd><dd>    pare
+    <br><dt><kbd>H</kbd><dd>    pare tudo
+    <br><dt><kbd>@</kbd><dd>    selecione o centro do movimento (e.g. <kbd>g 3 @</kbd>)
+    <br><dt><kbd>L</kbd><dd>    Olhe para objeto
+    </dl>
+     <br><dt>Visualizando<dd>
+          <dl>
+    <dt><kbd>0vp</kbd><dd>    vis&atilde;o Ortogr&aacute;fica
+    <br><dt><kbd>1vp</kbd><dd>    vis&atilde;o em perspectiva
+    <br><dt><kbd>vd</kbd><dd>    Habilite outras c&acirc;meras de vis&atilde;o
+    <br><dt><kbd>#vv</kbd><dd>    campo de vis&atilde;o
+    <br><dt><kbd>#vn</kbd><dd>    pr&oacute;xima dist&acirc;ncia de corte
+    <br><dt><kbd>#vf</kbd><dd>    dist&acirc;ncia de corte afastada
+    <br><dt><kbd>v+</kbd><dd>    adicione nova c&acirc;mera
+    <br><dt><kbd>vx</kbd><dd>    cursor ligado/desligado
+    <br><dt><kbd>vb</kbd><dd>    face de tr&aacute;s de um pol&iacute;gono separada habilitada/desabilitada
+    <br><dt><kbd>#vl</kbd><dd>    dist&acirc;ncia focal
+    <br><dt><kbd>v~</kbd><dd>    Tonalidade feita via software ligada/desligada
+    </dl>
+     <br><dt>Pain&eacute;is<dd>
+          <dl>
+    <dt><kbd>Pm</kbd><dd>    Principal
+    <br><dt><kbd>Pa</kbd><dd>    Apar&ecirc;ncia
+    <br><dt><kbd>Pl</kbd><dd>    Ilumina&ccedil;&atilde;o
+    <br><dt><kbd>Po</kbd><dd>    Obscuro
+    <br><dt><kbd>Pt</kbd><dd>    Ferramentas
+    <br><dt><kbd>Pc</kbd><dd>    C&acirc;meras
+    <br><dt><kbd>PC</kbd><dd>    Comandos
+    <br><dt><kbd>Pf</kbd><dd>    arquivos
+    <br><dt><kbd>Ps</kbd><dd>    Salvar
+    <br><dt><kbd>P-</kbd><dd>    ler comandos pelo tty
+    <br><dt><kbd>PA</kbd><dd>    Cr&eacute;ditos ("about")
+    </dl>
+     <br><dt>Luzes<dd>
+          <dl>
+    <dt><kbd>ls</kbd><dd>    mostrar luzes
+    <br><dt><kbd>le</kbd><dd>    editar luzes
+    </dl>
+     <br><dt>Espa&ccedil;o<dd>
+          <dl>
+    <dt><kbd>me</kbd><dd>    Euclidiano
+    <br><dt><kbd>mh</kbd><dd>    Hiperb&oacute;lico
+    <br><dt><kbd>ms</kbd><dd>    Esf&eacute;rico
+    </dl>
+     <br><dt>Modelo<dd>
+          <dl>
+    <dt><kbd>mv</kbd><dd>    Virtual
+    <br><dt><kbd>mp</kbd><dd>    Projetivo
+    <br><dt><kbd>mc</kbd><dd>    Conformal
+    </dl>
+     <br><dt>Outro<dd>
+          <dl>
+    <dt><kbd>0N</kbd><dd>    normaliza&ccedil;&atilde;o: nenhuma
+    <br><dt><kbd>1N</kbd><dd>    normaliza&ccedil;&atilde;o: individual
+    <br><dt><kbd>2N all</kbd><dd>    normaliza&ccedil;&atilde;o: todos
+    <br><dt><kbd>ui</kbd><dd>    movimento: In&eacute;rcial
+    <br><dt><kbd>uc</kbd><dd>    movimento: Contra&ccedil;&atilde;o para o eixo
+    <br><dt><kbd>uo</kbd><dd>    movimento: coordenadas pr&oacute;prias do objeto
+    <br><dt><kbd>&lt;</kbd>    <br><dt><kbd>Pf</kbd><dd>    carregar arquivo geom&eacute;trico ou de comandos
+    <br><dt><kbd>dd</kbd><dd>    apagar objeto alvo
+    <br><dt><kbd>&gt;</kbd>    <br><dt><kbd>Ps</kbd><dd>    grave o estado atual em um arquivo
+    <br><dt><kbd>TV</kbd><dd>    mudar para o modo NTSC
+    <br><dt><kbd>p</kbd><dd>    selecionar como objeto alvo (e.g. <kbd>g 3 p</kbd>)
+    Sem preixo, seleciona o objeto sob o
+    cursor do mouse (da mesma forma que duplo-clicando o bot&atilde;o direito do mouse)
+    </dl>
+     </dl>
+
+<!-- **************************************************************** -->
+   </body></html>
+

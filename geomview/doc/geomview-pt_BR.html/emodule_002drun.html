@@ -1,0 +1,59 @@
+<html lang="en">
+<head>
+<title>emodule-run - Manual do Geomview</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Manual do Geomview">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="GCL-Reference.html#GCL-Reference" title="GCL Reference">
+<link rel="prev" href="emodule_002dpath.html#emodule_002dpath" title="emodule-path">
+<link rel="next" href="emodule_002dsort.html#emodule_002dsort" title="emodule-sort">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="emodule-run"></a>
+<a name="emodule_002drun"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="emodule_002dsort.html#emodule_002dsort">emodule-sort</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="emodule_002dpath.html#emodule_002dpath">emodule-path</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="GCL-Reference.html#GCL-Reference">GCL Reference</a>
+<hr>
+</div>
+
+<h4 class="subsection">7.2.44 emodule-run</h4>
+
+<p><a name="index-emodule_002drun_002c-_007c-50"></a><a name="index-g_t_007c_002c-emodule_002drun-51"></a>
+     <dl>
+<dt><code>(emodule-run COMANDO-SHELL ARGS...)</code><dd>Executa o COMANDO-SHELL fornecido (uma sequ&ecirc;ncia de caracteres contendo um comando shell
+UNIX) como um m&oacute;dulo externo.  A sa&iacute;da padr&atilde;o do m&oacute;dulo
+&eacute; interpretado como comandos do geomview; respostas (escrita para nomearquivo
+<code>-</code>) s&atilde;o enviadas para a entrada padr&atilde;o do m&oacute;dulo.  O comando
+shell &eacute; interpretado por /bin/sh, de forma que redirecionamento de E/S pode
+ser usada: um programa que pergunta ao usu&aacute;rio por entradas a partir do
+terminal poder&aacute; vir a ser executado com:
+     <pre class="example">            (emodule-run  seuprograma  &lt;&amp;2)
+</pre>
+     <p>Caso j&aacute; n&atilde;o tenha sido ajustada, a vari&aacute;vel de ambiente $MACHTYPE &eacute; ajustada para o
+nome do tipo da m&aacute;quina.  Conec&ccedil;&otilde;es de entrada e sa&iacute;da para o geomview s&atilde;o
+liberadas automaticamente quando o comando shell encerra.  Clicando sobre um prorama
+que est&aacute; sendo executado na entrada do navegador de m&oacute;dulos envia o sinal SIGHUP ao programa. 
+Para que esse recurso funcione, programas devem evitar executar em segundo plano; os programas
+usando as bibliotecas FORMS ou GL devem chamar a fun&ccedil;&atilde;o foreground() antes da primeira chamada a
+FORMS ou winopen().  See <a href="emodule_002ddefine.html#emodule_002ddefine"><code>(emodule-define ...)</code></a>. See <a href="emodule_002dstart.html#emodule_002dstart"><code>(emodule-start ...)</code></a>. 
+</dl>
+
+   </body></html>
+

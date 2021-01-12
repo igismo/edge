@@ -1,0 +1,232 @@
+<html lang="en">
+<head>
+<title>Example1 - Manual do Geomview</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Manual do Geomview">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Modulos.html#Modulos" title="Modulos">
+<link rel="prev" href="Interface.html#Interface" title="Interface">
+<link rel="next" href="Example2.html#Example2" title="Example2">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Example1"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Example2.html#Example2">Example2</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Interface.html#Interface">Interface</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Modulos.html#Modulos">Modulos</a>
+<hr>
+</div>
+
+<h3 class="section">6.2 Exemplo 1: M&oacute;dulo Externo Simples</h3>
+
+<p>Essa se&ccedil;&atilde;o fornece um m&oacute;dulo externo extremamente simples que mostra uma
+malha oscilando.  Para experimentar esse exemplo, fa&ccedil;a uma c&oacute;pia do arquivo
+<samp><span class="file">example1.c</span></samp> (esse arquivo &eacute; distribu&iacute;do com Geomview no subdiretio
+<samp><span class="file">doc</span></samp>) em seu diret&oacute;rio e compile <samp><span class="file">example1.c</span></samp>  com o comando
+
+<pre class="example">     cc -o example1 example1.c -lm
+</pre>
+   <p>A seguir coloque a linha
+
+<pre class="example">     (emodule-define "Example 1" "./example1")
+</pre>
+   <p class="noindent">em um arquivo chamado <samp><span class="file">.geomview</span></samp> no seu diret&oacute;rio atual.  A seguir chame o
+Geomview; &Eacute; importante que voc&ecirc; compile o programa exemplo, crie
+o arquivo <samp><span class="file">.geomview</span></samp> e chame o Geomview a partir do mesmo
+diret&oacute;rio.  Voc&ecirc; pode ver "Example 1" no navegador  de m&oacute;dulos (<em>Modules</em>)
+do painel principal (<em>Main</em>) do Geomview; clique sobre essa entrada no navegador para
+iniciar o m&oacute;dulo.  Uma superf&iacute;cie deve aparecer na sua janela de c&acirc;mera e deve
+estar oscilando.  Voc&ecirc; pode parar o m&oacute;dulo clicando sobre a linha "[1]
+Example 1" no navegador de m&oacute;dulos (<em>Modules</em>).
+
+<pre class="example">     <!-- #include "example1.c" -->
+     /*
+      * example1.c: oscillating mesh
+      *
+      * This example module is distributed with the Geomview manual.
+      * If you are not reading this in the manual, see the "External
+      * Modules" chapter of the manual for more details.
+      *
+      * This module creates an oscillating mesh.
+      */
+     
+     #include &lt;math.h&gt;
+     #include &lt;stdio.h&gt;
+     
+     /* F is the function that we plot
+      */
+     float F(x,y,t)
+          float x,y,t;
+     {
+       float r = sqrt(x*x+y*y);
+       return(sin(r + t)*sqrt(r));
+     }
+     
+     main(argc, argv)
+          char **argv;
+     {
+       int xdim, ydim;
+       float xmin, xmax, ymin, ymax, dx, dy, t, dt;
+     
+       xmin = ymin = -5;             /* Set x and y            */
+       xmax = ymax = 5;              /*    plot ranges         */
+       xdim = ydim = 24;             /* Set x and y resolution */
+       dt = 0.1;                     /* Time increment is 0.1  */
+     
+       /* Geomview setup.  We begin by sending the command
+        *            (geometry example { : foo})
+        * to Geomview.  This tells Geomview to create a geom called
+        * "example" which is an instance of the handle "foo".
+        */
+       printf("(geometry example { : foo })\n");
+       fflush(stdout);
+     
+       /* Loop until killed.
+        */
+       for (t=0; ; t+=dt) {
+         UpdateMesh(xmin, xmax, ymin, ymax, xdim, ydim, t);
+       }
+     }
+     
+     /* UpdateMesh sends one mesh iteration to Geomview.  This consists of
+      * a command of the form
+      *    (read geometry { define foo
+      *       MESH
+      *       ...
+      *    })
+      * where ... is the actual data of the mesh.  This command tells
+      * Geomview to make the value of the handle "foo" be the specified
+      * mesh.
+      */
+     UpdateMesh(xmin, xmax, ymin, ymax, xdim, ydim, t)
+          float xmin, xmax, ymin, ymax, t;
+          int xdim, ydim;
+     {
+       int i,j;
+       float x,y, dx,dy;
+     
+       dx = (xmax-xmin)/(xdim-1);
+       dy = (ymax-ymin)/(ydim-1);
+     
+       printf("(read geometry { define foo \n");
+       printf("MESH\n");
+       printf("%1d %1d\n", xdim, ydim);
+       for (j=0, y = ymin; j&lt;ydim; ++j, y += dy) {
+         for (i=0, x = xmin; i&lt;xdim; ++i, x += dx) {
+           printf("%f %f %f\t", x, y, F(x,y,t));
+         }
+         printf("\n");
+       }
+       printf("})\n");
+       fflush(stdout);
+     }
+     <!-- #end include -->
+</pre>
+   <p>O m&oacute;dulo inicia-se definindo uma fun&ccedil;&atilde;o <code>F(x,y,t)</code> que
+especifica uma superf&iacute;cie va-riando com o tempo.  O prop&oacute;sito do m&oacute;dulo &eacute;
+animar essa superf&iacute;cie com o passar do tempo.
+
+   <p>O programa principal come&ccedil;a definindo algumas vari&aacute;veis que especificam
+os par&acirc;metros com os quais a fun&ccedil;&atilde;o &eacute; para ser mostrada.
+
+   <p>O pr&oacute;ximo peda&ccedil;o de c&oacute;digo no programa principal envia a seguinte
+linha para a sa&iacute;da padr&atilde;o
+
+<pre class="example">     (geometry example { : foo })
+</pre>
+   <p>Isso diz ao Geomview para criar um geom chamado <code>example</code> que &eacute; uma
+inst&acirc;ncia do manipulador <code>foo</code>.  <em>Manipuladores</em> s&atilde;o uma parte do
+formato de arquivo OOGL que permite a voc&ecirc; nomear uma pe&ccedil;a do objeto geom&eacute;trico cujo valor
+pode ser especificado em seu lugar (e nesse caso atualizado muitas vezes); para
+maiores informa&ccedil;&otilde;es sobre manipuladores, veja <a href="Formatos-dos-Arquivos-da-OOGL.html#Formatos-dos-Arquivos-da-OOGL">Formatos dos Arquivos da OOGL</a>. Nesse caso,
+<code>example</code> &eacute; o t&iacute;tulo atrav&eacute;s do qual o usu&aacute;rio ir&aacute; ver o objeto no
+navegador de objeto do Geomview, e <code>foo</code> &eacute; o nome interno do
+manipulador para o qual o objeto aponta.
+
+   <p>N&oacute;s ent&atilde;o fazemos <code>fflush(stdout)</code> para garantir que Geomview
+receba esse comando imediatamente.  Em geral, uma vez que pipes podem ser
+colocados em uma &aacute;rea de mem&oacute;ria tempor&aacute;ria de armazenamento, um m&oacute;dulo externo deve fazer isso sempre que esse m&oacute;dulo externo tenha que
+garantir que Geomview tenha atualmente recebido tudo que tenha sido mostrado na sa&iacute;da.
+
+   <p>A &uacute;ltima coisa no programa principal &eacute; um ciclo infinito que circula
+atrav&eacute;s de chamadas ao procedimento <code>UpdateMesh</code> com incremento dos
+valores de <code>t</code>.  <code>UpdateMesh</code> envia ao Geomview um comando
+da forma
+
+<pre class="example">     (read geometry { define foo
+     MESH
+     24 24
+     ...
+     })
+</pre>
+   <p class="noindent">onde <code>...</code> &eacute; uma longa lista de n&uacute;meros.  Esse comando diz ao Geomview
+fazer os valores do manipulador <code>foo</code> ser a malha especificada.  T&atilde;o
+breve quanto Geomview receba esse comando, o geom sendo mostrado
+muda para refletir o novo objeto geom&eacute;trico.
+
+   <p>A malha &eacute; fornecida no formato de uma OOGL MESH.  Esse formato come&ccedil;a com
+a palavra chave <code>MESH</code>.  A seguir temos dois n&uacute;meros que fornecem as dimens&otilde;es
+x e y da malha; nesse caso elas s&atilde;o ambas 24.  Essa linha &eacute;
+seguida por 24 linhas, cada linha contendo 24 trios de n&uacute;meros.  Cada um
+desses trios representa um ponto sobre  superf&iacute;cie.  Ent&atilde;o finalmente existe uma linha
+com "<code>})</code>" nesse formato que termina o "<code>{</code>" que iniciou a
+declara&ccedil;&atilde;o <code>define</code> e o "<code>(</code>" que iniciou o comando.  Para
+mais detalhes sobre o formato de dados MESH, veja <a href="MESH.html#MESH">MESH</a>.
+
+   <p>Esse m&oacute;dulo pode ser escrito sem o uso de manipuladores
+escrevendo comandos da forma
+
+<pre class="example">     (geometry example {
+     MESH
+     24 24
+     ...
+     })
+</pre>
+   <p class="noindent">Nesse primeiro tempo Geomview recebe um comando e dessa forma pode criar
+um geom chamado <code>example</code> com os dados fornecidos da <code>MESH</code>. 
+Subsequentemente comandos <code>(geometry example ...)</code> podem fazer com que
+Geomview substitua a geometria do geom <code>example</code> com os novos
+dados da <code>MESH</code>.  Se realizado dessa forma pode n&atilde;o ser necess&aacute;rio enviar
+o comando inicial <code>(geometry example { : foo })</code> como dito acima.  A
+t&eacute;cnica do manipulador &eacute; &uacute;til, todavia, porque essa t&eacute;cnica pode ser usada em situa&ccedil;&otilde;es
+mais gerais onde um manipulador representa somente parte de um complexo
+geom, permitindo a um m&oacute;dulo externo substituir somente aquela parte sem
+ter que retransmitir o geom completo.  Para mais informa&ccedil;&otilde;es sobre manipuladores,
+veja <a href="GCL.html#GCL">GCL</a>. Veja <a href="Referencias.html#Referencias">Referencias</a>. Veja <a href="hdefine.html#hdefine"><code>(hdefine ...)</code></a>. Veja <a href="read.html#read"><code>(read ...)</code></a>.
+
+   <p>O m&oacute;dulo entra em ciclos atrav&eacute;s de chamadas a <code>UpdateMesh</code> que fornece como sa&iacute;da
+comandos da forma acima um ap&oacute;s o outro t&atilde;o r&aacute;pido quanto poss&iacute;vel. 
+O ciclo continua indefinidamente; o m&oacute;dulo ir&aacute; terminar quando o
+usu&aacute;rio fizer isso clicando sobre sua linha de inst&acirc;ncia no navegador de
+m&oacute;dulos (<em>Modules</em>), ou em caso contr&aacute;rio quando Geomview for encerrado.
+
+   <p>Algumas vezes quando voc&ecirc; encerra o m&oacute;dulo clicando sobre sua entrada de
+inst&acirc;ncia no navegador de m&oacute;dulos (<em>Modules</em>), Geomview ir&aacute; encerr&aacute;-lo enquanto o m&oacute;dulo est&aacute; no
+meio de um comando ao Geomview.  Geomview ir&aacute; ent&atilde;o receber
+somente uma pe&ccedil;a de um comando e ir&aacute; mostrar uma cr&iacute;tica mas inofensiva
+mensagem de erro sobre isso.  uando um m&oacute;dulo tiver um painel de interface com o usu&aacute;rio
+o usu&aacute;rio pode usar um bot&atilde;o "Quit" para fornecer uma forma mais elegante para o usu&aacute;rio
+encerrar o m&oacute;dulo.  Veja o exemplo seguinte.
+
+   <p>Voc&ecirc; pode usar esse m&oacute;dulo em uma janela de shell sem o Geomview para ver os
+comando que o m&oacute;dulo mostra como sa&iacute;da.  Voc&ecirc; ir&aacute; ter que encerr&aacute;-lo com
+<kbd>ctrl-C</kbd> para que ele pare.
+
+<!-- ================================================================ -->
+   </body></html>
+

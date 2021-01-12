@@ -1,0 +1,94 @@
+#!version 2.2.6
+surface
+#!parameters:
+uniform	float	Ka	=	1
+uniform	float	Kd	=	.5
+uniform	float	Ks	=	.5
+uniform	float	roughness	=	.1
+uniform	color	specularcolor	=	1
+uniform	string	texturename	=	""
+uniform	color	bgcolor	=	0
+uniform	float	At	=	1
+#!variables:
+varying	vector	Nf
+varying	vector	V
+varying	vector	Ct
+varying	float	Ot
+varying	float	channels
+varying	vector	temporary_0
+varying	vector	temporary_1
+varying	vector	temporary_2
+varying	vector	temporary_3
+uniform	vector	temporary_4
+varying	vector	temporary_5
+varying	vector	temporary_6
+uniform	vector	temporary_7
+varying	float	temporary_8
+varying	float	temporary_9
+uniform	float	temporary_10
+varying	float	temporary_11
+varying	float	temporary_12
+varying	float	temporary_13
+#!Init:
+	return            
+#!Code:
+	movevv            	Ci Cs
+	movevv            	Oi Os
+	normalize	("v=v")  temporary_0  N 
+	faceforward	("v=vv")  Nf  temporary_0  I 
+	normalize	("v=v")  temporary_0  I 
+	negv              	V temporary_0
+	vfromf            	temporary_4 Ka
+	vuvector           temporary_3 temporary_4
+	ambient	("c=")  temporary_5 
+	mulvv             	temporary_2 temporary_3 temporary_5
+	vfromf            	temporary_4 Kd
+	vuvector           temporary_5 temporary_4
+	diffuse	("c=n")  temporary_6  Nf 
+	mulvv             	temporary_3 temporary_5 temporary_6
+	addvv             	temporary_1 temporary_2 temporary_3
+	mulvv             	temporary_0 Ci temporary_1
+	vfromf            	temporary_7 Ks
+	mulvv             	temporary_4 specularcolor temporary_7
+	vuvector           temporary_2 temporary_4
+	vufloat            temporary_8 roughness
+	specular	("c=nvf")  temporary_3  Nf  V  temporary_8 
+	mulvv             	temporary_1 temporary_2 temporary_3
+	addvv             	Ci temporary_0 temporary_1
+	sneql             	temporary_10 texturename ""
+	vufloat            temporary_9 temporary_10
+	textureinfo	("f=SSF")  temporary_12  texturename  "channels"  channels 
+	vufloat            temporary_13 1.0
+	feql              	temporary_11 temporary_12 temporary_13
+	and               	temporary_8 temporary_9 temporary_11
+	if                	temporary_8 #!Label5
+	vufloat            temporary_11 3
+	flt               	temporary_9 channels temporary_11
+	if                	temporary_9 #!Label8
+	texture	("f=SFffSf")  temporary_11  texturename  0  s  t  "width"  0.0 
+	vfromf            	Ct temporary_11
+	texture	("f=SFffSfsf")  Ot  texturename  1  s  t  "fill"  1.0  "width"  0.0 
+#!Label8:
+	else              	#!Label7
+	texture	("c=SFffSf")  Ct  texturename  0  s  t  "width"  0.0 
+	texture	("f=SFffSfsf")  Ot  texturename  3  s  t  "fill"  1.0  "width"  0.0 
+#!Label7:
+	endif             
+	vfromf            	temporary_4 1.0
+	vuvector           temporary_2 temporary_4
+	subvv             	temporary_1 temporary_2 Ct
+	mulvv             	temporary_0 temporary_1 Ci
+	vuvector           temporary_2 bgcolor
+	mulvv             	temporary_1 Ct temporary_2
+	addvv             	Ci temporary_0 temporary_1
+	subff             	temporary_10 1.0 At
+	vufloat            temporary_9 temporary_10
+	vufloat            temporary_12 At
+	mulff             	temporary_11 temporary_12 Ot
+	addff             	Ot temporary_9 temporary_11
+	vfromf            	temporary_0 Ot
+	mulvv             	Oi Oi temporary_0
+#!Label5:
+	endif             
+	mulvv             	Ci Ci Oi
+	return            

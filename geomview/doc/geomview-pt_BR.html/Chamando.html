@@ -1,0 +1,107 @@
+<html lang="en">
+<head>
+<title>Chamando - Manual do Geomview</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Manual do Geomview">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Interacao.html#Interacao" title="Interacao">
+<link rel="prev" href="Interacao-Basica.html#Interacao-Basica" title="Interacao Basica">
+<link rel="next" href="Movimentos-do-Mouse.html#Movimentos-do-Mouse" title="Movimentos do Mouse">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Chamando"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Movimentos-do-Mouse.html#Movimentos-do-Mouse">Movimentos do Mouse</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Interacao-Basica.html#Interacao-Basica">Interacao Basica</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Interacao.html#Interacao">Interacao</a>
+<hr>
+</div>
+
+<h3 class="section">3.4 Disponibilizando Objetos dentro do Geomview</h3>
+
+<p>Existem muitos caminhos para chamar um objeto dentro do Geomview.
+
+     <dl>
+<dt>No painel de arquivos (<em>Files</em>)<dd>Se voc&ecirc; clicar no bot&atilde;o <em>Load</em> no painel principal do Geomview (<em>Main</em>),
+o painel de arquivos (<em>Files</em>) ir&aacute; aparecer.
+
+     <div class="float">
+<a name="figmyfilelist"></a><img src="figs/myfilelist.png" alt="figs/myfilelist.png">
+
+     <p><strong class="float-caption">Figura 3.2: O Painel de Arquivos.</strong></p></div>
+Esse painel permite que voc&ecirc; selecione um arquivo a partir de uma variedade de diret&oacute;rios. 
+O topo do painel &eacute; um navegador de arquivos padr&atilde;o do Motif.  Abaixo deste est&aacute;
+uma lista de diret&oacute;rios no caminho de busca padr&atilde;o do Geomview; clique sobre um
+desses para navegar entre os arquivos naquele diret&oacute;rio.
+
+        <p>Para selecionar um arquivo, duplo-clique sobre o seu nome no navegador no canto superior direito,
+ou clique sobre o seu nome e pressione a tecla &lt;Enter&gt;, ou ainda digite o nome do arquivo
+dentro da caixa de texto na parte inferior do navegador e pressione a tecla &lt;Enter&gt;.
+
+        <p>Se o arquivo selecionado contiver dados geom&eacute;tricos OOGL, esse arquivo ir&aacute; ser adicionado ao
+navegador de alvos (<em>Targets</em>) do Geomview.  Se esse arquivo contiver comandos GCL em lugar de conter dados geom&eacute;tricos OOGL,
+o arquivo ser&aacute; interpretado. Veja <a href="GCL.html#GCL">GCL</a>.
+
+        <p>Quando o apinel de arquivos (<em>Files</em>) aparecer pela primeira vez, o diret&oacute;rio selecionado no
+navegador de diret&oacute;rios &eacute; o diret&oacute;rio atual &mdash; que corresponde ao diret&oacute;rio a partir do qual voc&ecirc;
+chamou o Geomview.  O navegador de arquivos mostra <em>todos</em> os arquivos nesse
+diret&oacute;rio, incluindo os que n&atilde;o s&atilde;o arquivos do Geomview.  Se voc&ecirc; tentar
+chamar um arquivo que n&atilde;o contenha um objeto OOGL e tamb&eacute;m n&atilde;o contenha comandos do
+Geomview, o Geomview ir&aacute; mostrar uma mensagem de erro.
+
+        <p>O navegador de diret&oacute;rios tamb&eacute;m lista um segundo e um terceiro diret&oacute;rios
+adicionalmente al&eacute;m do diret&oacute;rio atual.  O segundo, que termina em
+<samp><span class="file">data/geom</span></samp>, &eacute; o diret&oacute;rio de exemplos de dados do Geomview.  Esse diret&oacute;rio cont&eacute;m
+uma grande variedade de amostras de objetos.  Esse diret&oacute;rio tamb&eacute;m cont&eacute;m muitos
+subdiret&oacute;rios.  Em particular, os subdiret&oacute;rios <samp><span class="file">hyperbolic</span></samp> e o
+subdiret&oacute;rio <samp><span class="file">spherical</span></samp> possuem amostras de objetos hiperb&oacute;licos
+e esf&eacute;ricos, respectivamente.  Entradas no navegador de diret&oacute;rios s&atilde;o vistas apenas como
+entradas de arquivos; para visualizar um subdiret&oacute;rio, clique sobre o nome do referido diret&oacute;rio.
+
+        <p>O terceiro diret&oacute;rio mostrado no navegador de diret&oacute;rio, que termina em
+<samp><span class="file">geom</span></samp>, cont&eacute;m muitos subdiret&oacute;rios com outros arquivos do Geomview
+dentro deles.  Esses arquivos s&atilde;o usados menos frequ&ecirc;ntemente que os outros no
+diret&oacute;rio <samp><span class="file">data/geom</span></samp>.
+
+        <p>Voc&ecirc; pode mudar a lista de diret&oacute;rios mostrada no navegador de diret&oacute;rios
+do painel de arquivos (<em>Files</em>) usando o comando <code>set-load-path</code>;
+Veja <a href="set_002dload_002dpath.html#set_002dload_002dpath"><code>(set-load-path ...)</code></a>.
+
+        <br><dt>A tecla de atalho <kbd>&lt;</kbd>:<dd>Se voc&ecirc; digitar <kbd>&lt;</kbd> em qualquer janela do Geomview, o painel <em>Load</em> ir&aacute;
+aparecer.  Esse painel &eacute; uma pequena vers&atilde;o do painel de arquivos (<em>Files</em>); o painel <em>Load</em> cont&eacute;m
+um campo de texto no qual voc&ecirc; o nome de um arquivo a ser chamado (ou um
+comando GCL entre par&ecirc;ntesis).  Ap&oacute;s digitar o nome do arquivo
+a ser chamado, aperte a tecla <kbd>&lt;Enter&gt;</kbd>; Geomview ir&aacute;
+chamar o arquivo como se voc&ecirc; o tivesse chamado com o bot&atilde;o <em>Add</em> no
+painel de arquivos (<em>Files</em>).  Se, ap&oacute;s fazer surgir o pequeno painel <em>Load</em>
+com <kbd>&lt;</kbd>, voc&ecirc; decidir que quer usar o grande painel de arquivos (<em>Files</em>)
+ap&oacute;s tudo, pressione o bot&atilde;o <em>File Browser</em>. 
+<div class="float">
+<a name="figloadpanel"></a><img src="figs/load.png" alt="figs/load.png">
+
+        <p><strong class="float-caption">Figura 3.3: O Painel de Chamar Arquivos.</strong></p></div>
+
+        <br><dt>Comandos para chamar objetos geom&eacute;tricos:<dd>Os comandos GCL <code>load</code>, <code>geometry</code>, <code>new-geometry</code>,
+e <code>read</code> permitem a voc&ecirc; chamar um objeto dentro do Geomview;
+veja <a href="GCL.html#GCL">GCL</a>. Veja <a href="load.html#load"><code>(load ...)</code></a>. Veja <a href="new_002dgeometry.html#new_002dgeometry"><code>(new-geometry ...)</code></a>. Veja <a href="read.html#read"><code>(read ...)</code></a>.
+
+   </dl>
+
+<!-- ================================================================ -->
+   </body></html>
+

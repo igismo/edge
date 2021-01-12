@@ -1,0 +1,51 @@
+<html lang="en">
+<head>
+<title>Matrizes de transformacao - Manual do Geomview</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Manual do Geomview">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Convencoes.html#Convencoes" title="Convencoes">
+<link rel="prev" href="Direcoes-de-superficies-normais.html#Direcoes-de-superficies-normais" title="Direcoes de superficies normais">
+<link rel="next" href="Matrizes-de-transformacao-ND.html#Matrizes-de-transformacao-ND" title="Matrizes de transformacao ND">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Matrizes-de-transformacao"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Matrizes-de-transformacao-ND.html#Matrizes-de-transformacao-ND">Matrizes de transformacao ND</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Direcoes-de-superficies-normais.html#Direcoes-de-superficies-normais">Direcoes de superficies normais</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Convencoes.html#Convencoes">Convencoes</a>
+<hr>
+</div>
+
+<h4 class="subsection">4.1.6 Matrizes de transforma&ccedil;&atilde;o</h4>
+
+<p>Alguns objetos incorporam matrizes quadradas reais de ordem 4 para transforma&ccedil;&otilde;es sobre
+objetos homog&ecirc;neos.  Essas matrizes atuam atrav&eacute;s de multiplica&ccedil;&atilde;o &agrave; direita de
+vetores.  Dessa forma, se p for um vetor linha de 4 elementos representando coordenadas
+homog&ecirc;neas de um ponto no objeto OOGL, e A for a matrix 4x4, ent&atilde;o
+o ponto resultante da transforma&ccedil;&atilde;o &eacute; p' = p A.  Essa conven&ccedil;&atilde;o matricial &eacute; comum em
+computa&ccedil;&atilde;o gr&aacute;fica; &eacute; a matriz transposta daquela muitas vezes usada em matem&aacute;tica,
+onde pontos s&atilde;o vetores coluna multiplicados &agrave; direita pelas matrizes.
+
+   <p>Dessa forma para transforma&ccedil;&otilde;es Euclideanas, as componentes para transla&ccedil;&atilde;o aparecem na
+quarta linha (os &uacute;ltimos quatro elementos) da matriz A.  A &uacute;ltima coluna da matriz A (quarto, oitavo,
+d&eacute;cimo segundo e d&eacute;cimo sexto elementos) s&atilde;o tipicamente 0, 0, 0, e 1 respectivamente.
+
+<!--  -->
+   </body></html>
+

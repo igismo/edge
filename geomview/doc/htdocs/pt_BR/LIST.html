@@ -1,0 +1,64 @@
+<html lang="en">
+<head>
+<title>LIST - Manual do Geomview</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Manual do Geomview">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Formatos-de-Arquivo-de-Objeto.html#Formatos-de-Arquivo-de-Objeto" title="Formatos de Arquivo de Objeto">
+<link rel="prev" href="INST.html#INST" title="INST">
+<link rel="next" href="TLIST.html#TLIST" title="TLIST">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="LIST"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="TLIST.html#TLIST">TLIST</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="INST.html#INST">INST</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Formatos-de-Arquivo-de-Objeto.html#Formatos-de-Arquivo-de-Objeto">Formatos de Arquivo de Objeto</a>
+<hr>
+</div>
+
+<h4 class="subsection">4.2.10 Arquivos do Tipo LIST</h4>
+
+<p>O sufixo convencional para um arquivo <code>LIST</code> &eacute; <samp><span class="file">.list</span></samp>.
+
+   <p>Uma lista de objetos OOGL
+
+   <p>Sintaxe:
+
+<pre class="example">     LIST
+         <var>oogl-object</var>
+         <var>oogl-object</var>
+         ...
+</pre>
+   <p>Note que n&atilde;o existe separa&ccedil;&atilde;o expl&iacute;cita entre os objetos oogl, de forma que
+eles podem ser colocados entre chaves ({ }) por quest&otilde;es de clareza.  Da mesma forma
+n&atilde;o existe um marcador expl&iacute;cito para o final da lista; a menos que o arquivo apare&ccedil;a
+sozinho em um arquivo de disco, a constru&ccedil;&atilde;o completa pode tamb&eacute;m ser empacotada entre
+chaves, como em:
+
+<pre class="example">        { LIST { QUAD ... } { &lt; xyz.quad } }
+</pre>
+   <p>Uma <code>LIST</code> vazia, i.e. <code>{ LIST }</code>, &eacute; v&aacute;lida, e &eacute;
+o caminho mais f&aacute;cil para criar um objeto vazio.  Por exemplo, para remover uma
+defini&ccedil;&atilde;o de s&iacute;mbolo voc&ecirc; pode escrever
+
+<pre class="example">        { define algums&iacute;mbolo  { LIST } }
+</pre>
+   <!--  -->
+   </body></html>
+

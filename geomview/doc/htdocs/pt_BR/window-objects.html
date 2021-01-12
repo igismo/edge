@@ -1,0 +1,77 @@
+<html lang="en">
+<head>
+<title>window objects - Manual do Geomview</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Manual do Geomview">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Objetos-nao_002dgeometricos.html#Objetos-nao_002dgeometricos" title="Objetos nao-geometricos">
+<link rel="prev" href="Objeto-camera.html#Objeto-camera" title="Objeto camera">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="window-objects"></a>
+<p>
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Objeto-camera.html#Objeto-camera">Objeto camera</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Objetos-nao_002dgeometricos.html#Objetos-nao_002dgeometricos">Objetos nao-geometricos</a>
+<hr>
+</div>
+
+<h4 class="subsection">4.3.6 Janela</h4>
+
+<p>Um objeto janela especifica tamanho, posi&ccedil;&atilde;o, e outras informa&ccedil;&otilde;es
+relacionadas ao sistema de janelas sobre uma janela de forma que essas informa&ccedil;&otilde;es sejam independentes do dispositivo.
+
+   <p>A sintaxe de um objeto janela &eacute;:
+
+<pre class="example">     nomejanela ::=
+     
+     	[ "window" ]			(palavra chave opcional)
+     	  [ "{" ]			(abertura de chave, requerida na maioria das vezes)
+     
+     	    			(qualquer dos seguintes, em qualquer ordem)
+     
+     		"size"  &lt;tamanhox&gt; &lt;tamanhoy&gt;
+     				(tamanho da janela)
+     
+     		"position"  &lt;xmin&gt; &lt;xmax&gt; &lt;ymin&gt; &lt;ymax&gt;
+     				(posi&ccedil;&atilde;o &amp; tamanho)
+     
+     
+     		"noborder"
+     				(especifica se a janela pode
+     				 ter ou n&atilde;o uma borda)
+     
+     		"pixelaspect"  &lt;aspecto&gt;
+     			    (especifica a raz&atilde;o de aspecto real visualizada
+     			     de um pixel nessa janela no sentido
+     			     tamanhox/tamanhoy, normalmente 1.0.
+     			     Para hardware stereo o qual corta o
+     			     display verticalmente por um fator de 2,
+     			     ``pixelaspect 0.5'' pode funcionar.
+     			     O valor &eacute; usado no c&aacute;lculo da
+     			     proje&ccedil;&atilde;o de uma c&acirc;mera associada a
+     			     essa janela.)
+     
+     	  [ "}" ]			(correspondente fechamento de chave)
+</pre>
+   <p>Objetos janela s&atilde;o usados em <code>janelas</code> do Geomview e em
+comandos do painel de intera&ccedil;&atilde;o/interface com o usu&aacute;rio (<code>ui-panel</code>) para escolher propriedades padronizadas para futuras janelas ou
+mudar as mesmas propriedades padronizadas de uma janela existente. Veeja <a href="window.html#window"><code>(window ...)</code></a>. Veja tamb&eacute;m <a href="ui_002dpanel.html#ui_002dpanel"><code>(ui-panel ...)</code></a>.
+
+<!-- **************************************************************** -->
+   </body></html>
+

@@ -1,0 +1,75 @@
+<html lang="en">
+<head>
+<title>Formato binario - Manual do Geomview</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Manual do Geomview">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Convencoes.html#Convencoes" title="Convencoes">
+<link rel="prev" href="Matrizes-de-transformacao-ND.html#Matrizes-de-transformacao-ND" title="Matrizes de transformacao ND">
+<link rel="next" href="Referencias.html#Referencias" title="Referencias">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Formato-binario"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Referencias.html#Referencias">Referencias</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Matrizes-de-transformacao-ND.html#Matrizes-de-transformacao-ND">Matrizes de transformacao ND</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Convencoes.html#Convencoes">Convencoes</a>
+<hr>
+</div>
+
+<h4 class="subsection">4.1.8 Formato bin&aacute;rio</h4>
+
+<p>Muitos objetos OOGL aceitam formatos o formato de arquivo bin&aacute;rio bem como o formato de arquivo ASCII. 
+Esses arquivos come&ccedil;am com a indica&ccedil;&atilde;o usual (e.g. <code>CQUAD</code>)
+seguida pela palavra <code>BINARY</code>. 
+Dados bin&aacute;rios iniciam-se no byte imediatamente seguinte ao primeiro caractere de nova linha ap&oacute;s
+a palavra <code>BINARY</code>.  Espa&ccedil;os em branco e um simples coment&aacute;rio podem atrapalhar, e.g.
+
+<pre class="example">     OFF BINARY	# binary-format "OFF" data follows
+</pre>
+   <p>Dados bin&aacute;rios compreendem inteiros de 32 bits e os inteiros em ponto flutuante de 32 bits conforme definido pela IEEE (IEEE Standard for Binary Floating-Point Arithmetic (ANSI/IEEE Std 754-1985 - Institute of Electrical and Electronics Engineers), ambos os formatos
+seguem &agrave; forma de ordena&ccedil;&atilde;o "big-endian" (i.e., com o byte mais significativo em primeiro lugar).  Esse &eacute;
+o formato nativo para tipos de dado int e tipos de dado float em sistemas do tipo Sun-3, Sun-4, e
+Irises, al&eacute;m de muitos outros sistemas.
+
+   <p>Formatos de dados bin&aacute;rios assemelham-se aos formatos correspondentes em ASCII, com tipos de dado "int"
+e tipos de dado "float" nos lugares que voc&ecirc; est&aacute; acostumado a encontrar.  Existe algumas excess&otilde;es
+todavia, especificamente dos formatos d arquivo <code>QUAD</code>, <code>OFF</code> e
+<code>COMMENT</code>.  Detalhes s&atilde;o fornecidos no arquivo individual das descri&ccedil;&otilde;es do
+formato espec&iacute;fico.  Veja em <a href="QUAD.html#QUAD">QUAD</a>, <a href="OFF.html#OFF">OFF</a>, e em See <a href="COMMENT.html#COMMENT">COMMENT</a>.
+
+   <p>Objetos OOGL bin&aacute;rios podem ser livremente misturados em fluxos de objetos ASCII:
+
+<pre class="example">     LIST
+     { = MESH BINARY
+     ... dados bin&aacute;rios de uma malha aqui ...
+     }
+     { = QUAD
+     	1 0 0   0 0 1   0 1 0  0 1 0
+     }
+</pre>
+   <p>Note que dados ASCII continuam seguindo imediatamente o &uacute;ltimo byte dos
+dados bin&aacute;rios.
+
+   <p>Naturalmente, &eacute; imposs&iacute;vel incluir coment&aacute;rios dentro de um objeto em formato
+bin&aacute;rio OOGL, todavia coment&aacute;rios podem aparecer no cabe&ccedil;alho antes do in&iacute;cio dos
+dados bin&aacute;rios.
+
+<!--  -->
+   </body></html>
+

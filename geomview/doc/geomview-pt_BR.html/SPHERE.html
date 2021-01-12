@@ -1,0 +1,80 @@
+<html lang="en">
+<head>
+<title>SPHERE - Manual do Geomview</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Manual do Geomview">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Formatos-de-Arquivo-de-Objeto.html#Formatos-de-Arquivo-de-Objeto" title="Formatos de Arquivo de Objeto">
+<link rel="prev" href="SKEL.html#SKEL" title="SKEL">
+<link rel="next" href="INST.html#INST" title="INST">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="SPHERE"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="INST.html#INST">INST</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="SKEL.html#SKEL">SKEL</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Formatos-de-Arquivo-de-Objeto.html#Formatos-de-Arquivo-de-Objeto">Formatos de Arquivo de Objeto</a>
+<hr>
+</div>
+
+<h4 class="subsection">4.2.8 SPHERE Files</h4>
+
+<p>O sufixo convencional para arquivos <code>SPHERE</code> &eacute; <samp><span class="file">.sph</span></samp>.
+
+<pre class="example">     [ST][E|H|S]SPHERE # Palavra chave
+     # coordenadas de textura geradas automaticamente, somente permitido
+     # com objetos <em>ST</em>SPHERE [SINUSOIDAL|CYLINDRICAL|RECTANGULAR|
+     # STEREOGRAPHIC|ONEFACE]
+     # os pr&oacute;ximos quatro campos s&atilde;o requeridos
+     <var>Radius</var>
+     <var>Xcenter</var> <var>Ycenter</var> <var>Zcenter</var>
+</pre>
+   <p>A palavra chave &eacute; <code>[ST][E|H|S]SPHERE</code>. 
+Os caracteres prefixados opcionais significam:
+
+     <dl>
+<dt>&lsquo;<samp><span class="samp">ST</span></samp>&rsquo;<dd>A esfera &eacute; desenhada com coordenadas de textura geradas automaticamente. Veja abaixo. 
+<br><dt>&lsquo;<samp><span class="samp">E</span></samp>&rsquo;<dd>Assume-se que a esfera encontra-se dentro do espa&ccedil;o Euclidiano. 
+<br><dt>&lsquo;<samp><span class="samp">H</span></samp>&rsquo;<dd>Assume-se que a esfera encontra-se dentro de um espa&ccedil;o Hiperb&oacute;lico. Veja <a href="Geometrias-Nao_002dEuclidianas.html#Geometrias-Nao_002dEuclidianas">Geometrias Nao-Euclidianas</a>. 
+<br><dt>&lsquo;<samp><span class="samp">S</span></samp>&rsquo;<dd>Assume-se que a esfera encontra-se dentro de um espa&ccedil;o esf&eacute;rico. Veja <a href="Geometrias-Nao_002dEuclidianas.html#Geometrias-Nao_002dEuclidianas">Geometrias Nao-Euclidianas</a>. 
+</dl>
+
+   <p>Objetos do tipo esfera s&atilde;o desenhados usando malhas que s&atilde;o retangulares em um sistema de
+coordenadas polares, com o plano equatorial paralelo ao plano
+<code>x,y</code>. Sua suavidade superficial, e o tempo gasto para desenh&aacute;-la,
+depende da escolha dos cortes quadrados, 10x10 por padr&atilde;o.  Para
+Geomview, o painel de apar&ecirc;ncia, o comando de teclado <code>&lt;N&gt;ad</code>, ou um
+atributo de apar&ecirc;ncia <code>dice nu nv</code> escolhe isso.
+
+   <p>Coordenadas de textura s&atilde;o geradas para objetos <code>STSPHERE</code>; a
+palavra chave seguindo a palavra chave inicial <code>STSPHERE</code> define o caminho
+para fazer isso. A palavra chave que segue a papavra chave inicial segue as conven&ccedil;&otilde;es do script perl
+<samp><span class="command">mktxmesh</span></samp> que acompanha o diret&oacute;rio <em>Orrery</em> na &aacute;rvore de diret&oacute;rios instalados que acompanha o Geomview.
+
+     <dl>
+<dt><var>SINUSOIDAL</var><dd>proje&ccedil;&atilde;o sinusoidal de &aacute;rea equivalente
+<br><dt><var>CYLINDRICAL</var><dd>proje&ccedil;&atilde;o cil&iacute;drica: <var>s</var> &eacute; a longitude, <var>t</var> &eacute; a latitude
+<br><dt><var>RECTANGULAR</var><dd>proje&ccedil;&atilde;o retangular: <var>s</var> &eacute; a longitude, <var>t</var> &eacute;  <code>sin(latitude)</code>
+(i.e. a coordenada <code>z</code> no sistema de coordenadas da esfera)
+<br><dt><var>STEREOGRAPHIC</var><dd>proje&ccedil;&atilde;o estereogr&aacute;fica a partir do p&oacute;lo sul (<code>z=-1</code>)
+<br><dt><var>ONEFACE</var><dd>vis&atilde;o ortogr&aacute;fica extendida do hemisf&eacute;rio <code>+y</code> sobre ambos, espelhando
+</dl>
+
+<!--  -->
+   </body></html>
+

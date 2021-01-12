@@ -1,0 +1,121 @@
+<html lang="en">
+<head>
+<title>BBP and BEZ - Manual do Geomview</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Manual do Geomview">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Formatos-de-Arquivo-de-Objeto.html#Formatos-de-Arquivo-de-Objeto" title="Formatos de Arquivo de Objeto">
+<link rel="prev" href="BBOX.html#BBOX" title="BBOX">
+<link rel="next" href="OFF.html#OFF" title="OFF">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="BBP-and-BEZ"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="OFF.html#OFF">OFF</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="BBOX.html#BBOX">BBOX</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Formatos-de-Arquivo-de-Objeto.html#Formatos-de-Arquivo-de-Objeto">Formatos de Arquivo de Objeto</a>
+<hr>
+</div>
+
+<h4 class="subsection">4.2.4 Superf&iacute;cies de Bezier</h4>
+
+<p>O sufixo de arquivo convencional para arquivos de superf&iacute;cie de Bezier &eacute; <samp><span class="file">.bbp</span></samp>
+ou <samp><span class="file">.bez</span></samp>.  O arquivo com qualquer dos dois sufixos pode conter qualquer dos dois tipos de
+parte de superf&iacute;cie de Bezier.
+
+   <p>Sintaxe:
+
+<pre class="example">       [ST]BBP -ou- [C]BEZ&lt;<var>Nu</var>&gt;&lt;<var>Nv</var>&gt;&lt;<var>Nd</var>&gt;[_ST]
+     			# <var>Nu</var>, <var>Nv</var> s&atilde;o dire&ccedil;&otilde;es nos eixos u e v
+     			# graus de polin&ocirc;mios variam 1..6
+     			# <var>Nd</var> = dimens&atilde;o: 3-&gt;3-D, 4-&gt;4-D (racional)
+     			# (O sinal '&lt;' e o sinal '&gt;' n&atilde;o aparecem na entrada.)
+     			# <var>Nu</var>,<var>Nv</var>,<var>Nd</var> s&atilde;o cada um d&iacute;gito decimal simples.
+     			# a forma BBP implica <var>Nu</var>=<var>Nv</var>=<var>Nd</var>=3 de forma que BBP = BEZ333.
+     
+     		# Qualquer n&uacute;mero de partes de superf&iacute;cie de Bezier segue o cabe&ccedil;alho
+     			# (<var>Nu</var>+1)*(<var>Nv</var>+1) pontos de controle do peda&ccedil;o da sperf&iacute;cie de Bezier
+     			# cada 3 ou 4 n&uacute;meros em ponto flutuante conforme o cabe&ccedil;alho
+       <var>vertex</var>(u=0,v=0)  <var>vertex</var>(1,0) ... <var>vertex</var>(<var>Nu</var>,0)
+       <var>vertex</var>(0,1)			   ... <var>vertex</var>(<var>Nu</var>,1)
+       ...
+       <var>vertex</var>(0,<var>Nv</var>)		   ... <var>vertex</var>(<var>Nu</var>,<var>Nv</var>)
+     
+     			# coordenadas de textura ST se mencionado no cabe&ccedil;alho
+       <code>S</code>(u=0,v=0)	<code>T</code>(0,0)	<code>S</code>(0,<var>Nv</var>) <code>T</code>(0,<var>Nv</var>)
+       <code>S</code>(<var>Nu</var>,0)	<code>T</code>(<var>Nu</var>,0)	<code>S</code>(<var>Nu</var>,<var>Nv</var>) <code>T</code>(<var>Nu</var>,<var>Nv</var>)
+     
+     			# n&uacute;mero em ponto flutuante com 4 componentes no intervalo (0..1) de
+     			# cores R G B A para cada canto se mencionado no cabe&ccedil;alho
+       <code>RGBA</code>(0,0)   <code>RGBA</code>(0,<var>Nv</var>)
+       <code>RGBA</code>(<var>Nu</var>,0)  <code>RGBA</code>(<var>Nu</var>,<var>Nv</var>)
+</pre>
+   <p>Esses formatos representam cole&ccedil;&otilde;es de partes de superf&iacute;cies de Bezier, de
+graus maiores que 6, e com v&eacute;rtices 3-D ou 4-D (racionais).
+
+   <p>A palavra chave de cabe&ccedil;alho pode assumir as formas <code>[ST]BBP</code> ou
+<code>[C]BEZ&lt;</code><var>Nu</var><code>&gt;&lt;</code><var>Nv</var><code>&gt;&lt;</code><var>Nd</var><code>&gt;[_ST]</code> (os s&iacute;mbolos '&lt;' e '&gt;' n&atilde;o
+s&atilde;o parte da palara chave.
+
+   <p>O prefixo <code>ST</code> sobre <code>BBP</code>, ou o sufixo <code>_ST</code> sobre
+<code>BEZuvn</code>, indicam que cada peda&ccedil;o de superf&iacute;cie inclui quatro pares de
+pontos com coordenadas em ponto flutuante no espa&ccedil;o de textura, um em cada canto do
+peda&ccedil;o.
+
+   <p>O prefixo <code>C</code> sobre <code>BEZuvn</code> indica um peda&ccedil;o colorido,
+incluindo quatro conjuntos de quatro componentes com os n&uacute;meros que especificam as cores em ponto flutuante (vermelho, verde,
+azul, e alfa) no intervalo 0..1, uma cor para cada canto.
+
+   <p><var>Nu</var> e <var>Nv</var>, cada um &eacute; um simples d&iacute;gito no intervalo 1..6, s&atilde;o os
+graus do polin&ocirc;mio do peda&ccedil;o nas dire&ccedil;&otilde;es u e v respectivamente.
+
+   <p><var>Nd</var> &eacute; o n&uacute;mero de componentes no v&eacute;rtice de cada peda&ccedil;o, e deve ser
+ou <code>3</code> para 3-D ou <code>4</code> para coordenadas homog&ecirc;neas, isto
+&eacute;, peda&ccedil;os racionais.
+
+   <p>Peda&ccedil;os <code>BBP</code> s&atilde;o peda&ccedil;os bic&uacute;bicos com v&eacute;rtices tridimensionais, de forma que <code>BBP</code>
+= <code>BEZ333</code> e <code>STBBP</code> = <code>BEZ333_ST</code>.
+
+   <p>Qualquer n&uacute;mero de peda&ccedil;os segue o cabe&ccedil;alho.  Cada peda&ccedil;o compreende uma s&eacute;rie
+de v&eacute;rtices do peda&ccedil;o, seguido por coordenadas opcionais de textura (s,t),
+seguidas por cores opcionais no formato (r,g,b,a).
+
+   <p>Cada peda&ccedil;o tem (<var>Nu</var>+1)*(<var>Nv</var>+1) v&eacute;rtices na ordem v-crescente, de forma que se
+designarmos um v&eacute;rtice atrav&eacute;s de seus &iacute;ndices (u, v) de controle de ponto a ordem &eacute;
+<pre class="example">          (0,0) (1,0) (2,0) ...  (<var>Nu</var>,0)
+          (0,1) (1,1) (2,1) ...  (<var>Nu</var>,1)
+          ...
+          (0,<var>Nv</var>)            ...  (<var>Nu</var>,<var>Nv</var>)
+</pre>
+   <p class="noindent">com cada v&eacute;rtice contendo ou 3 ou 4 n&uacute;meros em ponto flutuantes
+como especificado pelo cabe&ccedil;alho.
+
+   <p>Se o cabe&ccedil;alho chama por coordenadas ST, quatro pares de n&uacute;meros em
+ponto flutuante seguem: o espa&ccedil;o de coordenadas de textura para (0,0),
+(<var>Nu</var>,0), (0,<var>Nv</var>), e os cantos (<var>Nu</var>,<var>Nv</var>) do
+peda&ccedil;o, respectivamente.
+
+   <p>Se o cabe&ccedil;alho chama por cores, segue quatro grupos de quatro componentes (vermelho, verde, azul,
+alfa) d cores em ponto flutuante, um para cada canto do peda&ccedil;o.
+
+   <p>A s&eacute;rie de peda&ccedil;os termina em um caractere de fim de arquivo, ou com uma chave fechada se
+incorporado em uma refer&ecirc;ncia de objeto.
+
+<!--  -->
+   </body></html>
+

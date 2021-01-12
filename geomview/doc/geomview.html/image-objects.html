@@ -1,0 +1,259 @@
+<html lang="en">
+<head>
+<title>image objects - Geomview Manual</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Geomview Manual">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Non_002dgeometric-objects.html#Non_002dgeometric-objects" title="Non-geometric objects">
+<link rel="prev" href="appearance-objects.html#appearance-objects" title="appearance objects">
+<link rel="next" href="transform-objects.html#transform-objects" title="transform objects">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="image-objects"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="transform-objects.html#transform-objects">transform objects</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="appearance-objects.html#appearance-objects">appearance objects</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Non_002dgeometric-objects.html#Non_002dgeometric-objects">Non-geometric objects</a>
+<hr>
+</div>
+
+<h4 class="subsection">4.3.2 Image Objects</h4>
+
+<p>Image objects are used to specify pixmap data for either textures
+(see <a href="Texture-Mapping.html#Texture-Mapping">Texture Mapping</a>), or for background images of cameras
+(see <a href="camera.html#camera">Camera objects</a>).
+
+   <p>At the time of this writing images are comprised of 1 to 4 channels, a
+channel provides a single number in the range from 0 to <code>maxval</code>
+for each pixel; and <code>maxval</code> is tied to 255. The interpretation of the image data depending on the number of channels is like follows:
+
+   <p><table summary=""><tr align="left"><th valign="top" width="20%">#Channels </th><th valign="top" width="20%">Channel No. </th><th valign="top" width="60%">Interpretation
+<br></th></tr><tr align="left"><td valign="top" width="20%">1
+</td><td valign="top" width="20%">1
+</td><td valign="top" width="60%">greyscale or luminance data
+<br></td></tr><tr align="left"><td valign="top" width="20%">2
+</td><td valign="top" width="20%">1
+</td><td valign="top" width="60%">greyscale or luminance data
+<br></td></tr><tr align="left"><td valign="top" width="20%"> 
+</td><td valign="top" width="20%">2
+</td><td valign="top" width="60%">alpha channel (0: transparent, <code>maxval</code>: opaque)
+<br></td></tr><tr align="left"><td valign="top" width="20%">3
+</td><td valign="top" width="20%">1
+</td><td valign="top" width="60%">red channel
+<br></td></tr><tr align="left"><td valign="top" width="20%">
+</td><td valign="top" width="20%">2
+</td><td valign="top" width="60%">green channel
+<br></td></tr><tr align="left"><td valign="top" width="20%">
+</td><td valign="top" width="20%">3
+</td><td valign="top" width="60%">blue channel
+<br></td></tr><tr align="left"><td valign="top" width="20%">4
+</td><td valign="top" width="20%">1
+</td><td valign="top" width="60%">red channel
+<br></td></tr><tr align="left"><td valign="top" width="20%">
+</td><td valign="top" width="20%">2
+</td><td valign="top" width="60%">green channel
+<br></td></tr><tr align="left"><td valign="top" width="20%">
+</td><td valign="top" width="20%">3
+</td><td valign="top" width="60%">blue channel
+<br></td></tr><tr align="left"><td valign="top" width="20%">
+</td><td valign="top" width="20%">4
+</td><td valign="top" width="60%">alpha channel (0: transparent, <code>maxval</code>: opaque)
+   <br></td></tr></table>
+
+   <p>Image data can be specified inline (embedded into the current data stream)
+or via file references; in both cases the data is read in and
+interpreted at the time the image object is parsed. <em>This is
+different from the old (and deprecated) texture image specification,
+where the the image data on-disk would eventually be re-read by
+Geomview</em>.
+
+   <p>The general syntax of image objects is like follows:
+<pre class="example">     &lt;image&gt; ::=
+       [ "{" ]             (curly brace, generally needed to make
+                            the end of the object unambiguous.)
+       [ "image" ]          (optional keyword; unnecessary if the type
+                            is determined by the context, which it
+                            usually is.)
+       [ "define" &lt;name&gt; ]
+                            (defines an image named &lt;name&gt;, setting
+                            its value from the stuff which follows)
+       |
+           "&lt;" &lt;filename&gt;   (meaning: read image from that file)
+       |
+           ":" &lt;name&gt;       (meaning: use variable <var>name</var>,
+                            defined elsewhere; if undefined the image
+                            carries no data)
+       |
+                            (actual stuff defining the image; image data
+                            must come last, after defining the width and
+                            height and number of channels)
+     
+           "width"          (width of the image, auto-detected from image data
+                            if possible)
+     
+           "height"         (height of the image, auto-detected from image data
+                            if possible)
+     
+           "channels"       (number of channels, auto-detected from image data
+                            and <code>data</code> specifications, if possible)
+     
+           "maxval"         (unsupported, must be <code>255</code> if specified)
+     
+           "data DESTMASK [FILTER] [{] &lt; FILENAME [}]"
+           "data DESTMASK [FILTER] DATASIZE [{][\n]LITERAL_IMAGE_DATA[}]"
+                            (either external or embedded image data, see below
+                            for a detailed description of the meaning of
+                            <em>MASK</em> and <em>FILTER</em>. An image can (and
+                            has, in general) multiple data sections.)
+     
+       [ "}" ]             (matching curly brace)
+</pre>
+   <p><b>Details concerning the image data specification:</b>
+
+     <dl>
+<dt>&lsquo;<samp><span class="samp">DESTMASK</span></samp>&rsquo;<dd>This is a bit-field describing where the specified image data should be
+placed in the destination pixmap. The bit-field is specified by an
+integer in one of the known formats (decimal, octal, hexadecimal). The
+channels of the source data are always enumbered consecutively. If,
+e.g. &lsquo;<samp><span class="samp">FILENAME</span></samp>&rsquo; or &lsquo;<samp><span class="samp">LITERAL_IMAGE_DATA</span></samp>&rsquo; specify a
+three-channel (probably RGB <small class="dots">...</small>) image and &lsquo;<samp><span class="samp">DESTMASK</span></samp>&rsquo; equals
+<code>0xD</code> (i.e. bit 1 is 0), then the 3rd channel of the source pixmap
+would be placed in the 4th channel of the destination image object (the
+alpha channel), the 2nd source channel would determine the &lsquo;<samp><span class="samp">blue</span></samp>&rsquo;
+destination value and the 1st source channel the &lsquo;<samp><span class="samp">red</span></samp>&rsquo; destination
+value.
+
+     <p>The number of channels of the source data always has to match the number
+of bits set in &lsquo;<samp><span class="samp">DESTMASK</span></samp>&rsquo;. <b>Exception:</b> if the source pixmap has
+only one channel, then it can be used to fill any number of destination
+channels; all channels specified in &lsquo;<samp><span class="samp">DESTMASK</span></samp>&rsquo; are filled with the
+data of the single channel source pixmap.
+
+     <p>Geomview knows the following symbolic constants, which can be used
+instead of specifying the &lsquo;<samp><span class="samp">DESTMASK</span></samp>&rsquo; bit-field numerically:
+          <dl>
+<dt><code>LUMINANCE</code><dd>same as &lsquo;<samp><span class="samp">1</span></samp>&rsquo;, &lsquo;<samp><span class="samp">0x1</span></samp>&rsquo;, &lsquo;<samp><span class="samp">\01</span></samp>&rsquo;
+<br><dt><code>LUMINANCE_ALPHA</code><dd>same as &lsquo;<samp><span class="samp">3</span></samp>&rsquo;, &lsquo;<samp><span class="samp">0x3</span></samp>&rsquo;, &lsquo;<samp><span class="samp">\03</span></samp>&rsquo;
+<br><dt><code>RGB</code><dd>same as &lsquo;<samp><span class="samp">7</span></samp>&rsquo;, &lsquo;<samp><span class="samp">0x7</span></samp>&rsquo;, &lsquo;<samp><span class="samp">\07</span></samp>&rsquo;
+<br><dt><code>RGBA</code><dd>same as &lsquo;<samp><span class="samp">15</span></samp>&rsquo;, &lsquo;<samp><span class="samp">0xf</span></samp>&rsquo;, &lsquo;<samp><span class="samp">\017</span></samp>&rsquo;
+<br><dt><code>ALPHA</code><dd>depends on the context: the absolute number of channels must be known;
+i.e. &lsquo;<samp><span class="samp">data ALPHA ...</span></samp>&rsquo; must be prepended by something determining
+the number of channels of the image, e.g.
+          <pre class="example">               ...
+               data RGB ...
+               data ALPHA
+               ...
+</pre>
+          <p>is valid, but
+          <pre class="example">               &lt;no other channel or image data specification&gt;
+               data ALPHA ...
+               &lt;whatever else ...&gt;
+</pre>
+          <p>is not valid, because Geomview has not means to determine the
+destination channel from the context. 
+<br><dt><code>AUTO</code><dd>PGM image data is interpreted as single grey-scale channel, RGB PNM data
+as RGB image data. <code>AUTO</code> cannot work with &lsquo;<samp><span class="samp">raw</span></samp>&rsquo; image data. 
+</dl>
+
+     <br><dt>&lsquo;<samp><span class="samp">FILTER</span></samp>&rsquo;<dd>The &lsquo;<samp><span class="samp">FILTER</span></samp>&rsquo; specification is optional. If it is missing, then
+Geomview tries to determine the image type from the &lsquo;<samp><span class="samp">FILENAME</span></samp>&rsquo;
+suffix. If there is no suffix or the suffix is unknown, or for embedded
+image data, Geomview is able to auto-detectc SGI image file formats (for
+historical reasons <small class="dots">...</small>) and NetPBM image formats (for practical
+reasons). The auto-detection of NetPBM formats includes the new
+<dfn>PAM</dfn> image format which allows (among other things) to store an
+alpha channel together with the luminance or RGB data. Likewise, the
+final output of any of the specified filters must either be in SGI image
+file format, or specify a PAM, PNM or PGM image.  If the image file
+format cannot be determined by either the filenmae suffix or the filter
+specification or by auto-deteciong of SGI or NetPBM data, then Geomview
+assume that it is raw-data. See below.
+
+     <p>The decompression filters may be prepended to either one of the know
+image formats or an explicitly specified filter, e.g. the following is
+valid:
+     <pre class="example">          data LUMINANCE raw.gzip { &lt; gzippedgreymapfile }
+</pre>
+     <p>The above should be equivalent to
+     <pre class="example">          data LUMINANCE raw { &lt; greymapfile },
+</pre>
+     <p>provided that the decompressed data carries single channel data, with
+the first pixel corresponding to the lower-left corner (because of the
+&lsquo;<samp><span class="samp">raw</span></samp>&rsquo; image format, see below).
+
+     <p>Geomview has builtin knowledge for the following filters/suffixes:
+          <dl>
+<dt><b>Data Decompression</b><dd>
+               <dl>
+<dt>&lsquo;<samp><span class="samp">z</span></samp>&rsquo;<br><dt>&lsquo;<samp><span class="samp">gz</span></samp>&rsquo;<br><dt>&lsquo;<samp><span class="samp">gzip</span></samp>&rsquo;<dd>data is piped through &lsquo;<samp><span class="samp">gzip -dc</span></samp>&rsquo;
+<br><dt>&lsquo;<samp><span class="samp">bz2</span></samp>&rsquo;<br><dt>&lsquo;<samp><span class="samp">bzip2</span></samp>&rsquo;<dd>data is piped through &lsquo;<samp><span class="samp">bzip2 -dc</span></samp>&rsquo;
+</dl>
+
+          <br><dt><b>Image Formats</b><dd>
+               <dl>
+<dt>&lsquo;<samp><span class="samp">tiff</span></samp>&rsquo;<br><dt>&lsquo;<samp><span class="samp">tif</span></samp>&rsquo;<dd><code>TIFF</code> image file format. Only supported if the <code>tifftopnm</code>
+executable can be fond in the current excution path. 
+<br><dt>&lsquo;<samp><span class="samp">png</span></samp>&rsquo;<dd><code>PNG</code> image file format. Only supported if the <code>pngtopnm</code>
+executable can be fond in the current excution path. 
+<br><dt>&lsquo;<samp><span class="samp">jpg</span></samp>&rsquo;<br><dt>&lsquo;<samp><span class="samp">jpeg</span></samp>&rsquo;<dd><code>JPEG</code> image file format. Only supported if the <code>jpegtopnm</code>
+executable can be fond in the current excution path. 
+<br><dt>&lsquo;<samp><span class="samp">gif</span></samp>&rsquo;<dd><code>GIF</code> image file format. Only supported if the <code>giftoppm</code>
+executable can be fond in the current excution path. 
+<br><dt>&lsquo;<samp><span class="samp">raw</span></samp>&rsquo;<dd>Raw image data; the number of channels must match the number of bits set
+in &lsquo;<samp><span class="samp">DESTMASK</span></samp>&rsquo;. Pixels are specified with 1 byte per channel. The
+pixels are organized in rows as &lsquo;<samp><span class="samp">liminance[-alpha]</span></samp>&rsquo; or
+&lsquo;<samp><span class="samp">RGB[A]</span></samp>&rsquo; samples. The left-most pixel is the first pixel in each
+data-row, the top-most image row must come first (this is just the same
+as the NetPBM convention, the image co-ordinate systems has its origin
+in the left/top corner, as usual). 
+</dl>
+          <br><dt><b>Explicitly Specified Filters</b><dd>If none of the suffixes specified above should match, then the
+suffix/filter is interpreted as an external filter program; the filter
+program must read from <code>STDIN</code> and write to <code>STDOUT</code>. The
+output must either be in SGI image format, or in PNM or PGM
+format. Otherwise the output data is interpreted as raw image data (see
+above).
+
+          <p>Something like the following should work, provided that the program
+<samp><span class="file">${HOME}/bin/bububfilter</span></samp> exists, is executable and does
+something useful:
+          <pre class="example">               ...
+               data RGB "${HOME}/bin/bububfilter.bzip2" 7 { # binary data follows
+               bububub
+               }
+               ...
+</pre>
+          <p>Note that &ndash; prior to feeding the data to the &lsquo;<samp><span class="samp">bububfilter</span></samp>&rsquo; &ndash;
+Geomview will try to decompress the stuff with &lsquo;<samp><span class="samp">bzip2 -dc</span></samp>&rsquo;.
+
+     </dl>
+
+   </dl>
+
+   <p><b>Missing image data:</b> Normally, the number of image channels is
+determined automatically from the image <code>data</code> specifications; if
+the image specification carries an explicit number of channels via the
+<code>channels</code> keyword which exceeds the number of channels found in
+the image <code>data</code> specifications, or if the union of all
+&lsquo;<samp><span class="samp">DESTMASK</span></samp>&rsquo; specfications has holes, then missing luminance and RGB
+channels are initialized to 0, and a missing alpha-channel is
+initialized to <code>maxval</code>, i.e. omitting the alpha channel data for
+an RGBA image is just the same as defining an RGB image.
+
+   </body></html>
+

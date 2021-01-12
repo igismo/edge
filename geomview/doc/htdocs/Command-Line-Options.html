@@ -1,0 +1,133 @@
+<html lang="en">
+<head>
+<title>Command Line Options - Geomview Manual</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Geomview Manual">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Interaction.html#Interaction" title="Interaction">
+<link rel="prev" href="Starting-Geomview.html#Starting-Geomview" title="Starting Geomview">
+<link rel="next" href="Basic-Interaction.html#Basic-Interaction" title="Basic Interaction">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Command-Line-Options"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Basic-Interaction.html#Basic-Interaction">Basic Interaction</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Starting-Geomview.html#Starting-Geomview">Starting Geomview</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Interaction.html#Interaction">Interaction</a>
+<hr>
+</div>
+
+<h3 class="section">3.2 Command Line Options</h3>
+
+<p>Here are the command line options that Geomview allows:
+
+     <dl>
+<dt>&lsquo;<samp><span class="samp">-b </span><var>r</var> <var>g</var> <span class="samp">b</span></samp>&rsquo;<dd>Set the window background color to the given <var>r</var> <var>g</var> b
+values.
+
+     <br><dt>&lsquo;<samp><span class="samp">-c </span><var>file</var></samp>&rsquo;<dd>Interpret the GCL commands in <var>file</var>, which may be the special
+symbol <samp><span class="file">-</span></samp> for standard input.  For a description of GCL,
+See <a href="GCL.html#GCL">GCL</a>.
+
+     <br><dt>&lsquo;<samp><span class="samp">-c </span><var>command</var></samp>&rsquo;<dd>Commands may also be supplied literally, as in
+     <pre class="example">          -c "(ui-panel main off)"
+</pre>
+     <p>Since <var>command</var> includes parentheses, which have special meaning to
+the shell, <var>command</var> must be quoted.  Multiple <var>-c</var> options are allowed.
+
+     <br><dt>&lsquo;<samp><span class="samp">-wins </span><var>nwins</var></samp>&rsquo;<dd>Causes Geomview to initially display <var>nwins</var> camera windows.
+
+     <br><dt>&lsquo;<samp><span class="samp">-wpos </span><var>width</var><span class="samp">,</span><var>height</var><span class="samp">[@</span><var>xmin</var><span class="samp">,</span><var>ymin</var><span class="samp">]</span></samp>&rsquo;<dd>Specifies the initial location and size of the first camera window.  The
+values for <var>width</var>, <var>height</var>, <var>xmin</var>, and <var>ymin</var> are in
+screen (pixel) coordinates.
+
+     <br><dt>&lsquo;<samp><span class="samp">-M[cg][ps[un|in|in6]] </span><var>PIPENAME</var><span class="samp">|</span><var>TCPPORT</var></samp>&rsquo;<dd>The &lsquo;<samp><span class="samp">-M</span></samp>&rsquo; option accepts modifiers: a &lsquo;<samp><span class="samp">g</span></samp>&rsquo; suffix expects
+geometry data (the default), while a &lsquo;<samp><span class="samp">c</span></samp>&rsquo; suffix expects GCL
+commands. A &lsquo;<samp><span class="samp">p</span></samp>&rsquo; implies the connection should use a named pipe (the
+default on everything except on the NeXT), while &lsquo;<samp><span class="samp">s</span></samp>&rsquo; implies using
+a UNIX-domain socket (the default on the NeXT). Since version 1.9 of
+Geomview Internet domain sockets are also supported; use &lsquo;<samp><span class="samp">sin</span></samp>&rsquo; to
+make Geomview listen on the IPv4 port given by <var>TCPPORT</var>, or use
+&lsquo;<samp><span class="samp">sin6</span></samp>&rsquo; to make Geomview listen on an IPv6 port (also as specified
+by <var>TCPPORT</var>). &lsquo;<samp><span class="samp">sun</span></samp>&rsquo; is a synonym for &lsquo;<samp><span class="samp">s</span></samp>&rsquo;, i.e. use the
+Unix domain socket with the name <var>PIPENAME</var>. If <var>PIPENAME</var>
+starts with a slash ('/'), then it is assumed to be an absolute
+pathname, otherwise the named pipe or socket is created below
+<samp><span class="file">${TMPDIR}/geomview/</span></samp>.
+
+     <p><b>Listening to command streams on TCP ports can be a security risk,
+as Geomview itself does not take any security precautions, it simply
+executes all commands fed to it through the network socket. This also
+implies that disk-io can be initiated remotely.</b>
+
+     <p>Examples:
+          <dl>
+<dt><code>-M </code><var>objectname</var><dd>Display (possibly dynamically changing) geometry sent from the
+programs <code>geomstuff</code> or <code>togeomview</code>.  This actually listens to the
+named pipe <samp><span class="file">/tmp/geomview/objectname</span></samp>; you can achieve the same
+effect with the shell commands:
+          <pre class="example">               mkdir /tmp/geomview
+               mknod /tmp/geomview/objectname p
+</pre>
+          <p>(assuming the directory and named pipe don't already exist), then
+executing the GCL command:
+          <pre class="example">               (geometry objectname  &lt; /tmp/geomview/objectname)
+</pre>
+          <p>(see <a href="geometry.html#geometry"><code>(geometry ...)</code></a>)
+
+          <br><dt><code>-Mc </code><var>pipename</var><dd>Like &lsquo;<samp><span class="samp">-M</span></samp>&rsquo; above, but expects GCL commands, rather than OOGL
+geometry data, on the connection.
+
+          <br><dt><code>-Mcs fred</code><dd>Read commands from the UNIX-domain socket named. 
+<samp><span class="file">/tmp/geomview/fred</span></samp>
+
+          <br><dt><code>-Mcsin 40000</code><dd>Read commands from the IPv4 port &lsquo;<samp><span class="samp">40000</span></samp>&rsquo;. Geomview itself does not
+take any security precautions, so this can be a security risk. 
+</dl>
+
+     <br><dt>&lsquo;<samp><span class="samp">-noopengl</span></samp>&rsquo;<dd>Disable the use of OpenGL for (possibly) hardware accelerated rendering,
+even if the Geomview binary has support for OpenGL compiled in. This
+also disables the support for transparency and textures in the
+camera windows. RenderMan snapshots still will have correct transparency
+and some limited texture support.
+
+     <br><dt>&lsquo;<samp><span class="samp">-nopanels</span></samp>&rsquo;<dd>Start up displaying no panels, only graphics windows.  Panels may be
+invoked later as usual with the <kbd>Px</kbd> keyboard shortcuts or with
+the <code>ui-panel</code> command. See <a href="ui_002dpanel.html#ui_002dpanel"><code>(ui-panel ...)</code></a>.
+
+     <br><dt>&lsquo;<samp><span class="samp">-noinit</span></samp>&rsquo;<dd>Read no initialization files. By default, geomview reads the system-wide
+<samp><span class="file">.geomview</span></samp> file, followed by those in <samp><span class="file">${HOME}/.geomview</span></samp> and
+<samp><span class="file">./.geomview</span></samp>.
+
+     <br><dt>&lsquo;<samp><span class="samp">-e </span><var>module</var></samp>&rsquo;<dd>Start an external module; <var>module</var> is the name associated with the
+module, appearing in the main panel's Applications browser, as defined
+by the <code>emodule-define</code> command. See <a href="emodule_002ddefine.html#emodule_002ddefine"><code>(emodule-define ...)</code></a>.
+
+     <br><dt>&lsquo;<samp><span class="samp">-start </span><var>module</var> <var>args</var><span class="samp"> ...</span></samp>&rsquo;<dd>Like -e but allows you to pass arguments to the external module.  "&ndash;"
+signals the end of the argument list; the "&ndash;" may be omitted if it
+would be the last argument on the Geomview command line.
+
+     <br><dt>&lsquo;<samp><span class="samp">-run </span><var>shell-command</var> <var>args</var><span class="samp"> ...</span></samp>&rsquo;<dd>Like -start but takes the pathname of executable of the external module
+instead of the module's name.  The pathnames of all known module directories
+are appended to the UNIX search path when invoking <var>shell-command</var>.
+
+   </dl>
+
+<!-- ================================================================ -->
+   </body></html>
+

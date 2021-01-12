@@ -1,0 +1,65 @@
+<html lang="en">
+<head>
+<title>ND-Vertices - Geomview Manual</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Geomview Manual">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Conventions.html#Conventions" title="Conventions">
+<link rel="prev" href="Vertices.html#Vertices" title="Vertices">
+<link rel="next" href="Surface-normal-directions.html#Surface-normal-directions" title="Surface normal directions">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="ND-Vertices"></a>
+<a name="ND_002dVertices"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Surface-normal-directions.html#Surface-normal-directions">Surface normal directions</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Vertices.html#Vertices">Vertices</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Conventions.html#Conventions">Conventions</a>
+<hr>
+</div>
+
+<h4 class="subsection">4.1.4 <var>N</var>-dimensional Vertices</h4>
+
+<p>Several objects share a common style of representing vertices with
+optional per-vertex surface-normal and color.  All vertices within an
+object have the same format, specified by the header key word.
+
+   <p>All data for a vertex is grouped together (as opposed to e.g. giving
+coordinates for all vertices, then colors for all vertices, and so on).
+
+   <p>The syntax for <var>N</var>-dimensional vertices (<var>N</var> &gt; 3) is
+
+     <dl>
+<dt>&lsquo;<samp><var>x[1]</var>  <var>x[2]</var>  <var>x[3]</var> <var>x[4]</var><span class="samp"> ...</span></samp>&rsquo;<dd>(<var>N</var> floating-point vertex coordinates) or
+<br><dt>&lsquo;<samp><var>x[0]</var> <var>x[1]</var>  <var>x[2]</var>  <var>x[3]</var> <var>x[4]</var><span class="samp"> ...</span></samp>&rsquo;<dd>(<var>(N+1)</var> floating-point vertex coordinates, if the <code>4</code> modifier
+has been specified in the object's header line)
+</dl>
+
+   <p>Note, however, that <var>N</var>-dimensional objects internally always have
+<var>(N+1)</var>-dimensional points; the first component <var>x[0]</var> &ndash; if
+present in the object file &ndash; is used as homogeneous divisor. This is
+different from the ordinary 3D case where the <code>4</code> modifier
+generates a 4D object where the homogeneous component implicitly is set
+to 1.
+
+   <p>Color components usually can be specified like for 3D vertices,
+see <a href="Vertices.html#Vertices">Vertices</a>, while specifying normals does not make sense.
+
+<!--  -->
+   </body></html>
+

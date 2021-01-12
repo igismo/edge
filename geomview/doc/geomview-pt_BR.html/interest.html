@@ -1,0 +1,63 @@
+<html lang="en">
+<head>
+<title>interest - Manual do Geomview</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Manual do Geomview">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="GCL-Reference.html#GCL-Reference" title="GCL Reference">
+<link rel="prev" href="input_002dtranslator.html#input_002dtranslator" title="input-translator">
+<link rel="next" href="lambda.html#lambda" title="lambda">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="interest"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="lambda.html#lambda">lambda</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="input_002dtranslator.html#input_002dtranslator">input-translator</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="GCL-Reference.html#GCL-Reference">GCL Reference</a>
+<hr>
+</div>
+
+<h4 class="subsection">7.2.67 interest</h4>
+
+<p><a name="index-interest-74"></a>
+     <dl>
+<dt><code>(interest (COMANDO [args]))</code><dd>Permite a voc&ecirc; expressar interesse em um comando.  Quando geomview vier a executar
+o comando de interesse futuramente o comando de interesse ser&aacute; ecoado para o sistema de comunica&ccedil;&atilde;o
+do qual o comando interest for origin&aacute;rio. <var>COMANDO</var> pode ser qualquer comando. 
+Args especifica restri&ccedil;&otilde;es sobre os valores dos argumentos; se args estiver
+presente no comando interest, geomview ir&aacute; somente ecoar chamadas para o
+comando no qual os argumentos coincidirem com aquele fornecido no comando
+interest.  Dois valores especiais de argumento podem aparecer na lista de argumentos. 
+<code>*</code> que coincide com qualquer valor. <code>nil</code> que coincide com qualquer valor mas suprime
+o retorno daquele valor; seus valores s&atilde;o reportados como <code>nil</code>.
+
+     <p>O prop&oacute;sito do comando interest &eacute; permitir a m&oacute;dulos
+externos encontrar coisas acontecendo dentro do geomview. 
+Por exemplo, um m&oacute;dulo interessado em saber quando um geom chamado
+<code>foo</code> &eacute; apagado pode usar o comando interest da seguinte forma <code>(interest (delete foo))</code> e iria
+receber a sequ&ecirc;ncia de caracteres <code>(delete foo)</code> quando foo fosse apagado.
+
+     <p>Destacando um caso especial do uso do comando interest.  Para a maioria dos m&oacute;dulos interessados em selecionar
+eventos o comando <code>(interest (pick world))</code> &eacute; suficiente. O comando <code>(interest (pick world))</code>
+faz com que geomview envie uma sequ&ecirc;ncia de caracteres da forma <code>(pick world ...)</code>
+toda vez que um evento de sele&ccedil;&atilde;o (duplo clique bot&atilde;o direito do mounse).  Veja o comando
+<a href="pick.html#pick"><code>(pick ...)</code></a> para detalhes. 
+</dl>
+
+   </body></html>
+

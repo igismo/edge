@@ -1,0 +1,207 @@
+<html lang="en">
+<head>
+<title>GCL Reference - Manual do Geomview</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Manual do Geomview">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="GCL.html#GCL" title="GCL">
+<link rel="prev" href="Argument-Conventions.html#Argument-Conventions" title="Argument Conventions">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="GCL-Reference"></a>
+<p>
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Argument-Conventions.html#Argument-Conventions">Argument Conventions</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="GCL.html#GCL">GCL</a>
+<hr>
+</div>
+
+<h3 class="section">7.2 GCL Reference Guide</h3>
+
+<!-- @table @code -->
+<ul class="menu">
+<li><a accesskey="1" href="shell_002dshortcut.html#shell_002dshortcut">shell-shortcut</a>:               <code>(! COMANDOSHELL)</code>
+<li><a accesskey="2" href="lt.html#lt">lt</a>:                           <code>(&lt; EXPR1 EXPR2)</code>
+<li><a accesskey="3" href="eq.html#eq">eq</a>:                           <code>(= EXPR1 EXPR2)</code>
+<li><a accesskey="4" href="gt.html#gt">gt</a>:                           <code>(&gt; EXPR1 EXPR2)</code>
+<li><a accesskey="5" href="mul.html#mul">mul</a>:                          <code>(* EXPR1 EXPR2)</code>
+<li><a accesskey="6" href="div.html#div">div</a>:                          <code>(/ EXPR1 EXPR2)</code>
+<li><a accesskey="7" href="add.html#add">add</a>:                          <code>(+ EXPR1 EXPR2)</code>
+<li><a accesskey="8" href="sub.html#sub">sub</a>:                          <code>(- EXPR1 EXOR2)</code>
+<li><a accesskey="9" href="help_002dshortcut.html#help_002dshortcut">help-shortcut</a>:                <code>(? COMANDO)</code>
+<li><a href="morehelp_002dshortcut.html#morehelp_002dshortcut">morehelp-shortcut</a>:            <code>(?? COMANDO)</code>
+<li><a href="emodule_002drun_002dshortcut.html#emodule_002drun_002dshortcut">emodule-run-shortcut</a>:         <code>(| NOME)</code>
+<li><a href="all.html#all">all</a>:                          <code>(all objetogeom&eacute;trico|c&acirc;mera|emodule)</code>
+<li><a href="and.html#and">and</a>:                          <code>(and EXPR1 EXPR2)</code>
+<li><a href="ap_002doverride.html#ap_002doverride">ap-override</a>:                  <code>(ap-override [on|off])</code>
+<li><a href="backcolor.html#backcolor">backcolor</a>:                    <code>(backcolor      CAM-ID R G B)</code>
+<li><a href="background_002dimage.html#background_002dimage">background-image</a>:             <code>(background-image CAM-ID [NOMEDOARQUIVO])</code>
+<li><a href="bbox_002dcolor.html#bbox_002dcolor">bbox-color</a>:                   <code>(bbox-color GEOM-ID R G B)</code>
+<li><a href="bbox_002ddraw.html#bbox_002ddraw">bbox-draw</a>:                    <code>(bbox-draw GEOM-ID [yes|no])</code>
+<li><a href="camera.html#camera">camera</a>:                       <code>(camera CAM-ID [CAMERA])</code>
+<li><a href="camera_002ddraw.html#camera_002ddraw">camera-draw</a>:                  <code>(camera-draw CAM-ID [yes|no])</code>
+<li><a href="camera_002dprop.html#camera_002dprop">camera-prop</a>:                  <code>(camera-prop { geometry object } [projective])</code>
+<li><a href="camera_002dreset.html#camera_002dreset">camera-reset</a>:                 <code>(camera-reset CAM-ID)</code>
+<li><a href="car.html#car">car</a>:                          <code>(car LISTA)</code>
+<li><a href="cdr.html#cdr">cdr</a>:                          <code>(cdr LISTA)</code>
+<li><a href="clock.html#clock">clock</a>:                        <code>(clock)</code>
+<li><a href="command.html#command">command</a>:                      <code>(command ARQENTRADA [ARQSAIDA])</code>
+<li><a href="cons.html#cons">cons</a>:                         <code>(cons EXPR LISTA)</code>
+<li><a href="copy.html#copy">copy</a>:                         <code>(copy [ID] [nome])</code>
+<li><a href="cursor_002dstill.html#cursor_002dstill">cursor-still</a>:                 <code>(cursor-still [INT])</code>
+<li><a href="cursor_002dtwitch.html#cursor_002dtwitch">cursor-twitch</a>:                <code>(cursor-twitch [INT])</code>
+<li><a href="defun.html#defun">defun</a>:                        <code>(defun NOME ARGS [DOC] CORPO)</code>
+<li><a href="delete.html#delete">delete</a>:                       <code>(delete ID)</code>
+<li><a href="dice.html#dice">dice</a>:                         <code>(dice GEOM-ID N)</code>
+<li><a href="dimension.html#dimension">dimension</a>:                    <code>(dimension [N])</code>
+<li><a href="dither.html#dither">dither</a>:                       <code>(dither CAM-ID {on|off|toggle})</code>
+<li><a href="draw.html#draw">draw</a>:                         <code>(draw CAM-ID)</code>
+<li><a href="dump_002dhandles.html#dump_002dhandles">dump-handles</a>:                 <code>(dump-handles)</code>
+<li><a href="echo.html#echo">echo</a>:                         <code>(echo ...)</code>
+<li><a href="emodule_002dclear.html#emodule_002dclear">emodule-clear</a>:                <code>(emodule-clear)</code>
+<li><a href="emodule_002ddefine.html#emodule_002ddefine">emodule-define</a>:               <code>(emodule-define NOME COMANDOSHELL ...)</code>
+<li><a href="emodule_002ddefined.html#emodule_002ddefined">emodule-defined</a>:              <code>(emodule-defined NOMEMÓDULO)</code>
+<li><a href="emodule_002disrunning.html#emodule_002disrunning">emodule-isrunning</a>:            <code>(emodule-isrunning NOME)</code>
+<li><a href="emodule_002dpath.html#emodule_002dpath">emodule-path</a>:                 <code>(emodule-path)</code>
+<li><a href="emodule_002drun.html#emodule_002drun">emodule-run</a>:                  <code>(| NOME)</code>
+<li><a href="emodule_002dsort.html#emodule_002dsort">emodule-sort</a>:                 <code>(emodule-sort)</code>
+<li><a href="emodule_002dstart.html#emodule_002dstart">emodule-start</a>:                <code>(emodule-start  NOME)</code>
+<li><a href="emodule_002dtransmit.html#emodule_002dtransmit">emodule-transmit</a>:             <code>(emodule-transmit NOME LISTA)</code>
+<li><a href="escale.html#escale">escale</a>:                       <code>(escale GEOM-ID FATOR)</code>
+<li><a href="eval.html#eval">eval</a>:                         <code>(eval EXPR)</code>
+<li><a href="event_002dkeys.html#event_002dkeys">event-keys</a>:                   <code>(event-keys {on|off})</code>
+<li><a href="event_002dmode.html#event_002dmode">event-mode</a>:                   <code>(event-mode MODESTRING)</code>
+<li><a href="event_002dpick.html#event_002dpick">event-pick</a>:                   <code>(event-pick {on|off})</code>
+<li><a href="evert.html#evert">evert</a>:                        <code>(evert GEOM-ID [yes|no])</code>
+<li><a href="exit.html#exit">exit</a>:                         <code>(exit)</code>
+<li><a href="ezoom.html#ezoom">ezoom</a>:                        <code>(ezoom GEOM-ID FATOR)</code>
+<li><a href="freeze.html#freeze">freeze</a>:                       <code>(freeze CAM-ID)</code>
+<li><a href="geometry.html#geometry">geometry</a>:                     <code>(geometry GEOM-ID [OBJETOGEOM&Eacute;TRICO])</code>
+<li><a href="geomview_002dversion.html#geomview_002dversion">geomview-version</a>:             <code>(geomview-version)</code>
+<li><a href="hdefine.html#hdefine">hdefine</a>:                      <code>(hdefine geometry|camera|... NOME VALOR)</code>
+<li><a href="hdelete.html#hdelete">hdelete</a>:                      <code>(hdelete [geometry|camera|...] nome)</code>
+<li><a href="help.html#help">help</a>:                         <code>(? COMANDO)</code>
+<li><a href="hmodel.html#hmodel">hmodel</a>:                       <code>(hmodel CAMID {virtual|projective|conformal})</code>
+<li><a href="hsphere_002ddraw.html#hsphere_002ddraw">hsphere-draw</a>:                 <code>(hsphere-draw CAMID [yes|no])</code>
+<li><a href="if.html#if">if</a>:                           <code>(if TEST EXPR1 [EXPR2])</code>
+<li><a href="inhibit_002dwarning.html#inhibit_002dwarning">inhibit-warning</a>:              <code>(inhibit-warning STRING)</code>
+<li><a href="input_002dtranslator.html#input_002dtranslator">input-translator</a>:             <code>(input-translator "#pfx" "comando-shell")</code>
+<li><a href="interest.html#interest">interest</a>:                     <code>(interest (COMANDO [args]))</code>
+<li><a href="lambda.html#lambda">lambda</a>:                       <code>(lambda ARGS CORPO)</code>
+<li><a href="let.html#let">let</a>:                          <code>(let (ARGS) CORPO)</code>
+<li><a href="lines_002dcloser.html#lines_002dcloser">lines-closer</a>:                 <code>(lines-closer CAM-ID DIST)</code>
+<li><a href="load.html#load">load</a>:                         <code>(load nomearquivo [command|geometry|camera])</code>
+<li><a href="load_002dpath.html#load_002dpath">load-path</a>:                    <code>(load-path)</code>
+<li><a href="look.html#look">look</a>:                         <code>(look [objetoID] [camID])</code>
+<li><a href="look_002dencompass.html#look_002dencompass">look-encompass</a>:               <code>(look-encompass [objID] [camID])</code>
+<li><a href="look_002dencompass_002dsize.html#look_002dencompass_002dsize">look-encompass-size</a>:          <code>(look-encompass-size [view clip near far])</code>
+<li><a href="look_002drecenter.html#look_002drecenter">look-recenter</a>:                <code>(look-recenter [objID] [camID])</code>
+<li><a href="look_002dtoward.html#look_002dtoward">look-toward</a>:                  <code>(look-toward [objID] [camID] [origin|center])</code>
+<li><a href="merge.html#merge">merge</a>:                        <code>(merge {janela|camera} CAM-ID { WIN or CAM ... })</code>
+<li><a href="merge_002dap.html#merge_002dap">merge-ap</a>:                     <code>(merge-ap GEOM-ID APAR&Ecirc;NCIA)</code>
+<li><a href="merge_002dbase_002dap.html#merge_002dbase_002dap">merge-base-ap</a>:                <code>(merge-base-ap APAAR&Ecirc;NCIA)</code>
+<li><a href="merge_002dbaseap.html#merge_002dbaseap">merge-baseap</a>:                 <code>(merge-baseap APAR&Ecirc;NCIA)</code>
+<li><a href="mod.html#mod">mod</a>:                          <code>(mod NUMERADOR DENOMINADOR)</code>
+<li><a href="morehelp.html#morehelp">morehelp</a>:                     <code>(?? COMANDO)</code>
+<li><a href="name_002dobject.html#name_002dobject">name-object</a>:                  <code>(name-object ID NOME)</code>
+<li><a href="ND_002daxes.html#ND_002daxes">ND-axes</a>:                      <code>(ND-axes CAMID [CLUSTER [Xidx Yidx Zidx [Widx]]])</code>
+<li><a href="ND_002dcolor.html#ND_002dcolor">ND-color</a>:                     <code>(ND-color CAMID ...</code>
+<li><a href="ND_002dxform.html#ND_002dxform">ND-xform</a>:                     <code>(ND-xform OBJID [ntransform { ... }])</code>
+<li><a href="ND_002dxform_002dget.html#ND_002dxform_002dget">ND-xform-get</a>:                 <code>(ND-xform-get ID [from-ID])</code>
+<li><a href="ND_002dxform_002dset.html#ND_002dxform_002dset">ND-xform-set</a>:                 <code>(ND-xform-set OBJID [ntransform { ... }])</code>
+<li><a href="new_002dalien.html#new_002dalien">new-alien</a>:                    <code>(new-alien nome [GEOMETRY])</code>
+<li><a href="new_002dcamera.html#new_002dcamera">new-camera</a>:                   <code>(new-camera nome [CAMERA])</code>
+<li><a href="new_002dcenter.html#new_002dcenter">new-center</a>:                   <code>(new-center [id])</code>
+<li><a href="new_002dgeometry.html#new_002dgeometry">new-geometry</a>:                 <code>(new-geometry nome [GEOMETRY])</code>
+<li><a href="new_002dreset.html#new_002dreset">new-reset</a>:                    <code>(new-reset)</code>
+<li><a href="NeXT.html#NeXT">NeXT</a>:                         <code>(NeXT)</code>
+<li><a href="normalization.html#normalization">normalization</a>:                <code>(normalization GEOM-ID {each|none|all|keep})</code>
+<li><a href="not.html#not">not</a>:                          <code>(not EXPR)</code>
+<li><a href="or.html#or">or</a>:                           <code>(or EXPR1 EXPR2)</code>
+<li><a href="pick.html#pick">pick</a>:                         <code>(pick COORDSYS GEOMID G V E F P VI EI FI)</code>
+<li><a href="pick_002dinvisible.html#pick_002dinvisible">pick-invisible</a>:               <code>(pick-invisible [yes|no])</code>
+<li><a href="pickable.html#pickable">pickable</a>:                     <code>(pickable GEOM-ID {yes|no})</code>
+<li><a href="position.html#position">position</a>:                     <code>(position objetoID otherID)</code>
+<li><a href="position_002dat.html#position_002dat">position-at</a>:                  <code>(position-at objetoID otherID [center | origin])</code>
+<li><a href="position_002dtoward.html#position_002dtoward">position-toward</a>:              <code>(position-toward objID othID [center|origin])</code>
+<li><a href="process_002devents.html#process_002devents">process-events</a>:               <code>(process-events)</code>
+<li><a href="progn.html#progn">progn</a>:                        <code>(progn DECLARA&Ccedil;&Atilde;O [ ... ])</code>
+<li><a href="quit.html#quit">quit</a>:                         <code>(quit)</code>
+<li><a href="quote.html#quote">quote</a>:                        <code>(quote EXPR)</code>
+<li><a href="rawevent.html#rawevent">rawevent</a>:                     <code>(rawevent dev val x y t)</code>
+<li><a href="rawpick.html#rawpick">rawpick</a>:                      <code>(rawpick CAMID X Y)</code>
+<li><a href="read.html#read">read</a>:                         <code>(read geometry|camera|... {GEOM ou CAM ou ...})</code>
+<li><a href="real_002did.html#real_002did">real-id</a>:                      <code>(real-id ID)</code>
+<li><a href="redraw.html#redraw">redraw</a>:                       <code>(redraw CAM-ID)</code>
+<li><a href="regtable.html#regtable">regtable</a>:                     <code>(regtable)</code>
+<li><a href="rehash_002demodule_002dpath.html#rehash_002demodule_002dpath">rehash-emodule-path</a>:          <code>(rehash-emodule-path)</code>
+<li><a href="replace_002dgeometry.html#replace_002dgeometry">replace-geometry</a>:             <code>(replace-geometry GEOM-ID PART GEOMETRY)</code>
+<li><a href="rib_002ddisplay.html#rib_002ddisplay">rib-display</a>:                  <code>(rib-display [frame|tiff] PREFIXOARQUIVO)</code>
+<li><a href="rib_002dsnapshot.html#rib_002dsnapshot">rib-snapshot</a>:                 <code>(rib-snapshot CAM-ID [nomearquivo])</code>
+<li><a href="scale.html#scale">scale</a>:                        <code>(scale GEOM-ID FATOR [FATORY FATORZ])</code>
+<li><a href="scene.html#scene">scene</a>:                        <code>(scene CAM-ID [GEOMETRY])</code>
+<li><a href="set_002dclock.html#set_002dclock">set-clock</a>:                    <code>(set-clock TEMPO)</code>
+<li><a href="set_002dconformal_002drefine.html#set_002dconformal_002drefine">set-conformal-refine</a>:         <code>(set-conformal-refine CMX [N [ARESTAS]])</code>
+<li><a href="set_002demodule_002dpath.html#set_002demodule_002dpath">set-emodule-path</a>:             <code>(set-emodule-path (PATH1 ... PATHN))</code>
+<li><a href="set_002dload_002dpath.html#set_002dload_002dpath">set-load-path</a>:                <code>(set-load-path (PATH1 ... PATHN))</code>
+<li><a href="set_002dmotionscale.html#set_002dmotionscale">set-motionscale</a>:              <code>(set-motionscale X)</code>
+<li><a href="setenv.html#setenv">setenv</a>:                       <code>(setenv nome string)</code>
+<li><a href="setq.html#setq">setq</a>:                         <code>(setq SYM EXPR)</code>
+<li><a href="sgi.html#sgi">sgi</a>:                          <code>(sgi)</code>
+<li><a href="shell.html#shell">shell</a>:                        <code>(! COMANDOSHELL)</code>
+<li><a href="sleep_002dfor.html#sleep_002dfor">sleep-for</a>:                    <code>(sleep-for TEMPO)</code>
+<li><a href="sleep_002duntil.html#sleep_002duntil">sleep-until</a>:                  <code>(sleep-until TEMPO)</code>
+<li><a href="snapshot.html#snapshot">snapshot</a>:                     <code>(snapshot CAM-ID NOMEDOARQUIVO [FORMATO [TAMANHOX [TAMANHOY]]])</code>
+<li><a href="soft_002dshader.html#soft_002dshader">soft-shader</a>:                  <code>(soft-shader CAM-ID {on|off|toggle})</code>
+<li><a href="space.html#space">space</a>:                        <code>(space {euclidean|hyperbolic|spherical})</code>
+<li><a href="stereowin.html#stereowin">stereowin</a>:                    <code>(stereowin CAM-ID [no|horizontal|...] [gap])</code>
+<li><a href="time_002dinterests.html#time_002dinterests">time-interests</a>:               <code>(time-interests delta initial prefix [suffix])</code>
+<li><a href="transform.html#transform">transform</a>:                    <code>(transform objetoID centerID frameID [rotate|...] ...)</code>
+<li><a href="transform_002dincr.html#transform_002dincr">transform-incr</a>:               <code>(transform-incr objetoID centerID frameID ...)</code>
+<li><a href="transform_002dset.html#transform_002dset">transform-set</a>:                <code>(transform-set objetoID centerID frameID ...)</code>
+<li><a href="truncate.html#truncate">truncate</a>:                     <code>(truncate N&Uacute;MERO)</code>
+<li><a href="ui_002dcam_002dfocus.html#ui_002dcam_002dfocus">ui-cam-focus</a>:                 <code>(ui-cam-focus {focus-change|mouse-cross})</code>
+<li><a href="ui_002dcenter.html#ui_002dcenter">ui-center</a>:                    <code>(ui-center ID)</code>
+<li><a href="ui_002dcenter_002dorigin.html#ui_002dcenter_002dorigin">ui-center-origin</a>:             <code>(ui-center-origin {origin|bbox-center})</code>
+<li><a href="ui_002demotion_002dprogram.html#ui_002demotion_002dprogram">ui-emotion-program</a>:           <code>(ui-emotion-program PROGRAMA)</code>
+<li><a href="ui_002demotion_002drun.html#ui_002demotion_002drun">ui-emotion-run</a>:               <code>(ui-emotion-run EMODULE)</code>
+<li><a href="ui_002dfreeze.html#ui_002dfreeze">ui-freeze</a>:                    <code>(ui-freeze {on|off})</code>
+<li><a href="ui_002dhtml_002dbrowser.html#ui_002dhtml_002dbrowser">ui-html-browser</a>:              <code>(ui-html-browser NAVEGADOR)</code>
+<li><a href="ui_002dmotion.html#ui_002dmotion">ui-motion</a>:                    <code>(ui-motion {inertia|...} {on|off})</code>
+<li><a href="ui_002dpanel.html#ui_002dpanel">ui-panel</a>:                     <code>(ui-panel NOMEPAINEL {on|off} [JANELA])</code>
+<li><a href="ui_002dpdf_002dviewer.html#ui_002dpdf_002dviewer">ui-pdf-viewer</a>:                <code>(ui-pdf-viewer VISUALIZADOR)</code>
+<li><a href="ui_002dtarget.html#ui_002dtarget">ui-target</a>:                    <code>(ui-target ID [yes|no])</code>
+<li><a href="uninterest.html#uninterest">uninterest</a>:                   <code>(uninterest (COMANDO [args]))</code>
+<li><a href="update.html#update">update</a>:                       <code>(update [timestep_in_seconds])</code>
+<li><a href="update_002ddraw.html#update_002ddraw">update-draw</a>:                  <code>(update-draw CAM-ID  [timestep_in_seconds])</code>
+<li><a href="while.html#while">while</a>:                        <code>(while TESTE CORPO)</code>
+<li><a href="window.html#window">window</a>:                       <code>(janela CAM-ID JANELA)</code>
+<li><a href="winenter.html#winenter">winenter</a>:                     <code>(winenter CAM-ID)</code>
+<li><a href="write.html#write">write</a>:                        <code>(write command|geometry|... NOMEDOARQUIVO ...)</code>
+<li><a href="write_002dcomments.html#write_002dcomments">write-comments</a>:               <code>(write-comments NOMEDOARQUIVO GEOMID PICKPATH)</code>
+<li><a href="write_002dhandle.html#write_002dhandle">write-handle</a>:                 <code>(write-handle PREFIX NOMEDOARQUIVO CABE&Ccedil;ALHO)</code>
+<li><a href="write_002dsexpr.html#write_002dsexpr">write-sexpr</a>:                  <code>(write-sexpr NOMEDOARQUIVO OBJETOLISP)</code>
+<li><a href="xform.html#xform">xform</a>:                        <code>(xform ID TRANSFORM)</code>
+<li><a href="xform_002dincr.html#xform_002dincr">xform-incr</a>:                   <code>(xform-incr ID TRANSFORM)</code>
+<li><a href="xform_002dset.html#xform_002dset">xform-set</a>:                    <code>(xform-set ID TRANSFORM)</code>
+<li><a href="zoom.html#zoom">zoom</a>:                         <code>(zoom CAM-ID FATOR)</code>
+</ul>
+
+<p>Nota do tradutor: os termos &ldquo;express&atilde;o lambda" e &ldquo;express&atilde;o S" s&atilde;o espec&iacute;ficos da linguagem de programa&ccedil;&atilde;o Lisp.
+
+   </body></html>
+

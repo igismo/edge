@@ -1,0 +1,107 @@
+<html lang="en">
+<head>
+<title>Unix Binary Installation - Geomview Manual</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Geomview Manual">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Installation.html#Installation" title="Installation">
+<link rel="prev" href="Installation.html#Installation" title="Installation">
+<link rel="next" href="Source-Code-Installation.html#Source-Code-Installation" title="Source Code Installation">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Unix-Binary-Installation"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Source-Code-Installation.html#Source-Code-Installation">Source Code Installation</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Installation.html#Installation">Installation</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Installation.html#Installation">Installation</a>
+<hr>
+</div>
+
+<h3 class="section">10.1 Installing the Unix Binary Distribution</h3>
+
+<blockquote>
+<b>BUG:</b> This section is out of date. <code>Geomview</code> follows the
+GNU-installation habits, data goes to <samp><span class="file">PREFIX/share/geomview/</span></samp>,
+user executables to <samp><span class="file">PREFIX/bin/</span></samp>, private executables to
+<samp><span class="file">PREFIX/libexec/geomview/</span></samp>, libraries to <samp><span class="file">PREFIX/lib/</span></samp> where
+<code>PREFIX</code> denotes the installation prefiex specified for the
+<samp><span class="file">TOPSRCDIR/configure</span></samp> script. Please have a look at the files
+<samp><span class="file">TOPSRCDIR/INSTALL</span></samp> and <samp><span class="file">TOPSRCDIR/INSTALL.Geomview</span></samp> for
+installation instructions. 
+</blockquote>
+
+   <p>If you have just obtained a copy of the binary distribution
+for a Unix system (Linux, SGI, Solaris, HP, etc),
+you should be able to run Geomview and make
+use of most of its features immediately after unpacking it by
+<code>cd</code>'ing to the directory that it is in and typing <code>geomview</code>.
+
+   <p>In order to fully install Geomview so that you can run it from any
+directory and use all of its features, follow the steps in this section. 
+In particular, you must go through this installation procedure in order
+to use Geomview to display Mathematica graphics.
+
+   <p>Geomview is distributed in a directory that contains various files and
+subdirectories that Geomview needs at run-time, such as data files and
+external modules.  It also contains other things distributed with
+Geomview, such as documentation and (in the soure-code distribution)
+source-code.  We refer to the root directory of this tree as the
+<samp><span class="file">$GEOMROOT</span></samp> directory.  This is the directory called <samp><span class="file">Geomview</span></samp>
+that is created when you unpack the distribution file.
+
+   <p>To install Geomview on your system, arrange for the <samp><span class="file">$GEOMROOT</span></samp>
+directory to be in a permanent place.  Then, in a shell window,
+<code>cd</code> to that directory and type <code>install</code>.  This runs a shell
+script which does the installation after asking you several questions
+about where you want to install the various components of Geomview.
+
+   <p>After running the <code>install</code> script you should now be able to run
+Geomview from any directory on your system.  (You may need to give the
+<code>rehash</code> command in any shells on your computer that were started
+up before you did the installation.)
+
+   <p>The <samp><span class="file">install</span></samp> script puts copies of the files in
+<samp><span class="file">$GEOMROOT/bin/&lt;CPU&gt;</span></samp> and <samp><span class="file">$GEOMROOT/man</span></samp> into the directories
+you specified for executables and man pages, respectively.  Once you
+have done the installation you can cut down one the disk space required
+by Geomview by removing some files from these directories, since copies
+have been installed elsewhere.  You should first test that your
+installed Geomview works properly because once you remove these files
+from their distribution directories you will not be able to do the
+installation again.
+
+   <p>In particular, the files you can remove are
+
+     <dl>
+<dt><samp><span class="file">$GEOMROOT/bin/&lt;MACHTYPE&gt;</span></samp>:<dd>(where <samp><span class="file">&lt;MACHTYPE&gt;</span></samp> is the type of system you are on, e.g. 
+<samp><span class="file">linux</span></samp>, <samp><span class="file">sgi</span></samp>, <samp><span class="file">hpux</span></samp>, etc). 
+Remove all files from here except <samp><span class="file">gvx</span></samp>, which is the geomview
+executable file.  DO NOT REMOVE <samp><span class="file">gvx</span></samp>.  It is not installed
+elsewhere.
+
+     <br><dt><samp><span class="file">$GEOMROOT/man</span></samp>:<dd>You can remove all the files in this directory.
+
+   </dl>
+
+<!-- ================================================================ -->
+<ul class="menu">
+<li><a accesskey="1" href="Unix-Binary-Detail.html#Unix-Binary-Detail">Unix Binary Detail</a>
+</ul>
+
+   </body></html>
+

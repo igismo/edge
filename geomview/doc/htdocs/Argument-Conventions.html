@@ -1,0 +1,113 @@
+<html lang="en">
+<head>
+<title>Argument Conventions - Geomview Manual</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Geomview Manual">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="GCL.html#GCL" title="GCL">
+<link rel="prev" href="GCL.html#GCL" title="GCL">
+<link rel="next" href="GCL-Reference.html#GCL-Reference" title="GCL Reference">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Argument-Conventions"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="GCL-Reference.html#GCL-Reference">GCL Reference</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="GCL.html#GCL">GCL</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="GCL.html#GCL">GCL</a>
+<hr>
+</div>
+
+<h3 class="section">7.1 Conventions Used In Describing Argument Types</h3>
+
+<p>The following symbols are used to describe argument types
+in the documentation for GCL functions.
+
+     <dl>
+<dt><var>appearance</var><dd>is an OOGL appearance specification.
+
+     <br><dt><var>cam-id</var><dd>is an <var>id</var> that refers to a camera.
+
+     <br><dt><var>camera</var><dd>is an OOGL camera specification.
+
+     <br><dt><var>geom-id</var><dd>is an <var>id</var> that refers to a geometry.
+
+     <br><dt><var>geometry</var><dd>is an OOGL geometry specification.
+
+     <br><dt><var>id</var><dd>is a string which names a geometry or camera.  Besides
+those you create, valid ones are:
+
+          <dl>
+<dt><code>World, world, worldgeom, g0</code><dd>the collection of all geom's
+
+          <br><dt><code>target</code><dd>selected target object (cam or geom)
+
+          <br><dt><code>center</code><dd>selected center-of-motion object
+
+          <br><dt><code>targetcam</code><dd>last selected target camera
+
+          <br><dt><code>targetgeom</code><dd>last selected target geom
+
+          <br><dt><code>focus</code><dd>camera where cursor is (or most recently was)
+
+          <br><dt><code>allgeoms</code><dd>all geom objects
+
+          <br><dt><code>allcams</code><dd>all cameras
+
+          <br><dt><code>default, defaultcam, prototype</code><dd>future cameras inherit default's settings
+
+     </dl>
+
+     <p>The following <var>id</var>s are used to name coordinate systems,
+e.g. in <code>pick</code> and <code>write</code> commands:
+
+          <dl>
+<dt><code>World, world, worldgeom, g0</code><dd>the world, within which all other geoms live.
+
+          <br><dt><code>universe</code><dd>the universe, in which the World, lights and cameras live.  Cameras'
+world2cam transforms might better be called universe2cam, etc.
+
+          <br><dt><code>self</code><dd>"this Geomview object".  Transform from an object to <code>self</code> is the
+identity; writing its geometry gives the object itself with no
+enclosing transform; picked points appear in the object's coordinates.
+
+          <br><dt><code>primitive</code><dd>(for <code>pick</code> only) Picked points appear in the coordinate system of the
+lowest-level OOGL primitive.
+
+     </dl>
+
+     <p>A name is also an acceptable id.  Given names are made unique by
+appending numbers if necessary (i.e. <code>foo&lt;2&gt;</code>). Every geom is also
+named g[n] and every camera is also named c[n] (<code>g0</code> is always the
+worldgeom): this name is used as a prefix to keyboard commands and can
+also be used as a GCL id.  Numbers are reused after an
+object is deleted. Both names are shown in the Object browser.
+
+     <br><dt><var>statement</var><dd>represents a function call.  Function calls have the form <code>(func arg1
+arg2 ... )</code>, where <code>func</code> is the name of the function and <code>arg1</code>,
+<code>arg2</code>, <small class="dots">...</small> are the arguments.
+
+     <br><dt><var>transform</var><dd>is an OOGL 4x4 transformation matrix.
+
+     <br><dt><var>ntransform</var><dd>is an OOGL (N+1)x(N+1) transformation matrix.
+
+     <br><dt><var>window</var><dd>is an OOGL window specification.
+
+   </dl>
+
+   </body></html>
+

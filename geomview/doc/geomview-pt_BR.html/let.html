@@ -1,0 +1,54 @@
+<html lang="en">
+<head>
+<title>let - Manual do Geomview</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Manual do Geomview">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="GCL-Reference.html#GCL-Reference" title="GCL Reference">
+<link rel="prev" href="lambda.html#lambda" title="lambda">
+<link rel="next" href="lines_002dcloser.html#lines_002dcloser" title="lines-closer">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="let"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="lines_002dcloser.html#lines_002dcloser">lines-closer</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="lambda.html#lambda">lambda</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="GCL-Reference.html#GCL-Reference">GCL Reference</a>
+<hr>
+</div>
+
+<h4 class="subsection">7.2.69 let</h4>
+
+<p><a name="index-let-76"></a>
+     <dl>
+<dt><code>(let ARGUMENTS EXPR1 ... EXPRN)</code><dd>Gera uma express&atilde;o lambda a partir de <var>EXRP1</var> <small class="dots">...</small> <var>EXPRN</var>, com
+a associa&ccedil;&atilde;o de argumento descrita por <var>ARGUMENTS</var>. <var>ARGUMENTS</var> corresponde a uma
+lista de s&iacute;mbolos (associada a <code>nil</code> por padr&atilde;o) ou a listas da forma
+<code>(ARG VALUE)</code> onde <var>ARG</var> &eacute; um s&iacute;mbolo e n&atilde;o avaliado e
+<var>VALUE</var> &eacute; uma express&atilde;o-S que &eacute; primeiramente avaliada, a seguir seu valor
+&eacute; associa a <var>ARG</var>. A express&atilde;o completa avalia para o valor de
+<var>EXPRN</var>, a &uacute;ltima express&atilde;o no corpo da declara&ccedil;&atilde;o. A
+lista de argumento deve ester presente, mas pode ser vazia; no &uacute;ltimo caso a
+declara&ccedil;&atilde;o <code>(let () ...)</code> &eacute; equivalente a um <code>(progn
+...)</code>. See <a href="lambda.html#lambda"><code>(lambda ...)</code></a>. 
+See <a href="defun.html#defun"><code>(defun ...)</code></a>. 
+See <a href="setq.html#setq"><code>(setq ...)</code></a>. 
+</dl>
+
+   </body></html>
+

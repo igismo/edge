@@ -1,0 +1,90 @@
+<html lang="en">
+<head>
+<title>Lighting Panel - Geomview Manual</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Geomview Manual">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Appearance.html#Appearance" title="Appearance">
+<link rel="prev" href="Materials-Panel.html#Materials-Panel" title="Materials Panel">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Lighting-Panel"></a>
+<p>
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Materials-Panel.html#Materials-Panel">Materials Panel</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Appearance.html#Appearance">Appearance</a>
+<hr>
+</div>
+
+<h4 class="subsection">3.6.3 The Lighting Panel</h4>
+
+<p>The <em>Lights</em> panel controls the number, position, and color of
+the light sources used in shading. 
+<div class="float">
+<img src="figs/light.png" alt="figs/light.png">
+
+   <p><strong class="float-caption">The Lighting Panel.</strong></p></div>
+
+   <p>The <em>Lighting</em> panel is different from the <em>Appearance</em> and
+<em>Material</em> panels in that it always works with the base
+appearance.  This is because it usually makes sense to use the same set
+of lights for drawing all objects in your scene.
+
+     <dl>
+<dt><em>LIGHTS</em><dd>The <em>LIGHTS</em> browser shows the currently selected light.  Changes
+made using the other widgets on this panel apply to this light.  There
+is always at least one light, the ambient light.
+
+     <br><dt><em>Intensity</em><dd>This slider controls the intensity of the current light.
+
+     <br><dt><em>Color</em><dd>This button brings up a color chooser which lets you select the color
+of the current light.
+
+     <br><dt><em>Add</em><dd>This button adds a light.
+
+     <br><dt><em>Delete</em><dd>This button deletes the current light.
+
+     <br><dt><em>Show Lights</em><dd>This button lets you see and change the positions of the light sources
+in a camera window.  Each light is drawn as long cylinder which is
+supposed to remind you of a light beam.  When you click on the
+<em>Show Lights</em> button Geomview goes into "light edit" mode, during
+which you can rotate current light by holding down the left mouse button
+and moving the mouse.  Lights placed in this way are infinitely distant,
+so what you are changing is the angular position.  Click on the
+<em>Show Lights</em> button again to return to the previous motion mode
+and to quit drawing the light beams.
+
+     <br><dt><em>Done</em><dd>This button dismisses the <em>Lighting</em> panel.
+
+   </dl>
+
+   <p>Geomview's <em>Appearance</em>, <em>Materials</em>, and <em>Lighting</em>
+panels are constructed to allow you to easily do most of the appearance
+related things that you might want to do.  The appearance hierarchy that
+Geomview supports internally, however, is very complex and there are
+certain operations that you cannot do with the panels.  The Geomview
+command language (GCL) provides complete support for appearance
+operations.  In particular, the <code>merge-baseap</code> command can be used
+to change the base appearance (which, except for lighting, cannot be
+changed by Geomview's panels).  The <code>merge-ap</code> command can be used
+to change an individual geom's appearance.  Appearances can also be
+specified in OOGL files; for details,
+see <a href="Appearances.html#Appearances">Appearances</a>. See <a href="merge_002dbaseap.html#merge_002dbaseap"><code>(merge-baseap ...)</code></a>. See <a href="merge_002dap.html#merge_002dap"><code>(merge-ap ...)</code></a>.
+
+<!-- ================================================================ -->
+   </body></html>
+

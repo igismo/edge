@@ -1,0 +1,54 @@
+<html lang="en">
+<head>
+<title>let - Geomview Manual</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Geomview Manual">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="GCL-Reference.html#GCL-Reference" title="GCL Reference">
+<link rel="prev" href="lambda.html#lambda" title="lambda">
+<link rel="next" href="lines_002dcloser.html#lines_002dcloser" title="lines-closer">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="let"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="lines_002dcloser.html#lines_002dcloser">lines-closer</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="lambda.html#lambda">lambda</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="GCL-Reference.html#GCL-Reference">GCL Reference</a>
+<hr>
+</div>
+
+<h4 class="subsection">7.2.69 let</h4>
+
+<p><a name="index-let-76"></a>
+     <dl>
+<dt><code>(let ARGUMENTS EXPR1 ... EXPRN)</code><dd>Generate a lambda expression from <var>EXRP1</var> <small class="dots">...</small> <var>EXPRN</var>, with
+the argument bindings described by <var>ARGUMENTS</var>. <var>ARGUMENTS</var> is a
+list of symbols (bound to <code>nil</code> by default) or lists of the form
+<code>(ARG VALUE)</code> where <var>ARG</var> is a symbol and not evaluated and
+<var>VALUE</var> is an S-expression which is first evaluated, then its value
+is bound to <var>ARG</var>. The entire expression evaluates to the value of
+<var>EXPRN</var>, the last expression in the body of the statement. The
+argument list must be present, but can be empty; in the latter case the
+<code>(let () ...)</code> statement is equivalent to a <code>(progn
+...)</code>. See <a href="lambda.html#lambda"><code>(lambda ...)</code></a>. 
+See <a href="defun.html#defun"><code>(defun ...)</code></a>. 
+See <a href="setq.html#setq"><code>(setq ...)</code></a>. 
+</dl>
+
+   </body></html>
+

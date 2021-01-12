@@ -1,0 +1,61 @@
+<html lang="en">
+<head>
+<title>Private Module Installation - Geomview Manual</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Geomview Manual">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Module-Installation.html#Module-Installation" title="Module Installation">
+<link rel="prev" href="Module-Installation.html#Module-Installation" title="Module Installation">
+<link rel="next" href="System-Module-Installation.html#System-Module-Installation" title="System Module Installation">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Private-Module-Installation"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="System-Module-Installation.html#System-Module-Installation">System Module Installation</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Module-Installation.html#Module-Installation">Module Installation</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Module-Installation.html#Module-Installation">Module Installation</a>
+<hr>
+</div>
+
+<h4 class="subsection">6.7.1 Private Module Installation</h4>
+
+<p>The <code>emodule-define</code> command arranges for a module to appear in
+Geomview's <em>Modules</em> browser. The command takes two string
+arguments; the first is the name that will appear in the <em>Modules</em>
+browser.  The second is the shell command for running the module; it may
+include arguments (see <a href="emodule_002ddefine.html#emodule_002ddefine"><code>(emodule-define ...)</code></a>). 
+Geomview executes this command in a subshell when you click on the
+module's entry in the browser.  For example
+
+<pre class="example">     (emodule-define "Foo" "/u/home/modules/foo -x")
+</pre>
+   <p class="noindent">adds a line labeled "Foo" to the <em>Modules</em> browser which
+causes the command "/u/home/modules/foo -x" to be executed when selected.
+
+   <p>You may put <code>emodule-define</code> commands in your <samp><span class="file">~/.geomview</span></samp>
+file to arrange for certain modules to be available every time you run
+Geomview; See <a href="Customization.html#Customization">Customization</a>.  You can also execute
+<code>emodule-define</code> commands from the <em>Commands</em> panel
+to add a module to an already running copy of Geomview.
+
+   <p>There are several other GCL commands for controlling the entries
+in the <em>Modules</em> browser; for details, See <a href="GCL.html#GCL">GCL</a>.
+
+<!--  -->
+   </body></html>
+

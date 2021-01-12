@@ -1,0 +1,52 @@
+<html lang="en">
+<head>
+<title>hdefine - Manual do Geomview</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Manual do Geomview">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="GCL-Reference.html#GCL-Reference" title="GCL Reference">
+<link rel="prev" href="geomview_002dversion.html#geomview_002dversion" title="geomview-version">
+<link rel="next" href="hdelete.html#hdelete" title="hdelete">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="hdefine"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="hdelete.html#hdelete">hdelete</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="geomview_002dversion.html#geomview_002dversion">geomview-version</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="GCL-Reference.html#GCL-Reference">GCL Reference</a>
+<hr>
+</div>
+
+<h4 class="subsection">7.2.59 hdefine</h4>
+
+<p><a name="index-hdefine-66"></a>
+     <dl>
+<dt><code>(hdefine geometria|camera|janela|apar&ecirc;ncia|imagem|transforma&ccedil;&atilde;o|ntransform nome valor)</code><dd>Ajusta o valor de um manipulador de tipo fornecido.
+     <pre class="example">            (hdefine  &lt;tipo&gt;  &lt;nome&gt;  &lt;valor&gt;)
+</pre>
+     <p>is generally equivalent to
+     <pre class="example">            (read &lt;tipo&gt;  { define &lt;nome&gt; &lt;valor&gt; })
+</pre>
+     <p>exeto que a atribui&ccedil;&atilde;o &eacute; desfeita ao final da execu&ccedil;&atilde;o de hdefine, (possivelmente
+n&atilde;o em todos os lugares se dentro de uma declara&ccedil;&atilde;o condicional), enquanto oe <code>read
+... define</code> realiza a atribui&ccedil;&atilde;o t&atilde;o rapidamente quanto o texto &eacute;
+lido. See <a href="Referencias.html#Referencias">Referencias</a>. See <a href="read.html#read"><code>(read ...)</code></a>. See <a href="hdelete.html#hdelete"><code>(hdelete ...)</code></a>. 
+</dl>
+
+   </body></html>
+

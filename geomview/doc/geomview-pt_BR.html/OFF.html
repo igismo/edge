@@ -1,0 +1,138 @@
+<html lang="en">
+<head>
+<title>OFF - Manual do Geomview</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Manual do Geomview">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Formatos-de-Arquivo-de-Objeto.html#Formatos-de-Arquivo-de-Objeto" title="Formatos de Arquivo de Objeto">
+<link rel="prev" href="BBP-and-BEZ.html#BBP-and-BEZ" title="BBP and BEZ">
+<link rel="next" href="VECT.html#VECT" title="VECT">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="OFF"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="VECT.html#VECT">VECT</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="BBP-and-BEZ.html#BBP-and-BEZ">BBP and BEZ</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Formatos-de-Arquivo-de-Objeto.html#Formatos-de-Arquivo-de-Objeto">Formatos de Arquivo de Objeto</a>
+<hr>
+</div>
+
+<h4 class="subsection">4.2.5 Arquivos do Tipo OFF</h4>
+
+<p>O sufixo convencional para arquivos <code>OFF</code> &eacute; <samp><span class="file">.off</span></samp>.
+
+   <p>Sintaxe:
+
+<pre class="example">     [ST][C][N][4][n]OFF	# Palavra chave do cabe&ccedil;alho
+     [<var>Ndim</var>]		# Dimens&atilde;o do espa&ccedil;o dos v&eacute;rtices, presente somente se nOFF
+     			# estiver tamb&eacute;m presente
+     <var>NV&eacute;rtices</var>  <var>NFaces</var>  <var>NArestas</var>   # NArestas n&atilde;o &eacute; usado nem checado
+     
+     <var>x</var>[0]  <var>y</var>[0]  <var>z</var>[0]	# V&eacute;rtices, possivelmente com normais,
+     			# cores, e/ou coordenadas de textura, nessa ordem,
+     			# se os prefixo <code>N</code>, <code>C</code>, <code>ST</code>
+     			# estiverem presentes.
+     			# Se 4OFF, cada v&eacute;rtice possui 4 componentes,
+     			# incluindo uma componente final homog&ecirc;nea.
+     			# Se nOFF, cada v&eacute;rtice possui <var>Ndim</var> componentes.
+     			# Se 4nOFF, cada v&eacute;rtice possui <var>Ndim</var>+1 componentes.
+     ...
+     <var>x</var>[<var>NV&eacute;rtices</var>-1]  <var>y</var>[<var>NV&eacute;rtices</var>-1]  <var>z</var>[<var>NV&eacute;rtices</var>-1]
+     
+         			# Faces
+         			# <var>Nv</var> = # v&eacute;rtices na referida face
+         			# <var>v</var>[0] ... <var>v</var>[<var>Nv</var>-1]: &iacute;ndices dos v&eacute;rtices
+         			#		no intervalo 0..<var>NV&eacute;rtices</var>-1
+     <var>Nv</var>  <var>v</var>[0] <var>v</var>[1] ... <var>v</var>[<var>Nv</var>-1]  <var>colorspec</var>
+     ...
+         			# <var>colorspec</var> colar cont&iacute;nuo <var>v</var>[<var>Nv</var>-1]
+         			# at&eacute; o aparecer um caractere de fim de linha; pode ser de 0 a 4
+         			# n&uacute;meros
+         			# nenhum: padr&atilde;o
+         			# inteiro: &iacute;ndice do mapa de cores
+         			# 3 ou 4 inteiros: valores RGB[A] no intervalo 0..255
+     			# 3 ou 4 n&uacute;meros em ponto flutuante: valores RGB[A] no intervalo 0..1
+</pre>
+   <p>Arquivos <code>OFF</code> (nome  para "object file format" formato de arquivo de objeto) representa cole&ccedil;&otilde;es
+de pol&iacute;gonos planos com v&eacute;rtices possivelmente compartilhados, um caminho conveniente para
+descrever poliedros.  Os pol&iacute;gonos podem ser c&ocirc;ncavos mas n&atilde;o existe
+suporte para pol&iacute;gonos contendo buracos.
+
+   <p>Um arquivo <code>OFF</code> pode come&ccedil;ar com a palavra chave <code>OFF</code>; isso &eacute;
+recomendado mas tamb&eacute;m &eacute; opcional, muitos arquivos existentes precisam dessa palavra chave.
+
+   <p>Tr&ecirc;s inteiros ASCII seguem a palavra chave <code>OFF</code>: <var>NV&eacute;rtices</var>, <var>NFaces</var>, e
+<var>NArestas</var>.  Esses s&atilde;o o n&uacute;mero de v&eacute;rtices, faces, e arestas,
+respectivamente.  Atualmente o software n&atilde;o utiliza nem verifica <var>NArestas</var>; ele
+n&atilde;o precisa ser correto mas deve estar presente.
+
+   <p>As coordenadas do v&eacute;rtice seguem: dimens&atilde;o * <var>Nv&eacute;rtices</var>
+valores em ponto flutuante.  Esses valores em ponto flutuante est&atilde;o implicitamente numerados de 0 a
+<var>NV&eacute;rtices</var>-1.  A dimens&atilde;o &eacute; ou 3 (o padr&atilde;o) ou 4 (especificado pelo
+caractere chave <code>4</code> diretamente antes da palavra chave <code>OFF</code>).
+
+   <p>Seguindo esses acima citados est&atilde;o as descri&ccedil;&otilde;es das faces, tipicamente escritos
+com uma linha por face.  Cada linha tem a forma
+<pre class="example">     <var>N</var>  <var>Vert1</var> <var>Vert2</var> ... <var>VertN</var>  [<var>cor</var>]
+</pre>
+   <p class="noindent">Aqui <var>N</var> &eacute; o n&uacute;mero de v&eacute;rtices sobre a considerada face,
+e <var>Vert1</var> a <var>VertN</var> s&atilde;o &iacute;ndices dentro da lista de
+v&eacute;rtices (no intervalo 0..<var>NV&eacute;rtices</var>-1).
+
+   <p>O modificador opcional <var>cor</var> no final da linha acima pode tomar v&aacute;rias formas.  Caracteres de fim de linha s&atilde;o
+significativos nesse ponto: a descri&ccedil;&atilde;o <var>cor</var> inicia-se ap&oacute;s <var>VertN</var>
+e termina com o caractere de fim de linha (ou pr&oacute;ximo caractere cerquilha # representativo de coment&aacute;rio).  Uma
+<var>cor</var> pode ser:
+
+     <dl>
+<dt>aus&ecirc;ncia de caractere<dd>a cor padr&atilde;o
+<br><dt>um inteiro<dd>&iacute;ndice dentro "do" mapa de cores; veja abaixo
+<br><dt>tr&ecirc;s ou quatro inteiros<dd>valores de RGB e possivelmente alfa no intervalo 0..255
+<br><dt>tr&ecirc;s ou quatro n&uacute;meros em ponto flutuante<dd>valores RGB e possivelmente alfa no intervalo 0..1
+</dl>
+
+   <p>Para o caso de um inteiro, o mapa de cores &eacute; lido diretamente do arquivo
+<samp><span class="file">cmap.fmap</span></samp> em sua forma atual no diret&oacute;rio <samp><span class="file">data</span></samp> do Geomview.  Algum melhor
+mecanismo para fornecer um mapa de cor ser&aacute; fornecido provavelmente algum dia.
+
+   <p>O significado de "cor padr&atilde;o" varia.  Se nenhuma face do objeto tem uma
+cor, tudo recebe como heran&ccedil;a a cor material padr&atilde;o do ambiente.  Se alguma
+mas n&atilde;o todas as faces possuem cores, o padr&atilde;o &eacute; cinza (R,G,B,A=.666).
+
+   <p>Um formato <code>[ST][C][N][n]OFF BINARY</code> &eacute; aceito; veja <a href="Formato-binario.html#Formato-binario">Formato binario</a>.  Esse formato assemelha-se ao formato ASCII em quase tudo que voc&ecirc; poderia esperar,
+com inteiros de 32-bit para todos os contadores e &iacute;ndices de v&eacute;rtice e n&uacute;meros em ponto flutuante de
+32-bit para posi&ccedil;&otilde;es de v&eacute;rtice (e coordenadas de textura ou cores de v&eacute;rtice ou
+retas normais se algum dos formatos
+<code>COFF</code>/<code>NOFF</code>/<code>CNOFF</code>/<code>STCNOFF</code>/etc. estiver presente).
+
+   <p>Exce&ccedil;&atilde;o: cada um dos &iacute;ndices de face do v&eacute;rtice s&atilde;o seguidos por um inteiro
+indicando quantas componentes de cor o acompanham.  Componentes de
+cor de face devem ser n&uacute;meros em ponto flutuante, n&atilde;o valores inteiros.  Dessa forma uma face triangular
+ pouco colorida pode ser representada como
+
+<pre class="example">     int int int int int
+     3   17   5   9   0
+</pre>
+   <p>enquanto a mesma face colorida com vermelho pode ser
+
+<pre class="example">     int int int int int float float float float
+      3  17   5   9   4   1.0   0.0   0.0   1.0
+</pre>
+   <!--  -->
+   </body></html>
+

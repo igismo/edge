@@ -1,0 +1,82 @@
+<html lang="en">
+<head>
+<title>Networked Geomview - Manual do Geomview</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Manual do Geomview">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Remote-Display.html#Remote-Display" title="Remote Display">
+<link rel="prev" href="Remote-Display.html#Remote-Display" title="Remote Display">
+<link rel="next" href="Chunks.html#Chunks" title="Chunks">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Networked-Geomview"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Chunks.html#Chunks">Chunks</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Remote-Display.html#Remote-Display">Remote Display</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Remote-Display.html#Remote-Display">Remote Display</a>
+<hr>
+</div>
+
+<h4 class="subsection">9.4.1 Using a Networked Geomview Host</h4>
+
+<p>The <code>Geomview</code> command looks at the <code>DISPLAY</code> or
+<code>REMOTEHOST</code> environment variables to try to determine if you are
+logged in from another computer.  If either of these indicates that you
+are, <code>Geomview</code> will attempt to run Geomview on that
+computer.  In order for this to work, your network must be configured
+such that the Mathematica computer can successfully <code>rsh</code> to the
+Geomview computer without giving a password.
+
+   <p>You can also explicitly set the <code>DisplayHost</code> option to the
+<code>Geomview</code> command to a sequ&ecirc;ncia de caracteres which is the desired hostname, for
+exemplo:
+<pre class="example">     In[1] := &lt;&lt; OOGL.m
+     
+     In[2] := Plot3D[Sin[x + Sin[y]], {x,-2,2},{y,-2,2}]
+     
+     Out[2] := -Graphics3D-
+     
+     In[3] := Geomview[%3, DisplayHost-&gt;"riemann"]
+</pre>
+   <p class="noindent">This displays the graphics <code>%3</code> on the remote host named
+<code>riemann</code>.
+
+   <p><code>Geomview</code> recognizes the sequ&ecirc;ncia de caracteres <code>"local"</code> as a value for
+<code>$DisplayHost</code>; it forces the graphics to be displayed on the local
+machine.
+
+   <p>In addition to knowing the name da machine you want to run Geomview
+on, <code>Geomview</code> needs to know the type of that machine (the setting
+da CPU variable that corresponds to the machine;
+see <a href="Source-Code-Installation.html#Source-Code-Installation">Source Code Installation</a>). 
+By default, <code>Geomview</code> assumes that it is the same kind of
+computer as the one you are running Mathematica on.  The <code>MachType</code>
+option lets you explicitly specify the type do <code>DisplayHost</code>
+computer; it should be one das sequ&ecirc;ncias de caracteres <code>"sgi"</code> or
+<code>"next"</code> ou <code>"x11"</code>.
+
+   <p>You can use <code>SetOptions</code> to change the default <code>DisplayHost</code>
+and <code>MachType</code>.  For exemplo,
+<pre class="example">     In[4] := SetOptions[Geomview, DisplayHost-&gt;"riemann", MachType-&gt;"sgi"]
+</pre>
+   <p class="noindent">arranges for <code>Geomview</code> to run Geomview on an SGI workstation named
+<code>riemann</code>.
+
+<!--  -->
+   </body></html>
+

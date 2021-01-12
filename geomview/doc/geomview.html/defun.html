@@ -1,0 +1,57 @@
+<html lang="en">
+<head>
+<title>defun - Geomview Manual</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Geomview Manual">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="GCL-Reference.html#GCL-Reference" title="GCL Reference">
+<link rel="prev" href="cursor_002dtwitch.html#cursor_002dtwitch" title="cursor-twitch">
+<link rel="next" href="delete.html#delete" title="delete">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="defun"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="delete.html#delete">delete</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="cursor_002dtwitch.html#cursor_002dtwitch">cursor-twitch</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="GCL-Reference.html#GCL-Reference">GCL Reference</a>
+<hr>
+</div>
+
+<h4 class="subsection">7.2.31 defun</h4>
+
+<p><a name="index-defun-37"></a>
+     <dl>
+<dt><code>(defun NAME (ARG1 ...) [DOCSTRING] EXPR1 ...)</code><dd>Define a named lambda-expression, that is: define <var>NAME</var> to evaluate
+to the lambda-expression <code>(lambda (ARG1 ...) (EXPR1 ...))</code>
+when called as a function. Also, install <var>DOCSTRING</var> as response to
+the commands <code>(help NAME)</code> and <code>(morehelp NAME)</code>.  Note that
+<var>DOCSTRING</var> need not contain the command-synopsis, it is generated
+automatically.  <var>EXPR1</var> cannot be a string if <code>DOCSTRING</code> is
+omitted; it would be interpreted as the doc-string. The return value of
+<code>(defun ...)</code> is the function name. Functions can be recursive
+and self-modifying. It is possible to redefine builtin-functions, in
+this case the old definition is still available under the name
+<code>-builtin-OLDNAME-</code>. Argument values may be altered by <code>setq</code>;
+the new binding is discarded after evaluation of the surrounding
+<code>defun</code>-body. The special keywords <code>&amp;optional</code> and
+<code>&amp;rest</code> have the same meaning as for anonymous lambda-expression,
+see there. See <a href="lambda.html#lambda"><code>(lambda ...)</code></a>.  See <a href="setq.html#setq"><code>(setq ...)</code></a>.  See <a href="let.html#let"><code>(let ...)</code></a>. 
+</dl>
+
+   </body></html>
+

@@ -1,0 +1,65 @@
+<html lang="en">
+<head>
+<title>ND-Vertices - Manual do Geomview</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Manual do Geomview">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Convencoes.html#Convencoes" title="Convencoes">
+<link rel="prev" href="Vertices.html#Vertices" title="Vertices">
+<link rel="next" href="Direcoes-de-superficies-normais.html#Direcoes-de-superficies-normais" title="Direcoes de superficies normais">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="ND-Vertices"></a>
+<a name="ND_002dVertices"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Direcoes-de-superficies-normais.html#Direcoes-de-superficies-normais">Direcoes de superficies normais</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Vertices.html#Vertices">Vertices</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Convencoes.html#Convencoes">Convencoes</a>
+<hr>
+</div>
+
+<h4 class="subsection">4.1.4 V&eacute;rtices <var>N</var>-dimensionais</h4>
+
+<p>Muitos objetos compartilham um estilo comum de representa&ccedil;&atilde;o de v&eacute;rtice com
+opcionais de superf&iacute;cie normal e cor.  Todos os v&eacute;rtices dentro de um
+objeto possuem o mesmo formato, especificado pela palavra chave do cabe&ccedil;alho.
+
+   <p>Todos os dados para um v&eacute;rtice est&atilde;o agrupados juntos (em oposi&ccedil;&atilde;o a e.g. fornecendo
+coordenadas para todos os v&eacute;rtices, a seguir cores para todos os v&eacute;rtices, e assim por diante).
+
+   <p>A sintaxe para v&eacute;rtices <var>N</var>-dimensionais (<var>N</var> &gt; 3) &eacute;
+
+     <dl>
+<dt>&lsquo;<samp><var>x[1]</var>  <var>x[2]</var>  <var>x[3]</var> <var>x[4]</var><span class="samp"> ...</span></samp>&rsquo;<dd>(<var>N</var> coordenadas do v&eacute;rtice em ponto flutuante) ou
+<br><dt>&lsquo;<samp><var>x[0]</var> <var>x[1]</var>  <var>x[2]</var>  <var>x[3]</var> <var>x[4]</var><span class="samp"> ...</span></samp>&rsquo;<dd>(<var>(N+1)</var> coordenadas do v&eacute;rtice em ponto flutuante, se o modificador <code>4</code>
+tiver sido especificado na linha de cabe&ccedil;alho do objeto)
+</dl>
+
+   <p>Note, todavia, que objetos <var>N</var>-dimensionais internamente sempre possuem
+pontos <var>(N+1)</var>-dimensionais; a primeira componente <var>x[0]</var> &ndash; se
+presente no arquivo do objeto file &ndash; &eacute; usada como divisor homog&ecirc;neo. Isso &eacute;
+diferente do caso tridimensional comum onde o modificador <code>4</code>
+gera um objeto quadridimensional onde a componente quadridimensional implicitamente &eacute; escolhida
+para 1.
+
+   <p>Componentes de cor usualmente podem ser especificadas da mesma forma que para v&eacute;rtices tridimensionais,
+Veja <a href="Vertices.html#Vertices">Vertices</a>, enquanto especificando componentes de cor em normais n&atilde;o faz sentido.
+
+<!--  -->
+   </body></html>
+

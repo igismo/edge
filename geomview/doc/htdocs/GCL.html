@@ -1,0 +1,97 @@
+<html lang="en">
+<head>
+<title>GCL - Geomview Manual</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Geomview Manual">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="prev" href="Modules.html#Modules" title="Modules">
+<link rel="next" href="Non_002dEuclidean-Geometry.html#Non_002dEuclidean-Geometry" title="Non-Euclidean Geometry">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="GCL"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Non_002dEuclidean-Geometry.html#Non_002dEuclidean-Geometry">Non-Euclidean Geometry</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Modules.html#Modules">Modules</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="index.html#Top">Top</a>
+<hr>
+</div>
+
+<h2 class="chapter">7 GCL: the Geomview Command Language</h2>
+
+<p>GCL has the syntax of lisp &ndash; i.e. an expression of the form (f a b
+<small class="dots">...</small>) means pass the values of a, b, <small class="dots">...</small> to the function f. 
+GCL is very limited and is by no means an implementation of lisp.  It
+is simply a language for expressing commands to be executed in the order
+given, rather than a programming language.  It does not support variable
+or function definition.
+
+   <p>GCL is the language that Geomview understands for files that it loads
+as well as for communication with other programs. 
+To execute a GCL command interactively, you can bring up the
+<em>Commands</em> panel which lets you type in a command; Geomview
+executes the command when you hit the &lt;Enter&gt; key.  Output from such
+commands is printed to standard output.  Alternately, you can invoke
+Geomview as <code>geomview -c -</code> which causes it to read GCL commands
+from standard input.
+
+   <p>GCL functions return a value, and you can nest function calls in ways
+which use this returned value.  For example
+<pre class="example">     (f (g a b))
+</pre>
+   <p>evaluates <code>(g a b)</code> and then evaluates <code>(f x)</code> where <code>x</code>
+is the result returned by <code>(g a b)</code>.  Geomview maintains these
+return values internally but does not normally print them out. 
+To print out a return value pass it to the <code>echo</code> function. 
+For example the <code>geomview-version</code> function returns a string
+representing the version of Geomview that is running, and
+<pre class="example">     (echo (geomview-version))
+</pre>
+   <p>prints out this string.
+
+   <p>Many functions simply return <code>t</code> for success or <code>nil</code> for
+failure; this is the case if the documentation for the function does not
+indicate otherwise.  These are the lisp symbols for true and false,
+respectively.  (They correspond to the C variables <code>Lt</code> and
+<code>Lnil</code> which you are likely to see if you look at the source code
+for Geomview or some of the external modules.)
+
+   <p>In the descriptions of the commands below several references are made to
+"OOGL" formats.  OOGL is the data description language that Geomview
+uses for describing geometry, cameras, appearances, and other basic
+objects.  For details of the OOGL formats, See <a href="OOGL-File-Formats.html#OOGL-File-Formats">OOGL File Formats</a>. 
+(Or equivalently, see the oogl(5) manual page, distributed with Geomview
+in the file /share/man/man5/oogl.5gv.
+
+   <p>The GCL commands and argument types are listed below.  Most
+of the documentation in this section of the manual is available within
+Geomview via the <code>?</code> and <code>??</code> commands.  The command <code>(? 
+</code><var>command</var><code>)</code> causes Geomview to print out a one-line summary of the
+syntax of <var>command</var>, and <code>(?? </code><var>command</var><code>)</code> prints out an
+explanation of what <var>command</var> does.  You can include the wild-card
+character <code>*</code> in <var>command</var> to print information for a group of
+commands matching a pattern.  For example, <code>(?? *emodule*)</code> will
+print all information about all commands containing the string
+<code>emodule</code>.  <code>(? *)</code> will print a short list of all commands.
+
+<ul class="menu">
+<li><a accesskey="1" href="Argument-Conventions.html#Argument-Conventions">Argument Conventions</a>:         Conventions used in describing argument types. 
+<li><a accesskey="2" href="GCL-Reference.html#GCL-Reference">GCL Reference</a>:                Documentation for each GCL command. 
+</ul>
+
+   </body></html>
+

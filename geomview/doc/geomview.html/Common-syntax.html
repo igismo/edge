@@ -1,0 +1,58 @@
+<html lang="en">
+<head>
+<title>Common syntax - Geomview Manual</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Geomview Manual">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Conventions.html#Conventions" title="Conventions">
+<link rel="prev" href="Conventions.html#Conventions" title="Conventions">
+<link rel="next" href="File-names.html#File-names" title="File names">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Common-syntax"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="File-names.html#File-names">File names</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Conventions.html#Conventions">Conventions</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Conventions.html#Conventions">Conventions</a>
+<hr>
+</div>
+
+<h4 class="subsection">4.1.1 Syntax Common to All OOGL File Formats</h4>
+
+<p>Most OOGL object file formats are free-format ASCII &mdash; any amount of
+white space (blanks, tabs, newlines) may appear between tokens (numbers,
+key words, etc.).  Line breaks are almost always insignificant, with a
+couple of exceptions as noted.  Comments begin with # and continue to
+the end of the line; they're allowed anywhere a newline is.
+
+   <p>Binary formats are also defined for several objects; See <a href="Binary-format.html#Binary-format">Binary format</a>, and the individual object descriptions.
+
+   <p>Typical OOGL objects begin with a key word designating object type,
+possibly with modifiers indicating presence of color information etc. 
+In some formats the key word is optional, for compatibility with file
+formats defined elsewhere.  Object type is then determined by
+guessing from the file suffix (if any) or from the data itself.
+
+   <p>Key words are case sensitive.  Some have optional prefix letters
+indicating presence of color or other data; in this case the order of
+prefixes is significant, e.g. <code>CNMESH</code> is meaningful but
+<code>NCMESH</code> is invalid.
+
+<!--  -->
+   </body></html>
+

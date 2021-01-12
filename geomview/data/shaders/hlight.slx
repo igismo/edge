@@ -1,0 +1,178 @@
+lightsource
+AQSIS_V 2
+
+
+segment Data
+
+USES 96
+
+param uniform  float k1
+param uniform  float intensity
+param uniform  color lightcolor
+param uniform  point from
+varying  float inpro
+varying  float hdis
+varying  float d
+varying  float PP
+varying  float QQ
+varying  float PQ
+varying  float PdotP
+varying  point sP
+
+
+segment Init
+	pushif 0.5
+	pop k1
+	pushif 1
+	pop intensity
+	pushif 0.100000001
+	pushif 1
+	pushif 1
+	settc
+	pop lightcolor
+	pushif 0
+	pushif 0
+	pushif 0
+	settp
+	pushis "current"
+	pushis "camera"
+	transform2
+	pop from
+
+
+segment Code
+	pushif 0
+	setfc
+	pop Cl
+:0
+	S_CLEAR
+	pushv from
+	illuminate
+	S_JZ 1
+	RS_PUSH
+	RS_GET
+	pushv L
+	pushv from
+	addpp
+	pop sP
+	pushv sP
+	pushv sP
+	dotpp
+	pop PdotP
+	S_CLEAR
+	pushif 1
+	pushv PdotP
+	geff
+	S_GET
+	RS_PUSH
+	RS_GET
+	RS_JZ 2
+	pushv PdotP
+	sqrt
+	pushif 1
+	divff
+	pop d
+	pushv sP
+	xcomp
+	pushv d
+	mulff
+	pushv sP
+	setxcomp
+	pushv sP
+	ycomp
+	pushv d
+	mulff
+	pushv sP
+	setycomp
+	pushv sP
+	zcomp
+	pushv d
+	mulff
+	pushv sP
+	setzcomp
+	pushv sP
+	pushv sP
+	dotpp
+	pop PdotP
+:2
+	RS_POP
+	pushv PdotP
+	pushif 1
+	subff
+	pop PP
+	S_CLEAR
+	pushif 0
+	pushv PP
+	lsff
+	S_GET
+	RS_PUSH
+	RS_GET
+	RS_JZ 3
+	pushif 0
+	pop PP
+:3
+	RS_POP
+	pushv from
+	pushv from
+	dotpp
+	pushif 1
+	subff
+	pop QQ
+	pushv from
+	pushv sP
+	dotpp
+	pushif 1
+	subff
+	pop PQ
+	pushv QQ
+	pushv PP
+	mulff
+	pop d
+	S_CLEAR
+	pushif 0
+	pushv d
+	gtff
+	S_GET
+	RS_PUSH
+	RS_GET
+	RS_JZ 5
+	pushv d
+	sqrt
+	pushv PQ
+	divff
+	pop inpro
+	pushif 1
+	pushv inpro
+	pushv inpro
+	mulff
+	subff
+	abs
+	sqrt
+	pushv inpro
+	addff
+	log
+	pop hdis
+	pushv hdis
+	pushv k1
+	negf
+	mulff
+	exp
+	setfc
+	pushv lightcolor
+	pushv intensity
+	mulfc
+	mulcc
+	pushv Cl
+	addcc
+	pop Cl
+:5
+	RS_INVERSE
+	RS_JZ 4
+	pushif 0
+	setfc
+	pop Cl
+:4
+	RS_POP
+	RS_POP
+	jmp 0
+:1

@@ -1,0 +1,267 @@
+<html lang="en">
+<head>
+<title>image objects - Manual do Geomview</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Manual do Geomview">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Objetos-nao_002dgeometricos.html#Objetos-nao_002dgeometricos" title="Objetos nao-geometricos">
+<link rel="prev" href="Objetos-de-aparencia.html#Objetos-de-aparencia" title="Objetos de aparencia">
+<link rel="next" href="transform-objects.html#transform-objects" title="transform objects">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="image-objects"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="transform-objects.html#transform-objects">transform objects</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Objetos-de-aparencia.html#Objetos-de-aparencia">Objetos de aparencia</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Objetos-nao_002dgeometricos.html#Objetos-nao_002dgeometricos">Objetos nao-geometricos</a>
+<hr>
+</div>
+
+<h4 class="subsection">4.3.2 Objetos de imagem</h4>
+
+<p>Objetos de imagem s&atilde;o usados para especificar dados de pixmap ou para texturas
+(Veja <a href="Mapeamento-de-Textura.html#Mapeamento-de-Textura">Mapeamento de Textura</a>), ou para imagens de fundo de c&acirc;meras
+(Veja <a href="camera.html#camera">Objetos de camera</a>).
+
+   <p>Ao mesmo tempo em que imagens s&atilde;o escritas elas s&atilde;o tamb&eacute;m comprimidas de 1 a 4 canais, um
+canal fornece um n&uacute;mero simples no intervalo que vai de 0 a <code>maxval</code>
+para cada ponto de imagem (pixel); e <code>maxval</code> &eacute; colocado em 255. A interpreta&ccedil;&atilde;o dos dados de imagem dependente do n&uacute;mero de canais &eacute; como segue:
+
+   <p><table summary=""><tr align="left"><th valign="top" width="20%">#Canais </th><th valign="top" width="20%">No. do Canal </th><th valign="top" width="60%">Interpreta&ccedil;&atilde;o
+<br></th></tr><tr align="left"><td valign="top" width="20%">1
+</td><td valign="top" width="20%">1
+</td><td valign="top" width="60%">escala de cinza ou dados de lumin&acirc;ncia
+<br></td></tr><tr align="left"><td valign="top" width="20%">2
+</td><td valign="top" width="20%">1
+</td><td valign="top" width="60%">escala de cinza ou dados de lumin&acirc;ncia
+<br></td></tr><tr align="left"><td valign="top" width="20%"> 
+</td><td valign="top" width="20%">2
+</td><td valign="top" width="60%">canal alfa (0: transparente, <code>maxval</code>: opaco)
+<br></td></tr><tr align="left"><td valign="top" width="20%">3
+</td><td valign="top" width="20%">1
+</td><td valign="top" width="60%">canal vermelho
+<br></td></tr><tr align="left"><td valign="top" width="20%">
+</td><td valign="top" width="20%">2
+</td><td valign="top" width="60%">canal verde
+<br></td></tr><tr align="left"><td valign="top" width="20%">
+</td><td valign="top" width="20%">3
+</td><td valign="top" width="60%">canal azul
+<br></td></tr><tr align="left"><td valign="top" width="20%">4
+</td><td valign="top" width="20%">1
+</td><td valign="top" width="60%">canal vermelho
+<br></td></tr><tr align="left"><td valign="top" width="20%">
+</td><td valign="top" width="20%">2
+</td><td valign="top" width="60%">canal verde
+<br></td></tr><tr align="left"><td valign="top" width="20%">
+</td><td valign="top" width="20%">3
+</td><td valign="top" width="60%">canal azul
+<br></td></tr><tr align="left"><td valign="top" width="20%">
+</td><td valign="top" width="20%">4
+</td><td valign="top" width="60%">canal alfa (0: transparente, <code>maxval</code>: opaco)
+   <br></td></tr></table>
+
+   <p>Dados de imagem podem ser especificados inline (embutidos dentro do fluxo de dados atual)
+ou via refer&ecirc;ncias de arquivos; em ambos os casos os dados s&atilde;o lidos e
+interpretados ao mesmo tempo que o objeto de imagem &eacute; passado. <em>Essa forma
+&eacute; diferente da antiga (e desatualizada) forma de especifica&ccedil;&atilde;o de textura de imagem,
+onde os dados de imagem em uma m&iacute;dia podem eventualmente serem re-lidos pelo
+Geomview</em>.
+
+   <p>A sintaxe geral de objetos de imagem &eacute; como segue:
+<pre class="example">     &lt;image&gt; ::=
+       [ "{" ]             (abertura de chave, geralmente precisam informar
+                            o fim do objeto de forma clara.)
+       [ "image" ]          (palavra chave opcional; desnecess&aacute;ria se o tipo
+                            &eacute; determinado pelo contexto, o que
+                            usualmente acontece.)
+       [ "define" &lt;nome&gt; ]
+                            (define uma imagem chamada &lt;nome&gt;, escolhendo
+                            seus valores a partir do material adiante)
+       |
+           "&lt;" &lt;nomedearquivo&gt;   (significando: leia a imagem de contida
+                            em nomedearquivo)
+       |
+           ":" &lt;nome&gt;       (significando: use a vari&aacute;vel <var>nome</var>,
+                            definida em algum lugar; se a vari&aacute;vel n&atilde;o
+                            for definida em algum lugar a imagem
+                            &eacute; tida como vazia)
+       |
+                            (material atual de defini&ccedil;&atilde;o de imagem; dados
+                            da imagem obrigat&oacute;riamente v&ecirc;m por ultimo,
+                            ap&oacute;s a defini&ccedil;&atilde;o da largura e da altura
+                            e do n&uacute;mero de canais)
+     
+           "width"          (largura da imagem, detectado automaticamente
+                            a partir dos dados da imagem se poss&iacute;vel)
+     
+           "height"         (altura da imagem, detectado automaticamente
+                            a partir dos dados da imagem se poss&iacute;vel)
+     
+           "channels"       (n&uacute;mero de canais, detectado automaticamente
+                            a partir dos dados da imagem e a partir das
+                            especifica&ccedil;&otilde;es <code>data</code> descrita
+                            adiante, se poss&iacute;vel)
+     
+           "maxval"         (n&atilde;o suportado, obrigatoriamente deve ser <code>255</code> se
+                            especificado)
+     
+           "data MASCDEST [FILTER] [{] &lt; NOMEDOARQUIVO [}]"
+           "data MASCDEST [FILTER] TAMAN_IMAGEM [{][\n]DADOS_LIT_IMAGEM[}]"
+                            (dados de imagem ou externos ou embutidos,
+                            veja abaixo para uma descri&ccedil;&atilde;o detalhada do
+                            significado de <em>MASCDEST</em> e <em>FILTER</em>. Uma imagem
+                            pode -e tem, em geral- multiplas se&ccedil;&otilde;es de
+                            dados.)
+     
+       [ "}" ]             (fechamento correspondente da chave)
+</pre>
+   <p><b>Detalhes relativos &agrave; especifica&ccedil;&atilde;o dos dados de uma imagem:</b>
+
+     <dl>
+<dt>&lsquo;<samp><span class="samp">MASCDEST</span></samp>&rsquo;<dd>Esse &eacute; um campo-bit descrevendo onde os dados da imagem especificada devem ser
+colocados no pixmap de destino. O campo-bit &eacute; especificado por meio de um
+inteiro em um dos formatos conhecidos (decimal, octal, hexadecimal). Os
+canais dos dados fonte s&atilde;o sempre enumerados consecutivamente. Se,
+e.g. &lsquo;<samp><span class="samp">NOMEDOARQUIVO</span></samp>&rsquo; ou &lsquo;<samp><span class="samp">DADOS_LIT_IMAGEM</span></samp>&rsquo; especificam um
+imagem (provavelmente RGB <small class="dots">...</small>) de tr&ecirc;s canais e &lsquo;<samp><span class="samp">MASCDEST</span></samp>&rsquo; for igual a
+<code>0xD</code> (i.e. o primeiro bit &eacute; 0), ent&atilde;o o terceiro canal do pixmap fonte
+pode ser substitu&iacute;do no quarto canal do objeto imagem de destino (o
+canal alfa), o segundo canal pode determinar o valor de destino
+&lsquo;<samp><span class="samp">azul</span></samp>&rsquo; e o primeiro canal da fonte determina o valor de destino
+correspondente ao &lsquo;<samp><span class="samp">vermelho</span></samp>&rsquo;.
+
+     <p>O n&uacute;mero de canais dos dados fontes sempre tem que coincidir com o n&uacute;mero
+de bits especificado como &lsquo;<samp><span class="samp">MASCDEST</span></samp>&rsquo;. <b>Exce&ccedil;&atilde;o:</b> se o pixmap fonte possui
+somente um canal, ent&atilde;o o n&uacute;mero de canais dos dados fonte pode ser usado para preencher qualquer n&uacute;mero de canais de
+destino; todos os canais especificados em &lsquo;<samp><span class="samp">MASCDEST</span></samp>&rsquo; s&atilde;o preenchidos com os
+dados do canal simples do pixmap fonte.
+
+     <p>Geomview conhece as seguintes constantes simb&oacute;licas, que podem ser usadas
+em lugar de especificar o campo-bit &lsquo;<samp><span class="samp">MASCDEST</span></samp>&rsquo; numericamente:
+          <dl>
+<dt><code>LUMINANCE</code><dd>o mesmo que &lsquo;<samp><span class="samp">1</span></samp>&rsquo;, &lsquo;<samp><span class="samp">0x1</span></samp>&rsquo;, &lsquo;<samp><span class="samp">\01</span></samp>&rsquo;
+<br><dt><code>LUMINANCE_ALPHA</code><dd>o mesmo que &lsquo;<samp><span class="samp">3</span></samp>&rsquo;, &lsquo;<samp><span class="samp">0x3</span></samp>&rsquo;, &lsquo;<samp><span class="samp">\03</span></samp>&rsquo;
+<br><dt><code>RGB</code><dd>o mesmo que &lsquo;<samp><span class="samp">7</span></samp>&rsquo;, &lsquo;<samp><span class="samp">0x7</span></samp>&rsquo;, &lsquo;<samp><span class="samp">\07</span></samp>&rsquo;
+<br><dt><code>RGBA</code><dd>o mesmo que &lsquo;<samp><span class="samp">15</span></samp>&rsquo;, &lsquo;<samp><span class="samp">0xf</span></samp>&rsquo;, &lsquo;<samp><span class="samp">\017</span></samp>&rsquo;
+<br><dt><code>ALPHA</code><dd>dependendo do contexto: o n&uacute;mero absoluto de canais deve obrigatoriamente ser conhecido;
+i.e. &lsquo;<samp><span class="samp">data ALPHA ...</span></samp>&rsquo; deve obrigatoriamente ser colocado antes de alguma coisa de forma a determinar
+o n&uacute;mero de canais da imagem, e.g.
+          <pre class="example">               ...
+               data RGB ...
+               data ALPHA
+               ...
+</pre>
+          <p>&eacute; v&aacute;lido, mas
+          <pre class="example">               &lt;nenhumoutrocanalouespecifica&ccedil;&atilde;odedadosdeimagem&gt;
+               data ALPHA ...
+               &lt;todo o resto ...&gt;
+</pre>
+          <p>n&atilde;o &eacute; v&aacute;lido, porque Geomview n&atilde;o tem meios de determinar o
+canal de destino a partir do contexto. 
+<br><dt><code>AUTO</code><dd>Dados de imagem no formato PGM &eacute; interpretado como canal simples em escala de cinza, dados RGB PNM
+como dados de imagem RGB. <code>AUTO</code> n&atilde;o pode trabalhar com dados de imagem no formato &lsquo;<samp><span class="samp">raw</span></samp>&rsquo;. 
+</dl>
+
+     <br><dt>&lsquo;<samp><span class="samp">FILTER</span></samp>&rsquo;<dd>A especifica&ccedil;&atilde;o &lsquo;<samp><span class="samp">FILTER</span></samp>&rsquo; &eacute; opcional. se for omitida, ent&atilde;o
+Geomview tenta determinar o tipode imagem usando o sufixo de
+&lsquo;<samp><span class="samp">NOMEDOARQUIVO</span></samp>&rsquo;. Se &atilde;o houver sufixo ou o sufixo for desconhecido, ou para dados
+embutidos de imagem, Geomview est&aacute; apto a auto-detectar  o formato do arquivo de imagem SGI (por
+raz&otilde;es hist&oacute;ricas <small class="dots">...</small>) e formatos de imagem NetPBM (por raz&otilde;es
+pr&aacute;ticas). A auto-detec&ccedil;&atilde;o de formatos NetPBM incluem o novo
+formato de imagem <dfn>PAM</dfn> que permite (em meio a um monte de outras coisas) armazenar um
+canal alfa juntamente com os dados de lumin&acirc;nica ou de RGB. Da mesma forma, a
+sa&iacute;da final de qualquer dos filtros especificados devem ou ser no formato de arquivo de
+imagem SGI, ou especificar uma imagem PAM, PNM ou PGM.  Se o formato de arquivo de
+imagem n&atilde;o puder ser determinado por ou pelo sufixo do nome de arquivo ou pela especifica&ccedil;&atilde;o
+de filtro ou pela auto-detec&ccedil;&atilde;o de dados SGI ou NetPBM, ent&atilde;o Geomview
+assume que os dados sejam "raw". Veja abaixo.
+
+     <p>Os filtros de descompress&atilde;o podem ser deduzidos ou de um dos formatos
+de imagem conhecidos ou de um especificador de filtro expl&iacute;cito, e.g. o seguinte &eacute;
+v&aacute;lido:
+     <pre class="example">          data LUMINANCE raw.gzip { &lt; arquivoemtonsdecinzagzipado }
+</pre>
+     <p>A linha acima deve ser equivalente a
+     <pre class="example">          data LUMINANCE raw { &lt; arquivoemtonsdecinza },
+</pre>
+     <p>fornece dados descomprimidos realizados atrav&eacute;s de dados de canal simples, com
+o primeiro pixel correspondendo ao canto inferior esquerdo (devido ao
+formato &lsquo;<samp><span class="samp">raw</span></samp>&rsquo; de imagem, veja abaixo).
+
+     <p>Geomview tem conhecimento interno dos seguintes filtros/sufixos:
+          <dl>
+<dt><b>Descompress&atilde;o de Dados</b><dd>
+               <dl>
+<dt>&lsquo;<samp><span class="samp">z</span></samp>&rsquo;<br><dt>&lsquo;<samp><span class="samp">gz</span></samp>&rsquo;<br><dt>&lsquo;<samp><span class="samp">gzip</span></samp>&rsquo;<dd>os dados s&atilde;o direcionados por &lsquo;<samp><span class="samp">gzip -dc</span></samp>&rsquo;
+<br><dt>&lsquo;<samp><span class="samp">bz2</span></samp>&rsquo;<br><dt>&lsquo;<samp><span class="samp">bzip2</span></samp>&rsquo;<dd>os dados s&atilde;o direcionados por &lsquo;<samp><span class="samp">bzip2 -dc</span></samp>&rsquo;
+</dl>
+
+          <br><dt><b>Formatos de Imagem</b><dd>
+               <dl>
+<dt>&lsquo;<samp><span class="samp">tiff</span></samp>&rsquo;<br><dt>&lsquo;<samp><span class="samp">tif</span></samp>&rsquo;<dd>Formato de imagem <code>TIFF</code>. Somente suportado se o execut&aacute;vel
+<code>tifftopnm</code> puder ser executado no caminho de execu&ccedil;&atilde;o atual. 
+<br><dt>&lsquo;<samp><span class="samp">png</span></samp>&rsquo;<dd>Formato de imagem <code>PNG</code>. Somente suportado se o execut&aacute;vel
+<code>pngtopnm</code> puder ser executado no caminho de execu&ccedil;&atilde;o atual. 
+<br><dt>&lsquo;<samp><span class="samp">jpg</span></samp>&rsquo;<br><dt>&lsquo;<samp><span class="samp">jpeg</span></samp>&rsquo;<dd>Formato de imagem <code>JPEG</code>. Somente suportado se o execut&aacute;vel
+<code>jpegtopnm</code> puder ser executado no caminho de execu&ccedil;&atilde;o atual. 
+<br><dt>&lsquo;<samp><span class="samp">gif</span></samp>&rsquo;<dd>Formato de imagem <code>GIF</code> image file format. Somente suportado se o execut&aacute;vel
+<code>giftoppm</code> puder ser executado no caminho de execu&ccedil;&atilde;o atual. 
+<br><dt>&lsquo;<samp><span class="samp">raw</span></samp>&rsquo;<dd>Dados de imagem em Raw; o n&uacute;mero de canais deve coincidir com o n&uacute;mero de bits informado
+em &lsquo;<samp><span class="samp">MASCDEST</span></samp>&rsquo;. Pixels s&atilde;o especificados com 1 byte por canal. Os
+pixels s&atilde;o organizados em linhas como em &lsquo;<samp><span class="samp">liminance[-alpha]</span></samp>&rsquo; ou
+em amostras &lsquo;<samp><span class="samp">RGB[A]</span></samp>&rsquo;. O pixel mais &agrave; esquerda &eacute; o primeiro pixel em cada
+linha de dados, a linha de dados mais acima deve vir primeiramente (isso &eacute; apenas o mesmo
+que a conven&ccedil;&atilde;o de NetPBM, os sistemas de coordenadas de imagem t&ecirc;m sua or&iacute;gem
+no canto superior esquerdo, da forma usual). 
+</dl>
+          <br><dt><b>Filtros Explicitamente Especificados</b><dd>Se nenhum dos sufixos especificados acima coincidirem, ent&atilde;o o
+sufixo/filtro &eacute; interpretado como um filtro de programa externo; o programa do
+filtro externo deve ler de <code>STDIN</code> (da entrada padr&atilde;o) e escrever para <code>STDOUT</code> (a sa&iacute;da padr&atilde;o). A
+sa&iacute;da deve ou ser no formato de imagem SGI, ou no formatos de image
+PNM ou PGM. De outra forma os dados de sa&iacute;da s&atilde;o interpretados como dados de imagem no formato raw (veja
+acima).
+
+          <p>Alguma coisa como o seguinte pode trabalhar, garantindo que o programa
+<samp><span class="file">${HOME}/bin/bububfilter</span></samp> exista, seja execut&aacute;vel e fa&ccedil;a
+alguma co&iacute;sa &uacute;til:
+          <pre class="example">               ...
+               data RGB "${HOME}/bin/bububfilter.bzip2" 7
+               { # dados bin&aacute;rios seguem
+               bububub
+               }
+               ...
+</pre>
+          <p>Note que &ndash; previamente fornecendo os dados para &lsquo;<samp><span class="samp">bububfilter</span></samp>&rsquo; &ndash;
+Geomview ir&aacute; tentar descompactar o material com &lsquo;<samp><span class="samp">bzip2 -dc</span></samp>&rsquo;.
+
+     </dl>
+
+   </dl>
+
+   <p><b>Omitindo dados de imagem:</b> Normalmente, o n&uacute;mero de canais de imagem &eacute;
+determinado automaticamente a partir das especifica&ccedil;&otilde;es dos <code>dados</code> de imagem; se
+a especifica&ccedil;&atilde;o de imagem carrega um n&uacute;mero expl&iacute;cito de canais via
+palavra chave <code>channels</code> que excede o n&uacute;mero de canais encontrado nas
+especifica&ccedil;&otilde;es de <code>dados</code>, ou se a uni&atilde;o de todas
+as especifica&ccedil;&otilde;es &lsquo;<samp><span class="samp">MASCDEST</span></samp>&rsquo; possuem buracos, ent&atilde;o omitindo lumin&acirc;ncia e
+canais RGB s&atilde;o initializados para 0, e um canal alfa omitido &eacute;
+inicializado para <code>maxval</code>, i.e. omitindo os dados do canal alfa para
+uma imagem RGBA &eacute; apenas o mesmo que definir uma imagem RGB.
+
+   </body></html>
+

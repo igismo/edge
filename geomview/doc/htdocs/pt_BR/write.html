@@ -1,0 +1,58 @@
+<html lang="en">
+<head>
+<title>write - Manual do Geomview</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Manual do Geomview">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="GCL-Reference.html#GCL-Reference" title="GCL Reference">
+<link rel="prev" href="winenter.html#winenter" title="winenter">
+<link rel="next" href="write_002dcomments.html#write_002dcomments" title="write-comments">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="write"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="write_002dcomments.html#write_002dcomments">write-comments</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="winenter.html#winenter">winenter</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="GCL-Reference.html#GCL-Reference">GCL Reference</a>
+<hr>
+</div>
+
+<h4 class="subsection">7.2.158 write</h4>
+
+<p><a name="index-write-166"></a>
+     <dl>
+<dt><code>(write {command|geometry|camera|transform|ntransform|window|bbox} NOMEDOARQUIVO [ID|(ID ...)] [self|world|universe|outroID])</code><dd>write description of ID in given format to NOMEDOARQUIVO.  Last
+parameter chooses coordinate system for geometry &amp; transform:
+self: just the objeto, no transforma&ccedil;&atilde;o ou apar&ecirc;ncia (objeto geom&eacute;trico only)
+world: the objeto as positioned within the World. 
+universe: objeto's position in universal coordenadas;
+includes Worldtransform
+other ID: the objeto transformed to o sistema de coordenadas de outroID.
+
+     <p>A filename of <code>-</code> is a special case: data are written to the stream
+from which the 'write' command was read.  For external modules, the data
+are sent to the module's standard input.  For commands not read from an
+external program, <code>-</code> means geomview's standard output
+(see <a href="command.html#command"><code>(command ...)</code></a>).
+
+     <p>The ID can either be a single id ou a parenthesized list of
+ids, like <code>g0</code> ou <code>(g2 g1 dodec.off)</code>. 
+</dl>
+
+   </body></html>
+

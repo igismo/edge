@@ -1,0 +1,12 @@
+VECT
+## number-of-lines  num-of-vertices  num-of-colors
+1 2 1 
+## number of vertices in each line: x y z ...
+2
+## number of colors for each line
+1
+## coordinates of two vertices for each line  (-2, -2, -2) (2,2,2)
+-2 -2 -2 
+2 2 2
+## color coding for each vertex (1001) (0101) (0011) 
+1 0 0 1

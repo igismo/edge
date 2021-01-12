@@ -1,0 +1,75 @@
+<html lang="en">
+<head>
+<title>Chunks - Manual do Geomview</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Manual do Geomview">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Remote-Display.html#Remote-Display" title="Remote Display">
+<link rel="prev" href="Networked-Geomview.html#Networked-Geomview" title="Networked Geomview">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Chunks"></a>
+<p>
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Networked-Geomview.html#Networked-Geomview">Networked Geomview</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Remote-Display.html#Remote-Display">Remote Display</a>
+<hr>
+</div>
+
+<h4 class="subsection">9.4.2 Transporting Mathematica Files to Geomview by Hand</h4>
+
+<p>The auxilliary function <code>WriteChunk</code> is for those who can only use
+Mathematica on a computer that Geomview isn't installed on. 
+<code>WriteChunk[</code><var>file</var><code>,
+</code><var>graphics</var><code>]</code> generates a file named <var>file</var> which contains the
+graphics objeto <var>graphics</var> in the format accepted by
+<samp><span class="file">math2oogl</span></samp>.
+
+   <p>You can transfer that file to a computer that has Geomview installed on
+it and then use the programs <samp><span class="file">math2oogl</span></samp>, <samp><span class="file">oogl2ri</span></samp>b, and
+<samp><span class="file">geomview</span></samp> directly from the shell.  These programs are distributed
+in the <samp><span class="file">bin/&lt;CPU&gt;</span></samp>
+subdirectory do Geomview directory, and may have been installed so
+that they are on your <code>path</code>.
+
+<pre class="example">     In[1]:= &lt;&lt;OOGL.m
+     
+     In[2]:= Plot3D[ Sin[x + Sin[y]], {x,-2,2}, {y,-2,2} ]
+     
+     Out[2]= -SurfaceGraphics-
+     
+     In[3]:= WriteChunk["mychunk",%2]
+</pre>
+   <p class="noindent">This writes the file <samp><span class="file">mychunk</span></samp> which contains a description
+do graphics objeto.  You can then transfer this file to a system
+with Geomview and type
+<pre class="example">     math2oogl &lt; mychunk &gt; mma.oogl
+</pre>
+   <p class="noindent">to convert it to the OOGL file <samp><span class="file">mma.oogl</span></samp> which you can then view
+using Geomview. This is the equivalent do <code>WriteOOGL</code> command.
+
+   <p>For a result equivalent to the <code>Geomview</code> ou <code>Show</code>
+commands, type
+<pre class="example">     math2oogl -togeomview Mathematica geomview &lt; mychunk
+</pre>
+   <p class="noindent">The <code>WriteRI</code>b command can be emulated from the shell as
+<pre class="example">     math2oogl &lt; mychunk | oogl2rib -n mma.tiff
+</pre>
+   <p class="noindent"><!-- ================================================================ -->
+
+   </body></html>
+

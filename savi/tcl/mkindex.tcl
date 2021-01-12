@@ -1,0 +1,1 @@
+auto_mkindex . init.tcl main.tcl utils.tcl load.tcl save.tcl coverage_frames.tcl coverage.tcl coverage_size.tcl edit.tcl fisheye.tcl params.tcl geomview.tcl random.tcl about.tcl oe.tcl constellations.tcl no_frames.tcl snapshot.tcl rosette.tcl star.tcl empty.tcl sunlight.tcl equator.tcl details.tcl helpfile.tcl load_url_tle.tcl

@@ -1,0 +1,90 @@
+<html lang="en">
+<head>
+<title>TLIST - Geomview Manual</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Geomview Manual">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Object-File-Formats.html#Object-File-Formats" title="Object File Formats">
+<link rel="prev" href="LIST.html#LIST" title="LIST">
+<link rel="next" href="GROUP.html#GROUP" title="GROUP">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="TLIST"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="GROUP.html#GROUP">GROUP</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="LIST.html#LIST">LIST</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Object-File-Formats.html#Object-File-Formats">Object File Formats</a>
+<hr>
+</div>
+
+<h4 class="subsection">4.2.11 TLIST Files</h4>
+
+<p>The conventional suffix for a <code>TLIST</code> file is <samp><span class="file">.grp</span></samp> ("group")
+or <samp><span class="file">.prj</span></samp> ("projective" matrices).
+
+   <p>Collection of 4x4 matrices, used in the <code>transforms</code> section of and
+<code>INST</code> object.
+
+   <p>Syntax:
+
+<pre class="example">     TLIST                    # key word
+     &lt;4x4 matrix (16 floats)&gt;
+     ...                  # any number of 4x4 matrices
+     transform {             # reference to a transform object
+     &lt;transform object (can be a handle)&gt;
+     }
+     tlist {                 # nested TLIST
+     &lt;TLIST OOGL object (can be a handle)&gt;
+     }
+</pre>
+   <p><code>TLIST</code>s are used only within the <code>transforms</code> clause of an
+<code>INST</code> object.  They cause the <code>INST</code>s <code>geom</code> object to
+be instantiated once under each of the transforms in the <code>TLIST</code>. 
+The effect is like that of a <code>LIST</code> of <code>INST</code>s each with a
+single transform, and all referring to the same object, but is more
+efficient.
+
+   <p><code>TLIST</code>s can be nested: effectively this means that all
+transformations in each nested <code>TLIST</code> object are multiplied (from
+the left) by the transformations in the outer <code>TLIST</code> object.
+
+   <p>Be aware that a <code>TLIST</code> is a kind of geometry object, distinct from a
+<code>transform</code> object.  Some contexts expect one type of object,
+some the other.  For example in
+<pre class="example">     INST transform { : <var>myT</var> } geom { ... }
+</pre>
+   <p class="noindent"><var>myT</var> must be a transform object, which might have been
+created with the GCL
+<pre class="example">     (read transform { define myT 1 0 0 1 ... })
+</pre>
+   <p class="noindent">while in
+<pre class="example">       INST transforms { : <var>myTs</var> } geom { ... }
+       or
+       INST transforms { LIST {: <var>myTs</var>} {&lt; more.prj} } geom { ... }
+</pre>
+   <p class="noindent"><var>myTs</var> must be a geometry object, defined e.g. with
+<pre class="example">       (read geometry { define <var>myTs</var> { TLIST 1 0 0 1 ... } })
+</pre>
+   <p>A <code>TLIST BINARY</code> format is accepted.  Binary data begins with a
+32-bit integer giving the number of transformations, followed by that
+number of 4x4 matrices in 32-bit floating-point format.  The order of
+matrix elements is the same as in the ASCII format.
+
+<!--  -->
+   </body></html>
+

@@ -1,0 +1,77 @@
+<html lang="en">
+<head>
+<title>window objects - Geomview Manual</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Geomview Manual">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Non_002dgeometric-objects.html#Non_002dgeometric-objects" title="Non-geometric objects">
+<link rel="prev" href="camera-objects.html#camera-objects" title="camera objects">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="window-objects"></a>
+<p>
+Previous:&nbsp;<a rel="previous" accesskey="p" href="camera-objects.html#camera-objects">camera objects</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Non_002dgeometric-objects.html#Non_002dgeometric-objects">Non-geometric objects</a>
+<hr>
+</div>
+
+<h4 class="subsection">4.3.6 window</h4>
+
+<p>A window object specifies size, position, and other window-system
+related information about a window in a device-independent way.
+
+   <p>The syntax for a window object is:
+
+<pre class="example">     window ::=
+     
+             [ "window" ]                    (optional keyword)
+               [ "{" ]                      (curly brace, often required)
+     
+                                     (any of the following, in any order)
+     
+                     "size"  &lt;xsize&gt; &lt;ysize&gt;
+                                     (size of the window)
+     
+                     "position"  &lt;xmin&gt; &lt;xmax&gt; &lt;ymin&gt; &lt;ymax&gt;
+                                     (position &amp; size)
+     
+     
+                     "noborder"
+                                     (specifies the window should
+                                      have no window border)
+     
+                     "pixelaspect"  &lt;aspect&gt;
+                                 (specifies the true visual aspect ratio
+                                  of a pixel in this window in the sense
+                                  xsize/ysize, normally 1.0.
+                                  For stereo hardware which stretches the
+                                  display vertically by a factor of 2,
+                                  ``pixelaspect 0.5'' might do.
+                                  The value is used when computing the
+                                  projection of a camera associated with
+                                  this window.)
+     
+               [ "}" ]                      (matching closebrace)
+</pre>
+   <p>Window objects are used in the Geomview <code>window</code> and
+<code>ui-panel</code> commands to set default properties for future windows or
+to change those of an existing window. See <a href="window.html#window"><code>(window ...)</code></a>. See <a href="ui_002dpanel.html#ui_002dpanel"><code>(ui-panel ...)</code></a>.
+
+<!-- **************************************************************** -->
+   </body></html>
+

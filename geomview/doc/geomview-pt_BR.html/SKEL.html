@@ -1,0 +1,98 @@
+<html lang="en">
+<head>
+<title>SKEL - Manual do Geomview</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Manual do Geomview">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Formatos-de-Arquivo-de-Objeto.html#Formatos-de-Arquivo-de-Objeto" title="Formatos de Arquivo de Objeto">
+<link rel="prev" href="VECT.html#VECT" title="VECT">
+<link rel="next" href="SPHERE.html#SPHERE" title="SPHERE">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="SKEL"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="SPHERE.html#SPHERE">SPHERE</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="VECT.html#VECT">VECT</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Formatos-de-Arquivo-de-Objeto.html#Formatos-de-Arquivo-de-Objeto">Formatos de Arquivo de Objeto</a>
+<hr>
+</div>
+
+<h4 class="subsection">4.2.7 Arquivos do Tipo SKEL</h4>
+
+<p>Arquivos do Tipo <code>SKEL</code> representam cole&ccedil;&otilde;es de pontos e linhas poligonais, com
+v&eacute;rtices compartilhados. 
+O sufixo convencional para arquivos <code>SKEL</code> &eacute; <samp><span class="file">.skel</span></samp>.
+
+   <p>Sintaxe:
+
+<pre class="example">     [C][4][n]SKEL
+     [<var>NDim</var>]                    # Dimens&atilde;o dos v&eacute;rtices, presente somente
+     				    # se nSKEL tamb&eacute;m estiver presente
+     <var>NV&eacute;rtices</var>  <var>NLinhaspoligonais</var>
+     
+     <var>x</var>[0]  <var>y</var>[0]  <var>z</var>[0]  # V&eacute;rtices
+     				    # se 4SKEL, cada v&eacute;rtice ter&aacute; 4 componentes
+     				    # se nSKEL, each v&eacute;rtice ter&aacute; NDim componentes
+                                         # se C[4][n]SKEL coordenadas de
+                                         # v&eacute;rtice s&atilde;o seguidas por uma
+                                         # especifica&ccedil;&atilde;o de cor RGBA
+     ...
+     <var>x</var>[<var>NV&eacute;rtices</var>-1]  <var>y</var>[<var>NV&eacute;rtices</var>-1]  <var>z</var>[<var>NV&eacute;rtices</var>-1]
+     
+                             # linhas poligonais
+                             # <var>Nv</var> = v&eacute;rtices sobre essa linha poligonal
+                             # (1 = ponto)
+                             # <var>v</var>[0] ... <var>v</var>[<var>Nv</var>-1]: &iacute;ndices de v&eacute;rtice
+                             #               no intervalo 0..<var>NV&eacute;rtices</var>-1
+     <var>Nv</var>  <var>v</var>[0] <var>v</var>[1] ... <var>v</var>[<var>Nv</var>-1]  [<var>colorspec</var>]
+     ...
+                             # <var>colorspec</var> continua adiante de <var>v</var>[<var>Nv</var>-1]
+                             # at&eacute;m encontrar um fim de linha; pode ser
+                             # vazia, ou 3 ou 4 n&uacute;meros.
+                             # vazia: cor padr&atilde;o
+     			# 3 ou 4 n&uacute;meros em ponto flutuante: valores RGB[A] no intervalo 0..1
+</pre>
+   <p>A sintaxe &eacute; semelhante &agrave; sintaxe dos arquivos <code>OFF</code>, com uma tabela de v&eacute;rtices
+seguidos de uma sequ&ecirc;ncia de descri&ccedil;&otilde;es de linhas poligonais, cada descri&ccedil;&atilde;o referindo-se a v&eacute;rtices
+atrav&eacute;s de &iacute;ndices na tabela.  Cada linha poligonal tem uma cor opcional.
+
+   <p>Para objetos <code>nSKEL</code>, cada v&eacute;rtice tem <var>NDim</var> componentes. 
+Para objetos <code>4nSKEL</code>, cada v&eacute;rtice tem <var>NDim+1</var> componentes;
+a componente final &eacute; o divisor homog&ecirc;neo.
+
+   <p>Um formato <var>[4][n]SKEL BINARY</var> &eacute; aceito; veja <a href="Formato-binario.html#Formato-binario">Formato binario</a>. 
+Esse formato assemelha-se ao formato ASCII na maioria das formas que voc&ecirc; pode esperar,
+com inteiros de 32-bit para todos os contadores e &iacute;ndices de v&eacute;rtice e n&uacute;meros em ponto flutuante de
+32-bit para posi&ccedil;&otilde;es de v&eacute;rtice.
+
+   <p>Exce&ccedil;&atilde;o: cada &iacute;ndice do v&eacute;rtice de linhas poligonais &eacute; seguido de um inteiro
+indicando quantas componentes de cor o acompanham. Componentes de cor de
+linhas poligonais devem ser inteiros em ponto flutuante, n&atilde;o valores inteiros.  Dessa forma uma pouco colorida
+linha poligonal com 3 v&eacute;rtices pode ser representada como
+
+<pre class="example">     int int int int int
+     3   17   5   9   0
+</pre>
+   <p>enquanto a mesma linha poligonal colorida em vermelho pode ser
+
+<pre class="example">     int int int int int float float float float
+      3  17   5   9   4   1.0   0.0   0.0   1.0
+</pre>
+   <!--  -->
+   </body></html>
+

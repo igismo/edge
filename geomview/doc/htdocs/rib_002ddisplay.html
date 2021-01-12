@@ -1,0 +1,52 @@
+<html lang="en">
+<head>
+<title>rib-display - Geomview Manual</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Geomview Manual">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="GCL-Reference.html#GCL-Reference" title="GCL Reference">
+<link rel="prev" href="replace_002dgeometry.html#replace_002dgeometry" title="replace-geometry">
+<link rel="next" href="rib_002dsnapshot.html#rib_002dsnapshot" title="rib-snapshot">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="rib-display"></a>
+<a name="rib_002ddisplay"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="rib_002dsnapshot.html#rib_002dsnapshot">rib-snapshot</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="replace_002dgeometry.html#replace_002dgeometry">replace-geometry</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="GCL-Reference.html#GCL-Reference">GCL Reference</a>
+<hr>
+</div>
+
+<h4 class="subsection">7.2.117 rib-display</h4>
+
+<p><a name="index-rib_002ddisplay-124"></a>
+     <dl>
+<dt><code>(rib-display [frame|tiff] FILEPREFIX)</code><dd>Set Renderman display to framebuffer (popup screen window) or a
+TIFF format disk file. FILEPREFIX is used to construct
+names of the form <code>prefixNNNN.suffix</code>. (i.e. foo0000.rib)
+The number is incremented on every call to <code>rib-snapshot</code> and
+reset to 0000 when <code>rib-display</code> is called. TIFF files are given
+the same prefix and number as the RIB file (i.e. foo0004.rib
+generates foo0004.tiff). The default FILEPREFIX is <code>geom</code> and
+the default format is TIFF. (Note that geomview just generates a
+RIB file, which must then be rendered.) 
+</dl>
+
+   </body></html>
+

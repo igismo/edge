@@ -1,0 +1,72 @@
+<html lang="en">
+<head>
+<title>Aparencia - Manual do Geomview</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Manual do Geomview">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Interacao.html#Interacao" title="Interacao">
+<link rel="prev" href="Movimentos-do-Mouse.html#Movimentos-do-Mouse" title="Movimentos do Mouse">
+<link rel="next" href="Cameras.html#Cameras" title="Cameras">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Aparencia"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Cameras.html#Cameras">Cameras</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Movimentos-do-Mouse.html#Movimentos-do-Mouse">Movimentos do Mouse</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Interacao.html#Interacao">Interacao</a>
+<hr>
+</div>
+
+<h3 class="section">3.6 Modificando a Forma de Ver as Coisas</h3>
+
+<p>Geomview utiliza uma hierarquia de apar&ecirc;ncias para controlar o caminho atrav&eacute;s do qual olha-se coisas. 
+Uma apar&ecirc;ncia (<dfn>appearance</dfn>) &eacute; uma especifica&ccedil;&atilde;o de informa&ccedil;&atilde;o sobre como
+alguma coisa pode ser desenhada.  Isso pode incluir muitas caracter&iacute;sticas como
+cor, brilho, propriedades do material, etc.  Apar&ecirc;ncias trabalham de uma
+maneira hier&aacute;rquica: se uma certa propriedade de apar&ecirc;ncia, por exemplo cor
+de face, n&atilde;o for especificada em uma apar&ecirc;ncia particular de algum objeto, esse bojeto
+&eacute; desenhado usando aquele propriedade de uma hierarquia superior.  Se ambas as
+apar&ecirc;ncias de hierarquias, a atual e a superior, especificam uma propriedade, a hierarquia atual tem
+preced&ecirc;ncia a menos que a hierarquia superior n&atilde;o for escolhida para sobrescrev&ecirc;-la.
+
+   <p>Todo geom no Geomview tem uma apa&ecirc;ncia associada.  Existe
+tamb&eacute;m uma apar&ecirc;ncia associada ao geom do tipo "World", que comporta-se como
+hierarquia superior a cada apar&ecirc;ncia individual de qualquer geom.  Finalmente, existe uma
+apar&ecirc;ncia b&aacute;sica global, que &eacute; a hierarquia superior da apar&ecirc;ncia "World".
+
+   <p>A apar&ecirc;ncia b&aacute;sica especifica valores razo&aacute;veis para toda informa&ccedil;&atilde;o de
+apar&ecirc;ncia, e por padr&atilde;o nenhuma outra apar&ecirc;ncia especifica
+qualquer coisa, o que significa que as apar&ecirc;ncias erdam seus valores a a partir da apar&ecirc;ncia
+b&aacute;sica.  Isso significa que por padr&atilde;o todos os objetos s&atilde;o desenhados usando a
+apar&ecirc;ncia b&aacute;sica.
+
+   <p>Se voc&ecirc; modificar uma certa propriedade de apar&ecirc;ncia de um geom, aquela propriedade
+&eacute; usada na constru&ccedil;&atilde;o daquele geom.  A apar&ecirc;ncia de hierarquia superior &eacute; usada para quaisquer
+propriedades que voc&ecirc; n&atilde;o explicitamente escolheu.
+
+   <p>Geomview possui tr&ecirc;s pain&eacute;is que levam voc&ecirc; a modificar apar&ecirc;ncias.
+
+<ul class="menu">
+<li><a accesskey="1" href="Painel-de-Aparencia.html#Painel-de-Aparencia">Painel de Aparencia</a>:          Cor etc. 
+<li><a accesskey="2" href="Painel-de-Materiais.html#Painel-de-Materiais">Painel de Materiais</a>:          Propriedades do Material da Superf&iacute;cie. 
+<li><a accesskey="3" href="Painel-de-Iluminacao.html#Painel-de-Iluminacao">Painel de Iluminacao</a>:         Par&acirc;metros de Ilumina&ccedil;&atilde;o. 
+</ul>
+
+<!--  -->
+   </body></html>
+

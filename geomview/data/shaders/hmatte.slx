@@ -1,0 +1,153 @@
+surface
+AQSIS_V 2
+
+
+segment Data
+
+USES 461159
+
+param uniform  float Ka
+param uniform  float Kd
+varying  float Lhw
+varying  float Nhw
+varying  point Nh
+varying  point Lh
+varying  point Px
+varying  float b
+varying  float d
+
+
+segment Init
+	pushif 0.0500000007
+	pop Ka
+	pushif 1
+	pop Kd
+
+
+segment Code
+	pushv I
+	pushv N
+	normalize
+	faceforward
+	pop Nh
+	pushv P
+	pushis "shader"
+	transform
+	pop Px
+	pushif 0
+	setfc
+	pop Ci
+	pushv Px
+	init_illuminance
+	jz 1
+:0
+	S_CLEAR
+	pushv Px
+	pushis ""
+	illuminance
+	S_JZ 2
+	RS_PUSH
+	RS_GET
+	pushv Nh
+	pushv Px
+	dotpp
+	pop Nhw
+	pushif 1
+	pushv Px
+	pushv Px
+	dotpp
+	subff
+	pushif 0
+	pushv Px
+	pushv L
+	dotpp
+	subff
+	negf
+	divff
+	pop b
+	pushv Px
+	pushv b
+	mulfp
+	pushv L
+	addpp
+	pop Lh
+	pushv b
+	pushif 0
+	addff
+	pop Lhw
+	pushv Nhw
+	pushv Nhw
+	mulff
+	pushv Nh
+	pushv Nh
+	dotpp
+	subff
+	pushv Lhw
+	pushv Lhw
+	mulff
+	pushv Lh
+	pushv Lh
+	dotpp
+	subff
+	mulff
+	abs
+	sqrt
+	pushv Nhw
+	pushv Lhw
+	mulff
+	pushv Nh
+	pushv Lh
+	dotpp
+	subff
+	divff
+	pop d
+	S_CLEAR
+	pushif 0
+	pushv d
+	lsff
+	S_GET
+	RS_PUSH
+	RS_GET
+	RS_JZ 3
+	pushv d
+	negf
+	pop d
+:3
+	RS_POP
+	S_CLEAR
+	pushif 1
+	pushv d
+	gtff
+	S_GET
+	RS_PUSH
+	RS_GET
+	RS_JZ 4
+	pushif 1
+	pop d
+:4
+	RS_POP
+	pushv d
+	setfc
+	pushv Kd
+	setfc
+	pushv Cl
+	mulcc
+	mulcc
+	ambient
+	pushv Ka
+	mulfc
+	addcc
+	pushv Cs
+	pushv Os
+	mulcc
+	mulcc
+	pushv Ci
+	addcc
+	pop Ci
+	RS_POP
+:2
+	advance_illuminance
+	jnz 0
+:1
+	pushv Os
+	pop Oi

@@ -1,0 +1,70 @@
+<html lang="en">
+<head>
+<title>QUAD - Manual do Geomview</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Manual do Geomview">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Formatos-de-Arquivo-de-Objeto.html#Formatos-de-Arquivo-de-Objeto" title="Formatos de Arquivo de Objeto">
+<link rel="prev" href="Formatos-de-Arquivo-de-Objeto.html#Formatos-de-Arquivo-de-Objeto" title="Formatos de Arquivo de Objeto">
+<link rel="next" href="MESH.html#MESH" title="MESH">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="QUAD"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="MESH.html#MESH">MESH</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Formatos-de-Arquivo-de-Objeto.html#Formatos-de-Arquivo-de-Objeto">Formatos de Arquivo de Objeto</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Formatos-de-Arquivo-de-Objeto.html#Formatos-de-Arquivo-de-Objeto">Formatos de Arquivo de Objeto</a>
+<hr>
+</div>
+
+<h4 class="subsection">4.2.1 QUAD: cole&ccedil;&atilde;o de quadril&aacute;teros</h4>
+
+<p>O sufixo convencional para um arquivo <code>QUAD</code> &eacute; <samp><span class="file">.quad</span></samp>.
+
+   <p>A sintaxe do arquivo &eacute;
+
+<pre class="example">        [C][N][4]QUAD  -ou-  [C][N][4]POLY		   # Palavra chave
+        <var>v&eacute;rtice</var>  <var>v&eacute;rtice</var>  <var>v&eacute;rtice</var>  <var>v&eacute;rtice</var>  # v&eacute;rtices 4-D para algum N
+        <var>v&eacute;rtice</var>  <var>v&eacute;rtice</var>  <var>v&eacute;rtice</var>  <var>v&eacute;rtice</var>
+        ...
+</pre>
+   <p>A palavra chave inicial &eacute; <code>[C][N][4]QUAD</code> ou <code>[C][N][4]POLY</code>,
+onde o prefixos opcionais <code>C</code> e <code>N</code> indicam que cada v&eacute;rtice
+inclui cores e retas normais respectivamente.  Isto &eacute;, esses arquivos
+iniciam-se com uma das palavras
+
+   <p><code>QUAD</code> <code>CQUAD</code> <code>NQUAD</code> <code>CNQUAD</code> <code>POLY</code>
+<code>CPOLY</code> <code>NPOLY</code> <code>CNPOLY</code>
+
+   <p>(mas n&atilde;o com <code>NCQUAD</code> ou <code>NCPOLY</code>).  <code>QUAD</code> e <code>POLY</code>
+s&atilde;o sin&ocirc;nimos; ambas as formas s&atilde;o permitidas apenas por compatibilidade com
+ChapReyes.
+
+   <p>Seguindo a palavra chave est&aacute; um n&uacute;mero arbitr&aacute;rio de grupos de quatro
+v&eacute;rtices, cada grupo descrevendo um quadril&aacute;tero.  Veja a sintaxe de v&eacute;rtice
+acima.  O objeto termina no caractere de fim de arquivo, ou com uma chave fechada se
+incorporado dentro de uma refer&ecirc;ncia de objeto (veja acima).
+
+   <p>Um formato de arquivo <code>QUAD BINARY</code> &eacute; aceito; veja <a href="Formato-binario.html#Formato-binario">Formato binario</a>.  A
+primeira palavra de dados bin&aacute;rios deve ser um inteiro de 32 bits fornecendo o n&uacute;mero de
+quads no objeto; seguindo esse inteiro encontra-se uma s&eacute;rie de inteiros em ponto flutuante de 32 bits,
+arranjados apenas como no formato ASCII.
+
+<!--  -->
+   </body></html>
+

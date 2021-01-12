@@ -1,0 +1,63 @@
+<html lang="en">
+<head>
+<title>Modules - Geomview Manual</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Geomview Manual">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="prev" href="Customization.html#Customization" title="Customization">
+<link rel="next" href="GCL.html#GCL" title="GCL">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Modules"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="GCL.html#GCL">GCL</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Customization.html#Customization">Customization</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="index.html#Top">Top</a>
+<hr>
+</div>
+
+<h2 class="chapter">6 External Modules</h2>
+
+<p>An external module is a program that interacts with Geomview.  A
+module communicates with Geomview through GCL and can
+control any apsect of Geomview that you can control through Geomview's
+user interface.
+
+   <p>In many cases an external module is a specialized program that
+implements some mathematical algorithm that creates a geometric
+object that changes shape as the algorithm progresses.  The module
+informs Geomview of the new object shape at each step, so the object
+appears to evolve with time in the Geomview window.  In this way
+Geomview serves as a <em>display engine</em> for the module.
+
+   <p>An external module may be interactive.  It can respond to mouse and
+keyboard events that take place in a Geomview window, thus extending
+the capability of Geomview itself.
+
+<ul class="menu">
+<li><a accesskey="1" href="Interface.html#Interface">Interface</a>:                    How External Modules Interface with Geomview. 
+<li><a accesskey="2" href="Example1.html#Example1">Example1</a>:                     Simple External Module. 
+<li><a accesskey="3" href="Example2.html#Example2">Example2</a>:                     Simple External Module with FORMS Control Panel. 
+<li><a accesskey="4" href="XForms.html#XForms">XForms</a>:                       The XForms library. 
+<li><a accesskey="5" href="Example3.html#Example3">Example3</a>:                     External Module with Bi-Directional Communication. 
+<li><a accesskey="6" href="Example4.html#Example4">Example4</a>:                     Simple Tcl/Tk Module Demonstrating Picking. 
+<li><a accesskey="7" href="Module-Installation.html#Module-Installation">Module Installation</a>:          Module Installation. 
+</ul>
+
+   </body></html>
+

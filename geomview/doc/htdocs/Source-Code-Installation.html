@@ -1,0 +1,116 @@
+<html lang="en">
+<head>
+<title>Source Code Installation - Geomview Manual</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Geomview Manual">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Installation.html#Installation" title="Installation">
+<link rel="prev" href="Unix-Binary-Installation.html#Unix-Binary-Installation" title="Unix Binary Installation">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Source-Code-Installation"></a>
+<p>
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Unix-Binary-Installation.html#Unix-Binary-Installation">Unix Binary Installation</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Installation.html#Installation">Installation</a>
+<hr>
+</div>
+
+<h3 class="section">10.2 Compiling and Installing the Source Code Distribution</h3>
+
+<blockquote>
+<b>BUG:</b> This section is out of date. <code>Geomview</code> follows the
+GNU-installation habits, data goes to <samp><span class="file">PREFIX/share/geomview/</span></samp>,
+user executables to <samp><span class="file">PREFIX/bin/</span></samp>, private executables to
+<samp><span class="file">PREFIX/libexec/geomview/</span></samp>, libraries to <samp><span class="file">PREFIX/lib/</span></samp> where
+<code>PREFIX</code> denotes the installation prefiex specified for the
+<samp><span class="file">TOPSRCDIR/configure</span></samp> script. Please have a look at the files
+<samp><span class="file">TOPSRCDIR/INSTALL</span></samp> and <samp><span class="file">TOPSRCDIR/INSTALL.Geomview</span></samp> for
+installation instructions. 
+</blockquote>
+
+   <p>The main reason to get the source code distribution is to look at and/or
+work with the source code.  If you are only concered with <em>using</em>
+Geomview it is better to get the binary distribution.  It takes anywhere
+from a few minutes to an hour or more to compile the entire source
+distribution, depending on what kind of computer you have.
+
+   <p>Let <samp><span class="file">$GEOMROOT</span></samp> denote the full pathname of the Geomview source
+code directory; this is the directory called <samp><span class="file">Geomview</span></samp> that is
+created when you unpack the distribution.  This directory contains the
+Geomview source code as well as various other files and subdirectories
+that Geomview needs when it runs.
+
+   <p>Before doing any compilation you should edit the file
+<samp><span class="file">$GEOMROOT/makefiles/mk.site.default</span></samp>.  This file defines some
+<code>make</code> variables which specify your local configuration.  This
+includes the pathnames of the directories into which Geomview will be
+installed, and possibly some other settings as well.  There are comments
+in the file telling you what to do.  This file is included by every
+Makefile in the source tree, so the settings you specify here are used
+throughout the source.
+
+   <p>If you will be compiling for multiple systems, you can do them all in the
+same directory tree.  By default the Makefiles are set up to put the
+objects files, libraries, and executables in directories which depend on
+the type of computer, so the two architectures will not interfere with
+each other.  The Makefiles use a variable called <code>CPU</code> to determine
+the type of machine. Before doing any compilation you must arrange for
+this variable to have a value.  There are two ways you can do this.
+
+     <ol type=1 start=1>
+
+     <li>
+If you will always be compiling Geomview on the same type of computer
+edit the file <samp><span class="file">$GEOMROOT/makefiles/Makedefs.global</span></samp> to set the
+<code>CPU</code> variable to one of the values <samp><span class="file">linux</span></samp>, <samp><span class="file">FreeBSD</span></samp>,
+<samp><span class="file">sgi</span></samp>, <samp><span class="file">hpux</span></samp>, <samp><span class="file">hpux-gcc</span></samp>, <samp><span class="file">solaris</span></samp>, <samp><span class="file">sun4os4</span></samp>
+(for Suns with SunOS 4, not Solaris), <samp><span class="file">rs6000</span></samp>,
+or <samp><span class="file">alpha</span></samp>.  If you're using a type of system not in this
+list, make up a new value for CPU, and write a <samp><span class="file">mk.&lt;CPU&gt;</span></samp> file
+for it patterned
+after the other <samp><span class="file">mk.*</span></samp> in the <samp><span class="file">makefiles</span></samp> subdirectory.
+
+     <li>If you will be compiling on more than one type of computer you can set a
+shell environment variable named <code>CPU</code> to one of the values above
+and the Makefiles will inherit the value from the environment.
+
+        </ol>
+
+<p class="noindent">Note that many of the Makefiles refer to a variable called
+<code>MACHTYPE</code>; this variable tells which type of graphics
+system to compile Geomview for.  The <samp><span class="file">mk.&lt;CPU&gt;</span></samp> files
+set this variable for you; in most cases its value is <samp><span class="file">x11</span></samp>,
+which specifies that Geomview should be compiled for X windows.
+
+   <p>Once you have configured your source tree by editing the files as
+described above and setting the <code>CPU</code> variable, you can compile and
+install Geomview by typing <code>make install</code> in the <samp><span class="file">$GEOMROOT</span></samp>
+directory.  You can also type <code>make all</code>, or equivalently just
+<code>make</code>, to compile without installing, and then type <code>make
+install</code> later to install.
+
+   <p>You can use these same <code>make</code> comands in any subdirectory in the
+tree to recompile and/or install a part of Geomview or a module.
+
+   <p>If you want to modify the complier flags used during compilation, edit
+the file <samp><span class="file">$GEOMROOT/makefiles/Makedefs.global</span></samp>; the <code>COPTS</code>
+variable specifies the flags passed to the C compiler (cc).
+
+<!-- ********************************************************* -->
+   </body></html>
+

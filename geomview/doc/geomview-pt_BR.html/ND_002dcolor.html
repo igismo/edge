@@ -1,0 +1,60 @@
+<html lang="en">
+<head>
+<title>ND-color - Manual do Geomview</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Manual do Geomview">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="GCL-Reference.html#GCL-Reference" title="GCL Reference">
+<link rel="prev" href="ND_002daxes.html#ND_002daxes" title="ND-axes">
+<link rel="next" href="ND_002dxform.html#ND_002dxform" title="ND-xform">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="ND-color"></a>
+<a name="ND_002dcolor"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="ND_002dxform.html#ND_002dxform">ND-xform</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="ND_002daxes.html#ND_002daxes">ND-axes</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="GCL-Reference.html#GCL-Reference">GCL Reference</a>
+<hr>
+</div>
+
+<h4 class="subsection">7.2.86 ND-color</h4>
+
+<p><a name="index-ND_002dcolor-93"></a>
+     <dl>
+<dt><code>(ND-color CAMID</code><dd>	[ (( [ID] (x1 x2 <small class="dots">...</small> xN) v r g b a   v r g b a  <small class="dots">...</small> )
+	   ((x1 <small class="dots">...</small> xN)  v r g b a  v r g b a <small class="dots">...</small>) <small class="dots">...</small>)] )
+Especifica uma fun&ccedil;&atilde;o, aplicada a cada v&eacute;rtice N-dimencional, o qual determina as
+cores dos objetos N-dimensionais como mostrado na c&acirc;mera CAMID. 
+Cada fun&ccedil;&atilde;o de cor &eacute; definida por um vetor (no sistema de coordenadas do objeto geom&eacute;trico ID)
+[x1 <small class="dots">...</small> xN] e por uma sequ&ecirc;ncia de qu&iacute;ntuplas valor (v)/cor(r g b a),
+ordenados por ordem crescente de v.  O produto interno v = P.[x] &eacute; linearmente
+interpolado nessa tabela para fornecer uma cor. 
+Se ID for omitido, o vetor (xi) &eacute; assumido em coordenadas de universo. 
+O comando ND-color especifica uma lista de tais fun&ccedil;&otilde;es; cada v&eacute;rtice
+&eacute; colorido por seu somat&oacute;rio (ent&atilde;o e.g. intensidade verde pode indicar
+proje&ccedil;&atilde;o ao longo de um eixoenquanto vermelho indica outro eixo. 
+Uma lista vazia, como em (ND-color CAMID ()), suprime o colorido. 
+Sem segundo argumento, (ND-color CAMID) retorna a lista de
+cor-fun&ccedil;&atilde;o de colora&ccedil;&atilde;o. 
+Mesmo quando colora&ccedil;&atilde;o est&aacute; habilitada, objetos acompanhados com o atributo de
+apar&ecirc;ncia <code>keepcolor</code> s&atilde;o mostrados em suas cores naturais. 
+</dl>
+
+   </body></html>
+

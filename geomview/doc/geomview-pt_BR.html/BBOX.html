@@ -1,0 +1,77 @@
+<html lang="en">
+<head>
+<title>BBOX - Manual do Geomview</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Manual do Geomview">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Formatos-de-Arquivo-de-Objeto.html#Formatos-de-Arquivo-de-Objeto" title="Formatos de Arquivo de Objeto">
+<link rel="prev" href="MESH.html#MESH" title="MESH">
+<link rel="next" href="BBP-and-BEZ.html#BBP-and-BEZ" title="BBP and BEZ">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="BBOX"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="BBP-and-BEZ.html#BBP-and-BEZ">BBP and BEZ</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="MESH.html#MESH">MESH</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Formatos-de-Arquivo-de-Objeto.html#Formatos-de-Arquivo-de-Objeto">Formatos de Arquivo de Objeto</a>
+<hr>
+</div>
+
+<h4 class="subsection">4.2.3 BBOX: Caixas associada simples</h4>
+
+<p>Esse &eacute; um objeto-brinquedo muito simples: Toma 2 v&eacute;rtices e desenha um
+(hiper-) cubo que &eacute; a caixa associada dos dois v&eacute;rtices.
+
+   <p>Sintaxe:
+
+<pre class="example">       BBOX
+       <var>x</var>[0] <var>y</var>[0] <var>z</var>[0]
+       <var>x</var>[1] <var>y</var>[1] <var>z</var>[1]
+</pre>
+   <p>ou
+
+<pre class="example">       4BBOX
+       <var>x</var>[0] <var>y</var>[0] <var>z</var>[0] <var>w</var>[0]
+       <var>x</var>[1] <var>y</var>[1] <var>z</var>[1] <var>w</var>[1]
+</pre>
+   <p>ou
+
+<pre class="example">       nBBOX
+       <var>Ndim</var> # &gt; 3
+       <var>x</var>[0] <var>y</var>[0] <var>z</var>[0] <var>w</var>[0] ...
+       <var>x</var>[1] <var>y</var>[1] <var>z</var>[1] <var>w</var>[1] ...
+</pre>
+   <p>ou
+
+<pre class="example">       4nBBOX
+       <var>Ndim</var> # &gt; 3
+       <var>d</var>[0] <var>x</var>[0] <var>y</var>[0] <var>z</var>[0] <var>w</var>[0] ...
+       <var>d</var>[0] <var>x</var>[1] <var>y</var>[1] <var>z</var>[1] <var>w</var>[1] ...
+</pre>
+   <p>N&atilde;o existe formato bin&aacute;rio BBOX. O modificador <code>4</code> tem diferentes
+significados dependendo da dimens&atilde;o da caixa associada: <code>4BBOX</code>
+significa que as 4 componentes dos v&eacute;rtices constroem uma caixa associada
+tetradimensional. Usando <code>4</code> em conjun&ccedil;&atilde;o com <code>n</code> &ndash;
+<code>4nBBOX </code><var>NDim</var> &ndash; significa que os v&eacute;rtices especificados no
+arquivo possuem <var>NDim+1</var> componentes, mas a componente no &iacute;ndice 0 &eacute; o
+divisor homog&ecirc;neo (em oposi&ccedil;&atilde;o ao caso comum tridimensional onde o
+divisor homog&ecirc;neo pode ser <code>w</code> &ndash; a terceira &ndash; componente).
+
+<!--  -->
+   </body></html>
+

@@ -1,0 +1,64 @@
+#!version 2.2.6
+surface
+#!parameters:
+uniform	string	texturename	=	""
+uniform	float	At	=	1
+#!variables:
+varying	vector	Ct
+varying	float	Ot
+varying	float	channels
+varying	float	temporary_0
+varying	float	temporary_1
+uniform	float	temporary_2
+varying	float	temporary_3
+varying	float	temporary_4
+varying	float	temporary_5
+varying	vector	temporary_6
+#!Init:
+	return            
+#!Code:
+	sneql             	temporary_2 texturename ""
+	vufloat            temporary_1 temporary_2
+	textureinfo	("f=SSF")  temporary_4  texturename  "channels"  channels 
+	vufloat            temporary_5 1.0
+	feql              	temporary_3 temporary_4 temporary_5
+	and               	temporary_0 temporary_1 temporary_3
+	if                	temporary_0 #!Label10
+	vufloat            temporary_3 3
+	flt               	temporary_1 channels temporary_3
+	if                	temporary_1 #!Label12
+	texture	("f=SFffSf")  temporary_3  texturename  0  s  t  "width"  0.0 
+	vfromf            	Ct temporary_3
+	vufloat            temporary_4 2
+	feql              	temporary_3 channels temporary_4
+	if                	temporary_3 #!Label13
+	texture	("f=SFffSf")  Ot  texturename  1  s  t  "width"  0.0 
+#!Label13:
+	endif             
+#!Label12:
+	else              	#!Label11
+	texture	("c=SFffSf")  Ct  texturename  0  s  t  "width"  0.0 
+	vufloat            temporary_4 4
+	feql              	temporary_3 channels temporary_4
+	if                	temporary_3 #!Label15
+	texture	("f=SFffSf")  Ot  texturename  3  s  t  "width"  0.0 
+#!Label15:
+	endif             
+#!Label11:
+	endif             
+	subff             	temporary_2 1.0 At
+	vufloat            temporary_1 temporary_2
+	vufloat            temporary_4 At
+	mulff             	temporary_3 temporary_4 Ot
+	addff             	Ot temporary_1 temporary_3
+	vfromf            	temporary_6 Ot
+	mulvv             	Ci Ct temporary_6
+	vfromf            	Oi Ot
+#!Label10:
+	else              	#!Label9
+	movevv            	Ci Cs
+	movevv            	Oi Os
+	mulvv             	Ci Ci Os
+#!Label9:
+	endif             
+	return            

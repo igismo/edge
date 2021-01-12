@@ -1,0 +1,95 @@
+<html lang="en">
+<head>
+<title>Referencias - Manual do Geomview</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Manual do Geomview">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Convencoes.html#Convencoes" title="Convencoes">
+<link rel="prev" href="Formato-binario.html#Formato-binario" title="Formato binario">
+<link rel="next" href="Aparencias.html#Aparencias" title="Aparencias">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Referencias"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Aparencias.html#Aparencias">Aparencias</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Formato-binario.html#Formato-binario">Formato binario</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Convencoes.html#Convencoes">Convencoes</a>
+<hr>
+</div>
+
+<h4 class="subsection">4.1.9 Refer&ecirc;ncias a Objetos Embutidos e a Objetos Externos</h4>
+
+<p>Alguns tipos de objeto OOGL (<code>LIST</code>, <code>INST</code>) permitem refer&ecirc;ncias a outros
+objetos OOGL, que podem aparecer literalmente no fluxo de dados, serem chamados
+a partir de arquivos em disco, ou serem comunicados a partir de outro lugar via objetos
+nomeados.  Comandos GCL tamb&eacute;m aceitam objetos geom&eacute;tricos atrav&eacute;s desses meios citados.
+
+   <p>A sintaxe gen&eacute;rica &eacute;
+
+<pre class="example">      &lt;oogl-object&gt;  ::=
+     	[ "{" ]
+     	    [ "define" <code>symbolname</code> ]
+     	    [ ["="] <code>object-keyword</code> ...
+     		 | "&lt;" <code>filename</code>
+     		 | ":" <code>symbolname</code> ]
+     	[ "}" ]
+</pre>
+   <p>onde os itens entre aspas duplas s&atilde;o sequ&ecirc;ncias de caracteres literais (que aparecem sem as
+aspas), os itens entre colch&ecirc;tes ([]) s&atilde;o opcionais, e a barra vertical (|) denota alternativas. 
+Chaves, quando estiverem presentes, apenas indicam coincid&ecirc;ncia; o par mais externo de
+chaves &eacute; geralmente requerido quando o objeto estiver em um contexto maior,
+e.g. quando for parte de um objeto maior ou inclu&iacute;do em um fluxo de comando do
+Geomview.
+
+   <p>Por exemplo, cada uma das tr&ecirc;s linhas seguintes:
+<pre class="example">     	{ define fred   QUAD 1 0 0  0 0 1  0 1 0  1 0 0 }
+     
+     	{ define fred = QUAD 1 0 0  0 0 1  0 1 0  1 0 0 }
+     
+     	{ appearance { +edge } LIST { &lt; "file1" } { : fred } }
+     
+     	VECT 1 2 0   2 0   0 0 0   1 1 2
+</pre>
+   <p class="noindent">&eacute; um bojeto OOGL v&aacute;lido.  O &uacute;ltimo exemplo &eacute; v&aacute;lido somente quando estiver
+delimitado precisamente e residindo precisamente no seu pr&oacute;prio arquivo em disco.
+
+   <p>A constru&ccedil;&atilde;o com ":" permite refer&ecirc;ncia a s&iacute;mbolos, criados com
+<code>define</code>. Um valor inicial de um s&iacute;mbolo &eacute; um objeto nulo.  Quando um
+s&iacute;mbolo for (re)definido, todas as refer&ecirc;ncias a esse s&iacute;mbolo s&atilde;o automaticamente modificadas.
+
+   <p>A constru&ccedil;&atilde;o "<code>define</code> NOME" permite definir um simbolo global para
+um objeto especificado. Se "NOME" referir-se a um objeto que j&aacute; existia anteriormente, ent&atilde;o o antigo
+objeto &eacute; descartado e substitu&iacute;do pela nova
+defini&ccedil;&atilde;o. Veja <a href="read.html#read"><code>(read ...)</code></a>. <a href="hdefine.html#hdefine"><code>(hdefine ...)</code></a>.
+
+   <p>A constru&ccedil;&atilde;o "&lt;" faz com que um arquivo em disco seja lido.  Note que isso n&atilde;o &eacute; um
+mecanismo textual gen&eacute;rico de uso da diretiva de programa&ccedil;&atilde;o "include"; um objeto OOGL completo deve aparecer
+no arquivo referenciado na constru&ccedil;&atilde;o  "&lt;".
+
+   <p>Arquivos lidos usando "&lt;" s&atilde;o procurados primeiramente no diret&oacute;rio do arquivo que
+&eacute; refrenciado em "&lt;", se existir; se essa busca falhar, o caminho normal de busca
+(veja <a href="load_002dpath.html#load_002dpath"><code>(load-path ...)</code></a>) &eacute; usado.  A busca padr&atilde;o
+olha primeiro no diret&oacute;rio atual, a seguir nos diret&oacute;rios de dados do
+Geomview.
+
+   <p>Ressaltando, espa&ccedil;os em branco e caracteres indicadores de final de linha s&atilde;o insignificantes, e coment&aacute;rios de "#"
+podem aparecer em qualquer lugar.
+
+<!--  -->
+   </body></html>
+

@@ -1,0 +1,80 @@
+<html lang="en">
+<head>
+<title>Customization - Geomview Manual</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Geomview Manual">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="prev" href="OOGL-File-Formats.html#OOGL-File-Formats" title="OOGL File Formats">
+<link rel="next" href="Modules.html#Modules" title="Modules">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Customization"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Modules.html#Modules">Modules</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="OOGL-File-Formats.html#OOGL-File-Formats">OOGL File Formats</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="index.html#Top">Top</a>
+<hr>
+</div>
+
+<h2 class="chapter">5 Customization: <samp><span class="file">.geomview</span></samp> files</h2>
+
+<p>When Geomview is started, it loads and executes commands in a
+system-wide startup file named <samp><span class="file">.geomview</span></samp>.  This file is in the
+<samp><span class="file">data</span></samp> subdirectory of the Geomview distribution directory
+and
+contains GCL commands to configure Geomview in a way
+common to all users on the system.
+
+   <p>Next, Geomview looks for the file <samp><span class="file">~/.geomview</span></samp> (<samp><span class="file">~</span></samp>
+stands for your home directory).  You can use this to configure
+your own default Geomview behavior to suit your tastes.
+
+   <p>After reading <samp><span class="file">~/.geomview</span></samp>, Geomview looks for a file named
+<samp><span class="file">.geomview</span></samp> in the current directory.  If such a file exists
+Geomview reads it, unless it is the same as <samp><span class="file">~/.geomview</span></samp> (which
+would be the case if you are running Geomview from your home directory). 
+You can use the current directory's <samp><span class="file">.geomview</span></samp> to create a Geomview
+customization specific to a certain project.
+
+   <p>You can use <samp><span class="file">.geomview</span></samp> files to control all kinds of things about
+Geomview.  They can contain any valid GCL statements.  Especially useful
+is the <code>ui-panel</code> command which controls the initial placement of
+Geomview's panels.  For an example see the system-wide <samp><span class="file">.geomview</span></samp>
+file mentioned above.  See <a href="GCL.html#GCL">GCL</a>. See <a href="ui_002dpanel.html#ui_002dpanel"><code>(ui-panel ...)</code></a>.
+
+   <p>It is a good idea to enclose all the commands you put in a
+<samp><span class="file">.geomview</span></samp> file in a <code>progn</code> statement in order to cause
+Geomview to execute them all at once.  Otherwise Geomview might execute
+them sequentially over the first few refresh cycles after starting up.
+
+   <p>To change, e.g. the focus policy of the camera window such that they
+pick up the focus policy of the window manager (instead of being
+activated when the mouse cursor crosses the window), you could put the
+following in your <samp><span class="file">~/.geomview</span></samp> file:
+
+<pre class="example">     (progn
+       (ui-cam-focus focus-change)
+       ... # other stuff
+     )
+</pre>
+   <p>You can put any valid <code>GCL</code> command into your <samp><span class="file">.geomview</span></samp>
+files,see <a href="GCL.html#GCL">GCL</a>. See <a href="progn.html#progn"><code>(progn ...)</code></a>. See <a href="ui_002dcam_002dfocus.html#ui_002dcam_002dfocus"><code>(ui-cam-focus ...)</code></a>.
+
+<!-- **************************************************************** -->
+   </body></html>
+

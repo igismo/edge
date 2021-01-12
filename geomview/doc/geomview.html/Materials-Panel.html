@@ -1,0 +1,93 @@
+<html lang="en">
+<head>
+<title>Materials Panel - Geomview Manual</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Geomview Manual">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Appearance.html#Appearance" title="Appearance">
+<link rel="prev" href="Appearance-Panel.html#Appearance-Panel" title="Appearance Panel">
+<link rel="next" href="Lighting-Panel.html#Lighting-Panel" title="Lighting Panel">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Materials-Panel"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Lighting-Panel.html#Lighting-Panel">Lighting Panel</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Appearance-Panel.html#Appearance-Panel">Appearance Panel</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Appearance.html#Appearance">Appearance</a>
+<hr>
+</div>
+
+<h4 class="subsection">3.6.2 The Materials Panel</h4>
+
+<p>The <em>Materials</em> panel controls material properties of surfaces. 
+It works with the target object in the same way that the
+<em>Appearance</em> panel does. 
+<div class="float">
+<a name="figmatpanel"></a><img src="figs/mat.png" alt="figs/mat.png">
+
+   <p><strong class="float-caption">Figure 3.7: The Materials Panel.</strong></p></div>
+
+     <dl>
+<dt><em>Translucent</em><dd>
+This button determines whether translucency is enabled. Geomview
+supports three different flavours of translucency:
+
+          <dl>
+<dt><em>Alpha-blending with BSP-tree depth-sorting</em><dd>This is the most accurate flavour for online viewing, but consumes vast
+amounts of computation time and memory. In this mode single translucent
+objects are displayed correctly with respect to themselves; however
+multiple translucent objects may appear in the wrong order on the
+screen. The notion <em>object</em> means here: top-level geometries as
+displayed in the geometry target browser.
+
+          <br><dt><em>Screen Door Translucency</em><dd>If the machine support OpenGL then there is support for kind-of
+translucency by masking out (completely) transparent pixels by means of
+a stipple mask. This is currently very experimental, and the result is
+somewhat ugly, but fast.
+
+          <br><dt><em>Alphe-blending without depth-sorting</em><dd>This is the old naive way of doing quick and dirty translucency. It is
+fast, but the results are completely incorrect. 
+</dl>
+
+     <p>When transparency is enabled, a RenderMan snapshot will contain the
+alpha information, a RenderMan compliant renderer can then generate
+high-quality pictures, including correct translucency.
+
+     <br><dt><em>Alpha</em><dd>This slider determines the opacity/transparency when transparency is
+enabled.  0 means totally transparent, 1 means totally opaque.
+
+     <br><dt><em>Diffuse Reflectance</em><dd>This slider controls the diffuse reflectance of a surface.  This has
+to do with how much the surface scatters light that it reflects.
+
+     <br><dt><em>Shininess</em><dd>This slider controls how shiny a surface is.   This determines the
+size of specular highlights on the surface.  Lower values give the
+surface a duller appearance.
+
+     <br><dt><em>Ambient Reflectance</em><dd>This slider controls how much of the ambient light a surface reflects.
+
+     <br><dt><em>Specular Reflectance</em><dd>This slider controls the specular reflectance of a surface.  This
+has to do with how directly the surface reflects light rays.  Higher
+values give brighter specular highlights.
+
+     <br><dt><em>Done</em><dd>This button dismisses the <em>Materials</em> panel.
+
+   </dl>
+
+<!--  -->
+   </body></html>
+

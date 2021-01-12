@@ -1,0 +1,98 @@
+<html lang="en">
+<head>
+<title>MESH - Geomview Manual</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Geomview Manual">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Object-File-Formats.html#Object-File-Formats" title="Object File Formats">
+<link rel="prev" href="QUAD.html#QUAD" title="QUAD">
+<link rel="next" href="BBOX.html#BBOX" title="BBOX">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="MESH"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="BBOX.html#BBOX">BBOX</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="QUAD.html#QUAD">QUAD</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Object-File-Formats.html#Object-File-Formats">Object File Formats</a>
+<hr>
+</div>
+
+<h4 class="subsection">4.2.2 MESH: rectangularly-connected mesh</h4>
+
+<p>The conventional suffix for a <code>MESH</code> file is <samp><span class="file">.mesh</span></samp>.
+
+   <p>The file syntax is
+
+<pre class="example">     [U][C][N][Z][4][u][v][n]MESH # Key word
+     [<var>Ndim</var>]                 # Space dimension, present only if nMESH
+     <var>Nu</var> <var>Nv</var>            # Mesh grid dimensions
+                                  # <var>Nu</var>*<var>Nv</var> vertices, in format specified
+                                  # by initial key word
+     <var>vertex</var>(u=0,v=0)  <var>vertex</var>(1,0)  ... <var>vertex</var>(<var>Nu</var>-1,0)
+     <var>vertex</var>(0,1) ...    <var>vertex</var>(<var>Nu</var>-1,1)
+     ...
+     <var>vertex</var>(0,<var>Nv</var>-1) ... <var>vertex</var>(<var>Nu</var>-1,<var>Nv</var>-1)
+</pre>
+   <p>The key word is  <code>[U][C][N][Z][4][u][v][n]MESH</code>. 
+The optional prefix characters mean:
+
+     <dl>
+<dt>&lsquo;<samp><span class="samp">U</span></samp>&rsquo;<dd>Each vertex includes a 3-component texture space parameter. 
+The first two components are the usual <code>S</code> and <code>T</code> texture
+parameters for that vertex; the third should be specified as zero. 
+<br><dt>&lsquo;<samp><span class="samp">C</span></samp>&rsquo;<dd>Each vertex (see Vertices above) includes a 4-component color. 
+<br><dt>&lsquo;<samp><span class="samp">N</span></samp>&rsquo;<dd>Each vertex includes a surface normal vector. 
+<br><dt>&lsquo;<samp><span class="samp">Z</span></samp>&rsquo;<dd>Of the 3 vertex position values, only the Z component is present; X and
+Y are omitted, and assumed to equal the mesh (u,v) coordinate so X
+ranges from 0 .. (Nu-1), Y from 0 .. (Nv-1) where Nu and Nv are the mesh
+dimensions &ndash; see below. 
+<br><dt>&lsquo;<samp><span class="samp">4</span></samp>&rsquo;<dd>Vertices are 4D, each consists of 4 floating values.  <code>Z</code> and
+<code>4</code> cannot both be present. 
+<br><dt>&lsquo;<samp><span class="samp">u</span></samp>&rsquo;<dd>The mesh is wrapped in the u-direction, so the
+(0,v)'th vertex is connected to the (<var>Nu</var>-1,v)'th for all v. 
+<br><dt>&lsquo;<samp><span class="samp">v</span></samp>&rsquo;<dd>The mesh is wrapped in the v-direction, so the (u,0)'th vertex is
+connected to the (u,<var>Nv</var>-1)'th for all u.  Thus a u-wrapped or
+v-wrapped mesh is topologically a cylinder, while a uv-wrapped mesh is a
+torus. 
+<br><dt>&lsquo;<samp><span class="samp">n</span></samp>&rsquo;<dd>Specifies a mesh whose vertices live in a higher dimensional space. 
+The dimension follows the "MESH" keyword.  Each vertex then has <var>Ndim</var>
+components. 
+</dl>
+
+   <p>Note that the order of prefix characters is significant; a colored,
+u-wrapped mesh is a <code>CuMESH</code> not a <code>uCMESH</code>.
+
+   <p>Following the mesh header are integers <var>Nu</var> and <var>Nv</var>,
+the dimensions of the mesh.
+
+   <p>Then follow <var>Nu</var>*<var>Nv</var> vertices, each in the form given by the header. 
+They appear in v-major order, i.e. if we name each vertex by (u,v)
+then the vertices appear in the order
+
+<pre class="example">     (0,0) (1,0) (2,0) (3,0) ...  (<var>Nu</var>-1,0)
+     (0,1) (1,1) (2,1) (3,1) ...  (<var>Nu</var>-1,1)
+     ...
+     (0,Nv-1)                ...  (<var>Nu</var>-1,<var>Nv</var>-1)
+</pre>
+   <p>A <code>MESH BINARY</code> format is accepted; See <a href="Binary-format.html#Binary-format">Binary format</a>.  The
+values of <var>Nu</var> and <var>Nv</var> are 32-bit integers; all other values
+are 32-bit floats.
+
+<!--  -->
+   </body></html>
+

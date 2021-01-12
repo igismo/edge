@@ -1,0 +1,106 @@
+<html lang="en">
+<head>
+<title>transform objects - Geomview Manual</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Geomview Manual">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Non_002dgeometric-objects.html#Non_002dgeometric-objects" title="Non-geometric objects">
+<link rel="prev" href="image-objects.html#image-objects" title="image objects">
+<link rel="next" href="ntransform-objects.html#ntransform-objects" title="ntransform objects">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="transform-objects"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="ntransform-objects.html#ntransform-objects">ntransform objects</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="image-objects.html#image-objects">image objects</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Non_002dgeometric-objects.html#Non_002dgeometric-objects">Non-geometric objects</a>
+<hr>
+</div>
+
+<h4 class="subsection">4.3.3 Transform Objects</h4>
+
+<p>Where a single 4x4 matrix is expected &ndash; as in the <code>INST</code>
+<code>transform</code> field, the camera's <code>camtoworld</code> transform and the
+Geomview <code>xform*</code> commands &ndash; use a transform object.
+
+   <p>Note that a transform is distinct from a <code>TLIST</code>, which is a type
+of geometry.  <code>TLIST</code>s can contain one or more 4x4 transformations;
+"transform" objects must have exactly one.
+
+   <p>Why have both?  In many places &ndash; e.g. camera positioning &ndash; it's only
+meaningful to have a single transform.  Using a separate object type
+enforces this.
+
+   <p>Syntax for a transform object is
+
+<pre class="example">     &lt;transform&gt; ::=
+       [ "{" ]             (curly brace, generally needed to make
+                            the end of the object unambiguous.)
+     
+        [ "transform" ]    (optional keyword; unnecessary if the type
+                            is determined by the context, which it
+                            usually is.)
+        [ "define" &lt;name&gt; ]
+                           (defines a transform named &lt;name&gt;, setting
+                            its value from the stuff which follows)
+     
+           &lt;sixteen floating-point numbers&gt;
+                           (interpreted as a 4x4 homogeneous transform
+                            given row by row, intended to apply to a
+                            row vector multiplied on its LEFT, so that e.g.
+                            Euclidean translations appear in the bottom row)
+        |
+           "&lt;" &lt;filename&gt;  (meaning: read transform from that file)
+        |
+           ":" &lt;name&gt;      (meaning: use variable &lt;name&gt;,
+                             defined elsewhere; if undefined the initial
+                             value is the identity transform)
+     
+      [ "}" ]              (matching curly brace)
+</pre>
+   <p>The whole should be enclosed in { braces }.  Braces are not essential
+if exactly one of the above items is present, so e.g. a 4x4 array of
+floats standing alone may but needn't have braces.
+
+   <p>Some examples, in contexts where they might be used:
+
+<pre class="example">     # Example 1: A GCL command to define a transform
+     # called "fred"
+     
+     (read transform { transform  define fred
+              1 0 0 0
+              0 1 0 0
+              0 0 1 0
+             -3 0 1 1
+         }
+     )
+</pre>
+   <pre class="example">     # Example 2:  A camera object using transform
+     # "fred" for camera positioning
+     # Given the definition above, this puts the camera at
+     # (-3, 0, 1), looking toward -Z.
+     
+     { camera
+             halfyfield 1
+             aspect 1.33
+             camtoworld { : fred }
+     }
+</pre>
+   <!--  -->
+   </body></html>
+

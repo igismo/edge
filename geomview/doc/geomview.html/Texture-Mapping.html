@@ -1,0 +1,149 @@
+<html lang="en">
+<head>
+<title>Texture Mapping - Geomview Manual</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Geomview Manual">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Conventions.html#Conventions" title="Conventions">
+<link rel="prev" href="Appearances.html#Appearances" title="Appearances">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Texture-Mapping"></a>
+<p>
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Appearances.html#Appearances">Appearances</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Conventions.html#Conventions">Conventions</a>
+<hr>
+</div>
+
+<h4 class="subsection">4.1.11 Texture Mapping</h4>
+
+<p>Some rendering back-ends support texture-mapped objects, actually only
+the OpenGL and the RenderMan interface at the time of this
+writing. There are also some issues with the RMan interface when using
+an alpha-channel in the texture image. Those rendering back-ends which
+don't support texturing silently ignore attempts to use texture
+mapping. A texture is specified as part of an appearance structure
+(see <a href="Appearances.html#Appearances">Appearances</a>).  Briefly, one provides a texture image
+(see <a href="image.html#image">Image objects</a>), which is considered to lie in a square
+in <code>(s,t)</code> parameter space in the range 0 &lt;= s &lt;= 1, 0 &lt;= t &lt;= 1. 
+Then one provides a geometric primitive, with each vertex tagged with
+<code>(s,t)</code> texture coordinates.  If texturing is enabled, the
+appropriate portion of the texture image is pasted onto each face of the
+textured object.
+
+   <p>There is (currently) no provision for inheritance of part of a texture
+structure; if the <code>texture</code> keyword is mentioned in an appearance,
+it supplants any other texture specification.
+
+   <p>The appearance attribute <code>texturing</code> controls whether textures are
+used; there's no performance penalty for having texture { <small class="dots">...</small> } fields
+defined when texturing is off.
+
+   <p>The available fields are:
+
+<pre class="example">     clamp   none  -or-  s  -or-  t  -or-  st
+       Determines the meaning of texture coordinates outside the range 0..1.
+       With <code>clamp none</code>, the default, coordinates are interpreted
+       modulo 1, so (s,t) = (1.25,0), (.25,0), and (-.75,0) all refer to
+       the same point in texture space.  With <code>s</code> or <code>t</code> or
+       <code>st</code>, either or both of s- or t-coordinates less than 0 or
+       greater than 1 are clamped to 1 or 0, respectively.
+     
+     image { &lt;image specification&gt; (see <a href="image.html#image">Image objects</a>) }
+       Specify the actual texture image. Images can have 1, 2, 3 or 4 channels:
+         1 channel:  luminance
+         2 channels: luminance and alpha
+         3 channels: RGB data
+         4 channels: RGBA data
+     
+       See <a href="image.html#image">Image objects</a>, for the actual definition of image
+       objects. The alpha-channel is only interpreted as mask: where the mask
+       is zero, pixels are simply not drawn. An exception is the case where
+       <em>apply</em> is equal to <em>modulate</em> and translucency is enabled:
+       in this case the resulting alpha value is the result of the
+       multiplication of the surface color with the alpha value of the
+       texture's alpha channel.
+     
+     file      filename
+     alphafile filename
+       <em>This is considered obsolete, and only kept for compatibility,
+       the modern way is to use the new OOGL image object. See <a href="image.html#image">Image objects</a>.
+       The stuff documented here should still work, though</em>
+     
+       Specifies image file(s) containing the texture.
+     
+       The <em>file</em> keyword specifies a file with color or lightness information;
+       <em>alphafile</em> if present, specifies a transparency ("alpha") mask;
+       where the mask is zero, pixels are simply not drawn.
+       Several image file formats are available; the file type must be
+       indicated by the last few characters of the file name:
+         .ppm or .ppm.Z or .ppm.gz  24-bit 3-color image in PPM format
+         .pgm or .pgm.Z or .pgm.gz  8-bit grayscale image in PGM format
+         .sgi or .sgi.Z or .sgi.gz  8-bit, 24-bit, or 32-bit SGI image
+         .tiff                      8-bit or 24-bit TIFF image
+         .gif                       GIF image
+       For this feature to work, some programs must be available in
+       geomview's search path:
+         zcat  for .Z files
+         gzip  for .gz files
+         tifftopnm for .tiff files
+         giftoppm for .gif files
+     
+       If an <code>alphafile</code> image is supplied, it must be the same size
+       as the <code>file</code> image.
+     
+       <em>Image objects provide a more flexible way to specify texture
+       data. See <a href="image.html#image">Image objects</a>.</em>
+     
+     apply   modulate  -or-  blend  -or-  decal
+       Indicates how the texture image is applied to the surface.
+       Here the "surface color" means the color the surface would have
+       in the absence of texture mapping.
+     
+       With <code>modulate</code>, the default, the texture color (or lightness,
+       if textured by a gray-scale image) is multiplied by the surface color.
+     
+       With <code>blend</code>, texture blends between the <code>background</code> color
+       and the surface color.  The <code>file</code> parameter must specify a
+       gray-scale image.  Where the texture image is 0, the surface color is
+       unaffected; where it's 1, the surface is painted in the color given
+       by <code>background</code>; and color is interpolated for intermediate values.
+     
+       With <code>decal</code>, the <code>file</code> parameter must specify a
+       3-color image.  If an <code>alphafile</code> parameter is present,
+       its value interpolates between the surface color (where alpha=0)
+       and the texture color (where alpha=1).  Lighting does not affect the
+       texture color in <code>decal</code> mode; effectively the texture is
+       constant-shaded.
+     
+     background  R G B A
+       Specifies a 4-component color, with R, G, B, and A floating-point
+       numbers normally in the range 0..1, used when <code>apply blend</code>
+       is selected.
+     
+     transform <code>transformation-matrix</code>
+       Expects a list of 16 numbers, or one of the other ways of representing
+       a transformation (<code>: handlename</code> or <code>&lt; filename</code>).
+       The 4x4 transformation matrix is applied to texture coordinates,
+       in the sense of a 4-component row vector (s,t,0,1) multiplied on
+       the left of the matrix, to produce new coordinates (s',t')
+       which actually index the texture.
+</pre>
+   <!-- ================================================================ -->
+   </body></html>
+

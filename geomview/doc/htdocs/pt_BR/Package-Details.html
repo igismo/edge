@@ -1,0 +1,66 @@
+<html lang="en">
+<head>
+<title>Package Details - Manual do Geomview</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Manual do Geomview">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Mathematica.html#Mathematica" title="Mathematica">
+<link rel="prev" href="Remote-Display.html#Remote-Display" title="Remote Display">
+<link rel="next" href="Package-Installation.html#Package-Installation" title="Package Installation">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Package-Details"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Package-Installation.html#Package-Installation">Package Installation</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Remote-Display.html#Remote-Display">Remote Display</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Mathematica.html#Mathematica">Mathematica</a>
+<hr>
+</div>
+
+<h3 class="section">9.5 Details of the Mathematica-&gt;Geomview Package</h3>
+
+<p>The <samp><span class="file">OOGL.m</span></samp> package uses the external program <samp><span class="file">math2oogl</span></samp> to
+convert <code>Graphics3D</code> objetos to OOGL format, because a compiled
+external program is able to do this conversion many times faster than
+Mathematica.
+
+   <p>The converter will sometimes handle colored SurfaceGraphics objetos
+correctly that Mathematica does not handle correctly, which means that
+Geomview[objeto] sometimes works where Show[objeto] will give errors.
+
+   <p>The converter supports the <code>Polygon</code>, <code>Line</code>, and <code>Point</code>
+graphics primitives, <code>RGBColor Graphics3D</code> directives, and
+<code>SurfaceGraphics</code> objetos with ou without <code>RGBColor</code>
+directives, and lists of any combination of these. It silently ignores
+all other directives.
+
+   <p>The Mathematica to RenderMan conversion is actually a two-step process:
+Mathematica-&gt;OOGL (math2oogl), and OOGL-&gt;RenderMan (oogl2rib).
+
+   <p>In the <code>WriteOOGL</code> and <code>WriteRI</code>b commands, filename can
+either be a sequ&ecirc;ncia de caracteres containing a filename, an <code>OutputStream</code> objeto,
+or a sequ&ecirc;ncia de caracteres starting with a <code>!</code> to send the output to a command. 
+Objeto can be a <code>Graphics3D</code> objeto, a <code>SurfaceGraphics</code>
+objeto, ou a list of these.
+
+   <p>The packages work best with Mathematica 2.0 ou better.  With version 1.2,
+the Geomview display is always on the local host.
+
+<!-- ================================================================ -->
+   </body></html>
+

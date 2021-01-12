@@ -1,0 +1,118 @@
+<html lang="en">
+<head>
+<title>Package Installation - Geomview Manual</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Geomview Manual">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Mathematica.html#Mathematica" title="Mathematica">
+<link rel="prev" href="Package-Details.html#Package-Details" title="Package Details">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Package-Installation"></a>
+<p>
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Package-Details.html#Package-Details">Package Details</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Mathematica.html#Mathematica">Mathematica</a>
+<hr>
+</div>
+
+<h3 class="section">9.6 Installing the Mathematica Packages</h3>
+
+<blockquote>
+<b>BUG:</b> This section is out of date. <code>Geomview</code> follows the
+GNU-installation habits, data goes to <samp><span class="file">PREFIX/share/geomview/</span></samp>,
+user executables to <samp><span class="file">PREFIX/bin/</span></samp>, private executables to
+<samp><span class="file">PREFIX/libexec/geomview/</span></samp>, libraries to <samp><span class="file">PREFIX/lib/</span></samp> where
+<code>PREFIX</code> denotes the installation prefiex specified for the
+<samp><span class="file">TOPSRCDIR/configure</span></samp> script. Please have a look at the files
+<samp><span class="file">TOPSRCDIR/INSTALL</span></samp> and <samp><span class="file">TOPSRCDIR/INSTALL.Geomview</span></samp> for
+installation instructions.
+
+   <p>The installed Mathematica data-files can be found in
+<samp><span class="file">PREFIX/share/geomview/Mathematica/</span></samp>. 
+</blockquote>
+
+   <p>If Geomview is properly installed on your system according to the
+instructions in See <a href="Installation.html#Installation">Installation</a>, then the Mathematica-to-Geomview
+packages should work as described here; there should be no need for
+additional installation procedures.  In practice, however, it is
+sometimes necessary to taylor the installation of the Mathematica
+packages and/or of Geomview itself to suit the needs of a particular
+system.  This section contains details about how the installation works;
+if the Mathematica-to-Geomview connection does not seem to work for you
+after following the Geomview installation procedure, consult this
+section to see what might need to be fixed.
+
+   <p>In this section, the phrase <em>Geomview installation</em> refers any of
+the procedures in See <a href="Installation.html#Installation">Installation</a>.  The way the Mathematica packages
+work and are installed is the same regardless of whether you have
+one of the binary distributions or the source distribution.
+
+     <ol type=1 start=1>
+
+     <li>The relevant mathematica files are <samp><span class="file">OOGL.m</span></samp>, <samp><span class="file">Geomview.m</span></samp>, and
+<samp><span class="file">BezierPlot.m</span></samp>; Mathematica must be able to find these files.  They
+are distributed in the <samp><span class="file">PREFIX/share/geomview/Mathematica</span></samp>
+subdirectory of the binary distributions, and in the
+<samp><span class="file">TOPSRCDIR/src/bin/geomutil/math2oogl</span></samp> subdirectory of the source
+distribution.  These files need to be in a directory that is on
+Mathematica's search path.  You can look at the value of the
+<code>$Path</code> variable in a Mathematica session on your system to see a
+list of the directories on Mathematica's search path.
+
+     <p>The Geomview installation procedure puts copies of the Mathematica
+packages into a directory that you specify (<code>MMAPACKAGEDIR</code>).  This
+should ensure that Mathematica can find them.  Alternately, you could
+arrange to append the pathname of the Mathmematica package subdirectory
+of the Geomview distribution to the <code>$Path</code> variable each time you
+run Mathematica.
+
+     <li>The package <samp><span class="file">OOGL.m</span></samp> needs to be able to invoke the programs
+<samp><span class="file">geomview</span></samp>, <samp><span class="file">math2oogl</span></samp>, and <samp><span class="file">oogl2rib</span></samp>.  The Geomview
+installation procedure installs these programs into a directory that you
+specify for executables (<code>BINDIR</code>).  Ideally, this directory should
+be on your shell's <code>$PATH</code>.  More specifically, it should be on
+the <code>$PATH</code> of the shell in which Mathematica runs; the directory
+<samp><span class="file">/usr/local/bin</span></samp> is usually a good choice.  You can see the list of
+directories on this path by giving the command <code>!echo $path</code> in
+Mathematica.
+
+     <p>If for some reason you can't arrange for <samp><span class="file">geomview</span></samp>,
+<samp><span class="file">math2oogl</span></samp>, and <samp><span class="file">oogl2rib</span></samp> to be in a directory on the
+shell's <code>$path</code>, you can modify <samp><span class="file">OOGL.m</span></samp> to cause it to look
+for them using absolute pathnames.  To do this, change the definitions
+of the variables <code>$GeomviewPath</code> and <code>$GeomRoot</code>, which are
+defined near the top of the file.  Change <code>$GeomviewPath</code> to the
+absolute pathname of the <samp><span class="file">geomview</span></samp> shell script on your system. 
+Change <code>$GeomRoot</code> to the absolute pathname of the
+<samp><span class="file">$GEOMROOT</span></samp> directory on your system.  If you do this, you should
+also make sure there are copies of <samp><span class="file">geomview</span></samp>, <samp><span class="file">math2oogl</span></samp>,
+and <samp><span class="file">oogl2ri</span></samp>b in the <samp><span class="file">$GEOMROOT/bin/&lt;CPU&gt;</span></samp>.
+
+     <li>The <samp><span class="file">geomview</span></samp> shell script, which <samp><span class="file">OOGL.m</span></samp> uses to invoke
+Geomview, needs to be able to find the geomview executable file (
+called <samp><span class="file">gvx</span></samp>). 
+The Geomview installation procedure should have been taken care
+of this, but if your Mathematica session doesn't seem to be able to
+invoke Geomview, it's worth double-checking that the settings in the
+<samp><span class="file">geomview</span></samp> script are correct.
+
+        </ol>
+
+<!-- **************************************************************** -->
+   </body></html>
+

@@ -1,0 +1,149 @@
+2006-08-01  Steve M. Robbins  <steve@nyongwa.montreal.qc.ca>
+
+	* geomutil/plutil/offconsol.1: Fix manpage section.
+
+2006-07-31  Steve M. Robbins  <steve@nyongwa.montreal.qc.ca>
+
+	* stereo/stereo.c: Make usage of "/usr/gfx/setmon" conditional on
+	that binary existing; it is an irix-specific program.
+
+	* flythrough/main.c:
+	* hinge/hui.c: Rename getline() to gv_getline() to avoid clash
+	with standard C library function.
+
+	* example/oogl.c: Remove unused method getline().
+
+2002-10-26  Steve M. Robbins  <steve@nyongwa.montreal.qc.ca>
+
+	* animate/glob.c: Add !defined(__CYGWIN__) to condition.
+
+	* bin/geomutil/math2oogl/math2oogl.c:
+	* bin/geomview/common/comm.c:
+	* bin/geomview/common/lang.c:
+	* bin/geomview/x11/gvcamui.c:
+	* bin/geomview/x11/gvevent.c:
+	* bin/geomview/x11/gvmain.c:
+	* bin/geomview/x11/gvui.c:
+	* bin/stereo/stereo.c:
+	* bin/togeomview/togeomview.c:
+	* lib/oogl/util/glob.c: Include <signal.h> rather than
+	<sys/signal.h> to get SIG_DFL defines.
+
+2002-04-13  Steve M. Robbins  <steve@nyongwa.montreal.qc.ca>
+
+	* geomutil/math2oogl/math2oogl.c: Add __unix__ to list of CPP
+	symbols used to detect unix systems.
+
+2001-06-04  Mark Phillips  <mbp@geomtech.com>
+
+	* geomutil/oogl2vrml/oogl2vrml.c: fixed segmentation fault bug
+
+2001-02-28  Steve M. Robbins  <steve@nyongwa.montreal.qc.ca>
+
+	* geomutil/math2oogl/Makefile.am (EXTRA_DIST):
+	* geomutil/oogl2rib/Makefile.am (EXTRA_DIST):
+	* geomutil/oogl2vrml/Makefile.am (EXTRA_DIST):
+	* geomutil/plutil/Makefile.am (EXTRA_DIST):
+	* geomutil/vrml2oogl/Makefile.am (EXTRA_DIST): Distribute man_MANS.
+
+	* geomutil/vrml2oogl/vrml2oogl.1: New.
+	* geomutil/vrml2oogl/Makefile.am (man_MANS): Install vrml2oogl.1.
+
+	* geomutil/oogl2vrml/oogl2vrml.1: New.
+	* geomutil/oogl2vrml/Makefile.am (man_MANS): Install oogl2vrml.1.
+
+	* geomutil/oogl2rib/oogl2rib.1: New.
+	* geomutil/oogl2rib/Makefile.am (man_MANS): Install oogl2rib.1.
+
+	* geomutil/math2oogl/math2oogl.1: New.
+	* geomutil/math2oogl/Makefile.am (man_MANS): Install math2oogl.1.
+
+	* geomutil/plutil/bez2mesh.1: New.
+	* geomutil/plutil/Makefile.am (man_MANS): Install bez2mesh.1.
+
+2001-02-22  Steve M. Robbins  <steve@nyongwa.montreal.qc.ca>
+
+	* togeomview/togeomview.c: Include config.h.
+
+2001-02-21  Steve M. Robbins  <steve@nyongwa.montreal.qc.ca>
+
+	* geomview/common/comm.c (emodule_run): 
+	* togeomview/togeomview.c (start_gv): 
+	* geomutil/math2oogl/math2oogl.c (start_gv): Use SETPGRP_VOID.
+
+2000-11-23  Steve Robbins  <steve@nyongwa.montreal.qc.ca>
+
+	* geomview/x11/Makefile.am: install "gvx" in moduledir, not
+	bindir.
+
+2000-11-17  Mark Phillips  <mbp@geomtech.com>
+
+	* added 'togeomview' utility program to distribution
+	  (in src/bin/togeomview)
+
+2000-11-15  Mark Phillips  <mbp@geomtech.com>
+
+	* src/bin/geomview/x11: removed clang.h from CVS since it's a
+	  derived file (clang.c, also derived, apparently wasn't in CVS).
+	  Also, btw, clang.[ch] are now built in src/bin/geomview not
+	  src/bin/geomview/x11 (see comments from stever below).
+
+	* Makefile.am: split SUBDIRS into DIST_SUBDIRS and
+	  $(src_bin_module_subdirs), which is now set by
+	  the top-level configure script.
+
+2000-11-05  Steve Robbins  <steve@nyongwa.montreal.qc.ca>
+
+	* geomutil/bdy/Makefile.am (drawbdy): Put $(moduledir) on PATH,
+	not $(exec_prefix)/bin.
+	(CLEANFILES): Clean up the generated script.
+
+	* geomview/x11/Makefile.am:
+	* geomview/common/Makefile.am: Removed the complicated
+	cross-directory dependency rules.  Build "clang.c" and "clang.h"
+	in the geomview directory before building either subdirectory.
+	Make "x11/buildinfo.c" depend on $(gvx_OBJECTS), rather than
+	"_always", to prevent recompilation during "make install".  Removed
+	"clang.h" from gvx_SOURCES, since it is no longer built in the
+	"x11" subdirectory.
+
+	* geomutil/ucd/Makefile.am (man_MANS): 
+	* geomutil/plutil/Makefile.am (man_MANS): 
+	* geomutil/clip/Makefile.am (man_MANS): 
+	* geomutil/bdy/Makefile.am (man_MANS): 
+	* geomview/Makefile.am (man_MANS): Install manpages.
+
+	* maniview/Makefile.am (datagroupsdir): Default the value from
+	$geomdatadir.
+
+2000-11-04  Steve Robbins  <steve@nyongwa.montreal.qc.ca>
+
+	* transformer/Makefile.am: 
+	* tackdown/Makefile.am: 
+	* sweep/Makefile.am: 
+	* stereo/Makefile.am: 
+	* maniview/Makefile.am: 
+	* hinge/Makefile.am: 
+	* graffiti/Makefile.am: 
+	* ginsu/Makefile.am: 
+	* geomutil/bdy/Makefile.am: 
+	* flythrough/Makefile.am: 
+	* example/Makefile.am: 
+	* cplxview/Makefile.am: 
+	* animate/Makefile.am: Install modules into moduledir.  Treat
+	.geomview-* files as data, not scripts.
+
+2000-10-29  Steve Robbins  <steve@nyongwa.montreal.qc.ca>
+
+	* geomutil/bdy/Makefile.am (drawbdy): 
+	* geomutil/vrml2oogl/Makefile.am (INCLUDES): 
+	* geomview/x11/Makefile.am (clang): Use $srcdir when referring to
+	directories in source hierarchy.
+
+	* geomview/common/Makefile.am (INCLUDES): Add both ../x11 (for
+	generated `clang.c' file), and $srcdir/../x11 (for `clang.h' file)
+	to include path.
+
+	* geomutil/bdy/Makefile.am (install-geomview-dotfile): 
+	* animate/Makefile.am (install-geomview-dotfile): Refer to script
+	`mkmodulesdir' using $top_srcdir.

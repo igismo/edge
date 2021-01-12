@@ -1,0 +1,21 @@
+## thickness of the lines, default is 1
+appearance {
+    linewidth 4 
+}
+VECT
+## number-of-lines  num-of-vertices-total   num-of-colors
+2 4 2  ## 2 lines, total 2x2=4 vertices, 2 colors 
+## number of vertices in each line: x y z ...
+2  ## 2 vertices in the first line
+2  ## 2 vertices in the second line
+## number of colors for each line
+1  ## 1 color for the first line
+1  ## 1 color for the second line
+## coordinates of two vertices for each line  (-2, -2, -2) (2,2,2)
+-2 -2 -2 ## line 1, vertex 1
+2 2 2    ## line 1 vertex 2
+1 1 1    ## line 2 vertex 1
+-2 2 2   ## line 2 vertex 2
+## color coding for each vertex (1001) (0101) (0011) 
+1 0 0 1  ### RED   - color of line 1
+0 0 1 1  ### BLUE  - color of line 2

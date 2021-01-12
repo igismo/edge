@@ -1,0 +1,51 @@
+<html lang="en">
+<head>
+<title>set-emodule-path - Geomview Manual</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Geomview Manual">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="GCL-Reference.html#GCL-Reference" title="GCL Reference">
+<link rel="prev" href="set_002dconformal_002drefine.html#set_002dconformal_002drefine" title="set-conformal-refine">
+<link rel="next" href="set_002dload_002dpath.html#set_002dload_002dpath" title="set-load-path">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="set-emodule-path"></a>
+<a name="set_002demodule_002dpath"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="set_002dload_002dpath.html#set_002dload_002dpath">set-load-path</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="set_002dconformal_002drefine.html#set_002dconformal_002drefine">set-conformal-refine</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="GCL-Reference.html#GCL-Reference">GCL Reference</a>
+<hr>
+</div>
+
+<h4 class="subsection">7.2.123 set-emodule-path</h4>
+
+<p><a name="index-set_002demodule_002dpath-130"></a>
+     <dl>
+<dt><code>(set-emodule-path (PATH1 ... PATHN))</code><dd>Sets the search path for external modules.  The PATHi should
+be pathnames of directories containing, for each module, the
+module's executable file and a .geomview-&lt;modulename&gt; file
+which contains an (emodule-define <small class="dots">...</small>) command for that
+module.  This command implicitly calls (rehash-emodule-path)
+to rebuild the application browser from the new path setting. 
+The special directory name <code>+</code> is replaced by the existing path,
+so e.g. (set-emodule-path (mydir +)) prepends mydir to the path. 
+</dl>
+
+   </body></html>
+

@@ -1,0 +1,267 @@
+<html lang="en">
+<head>
+<title>Aparencias - Manual do Geomview</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Manual do Geomview">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Convencoes.html#Convencoes" title="Convencoes">
+<link rel="prev" href="Referencias.html#Referencias" title="Referencias">
+<link rel="next" href="Mapeamento-de-Textura.html#Mapeamento-de-Textura" title="Mapeamento de Textura">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Aparencias"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Mapeamento-de-Textura.html#Mapeamento-de-Textura">Mapeamento de Textura</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Referencias.html#Referencias">Referencias</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Convencoes.html#Convencoes">Convencoes</a>
+<hr>
+</div>
+
+<h4 class="subsection">4.1.10 Apar&ecirc;ncias</h4>
+
+<p>Objetos geom&eacute;tricos podem ter informa&ccedil;&otilde;es de apar&ecirc;ncia associada,
+especificando tonalidade, brilho, cor, visualiza&ccedil;&atilde;o wire-frame vs. 
+shaded-surface, e assim por diante.  Apar&ecirc;ncias s&atilde;o erdadas atrav&eacute;s de hierarqu&iacute;as de
+objetos, e.g. anexando uma apar&ecirc;ncia a uma lista (<code>LIST</code>) significa que a
+apar&ecirc;ncia &eacute; aplicada a todos os membros de <code>LIST</code>.
+
+   <p>Algumas propriedades relacionada a apar&ecirc;ncia s&atilde;o relegadas a subestruturas tais como
+"material", "lighting" e "texture". Seja cuidadoso para notar quais
+propriedade pertencem a qual estrutura. Qualquer objeto geom&eacute;trico pode ser
+precedido por uma defini&ccedil;&atilde;o de apar&ecirc;ncia como no sguinte exemplo:
+
+<pre class="example">     {
+        appearance { +edge }
+        LIST { &lt; "arquivo1" } { QUAD 1 0 0  0 0 1  0 1 0  1 0 0 }
+     }
+</pre>
+   <p>Apar&ecirc;ncias s&atilde;o tamb&eacute;m objetos OOGL no seu pr&oacute;prio direito e pode ser fornecido
+nomes simb&oacute;licos e refer&ecirc;ncia a elas. Veja
+(<a href="Referencias.html#Referencias">Referencias</a>) e em <a href="Objetos-de-aparencia.html#Objetos-de-aparencia">Objetos de apar&ecirc;ncia</a>.
+
+     <dl>
+<dt><b>Texture Mapping</b><dd>Existe uma se&ccedil;&atilde;o separada com rela&ccedil;&atilde;o a defini&ccedil;&atilde;o de texturas:
+(<a href="Mapeamento-de-Textura.html#Mapeamento-de-Textura">Mapeamento de Textura</a>).
+
+     <br><dt><b>Transparency</b><dd>Objetos de renderiza&ccedil;&atilde;o transl&uacute;cida n&atilde;o s&atilde;o suportados por todos os desenhadores
+que funcionam no Geomview. O renderizador OpenGL tem suporte limitado para isso: objetos de n&iacute;vel mais alto
+(i.e. aqueles que aparecem no navegador de objetos do painel principal
+(veja <a href="Interacao-Basica.html#Interacao-Basica">O Painel Principal</a>) s&atilde;o renderizados corretamente por
+meio de alpha-blending). Tamb&eacute;m, os instant&acirc;neos do RenderMan ir&atilde;o incluir
+valores de opacidade. 
+</dl>
+
+   <p>Aqui est&aacute; um exemplo de estrutura de apar&ecirc;ncia incluindo valores para todos
+atributos.  A ordem dos atributos n&atilde;o &eacute; importante.  Como usual, espa&ccedil;os em branco
+ss&atilde;o irrelevates.  Atributos Booleanos podem ser precedidos por "+" ou "-" para torn&aacute;-los
+habilitados ou desabilitados; "+" &eacute; assumido se somente o nome do atributo aparecer. 
+Outros valores esperados de atributo.
+
+   <p>Um "*" prefixado a um atributo, e.g. "*+edge" ou "*linewidth 2"
+ou "material { *diffuse 1 1 .25 }", seleciona a situa&ccedil;&atilde;o atual para sobrescrever ("override") para
+aquele atributo.
+
+<pre class="example">     appearance {
+       +face               # (Faz) desenho de faces dos pol&iacute;gonos.  Habili-
+                           # tado por padr&atilde;o.
+       -edge               # (N&atilde;o faz) desenho de arestas de pol&iacute;gonos.
+       +vect               # (Faz) desenho de vetores (VECTs).  Habilitado
+                           # por padr&atilde;o.
+     
+       transparent screendoor
+                           # (Habilita) transpar&ecirc;ncia. Habilita&ccedil;&atilde;o de
+                           # transpar&ecirc;ncia.
+                           # n&atilde;o (necessariamente) resulta em cores corretas
+                           # no Geomview, mas os valores de alfa s&atilde;o usados
+                           # em instant&acirc;neos RenderMan.
+                           # As palavras chave permitidas s&atilde;o ``screendoor''
+                           # (mascarando pixels de sa&iacute;da por meio de um
+                           # modelo de ponteamento), ``blending'' para
+                           # alpha-blending ( harmoniza&ccedil;&atilde;o de alfa)
+                           # com BSP-tree (&aacute;rvore BSP) particionando o
+                           # espa&ccedil;o e ordenando com precis&atilde;o
+                           # (lento) e ``naive'' para harmoniza&ccedil;&atilde;o de
+                           # alfa sem mesmo ordenar com precis&atilde;o, n&atilde;o
+                           # para falar sobre particionamento de espa&ccedil;o.
+                           # Omitindo a palavra chave o padr&atilde;o ser&aacute;
+                           # harmoniza&ccedil;&atilde;o de alfa com &aacute;rvore
+                           # particionando o espa&ccedil;o e ordenando com
+                           # precis&atilde;o.
+       -normal             # (Faz) desenho de vetores normais a uma
+                           # superf&iacute;cie.
+     
+       normscale 1         # ... com comprimento 1.0 em coordenadas do
+                           # objeto.
+     
+       +evert              # faz a invers&atilde;o de normais de pol&iacute;gono onde
+                           # necess&aacute;rio de forma que sempre tenha
+                           # c&acirc;mera naquela face
+     
+       +texturing          # (Habilita) mapeamento de textura
+       +linear             # (Habilita) m&eacute;dia linear de elementos de textura
+                           # mais fechados
+     
+       +mipmap             # (Habilita) mapeamento mip de textura
+       +mipinterp          # (Habilita) mapeamento mip linear
+     
+       -backcull           # (N&atilde;o faz) descarte da orienta&ccedil;&atilde;o de faces
+                           # no sentido anti-hor&aacute;rio
+     
+       -concave            # (N&atilde;o faz) presun&ccedil;&atilde;o e manuseio de pol&iacute;-
+                           # gonos c&ocirc;ncavos
+     
+       -shadelines	      # (N&atilde;o faz) linhas de tonalidade como se elas esti-
+                           # vessem iluminando cilindros
+                           # Esses quatro (mipinterp, backcull, concave,
+                           # shadelines) s&atilde;o somente efetivos onde o
+                           # sistema gr&aacute;fico suport&aacute;-los, a saber em GL e
+                           # Open GL.
+     
+       -keepcolor	      # Normalmente, quando informa&ccedil;&atilde;o de cor N-D posi-
+                           # cional est&aacute; habilitada como
+                           # com o comando do geomview (ND-color ...), todas
+                           # as cores de objetos s&atilde;o afetadas.  Mas, objetos
+                           # com o atributo "+keepcolor" s&atilde;o imunes a infor-
+                           # ma&ccedil;&otilde;es de cor N-D.
+     
+       shading smooth      # ou ``shading constant'' ou ``shading flat'' ou
+                           # ou ``shading csmooth'' ou ``shading vcflat''.
+                           # smooth = tonalidade de Gouraud, flat = facetado,
+                           # csmooth = linearmente interpolado mas n&atilde;o
+                           # iluminado, vcflat = tonalidade mon&oacute;tona, mas
+                           # cores linearmente interpoladas.
+     
+       linewidth 1         # linhas, pontos, e arestas s&atilde;o da largura de
+                           # 1 pixel.
+     
+       patchdice 10 10     # subdivide retalhos de Bezier esmiu&ccedil;adamente em
+                           # u e v
+     
+       material {         # Aqui est&aacute; uma defini&ccedil;&atilde;o material;
+                           # pode tamb&eacute;m ser lido de um arquivo como em
+                           #  ``material &lt; arquivo.mat''
+     
+           ka  1.0         # coeficiente de reflex&atilde;o ambiente.
+           ambient .3 .5 .3 # cor do ambiente (em componentes de vermelho,
+                           # verde, azul). A contribui&ccedil;&atilde;o ambiente para a to-
+                           # nalidade &eacute; o produto de ka, a cor do ambiente,
+                           # pela cor da luz ambiente.
+     
+           kd  0.8         # coeficiente de reflex&atilde;o difusa.
+           diffuse .9 1 .4 # cor difusa.
+                             # (No modo ``shading constant'' (tonalidade
+                             # constante), a superf&iacute;cie
+                             # &eacute; colorida com a cor difusa.)
+     
+           ks 1.0          # coeficiente de reflex&atilde;o especular.
+           specular 1 1 1  # cor especular (destacada).
+           shininess  25   # expoente especular; grandes valores fornecem
+                           # destaques falsos.
+     
+           backdiffuse .7 .5 0 # cor da face de tr&aacute;s para superf&iacute;cies com
+                           # dois lados. Se definido, esse campo determina
+                           # a cor difusa para o lado de tr&aacute;s de uma super-
+                           # f&iacute;cie. &Eacute; implementada atrav&eacute;s de tonalidade
+                           # via software, e por tonalidade via hardware
+                           # sob sistemas GL que suportam ilumina&ccedil;&atilde;o de
+                           # dois lados, e sob Open GL.
+     
+           alpha   1.0     # opacidade; 0 = transparente (invis&iacute;vel),
+                           # 1 = opaco. Ignorado quando a transpar&ecirc;ncia
+                           # estiver desabilitada.
+     
+           edgecolor   1 1 0  # cor de linha &amp; aresta
+     
+           normalcolor 0 0 0  # cor para vetores normais a uma superf&iacute;cie
+       }
+     
+       lighting {         # Modelo de ilumina&ccedil;&atilde;o
+     
+           ambient  .3 .3 .3  # luz ambiente
+     
+           replacelights   # ``Use somente as seguintes luzes para
+                           # iluminar os objetos sob essa
+                           # apar&ecirc;ncia.''
+                           # Sem "replacelights" (substitui&ccedil;&atilde;o de luzes),
+                           # quaisquer luzes listadas s&atilde;o adicionadas
+                           # a esses na cena.
+     
+                           # Agora uma cole&ccedil;&atilde;o exemplo de luzes:
+           light {
+               color  1 .7 .6      # cor da luz
+               position  1 0 .5 0  # posi&ccedil;&atilde;o da luz [distant light]
+                                   # fornecida em coordenadas homog&ecirc;neas.
+                                   # Com a quarta componente = 0,
+                                   # isso significa uma luz vindo da
+                                   # dire&ccedil;&atilde;o (1,0,.5).
+           }
+     
+           light {                        # Outra luz.
+               color 1 1 1
+               position  0 0 .5 1  # luz na posi&ccedil;&atilde;o finita ...
+               location camera     # especificada em coordenadas de c&acirc;mera.
+                                   # (Uma vez que a c&acirc;mera olha adiante -Z,
+                                   # esse exemplo coloca a luz
+                                   # .5 unidade atr&aacute;s do olho.)
+               # Poss&iacute;vel palavra chave de localiza&ccedil;&atilde;o ("location"):
+               #  global   posi&ccedil;&atilde;o da luz global em coordenadas de objeto mundo
+               #             (bem, universo). Esse &eacute; o padr&atilde;o se nenhuma
+               #             localiza&ccedil;&atilde;o for especificada.
+               #  camera   posi&ccedil;&atilde;o da c&acirc;mera em coordenadas do sistemade
+               #             c&acirc;mera
+               #  local    posi&ccedil;&atilde;o local em coordenadas do sistema onde
+               #                   a apar&ecirc;ncia foi definida
+           }
+       }                   # fim do modelo de ilumina&ccedil;&atilde;o
+       texture {
+             clamp st               # ou ``s'' ou ``t'' ou ``none''
+             file lump.tiff         # arquivo fornecendo imagem de mapa de
+                                    # textura
+             alphafile mask.pgm.Z   # arquivo fornecendo imagem de m&aacute;scara
+                                    # de transpar&ecirc;ncia
+             apply blend            # ou ``modulate'' ou ``decal''
+             transform  1 0 0 0     # superf&iacute;cie (s,t,0,1) * tfm -&gt; coor-
+                        0 1 0 0     # denadas de textura
+                        0 0 1 0
+                       .5 0 0 1
+     
+             background 1 0 0 1     # relevante para ``apply blend''
+       }
+     }                     # fim de apar&ecirc;ncia
+</pre>
+   <p>Existem regras para heran&ccedil;a de atributos de apar&ecirc;ncia quando muitas apar&ecirc;ncia
+s&atilde;o impostas em diferentes n&iacute;veis na hierarqu&iacute;a.
+
+   <p>Por exemplo, Geomview instala uma apar&ecirc;ncia de parada de seguran&ccedil;a que fornece
+valores padr&atilde;o para a maioria dos par&acirc;metros; seu painel de controle instala outras
+apar&ecirc;ncias que fornecem novos valores para uns poucos atributos; a geometria
+fornecida pelo usu&aacute;rio pode tamb&eacute;m conter apar&ecirc;ncias.
+
+   <p>A regra geral &eacute; que a apar&ecirc;ncia dos filhos (aquelas fechadas para as
+primitivas geom&eacute;tricas) vencem.  Adicionalmente, controles de apar&ecirc;ncia com
+situa&ccedil;&atilde;o atual em sobrescrever ("override") (e.g. <code>*+face ou material { *diffuse 1 1 0 }</code>)
+vencem sobre as outras que estiverem sem o atributo de sobrescrever.
+
+   <p>Os controles de apar&ecirc;ncia do Geomview usam o recurso de sobrescrever "override" de forma a ser
+efetivo mesmo se objetos fornecidos pelo usu&aacute;rio contiverem suas pr&oacute;prias escolhas de apar&ecirc;ncia. 
+Todavia, Se um objeto fornecido pelo usu&aacute;rio contiver um campo de apar&ecirc;ncia com
+o recurso de sobrescrever ativado, esse campo de apar&ecirc;ncia ser&aacute; imune aos controles do Geomview.
+
+<!--  -->
+   </body></html>
+

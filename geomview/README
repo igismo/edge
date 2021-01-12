@@ -1,0 +1,294 @@
+		     Geomview/OOGL Release 1.9.5
+			     February 2009
+			     -------------
+
+CONTENTS
+--------
+
+        Introduction
+	Note to Users of Previous Geomview Versions
+        Installation
+        More about Geomview
+        External Modules
+        Auxiliary Programs
+        Documentation
+        Geomview Support
+        History
+        Miscellaneous
+        Known Bugs
+        Improvements/Wish list
+        Bug Reports and Comments
+
+
+
+INTRODUCTION
+------------
+                                   
+This is version 1.9.5 of Geomview/OOGL.  See the file NEWS for a summary
+of changes in this release, and the file ChangeLog for specific
+details.
+
+Geomview is an interactive geometry viewing program.  OOGL, which
+stands for Object Oriented Graphics Library, is the library upon which
+Geomview is built.
+
+Geomview runs on many unix-like platforms including but not limited to
+GNU/Linux, Solaris, IRIX, and AIX. It requires X windows, OpenGL, and
+Motif (or OpenMotif). It also works with Mesa, which is a
+free-software replacement to OpenGL. See www.geomview.org for more
+information.
+
+In addition, if you use geomview please consider joining the
+geomview-users mailing list; send an empty note with 'subscribe' in
+the subject line to geomview-users-request@lists.sourceforge.net, or
+visit the list web page at
+http://lists.sourceforge.net/mailman/listinfo/geomview-users.
+
+
+NOTE TO USERS OF PREVIOUS GEOMVIEW VERSIONS
+-------------------------------------------
+
+If you're a user of a really old (version 1.6 or earlier) version of
+Geomview and you're looking for some of the external modules that were
+included in the older versions but that are not present in this
+release, you can still download the old versions of Geomview from
+http://www.geom.uiuc.edu/software/download/geomview.html.
+
+INSTALLATION
+------------
+
+See the files INSTALL.Geomview and INSTALL for instructions
+on compiling and installing Geomview.
+
+
+MORE ABOUT GEOMVIEW
+-------------------
+
+Geomview is the product of an effort at the Geometry Center at the
+University of Minnesota to provide interactive geometry software which
+is particularly appropriate for mathematics research and education.
+In particular, geomview can display things in hyperbolic and spherical
+space as well as Euclidean space.
+
+Geomview allows multiple independently controllable objects and
+cameras.  It provides interactive control for motion, appearances
+(including lighting, shading, and materials), picking on an
+object, edge or vertex level, snapshots in SGI image file or
+Renderman RIB format, and adding or deleting objects is provided
+through direct mouse manipulation, control panels, and keyboard
+shortcuts.  External programs can drive desired aspects of the
+viewer (such as continually loading changing geometry or
+controlling the motion of certain objects) while allowing
+interactive control of everything else.
+
+Geomview supports the following simple data types: polyhedra with
+shared vertices (.off), quadrilaterals, rectangular meshes,
+vectors, and Bezier surface patches of arbitrary degree including
+rational patches.  Object hierarchies can be constructed with
+lists of objects and instances of object(s) transformed by one or
+many 4x4 matrices.  Arbitrary portions of changing hierarchies
+may be transmitted by creating named references.
+
+Geomview can display Mathematica and Maple 3-D graphics output; for
+information on this see the files OOGL.m.txt and gvplot.txt, respectively,
+in the "doc" subdirectory.
+
+EXTERNAL MODULES
+----------------
+
+Geomview comes with several "external modules" (emodules) -- programs
+that communicate with geomview through a command language.  The list
+of currently installed modules appears in the "Modules" browser on
+geomview's main panel.  To invoke a module, click the mouse on the
+appropriate line in this browser.  The modules in this distribution
+are:
+
+MODULE	   	DESCRIPTION
+~~~~~~          ~~~~~~~~~~~
+Animate:	flip through a sequence of objects
+Clipboard:      save a single OOGL object to a clipboard
+Gvclock:        an animated clock
+Nose:           debugging/example for picking (see Geomview manual)
+
+Modules involving extra libraries like XForms or Tcl/Tk have been
+moved to separate packages to make the maintenance of the Geomview
+main-package easier. The packages can be downloaded from the Geomview
+download area at Sourceforge.net. The names of the emodule packages,
+and the emodules they contain, are as follows:
+
+Package gvemod-xforms-example -- example XForms-based emodule
+*************************************************************
+  MODULE          DESCRIPTION
+  ~~~~~~          ~~~~~~~~~~~
+  Example:        generic FORMS example external module
+
+Package gvemodules-xforms -- emodules which require the XForms package
+**********************************************************************
+  MODULE          DESCRIPTION
+  ~~~~~~          ~~~~~~~~~~~
+  Cplxview:       visualize the graphs of complex functions
+  Example:        generic FORMS example external module
+  Flythrough:     "Not Knot" visualisation (hyperbolic space)
+  Ginsu:          interactively slice objects (see "clip")
+  Graffiti:       draw line segments on objects
+  Hinge:          "copy-rotate" a polyhedron around edges of itself
+  Stereo:         stereo vision module
+  Sweep:          generate objects of rotation from line segments
+  Tackdown:       redefine an object's "home" position
+  Transformer:    explicitly control an object's transformation matrix
+
+Package maniview -- requires XForms
+***********************************
+  MODULE          DESCRIPTION
+  ~~~~~~          ~~~~~~~~~~~
+  Maniview        visualize 3d manifolds and orbifolds
+
+Pacakge gvemod-crayola -- requires Tcl/Tk
+*****************************************
+  MODULE          DESCRIPTION
+  ~~~~~~          ~~~~~~~~~~~
+  Crayola:        interactive colouring of OOGL objects
+
+Package gvemod-labeler -- requires Tcl/Tk
+*****************************************
+  MODULE          DESCRIPTION
+  ~~~~~~          ~~~~~~~~~~~
+  Labeler:        somewhat crude generation of text as OOGL object
+
+gvemod-ndview -- requires Tcl/Tk
+****************************************************
+  MODULE          DESCRIPTION
+  ~~~~~~          ~~~~~~~~~~~
+  3D-Snapshot:    Save a 3D projection of an ND object
+  Colormap:       Coloring of ND objects w.r.t. the "invisible" directions
+  NDview:         visualization of objects in > 3D
+  NDdemo:         a demo for ND visualization
+  Origin:         draw a coordinate frame for an OOGL object
+  Slicer:         Slice ND objects (see also Ginsu above)
+
+                                                                        
+AUXILIARY PROGRAMS
+------------------
+
+PROGRAM	    	DESCRIPTION
+
+anytooff:	convert any OOGL object into OFF format
+anytoucd:	convert any OOGL object into UCD format
+bdy:		compute the boundary edges of a geom as a VECT file
+bez2mesh:	convert Bezier object to MESH
+clip:		clip OOGL objects against planes or other surfaces
+hvectext:	produce VECT text from Ghostscript Hershey fonts
+math2oogl:	convert Mathematica graphics object to OOGL format
+offconsol:	consolidate duplicate vertices in an OFF file
+oogl2rib:	convert OOGL to RenderMan RIB (see doc/OOGL.m.txt)
+oogl2vrml:      convert OOGL to VRML version 1
+oogl2vrml2:     convert OOGL to VRML version 2
+polymerge:	merge vertices, edges, and faces in an OFF file
+togeomview:	pipe GCL commands or geometry to a copy of geomview,
+		  invoking geomview if necessary
+ucdtooff:	convert UCD format file into an OFF OOGL file
+
+
+COMPUTER ALGEBRA INTERFACES
+---------------------------
+gvplot.mapleVx: plot interface to Maple (tm). `x' is in {3, 4, 8}.
+  The source code and Maple V8 work-sheets which can be used to
+  generate a Maple library are installed below
+  PREFIX/share/geomview/Maple/. After installation the documentation
+  can be found in PREFIX/share/doc/geomview-VERISION/README.gvplot
+
+math2oogl:	convert Mathematica graphics object to OOGL format
+
+
+DOCUMENTATION
+-------------
+
+A comprehensive manual is in the "doc" subdirectory.  You can also
+read or download the manual from the Geomview web site,
+www.geomview.org.
+
+"make install" installs the documentation under
+
+PREFIX/share/doc/geomview-VERSION/
+
+The manual comes in Info, PDF and HTML format.
+
+The file doc/oogltour gives an introduction to the OOGL file
+format, which is the format of geometry files that geomview
+reads.  More details are in the manual.
+
+Further documentation can be found in several manual pages; the manual
+pages are installed in their proper locations by "make install".  Some
+of the external modules, as well as geomview itself, has a manual
+page. Of particular interest are:
+
+	geomview(1)	geomview man page
+	geomview(5)	geomview command language reference
+	oogl(5)		OOGL file format reference
+
+Other documentation is also moved to PREFIX/share/doc/geomview-VERSION/
+by "make install", e.g.
+
+	OOGL.m.txt	documentation for interface to Mathematica
+	README.gvplot	documentation for interface to Maple
+
+GEOMVIEW MAILING LIST
+---------------------
+
+geomview-users@lists@sourceforge.net
+
+    This is a mailing list of people using geomview and can be used
+    for communication between users regarding geomview problems,
+    questions, experiences, etc.  The geomview authors are also a part
+    of this list and sometimes respond to questions posted to it.  We
+    also use this list to make announcements about new releases and
+    other things of interest to users.  To join the list, go the list
+    web page at http://lists.sourceforge.net/mailman/listinfo/geomview-users.
+
+GEOMVIEW WEB SITE
+-----------------
+
+The geomview web site is http://www.geomview.org.
+
+HISTORY
+-------
+
+This project began in the summer of 1988 at the University of
+Minnesota's Geometry Center with the work of Pat Hanrahan on a viewing
+program called MinneView.  Shortly thereafter Charlie Gunn begin
+developing OOGL in conjunction with MinneView.  In 1991 a team of
+programmers headed by Mark Phillips, Stuart Levy, and Tamara Munzner
+set about developing a revised version of OOGL and a new viewer which
+they named Geomview.  In the time since then, many people have
+contributed, including (in alphabetical order): Jorge Barros de Abreu,
+Steve Anderson, Rex Dieter, Celeste Fowler, Claus-Justus Heine, Todd
+Kaplan, Daniel Krech, Mario Lopez, Mark Meuer, Daeron Meyer, Steve
+Robbins, Timothy Rowley, Raphael Straub, Nathaniel Thurston, Scott Wisdom,
+Lloyd Wood and others.
+
+MISCELLANEOUS
+-------------
+
+For a list of changes between versions, see the file ChangeLog.
+
+Geomview is distributed under the terms of the GNU Lesser Public
+License (LGPL); see the file COPYING for details.
+    
+The file MANIFEST contains a list of the files in this distribution.
+
+
+KNOWN BUGS
+----------
+
+Picking can fail if any part of any object is behind the camera plane. (SNX)
+
+BUG REPORTS AND COMMENTS
+------------------------
+
+Please send bug reports and comments about Geomview to
+geomview-users@sourceforge.net.
+
+
+========================================================================
+This release packed up by:
+    Claus-Justus Heine <Claus-Justus.Heine@IANS.Uni-Stuttgart.DE>

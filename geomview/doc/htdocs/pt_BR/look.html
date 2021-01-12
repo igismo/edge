@@ -1,0 +1,54 @@
+<html lang="en">
+<head>
+<title>look - Manual do Geomview</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Manual do Geomview">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="GCL-Reference.html#GCL-Reference" title="GCL Reference">
+<link rel="prev" href="load_002dpath.html#load_002dpath" title="load-path">
+<link rel="next" href="look_002dencompass.html#look_002dencompass" title="look-encompass">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="look"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="look_002dencompass.html#look_002dencompass">look-encompass</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="load_002dpath.html#load_002dpath">load-path</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="GCL-Reference.html#GCL-Reference">GCL Reference</a>
+<hr>
+</div>
+
+<h4 class="subsection">7.2.73 look</h4>
+
+<p><a name="index-look-80"></a>
+     <dl>
+<dt><code>(look [objetoID] [cameraID])</code><dd>Rotaciona a referida c&acirc;mera - cameraID - de forma que aponte em dire&ccedil;&atilde;o ao centro da
+caixa associada ao referido objeto - objetoID (ou a origem nos espa&ccedil;os hiperbolico ou
+esf&eacute;rico).  No espa&ccedil;o Eucidiano, move a c&acirc;mera
+para al&eacute;m ou para tr&aacute;s at&eacute; que o objeto apare&ccedil;a t&atilde;o grande
+quanto poss&iacute;vel enquanto sendo inteiramente vis&iacute;vel.  Equivalente a
+     <pre class="example">          progn (
+          	(look-toward [objetoID] [cameraID] {center | origin})
+          	[(look-encompass [objetoID] [cameraID])]
+          )
+</pre>
+     <p>Se objetoID n&atilde;o for especificado, esse objeto &aacute; assumido como sendo o objeto mundo.  Se
+cameraID n&atilde;o for especificado, essa c&acirc;mera &eacute; assumido como sendo a targetcam. 
+</dl>
+
+   </body></html>
+

@@ -1,0 +1,72 @@
+<html lang="en">
+<head>
+<title>ui-motion - Geomview Manual</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Geomview Manual">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="GCL-Reference.html#GCL-Reference" title="GCL Reference">
+<link rel="prev" href="ui_002dhtml_002dbrowser.html#ui_002dhtml_002dbrowser" title="ui-html-browser">
+<link rel="next" href="ui_002dpanel.html#ui_002dpanel" title="ui-panel">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="ui-motion"></a>
+<a name="ui_002dmotion"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="ui_002dpanel.html#ui_002dpanel">ui-panel</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="ui_002dhtml_002dbrowser.html#ui_002dhtml_002dbrowser">ui-html-browser</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="GCL-Reference.html#GCL-Reference">GCL Reference</a>
+<hr>
+</div>
+
+<h4 class="subsection">7.2.148 ui-motion</h4>
+
+<p><a name="index-ui_002dmotion-156"></a>
+     <dl>
+<dt><code>(ui-motion {inertia|constrain|own-coordinates} {on|off})</code><dd>Enable or disable certain properties of mouse-controlled motion. The
+purpose of this command is to give access to the respective toggles of
+the <em>Main</em> panel's <em>Motion</em> menu through GCL
+commands. See <a href="Mouse-Motions.html#Mouse-Motions">Mouse Motions</a>.
+
+          <dl>
+<dt><code>inertia</code><dd>Normally, moving objects have inertia: if the mouse is still moving when
+the button is released, the selected object continues to move. When
+<code>inertia</code> is off, objects cease to move as soon as you release the
+mouse.
+
+          <br><dt><code>constrain</code><dd>It's sometimes handy to move an object in a direction aligned with a
+coordinate axis: exactly horizontally or vertically. Calling
+<code>(ui-motion constrain on)</code> changes the interpretation of mouse
+motions to allow this; approximately-horizontal or
+approximately-vertical mouse dragging becomes exactly horizontal or
+vertical motion. Note that the motion is still along the X or Y axes of
+the camera in which you move the mouse, not necessarily the object's own
+coordinate system.
+
+          <br><dt><code>own-coordinates</code><dd>It's sometimes handy to move objects with respect to the coordinate
+system where they were defined, rather than with respect to some
+camera's view. When <code>(ui-motion own-coordinates on)</code> has been
+called, all motions are interpreted that way: dragging the mouse
+rightward in translate mode moves the object in its own <var>+X</var>
+direction, and so on. May be especially useful in conjunction with the
+<code>(ui-motion constrain on)</code> command. 
+</dl>
+
+   </dl>
+
+   </body></html>
+

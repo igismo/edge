@@ -1,0 +1,151 @@
+<html lang="en">
+<head>
+<title>Basic Interaction - Geomview Manual</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Geomview Manual">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Interaction.html#Interaction" title="Interaction">
+<link rel="prev" href="Command-Line-Options.html#Command-Line-Options" title="Command Line Options">
+<link rel="next" href="Loading.html#Loading" title="Loading">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Basic-Interaction"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Loading.html#Loading">Loading</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Command-Line-Options.html#Command-Line-Options">Command Line Options</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Interaction.html#Interaction">Interaction</a>
+<hr>
+</div>
+
+<h3 class="section">3.3 Basic Interaction: The Main Panel</h3>
+
+<p>Normally when you invoke Geomview, three windows appear: the
+<em>Main</em> panel, the <em>Tools</em> panel, and one camera window. 
+Geomview has many other windows but most things can be done with these
+three and so by default the others do not appear.  This section of the
+manual introduces some basic concepts that are used throughout the rest
+of the manual and describes the <em>Main</em> panel. 
+<div class="float">
+<a name="figmainpanel"></a><img src="figs/main.png" alt="figs/main.png">
+
+   <p><strong class="float-caption">Figure 3.1: The Main Panel</strong></p></div>
+Geomview can display an arbitrary number of objects simultaneously.  The
+<em>Targets</em> browser in the <em>Main</em> panel displays a list of all
+the objects that Geomview currently knows about.  This browser has a
+line for each object that you have loaded, plus some lines for other
+objects.  One of the other objects is called <code>World</code> and corresponds to
+the all the currently loaded objects, treated as if they were one
+object.  Most of the operations that you can do to one object, such as
+applying a motion or changing a color, can also be done to the "World"
+object.
+
+   <p>The <em>Targets</em> browser also has an entry for each camera.  By
+default there is only one camera; it is possible to add more of them via
+the <em>New Camera</em> entry of the <em>Main</em> panel's <em>File</em> menu. 
+Geomview treats cameras in much the same way
+as it does geometric objects.  For example, you can move cameras around
+and add them and delete them just as with geometric objects.  Cameras do
+not usually show up in the display as an object that you see.  Each
+camera has a separate camera window which displays the view as seen by
+that camera.  (It is possible for each camera to display a geometric
+representation of other cameras.  See <a href="Cameras.html#Cameras">Cameras</a>.)
+
+   <p>Because Geomview treats cameras and geometric objects very similarly,
+the term <dfn>object</dfn> in this documentation is used to refer to either
+one.  When we need to distinguish between the two kinds of objects, we
+use the term <dfn>geom</dfn> to denote a geometric object and the word
+<dfn>camera</dfn> to denote a camera.
+
+   <p>The object which is selected (highlighted) in the <em>Targets</em>
+browser is called the <dfn>target</dfn> object.  This is the object that
+receives any actions that you do with the mouse or keyboard.  You can
+change the target object by selecting a different line in the
+<em>Targets</em> browser.  Another way to change the target object is
+to put the mouse cursor directly over a geometry in a camera window
+and rapidly double-click the right mouse button.  This process is called
+<dfn>picking</dfn>; the picked object becomes the new target.
+
+   <p>Geomview objects are all known by two names, both of which are shown in
+the <em>Targets</em> browser.  The first name given there, which appears
+in square brackets ([ ]), is a short name assigned by Geomview when you
+load the object.  It consists of the letter `g' for geometries and `c' for
+cameras, followed by a number.  The second name is a longer more
+descriptive name; by default this is the name of the file that the
+object was loaded from.  The two names are equivalent as far as Geomview
+is concerned; at any point where you need to specify a name you can give
+either one.
+
+   <p>To manipulate an object, make sure you that the object you want to move is the
+target object, and put the mouse cursor in a camera window.  Motions are
+applied by holding down either the left or middle mouse button and
+moving the mouse.  There are several different motion "modes", each for
+applying a different kind of motion.  The <em>MOTION MODE</em> browser
+in the <em>Main</em> panel indicates the current motion mode.  The
+default is "Rotate".  You can change the current motion mode by
+selecting a new one in the <em>MOTION MODE</em> browser, or by using the
+<em>Tools</em> panel.  For more information about motion modes,
+See <a href="Mouse-Motions.html#Mouse-Motions">Mouse Motions</a>.
+
+   <p>The <em>Modules</em> browser lists Geomview external modules.  An
+external module is a separate program that interacts with Geomview to
+extend its functionality.  For information on external modules,
+See <a href="Modules.html#Modules">Modules</a>.
+
+   <p>The menu bar at the top of the main panel offers menus for common operations.
+
+   <p>To create new windows, load new objects, save objects or other information,
+or quit from geomview, see the <em>File</em> menu.
+
+   <p>To copy or delete objects, see the <em>Edit</em> menu.
+
+   <p>You can invoke any panel from the <em>Inspect</em> menu.
+
+   <p>The <em>Space</em> menu lets you choose whether geomview operates
+in Euclidean, Hyperbolic, or Spherical mode.  Euclidean mode is selected
+by default.  For details about using <em>Hyperbolic</em> and
+<em>Spherical</em> spaces, See <a href="Non_002dEuclidean-Geometry.html#Non_002dEuclidean-Geometry">Non-Euclidean Geometry</a>.
+
+   <p>Most actions that you can do through Geomview's panels have equivalent
+keyboard shortcuts so that you can do the same action by typing a
+sequence of keys on the keyboard.  This is useful for advanced users who
+are familiar with Geomview's capabilities and want to work quickly
+without having to have lots of panels cluttering up the screen. 
+Keyboard shortcuts are usually indicated in square brackets ([ ]) near
+the corresponding item in a panel.  For example, the keyboard shortcut
+for <em>Rotate</em> mode is 'r'; this is indicated by "[r]" appearing
+before the word "Rotate" in the <em>MOTION MODE</em> browser.  To
+use this keyboard shortcut, just hit the <kbd>r</kbd> key while the mouse
+cursor is in any Geomview window.  Do not hit the <kbd>&lt;Enter&gt;</kbd> key
+afterwards.
+
+   <p>Some keyboard shortcuts consist of more than one key.  In these cases
+just type the keys one after the other, with no <kbd>&lt;Enter&gt;</kbd>
+afterwards.  Keyboard shortcuts are case sensitive.
+
+   <p>Many keyboard shortcuts can be preceded by a numeric parameter. 
+For example, typing <code>ae</code> toggles the state of drawing edges,
+while <code>1ae</code> always enables edge drawing.
+
+   <p>The <em>keyboard</em> field in the upper left corner of the <em>Main</em>
+panel echos the current state of keyboard shortcuts.
+
+   <p>For a list of all keyboard shortcuts, press the <code>?</code> key.
+
+<!-- ================================================================ -->
+   </body></html>
+

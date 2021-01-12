@@ -1,0 +1,108 @@
+<html lang="en">
+<head>
+<title>VECT - Manual do Geomview</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Manual do Geomview">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Formatos-de-Arquivo-de-Objeto.html#Formatos-de-Arquivo-de-Objeto" title="Formatos de Arquivo de Objeto">
+<link rel="prev" href="OFF.html#OFF" title="OFF">
+<link rel="next" href="SKEL.html#SKEL" title="SKEL">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="VECT"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="SKEL.html#SKEL">SKEL</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="OFF.html#OFF">OFF</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Formatos-de-Arquivo-de-Objeto.html#Formatos-de-Arquivo-de-Objeto">Formatos de Arquivo de Objeto</a>
+<hr>
+</div>
+
+<h4 class="subsection">4.2.6 Arquivos do Tipo VECT</h4>
+
+<p>O sufixo convencional para arquivos <code>VECT</code> &eacute; <samp><span class="file">.vect</span></samp>.
+
+   <p>Sintaxe:
+
+<pre class="example">     [4]VECT
+     <var>NLinhaspoligonais</var>  <var>NV&eacute;rtices</var>  <var>NCores</var>
+     
+     <var>Nv[0]</var> ... <var>Nv[NLinhaspoligonais-1]</var>     # n&uacute;mero de v&eacute;rtices
+                                                # em cada linha poligonal
+     
+     <var>Nc[0]</var> ... <var>Nc[NLinhaspoligonais-1]</var>     # n&uacute;mero de cores fornecido
+                                                # em cada linha poligonal
+     
+     <var>Vert[0]</var> ... <var>Vert[NVertices-1]</var>  # Todos os v&eacute;rtices
+                                                # (3*NVertices n&uacute;meros em
+                                                # ponto flutuante)
+     
+     <var>Color[0]</var> ... <var>Color[NCores-1]</var>  # Todas as cores
+                                                # (4*NCores n&uacute;meros em ponto
+                                                # flutuante, RGBA)
+</pre>
+   <p>Objetos do tipo <code>VECT</code> representam listas de linhas poligonais (sequ&ecirc;ncia de caracteres que representam
+segmentos de reta, possivelmente fechados).  Uma linha poligonal degenerada pode ser usada para
+representar um ponto.
+
+   <p>Um arquivo <code>VECT</code> inicia-se com a palavra chave <code>VECT</code> ou com <code>4VECT</code>
+e tr&ecirc;s inteiros: <var>NLinhas</var>, <var>NV&eacute;rtices</var>, e <var>NCores</var>. 
+Aqui <var>NLinhas</var> &eacute; o n´umero de linhas poligonais no arquivo,
+<var>NV&eacute;rtices</var> o n&uacute;mero total de vertices v&eacute;rtices, e <var>NCores</var> o
+n&uacute;mero de cores como explanado abaixo.
+
+   <p>A seguir vem <var>NLinhas</var> que s&atilde;o inteiros de <b>16-bit</b>
+
+<div align="center"><var>Nv[0]</var> <var>Nv[1]</var> <var>Nv[2]</var> <small class="dots">...</small> <var>Nv[NLinhas-1]</var></div>
+
+   <p>fornecendo o n&uacute;mero de v&eacute;rtices em cada linha poligonal.  Um n&uacute;mero negativo
+indica uma linha poligonal fechada; 1 denota ponto composto por um pixel simples.  O somat&oacute;rio
+(dos valores absolutos) de <var>Nv[i]</var> deve ser igual a <var>NV&eacute;rtices</var>.
+
+   <p>A seguir vem <var>NLinhas</var> que s&atilde;o formadas por inteiros de <b>16-bit</b> <var>Nc[i]</var>: o n&uacute;mero
+de cores em cada linha poligonal. Normalmente um dos tr&ecirc;s valores abaixo:
+
+     <dl>
+<dt>0<dd>Nenhuma cor &eacute; especificada para esta linha poligonal.  Seu desenho na mesma cor
+que a linha poligonal anterior. 
+<br><dt>1<dd>Uma cor simples &eacute; especificada.  A linha poligonal completa &eacute; desenhada nessa
+cor. 
+<br><dt>abs(<var>Nv[i]</var>)<dd>Cada v&eacute;rtice tem uma cor.  Ou cada segmento &eacute; desenhado na
+correspondente cor, ou as cores s&atilde;o linearmente interpoladas ao longo dos
+segmentos de reta, dependendo da implementa&ccedil;&atilde;o. 
+</dl>
+
+   <p>A seguir vem <var>NV&eacute;rtices</var> grupos de 3 ou 4 n&uacute;meros em ponto flutuante: as
+coordenadas de todos os v&eacute;rtices.  Se a palavra chave for <var>4VECT</var> ent&atilde;o
+existir&atilde;o 4 valores por v&eacute;rtice.  O primeiro grupo abs(<var>Nv[0]</var>) forma
+a primeira linha poligonal, o grupo seguinte abs(<var>Nv[1]</var>) forma a segunda e assim por diante.
+
+   <p>Finalmente <var>NCores</var> grupos de 4 n&uacute;meros em ponto flutuante fornecendo valores de
+vermelho, verde, azul e alfa (opacidade).  O primeiro grupo <var>Nc[0]</var>
+aplica-se &agrave; primeira linha poligonal, e assim por diante.
+
+   <p>Um formato <var>VECT BINARY</var> &eacute; aceito; veja <a href="Formato-binario.html#Formato-binario">Formato binario</a>.  O
+formato bin&aacute;rio segue exatamente o formato ASCII, com inteiros de 32-bit
+Big-Endian onde aparecem os n&uacute;meros inteiros comuns, e com inteiros de
+<b>16-bit</b> Big-Endian onde aparecem inteiros de 16-bit; n&uacute;meros em ponto flutuante de
+32-bit Big-Endian onde aparecem os valores reais.  <b>NOTA REALMENTE GRANDE:</b> Os contadores de v&eacute;rtice
+<var>Nv[i]</var> e os contadores de cor <var>Nc[i]</var> s&atilde;o inteiros de <b>16-bit</b>
+Big-Endian.
+
+<!--  -->
+   </body></html>
+

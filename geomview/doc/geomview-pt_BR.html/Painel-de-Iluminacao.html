@@ -1,0 +1,90 @@
+<html lang="en">
+<head>
+<title>Painel de Iluminacao - Manual do Geomview</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Manual do Geomview">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Aparencia.html#Aparencia" title="Aparencia">
+<link rel="prev" href="Painel-de-Materiais.html#Painel-de-Materiais" title="Painel de Materiais">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Painel-de-Iluminacao"></a>
+<p>
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Painel-de-Materiais.html#Painel-de-Materiais">Painel de Materiais</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Aparencia.html#Aparencia">Aparencia</a>
+<hr>
+</div>
+
+<h4 class="subsection">3.6.3 O Painel de Luzes</h4>
+
+<p>O painel de luzes (<em>Lights</em>) controla o n&uacute;mero, a posi&ccedil;&atilde;o, e a cor das
+fontes de luz usadas no sombreamento. 
+<div class="float">
+<img src="figs/light.png" alt="figs/light.png">
+
+   <p><strong class="float-caption">O Painel de Ilumina&ccedil;&atilde;o.</strong></p></div>
+
+   <p>O painel de ilumina&ccedil;&atilde;o (<em>Lighting</em>) &eacute; diferente do painel de apar&ecirc;ncia (<em>Appearance</em>) e
+dos pain&eacute;is de material (<em>Material</em>) no sentido de que o painel de ilumina&ccedil;&atilde;o sempre trabalha com a apar&ecirc;ncia
+base.  Isso ocorre pelo fato de fazer sentido usar o mesmo conjunto
+de luzes para desenhar todos os objetos na sua cena.
+
+     <dl>
+<dt><em>LIGHTS</em><dd>O navegador de luzes (<em>LIGHTS</em>) mostra a luz atualmente selecionada.  Modifica&ccedil;&otilde;es
+s&atilde;o feitas usando os outros meios de escolha sobre esse painel aplicado a essa luz.  Existe
+sempre pelo menos uma luz, a luz ambiente.
+
+     <br><dt><em>Intensity</em><dd>Esse bot&atilde;o deslizante controla a intensidade da luz atual.
+
+     <br><dt><em>Color</em><dd>Esse bot&atilde;o faz surgir um modificador de corres que lhe permite selecionar a cor
+da luz que atualmente ilumina o objeto.
+
+     <br><dt><em>Add</em><dd>Esse bot&atilde;o adiciona uma luz.
+
+     <br><dt><em>Delete</em><dd>Esse bot&atilde;o exclui a luz atual.
+
+     <br><dt><em>Show Lights</em><dd>Esse bot&atilde;o permite a voc&ecirc; ver e modificar a posi&ccedil;&atilde;o das fontes de ilumina&ccedil;&atilde;o
+em uma janela de c&acirc;mera.  Cada luz &eacute; movida ao longo de um cilindro que &eacute;
+suposto para lembrar a voc&ecirc; um raio de luz.  Quando voc&ecirc; clica sobre o bot&atilde;o
+<em>Show Lights</em> Geomview entra no modo "light edit", durante
+o qual voc&ecirc; pode rotacionar a ilumina&ccedil;&atilde;o atual mantendo pressionado o bot&atilde;o esquerdo do mouse
+e movendo o mouse.  Ilumina&ccedil;&atilde;o colocada dessa forma est&atilde;o infinitamente distantes,
+de forma que o que voc&ecirc; est&aacute; modificando &eacute; a posi&ccedil;&atilde;o angular.  Clique sobre o bot&atilde;o
+<em>Show Lights</em> novamente para retornar ao modo anterior de movimento
+e para sair movendo os raios de luz.
+
+     <br><dt><em>Done</em><dd>Esse bot&atilde;o dispensa o painel de ilumina&ccedil;&atilde;o (<em>Lighting</em>).
+
+   </dl>
+
+   <p>Os pain&eacute;is do Geomview <em>Appearance</em>, <em>Materials</em>, e
+<em>Lighting</em> s&atilde;o constru&iacute;dos para permitir a voc&ecirc; fazer facilmente a maioria das coisas
+relacionadas a apar&ecirc;ncia que voc&ecirc; pode querer fazer.  A hierarquia de apar&ecirc;ncia que
+Geomview suporta internamente, todavia, &eacute; muito complexa e existem
+certas opera&ccedil;&otilde;es que voc&ecirc; n&atilde;o pode fazer com os pain&eacute;is.  A linguagem de comandos
+do Geomview (GCL) fornece suporte completo a opera&ccedil;&otilde;es sobre
+apar&ecirc;ncia.  Em particular, o comando <code>merge-baseap</code> pode ser usado
+para modificar a apar&ecirc;ncia de base (a qual, exceto para ilumina&ccedil;&atilde;o, n&atilde;o pode ser
+modificada atrav&eacute;s de pain&eacute;is do Geomview).  O comando <code>merge-ap</code> pode ser usado
+para modificar a apar&ecirc;ncia de um geom individualmente.  Apar&ecirc;ncias podem tamb&eacute;m serem
+especificadas nos arquivos OOGL; para detalhes veja,
+<a href="Aparencias.html#Aparencias">Aparencias</a>. <a href="merge_002dbaseap.html#merge_002dbaseap"><code>(merge-baseap ...)</code></a>. <a href="merge_002dap.html#merge_002dap"><code>(merge-ap ...)</code></a>.
+
+<!-- ================================================================ -->
+   </body></html>
+

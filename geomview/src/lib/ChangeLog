@@ -1,0 +1,66 @@
+2006-07-31  Steve M. Robbins  <steve@nyongwa.montreal.qc.ca>
+
+	* gprim/geom/knownclass.c: In list of function prototypes, fix bug
+	arising from the fact that the "*" in C attaches to the
+	declarator rather than the type.  Patch from Karl Chen
+	(http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=366381).
+
+	* oogl/util/ooglutil.h: Remove declaration of fmemopen(), as it
+	is already in porting.h, included by this header.
+
+2002-10-26  Steve M. Robbins  <steve@nyongwa.montreal.qc.ca>
+
+	* oogl/util/futil.c: Add defined(__CYGWIN__) to __FreeBSD__ version of
+	stdio buffer fields.
+
+	* oogl/util/error.c (sperrno): Add !defined(__CYGWIN__) to list of
+	conditions.
+
+	* oogl/lisp/lisp.c (ulongpull): Use "unsigned long" (not ulong) as
+	second argument.
+
+2002-04-13  Steve M. Robbins  <steve@nyongwa.montreal.qc.ca>
+
+	* mg/opengl/mgopenglshade.c: Update the declarations for
+	glBindTextureEXT and glDeleteTexturesEXT.
+
+	* fexpr/real.c: Use variables to compute 0/0.
+
+	* gprim/geom/geomstream.c:
+	* mg/common/mgtexture.c:
+	* oogl/util/findfile.c:
+	* oogl/util/glob.c: Add __unix__ to list of CPP symbols used to detect
+	unix systems.
+
+	* oogl/refcomm/handleP.h: Include <sys/time.h>.
+
+	* shade/appearance.c: Bugfix; variable 'c' was used uninitialized.
+
+2001-03-21  Steve M. Robbins  <steve@nyongwa.montreal.qc.ca>
+
+	* mib/mibToggle.c (mib_create_Toggle, mib_load_Toggle): 
+	* mib/mibload.c (mib_load_public, mib_reset_size): Set
+	width and height only if non-zero.
+
+2001-02-17  Steve Robbins  <steve@nyongwa.montreal.qc.ca>
+
+	* oogl/util/futil.c: Use WORDS_BIGENDIAN instead of old
+	BIG_ENDIAN; the latter is defined on some linux machines, even
+	little-endian ones.  Clean code a bit to placate "gcc -Wall".
+
+	* oogl/util/glibglue.C: Convert FILE* to istdiostream class from
+	which we obtain the rdbuf structure that can set and seek to
+	marks.
+
+2000-11-05  Steve Robbins  <steve@nyongwa.montreal.qc.ca>
+
+	* oogl/lisp/Makefile.am (BUILT_SOURCES): Declare clisp.c and
+	clisp.h.
+
+2000-10-29  Steve Robbins  <steve@nyongwa.montreal.qc.ca>
+
+	* oogl/lisp/Makefile.am (clisp.c): 
+	* oogl/wa/Makefile.am (wa.yacc.c, wa.lex.c): 
+	* fexpr/Makefile.am (parse.tab.c): Use $srcdir to refer to files
+	in the source hierarchy.
+

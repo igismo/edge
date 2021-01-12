@@ -1,0 +1,108 @@
+<html lang="en">
+<head>
+<title>transform objects - Manual do Geomview</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Manual do Geomview">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Objetos-nao_002dgeometricos.html#Objetos-nao_002dgeometricos" title="Objetos nao-geometricos">
+<link rel="prev" href="image-objects.html#image-objects" title="image objects">
+<link rel="next" href="ntransform-objects.html#ntransform-objects" title="ntransform objects">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="transform-objects"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="ntransform-objects.html#ntransform-objects">ntransform objects</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="image-objects.html#image-objects">image objects</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Objetos-nao_002dgeometricos.html#Objetos-nao_002dgeometricos">Objetos nao-geometricos</a>
+<hr>
+</div>
+
+<h4 class="subsection">4.3.3 Objetos de Transforma&ccedil;&atilde;o</h4>
+
+<p>Onde uma matriz simples 4x4 &eacute; esperada &ndash; como no campo de <code>transform</code>
+<code>INST</code>, a transforma&ccedil;&atilde;o da c&acirc;mera <code>camtoworld</code> e os
+comandos do Geomview <code>xform*</code> &ndash; use um objeto de transforma&ccedil;&atilde;o.
+
+   <p>Note que uma transforma&ccedil;&atilde;o &eacute; diferente de uma <code>TLIST</code>, que &eacute; um tipo
+de geometria.  <code>TLIST</code>s podem conter uma ou mais transforma&ccedil;&otilde;es 4x4;
+objetos "transform" devem ter exa-tamente uma.
+
+   <p>Por que temos ambos ("transform" e TLIST)?  Em muitos lugares &ndash; e.g. posicionamento de c&acirc;meras &ndash; &eacute; somente
+significativo ter uma transofrma&ccedil;&atilde;o simples.  Usando um tipo separado de objeto
+refor&ccedil;a isso.
+
+   <p>A sintaxe para um objeto de transforma&ccedil;&atilde;o "transform" &eacute;
+
+<pre class="example">     &lt;transform&gt; ::=
+       [ "{" ]             (Abertura de chave, geralmente necess&aacute;rio para
+                            tornar o fim do objeto claramente explicitado.)
+     
+        [ "transform" ]    (palavra chave opcional; desnecess&aacute;ria se o tipo
+                            for determinado pelo contexto, o que comumente
+                            ocorre.)
+        [ "define" &lt;nome&gt; ]
+                           (define uma transforma&ccedil;&atilde;o chamada &lt;nome&gt;,
+                           escolhendo seus valores do material adiante)
+     
+           &lt;dezesseis n&uacute;meros em ponto flutuante&gt;
+                           (interpretado como uma transforma&ccedil;&atilde;o homog&ecirc;nea 4x4
+     		       fornecida linha por linha, intencionalmente aplicada a um
+                            vetor linha multiplicado &agrave; ESQUERDA, de forma que
+                            e.g. transla&ccedil;&otilde;es euclidianas apare&ccedil;am na linha
+                            inferior)
+        |
+           "&lt;" &lt;nomedearquivo&gt;  (significando: leia a transforma&ccedil;&atilde;o a partir
+                            daquele arquivo)
+        |
+           ":" &lt;nome&gt;      (significando: use a vari&aacute;vel &lt;nome&gt;,
+                             definida em algum lugar; se n&atilde;o definido o valor
+                             inicial &eacute; a transforma&ccedil;&atilde;o identidade)
+     
+      [ "}" ]              (fechamento de chave correspondente)
+</pre>
+   <p>O conjunto pode ser colocado entre { chaves }.  As chaves n&atilde;o s&atilde;o essenciais
+se exatamente um dos itens acima estiver presente, ent&atilde;o e.g. um array 4x4 de
+n&uacute;meros em ponto flutuante independente n&atilde;o precisa necessariamente ter chaves.
+
+   <p>Alguns exemplos, em contextos onde eles podem ser usados:
+
+<pre class="example">     # Exemplo 1: Um comando GCL para definir uma transforma&ccedil;&atilde;o
+     # chamada "fred"
+     
+     (read transform { transform  define fred
+              1 0 0 0
+              0 1 0 0
+              0 0 1 0
+             -3 0 1 1
+         }
+     )
+</pre>
+   <pre class="example">     # Exemplo 2:  Um objeto c&acirc;mera usando a transforma&ccedil;&atilde;o
+     # "fred" para posicionamento de c&acirc;mera
+     # Fornecida a defini&ccedil;&atilde;o acima, isso coloca a c&acirc;mera em
+     # (-3, 0, 1), olhando na dire&ccedil;&atilde;o -Z.
+     
+     { camera
+             halfyfield 1
+             aspect 1.33
+             camtoworld { : fred }
+     }
+</pre>
+   <!--  -->
+   </body></html>
+

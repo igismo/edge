@@ -1,0 +1,121 @@
+<html lang="en">
+<head>
+<title>BBP and BEZ - Geomview Manual</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Geomview Manual">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Object-File-Formats.html#Object-File-Formats" title="Object File Formats">
+<link rel="prev" href="BBOX.html#BBOX" title="BBOX">
+<link rel="next" href="OFF.html#OFF" title="OFF">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="BBP-and-BEZ"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="OFF.html#OFF">OFF</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="BBOX.html#BBOX">BBOX</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Object-File-Formats.html#Object-File-Formats">Object File Formats</a>
+<hr>
+</div>
+
+<h4 class="subsection">4.2.4 Bezier Surfaces</h4>
+
+<p>The conventional file suffixes for Bezier surface files are <samp><span class="file">.bbp</span></samp>
+or <samp><span class="file">.bez</span></samp>.  A file with either suffix may contain either type of
+patch.
+
+   <p>Syntax:
+
+<pre class="example">       [ST]BBP -or- [C]BEZ&lt;<var>Nu</var>&gt;&lt;<var>Nv</var>&gt;&lt;<var>Nd</var>&gt;[_ST]
+                             # <var>Nu</var>, <var>Nv</var> are u- and v-direction
+                             # polynomial degrees in range 1..6
+                             # <var>Nd</var> = dimension: 3-&gt;3-D, 4-&gt;4-D (rational)
+                             # (The '&lt;' and '&gt;' do not appear in the input.)
+                             # <var>Nu</var>,<var>Nv</var>,<var>Nd</var> are each a single decimal digit.
+                             # BBP form implies <var>Nu</var>=<var>Nv</var>=<var>Nd</var>=3 so BBP = BEZ333.
+     
+                     # Any number of patches follow the header
+                             # (<var>Nu</var>+1)*(<var>Nv</var>+1) patch control points
+                             # each 3 or 4 floats according to header
+       <var>vertex</var>(u=0,v=0)  <var>vertex</var>(1,0) ... <var>vertex</var>(<var>Nu</var>,0)
+       <var>vertex</var>(0,1)                        ... <var>vertex</var>(<var>Nu</var>,1)
+       ...
+       <var>vertex</var>(0,<var>Nv</var>)                 ... <var>vertex</var>(<var>Nu</var>,<var>Nv</var>)
+     
+                             # ST texture coordinates if mentioned in header
+       <code>S</code>(u=0,v=0)     <code>T</code>(0,0)   <code>S</code>(0,<var>Nv</var>) <code>T</code>(0,<var>Nv</var>)
+       <code>S</code>(<var>Nu</var>,0)  <code>T</code>(<var>Nu</var>,0)    <code>S</code>(<var>Nu</var>,<var>Nv</var>) <code>T</code>(<var>Nu</var>,<var>Nv</var>)
+     
+                             # 4-component float (0..1) R G B A colors
+                             # for each patch corner if mentioned in header
+       <code>RGBA</code>(0,0)   <code>RGBA</code>(0,<var>Nv</var>)
+       <code>RGBA</code>(<var>Nu</var>,0)  <code>RGBA</code>(<var>Nu</var>,<var>Nv</var>)
+</pre>
+   <p>These formats represent collections of Bezier surface patches, of
+degrees up to 6, and with 3-D or 4-D (rational) vertices.
+
+   <p>The header keyword has the forms <code>[ST]BBP</code> or
+<code>[C]BEZ&lt;</code><var>Nu</var><code>&gt;&lt;</code><var>Nv</var><code>&gt;&lt;</code><var>Nd</var><code>&gt;[_ST]</code> (the '&lt;' and '&gt;' are
+not part of the keyword.
+
+   <p>The <code>ST</code> prefix on <code>BBP</code>, or <code>_ST</code> suffix on
+<code>BEZuvn</code>, indicates that each patch includes four pairs of
+floating-point texture-space coordinates, one for each corner of the
+patch.
+
+   <p>The <code>C</code> prefix on <code>BEZuvn</code> indicates a colored patch,
+including four sets of four-component floating-point colors (red, green,
+blue, and alpha) in the range 0..1, one color for each corner.
+
+   <p><var>Nu</var> and <var>Nv</var>, each a single digit in the range 1..6, are the
+patch's polynomial degree in the u and v direction respectively.
+
+   <p><var>Nd</var> is the number of components in each patch vertex, and must be
+either <code>3</code> for 3-D or <code>4</code> for homogeneous coordinates, that
+is, rational patches.
+
+   <p><code>BBP</code> patches are bicubic patches with 3-D vertices, so <code>BBP</code>
+= <code>BEZ333</code> and <code>STBBP</code> = <code>BEZ333_ST</code>.
+
+   <p>Any number of patches follow the header.  Each patch comprises a series
+of patch vertices, followed by optional (s,t) texture coordinates,
+followed by optional (r,g,b,a) colors.
+
+   <p>Each patch has (<var>Nu</var>+1)*(<var>Nv</var>+1) vertices in v-major order, so that if we
+designate a vertex by its control point indices (u,v) the order is
+<pre class="example">          (0,0) (1,0) (2,0) ...  (<var>Nu</var>,0)
+          (0,1) (1,1) (2,1) ...  (<var>Nu</var>,1)
+          ...
+          (0,<var>Nv</var>)            ...  (<var>Nu</var>,<var>Nv</var>)
+</pre>
+   <p class="noindent">with each vertex containing either 3 or 4 floating-point numbers
+as specified by the header.
+
+   <p>If the header calls for ST coordinates, four pairs of floating-point
+numbers follow: the texture-space coordinates for the (0,0),
+(<var>Nu</var>,0), (0,<var>Nv</var>), and (<var>Nu</var>,<var>Nv</var>) corners of the
+patch, respectively.
+
+   <p>If the header calls for colors, four four-component (red, green, blue,
+alpha) floating-point colors follow, one for each patch corner.
+
+   <p>The series of patches ends at end-of-file, or with a closebrace if
+incorporated in an object reference.
+
+<!--  -->
+   </body></html>
+

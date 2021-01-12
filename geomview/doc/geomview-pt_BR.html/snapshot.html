@@ -1,0 +1,63 @@
+<html lang="en">
+<head>
+<title>snapshot - Manual do Geomview</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Manual do Geomview">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="GCL-Reference.html#GCL-Reference" title="GCL Reference">
+<link rel="prev" href="sleep_002duntil.html#sleep_002duntil" title="sleep-until">
+<link rel="next" href="soft_002dshader.html#soft_002dshader" title="soft-shader">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="snapshot"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="soft_002dshader.html#soft_002dshader">soft-shader</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="sleep_002duntil.html#sleep_002duntil">sleep-until</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="GCL-Reference.html#GCL-Reference">GCL Reference</a>
+<hr>
+</div>
+
+<h4 class="subsection">7.2.132 snapshot</h4>
+
+<p><a name="index-snapshot-140"></a>
+     <dl>
+<dt><code>(snapshot CAM-ID NOMEDOARQUIVO [FORMAT [XSIZE [YSIZE]]])</code><dd>Save a snapshot of <var>CAM-ID</var> in the <var>NOMEDOARQUIVO</var> (a sequ&ecirc;ncia de caracteres). The
+<var>FORMAT</var> argumento is optional; it may be "ppmscreen" (the default),
+"ps", "ppm", "sgi" (on SGI machines), "ppmosmesa" (if built with
+libOSMesa) ou "ppmosglx". A "ppmscreen" snapshot is created by reading
+the image directly from the given janela; the janela is popped above
+other janelas and redrawn first, then its contents are written as a PPM
+format image. A "ppmosmesa" snapshot is drawn by Mesa's software
+renderer into a memory buffer in RAM. A "ppmosglx" snapshot is rendered
+into a GLX Pixmap buffer, which is also off-screen but may ou may not
+reside in video RAM.  Rendering may ou may not be accelerated. The
+problem with on-screen snapshots is that the janela must be mapped and
+not obscured by other janelas. So on-screen snapshots will not work in
+the background, ou when a screen safer is active. With "ps", dumps a
+Postscript picture representing the view from that janela;
+hidden-surface removal might be incorrect. With "ppm", dumps a
+PPM-format image produced by geomview's internal software renderer; this
+may be of arbitrary size. If the <var>NOMEDOARQUIVO</var> argumento begins with
+"|", it's interpreted as a <code>/bin/sh</code> command to which the PPM ou PS
+data should be piped. Optional <var>XSIZE</var> and <var>YSIZE</var> values are
+relevant only for "ppm" formats, and render to a janela of that size (or
+scaled to that size, with aspect fixed, if only <var>XSIZE</var> is given)
+</dl>
+
+   </body></html>
+

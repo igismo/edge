@@ -1,0 +1,62 @@
+<html lang="en">
+<head>
+<title>ui-panel - Geomview Manual</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Geomview Manual">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="GCL-Reference.html#GCL-Reference" title="GCL Reference">
+<link rel="prev" href="ui_002dmotion.html#ui_002dmotion" title="ui-motion">
+<link rel="next" href="ui_002dpdf_002dviewer.html#ui_002dpdf_002dviewer" title="ui-pdf-viewer">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="ui-panel"></a>
+<a name="ui_002dpanel"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="ui_002dpdf_002dviewer.html#ui_002dpdf_002dviewer">ui-pdf-viewer</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="ui_002dmotion.html#ui_002dmotion">ui-motion</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="GCL-Reference.html#GCL-Reference">GCL Reference</a>
+<hr>
+</div>
+
+<h4 class="subsection">7.2.149 ui-panel</h4>
+
+<p><a name="index-ui_002dpanel-157"></a>
+     <dl>
+<dt><code>(ui-panel PANELNAME {on|off} [WINDOW])</code><dd>Do or don't display the given user-interface panel. 
+Case is ignored in panel names. Current <var>PANELNAMEs</var> are:
+          <dl>
+<dt>geomview<dd>main panel
+<br><dt>tools<dd>motion controls
+<br><dt>appearance<dd>appearance controls
+<br><dt>cameras<dd>camera controls
+<br><dt>lighting<dd>lighting controls
+<br><dt>obscure<dd>obscure controls (doesn't seem to exist any more)
+<br><dt>materials<dd>material properties controls
+<br><dt>command<dd>command entry box
+<br><dt>credits<dd>geomview credits
+</dl>
+     By default, the <code>geomview</code> and <code>tools</code> panels appear when
+geomview starts.  If the optional Window is supplied, a <code>position</code>
+clause (e.g. (ui-panel obscure on { position xmin xmax ymin ymax })
+sets the panel's default position.  (Only xmin and ymin values are
+actually used.)  A present but empty Window, e.g.  <code>(ui-panel
+obscure on {</code>)} causes interactive positioning. 
+</dl>
+
+   </body></html>
+

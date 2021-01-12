@@ -1,0 +1,81 @@
+<html lang="en">
+<head>
+<title>Vertices - Manual do Geomview</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Manual do Geomview">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Convencoes.html#Convencoes" title="Convencoes">
+<link rel="prev" href="Nomes-de-arquivos.html#Nomes-de-arquivos" title="Nomes de arquivos">
+<link rel="next" href="ND_002dVertices.html#ND_002dVertices" title="ND-Vertices">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Vertices"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="ND_002dVertices.html#ND_002dVertices">ND-Vertices</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Nomes-de-arquivos.html#Nomes-de-arquivos">Nomes de arquivos</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Convencoes.html#Convencoes">Convencoes</a>
+<hr>
+</div>
+
+<h4 class="subsection">4.1.3 V&eacute;rtices</h4>
+
+<p>Muitos objetos compartilham um estilo comum de representar v&eacute;rtices com
+op&ccedil;&otilde;es de superf&iacute;cie normal de v&eacute;rtice e cor.  Todos os v&eacute;rtices dentro de um
+objeto possuem o mesmo formato, especificado pela palavra chave no cabe&ccedil;alho.
+
+   <p>Todos os dados para um v&eacute;rtice est&atilde;o agrupados juntos (em oposi&ccedil;&atilde;o a e.g. fornecimento
+de coordenadas para todos os v&eacute;rtices, em seguida cores para todos os v&eacute;rtices, e assim por diante).
+
+   <p>A sintaxe &eacute;
+
+     <dl>
+<dt>&lsquo;<samp><var>x</var>  <var>y</var>  <var>z</var></samp>&rsquo;<dd>(coordenadas do v&eacute;rtice tridimensionais em ponto flutuante) ou
+<br><dt>&lsquo;<samp><var>x</var>  <var>y</var>  <var>z</var>  <var>w</var></samp>&rsquo;<dd>(coordenadas do v&eacute;rtice tetradimensionais em ponto flutuante)
+</dl>
+
+   <p>opcionalmente seguida por
+
+     <dl>
+<dt>&lsquo;<samp><var>nx</var>  <var>ny</var>  <var>nz</var></samp>&rsquo;<dd>(superf&iacute;cie normalizada tridimensional se presente)
+</dl>
+
+   <p>opcionalmente seguida por
+
+     <dl>
+<dt>&lsquo;<samp><var>r</var>  <var>g</var>  <span class="samp">b  </span><var>a</var></samp>&rsquo;<dd>(componente qu&aacute;drupla em ponto flutuante se presente, cada componente no intervalo
+0..1.  A componente <var>a</var> (alfa) representa a opacidade: 0 transparente, 1
+opaco.)
+
+     <p>opcionalmente seguida por
+<br><dt>&lsquo;<samp><var>s</var> <var>t</var></samp>&rsquo;<br><dt>&lsquo;<samp><span class="samp">ou</span></samp>&rsquo;<br><dt>&lsquo;<samp><var>s</var> <var>t</var> <var>u</var></samp>&rsquo;<dd></dl>
+
+   <p>(duas ou tr&ecirc;s valores coordenados de textura).
+
+   <p>Valores s&atilde;o separados por espa&ccedil;os em branco, e quebras de linha
+s&atilde;o imateriais.
+
+   <p>Letras na palavra chave de cabe&ccedil;alho do objeto devem aparecer numa ordem espec&iacute;fica;
+isto &eacute; a ordem reversa na qual os dados s&atilde;o fornecidos para cada v&eacute;rtice. 
+Ent&atilde;o v&eacute;rtices de objeto do tipo &lsquo;<samp><span class="samp">CN4OFF</span></samp>&rsquo; possuem primeiramente as componentes quadridimensionais de
+posicionamento no espa&ccedil;o, a seguir as componentes normais tridimensionais, finalmente as componentes quadridimensionais de cor. 
+Voc&ecirc; pode modificar a ordem dos dados modificando o cabe&ccedil;alho de palavra chave; um
+&lsquo;<samp><span class="samp">NCOFF</span></samp>&rsquo; &eacute; apenas n&atilde;o reconhecido.
+
+<!--  -->
+   </body></html>
+

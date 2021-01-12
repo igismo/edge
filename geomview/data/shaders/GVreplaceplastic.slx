@@ -1,0 +1,178 @@
+surface
+AQSIS_V 2
+
+
+segment Data
+
+USES 509959
+
+param uniform  float Ka
+param uniform  float Kd
+param uniform  float Ks
+param uniform  float roughness
+param uniform  color specularcolor
+param uniform  string texturename
+param uniform  float At
+varying  color Ct
+varying  float Ot
+varying  float channels
+varying  normal b5::Nf
+varying  vector b5::V
+
+
+segment Init
+	pushif 1
+	pop Ka
+	pushif 0.5
+	pop Kd
+	pushif 0.5
+	pop Ks
+	pushif 0.100000001
+	pop roughness
+	pushif 1
+	setfc
+	pop specularcolor
+	pushis ""
+	pop texturename
+	pushif 1
+	pop At
+
+
+segment Code
+	S_CLEAR
+	pushis ""
+	pushv texturename
+	ness
+	pushif 1
+	pushis "channels"
+	pushv texturename
+	textureinfo channels
+	eqff
+	land
+	S_GET
+	RS_PUSH
+	RS_GET
+	RS_JZ 1
+	S_CLEAR
+	pushif 3
+	pushv channels
+	lsff
+	S_GET
+	RS_PUSH
+	RS_GET
+	RS_JZ 3
+	pushif 0
+	pushis "channel"
+	pushif 0
+	pushis "width"
+	pushv texturename
+	pushif 4
+	ftexture1
+	setfc
+	pop Ct
+	S_CLEAR
+	pushif 2
+	pushv channels
+	eqff
+	S_GET
+	RS_PUSH
+	RS_GET
+	RS_JZ 4
+	pushif 1
+	pushis "channel"
+	pushif 0
+	pushis "width"
+	pushv texturename
+	pushif 4
+	ftexture1
+	pop Ot
+:4
+	RS_POP
+:3
+	RS_INVERSE
+	RS_JZ 2
+	pushif 0
+	pushis "width"
+	pushv texturename
+	pushif 2
+	ctexture1
+	pop Ct
+	S_CLEAR
+	pushif 4
+	pushv channels
+	eqff
+	S_GET
+	RS_PUSH
+	RS_GET
+	RS_JZ 5
+	pushif 3
+	pushis "channel"
+	pushif 0
+	pushis "width"
+	pushv texturename
+	pushif 4
+	ftexture1
+	pop Ot
+:5
+	RS_POP
+:2
+	RS_POP
+	pushv Ot
+	pushv At
+	mulff
+	pushv At
+	pushif 1
+	subff
+	addff
+	pop Ot
+	pushv Ot
+	setfc
+	pushv Ct
+	mulcc
+	pop Ci
+	pushv Ot
+	setfc
+	pop Oi
+:1
+	RS_INVERSE
+	RS_JZ 0
+	pushv Cs
+	pop Ci
+	pushv Os
+	pop Oi
+	pushv I
+	pushv N
+	normalize
+	faceforward
+	pop b5::Nf
+	pushv I
+	normalize
+	negp
+	pop b5::V
+	pushv roughness
+	pushv b5::V
+	pushv b5::Nf
+	specular
+	pushv Ks
+	setfc
+	pushv specularcolor
+	mulcc
+	mulcc
+	pushv b5::Nf
+	diffuse
+	pushv Kd
+	mulfc
+	ambient
+	pushv Ka
+	mulfc
+	addcc
+	pushv Ci
+	mulcc
+	addcc
+	pop Ci
+	pushv Os
+	pushv Ci
+	mulcc
+	pop Ci
+:0
+	RS_POP

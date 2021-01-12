@@ -1,0 +1,64 @@
+<html lang="en">
+<head>
+<title>LIST - Geomview Manual</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Geomview Manual">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Object-File-Formats.html#Object-File-Formats" title="Object File Formats">
+<link rel="prev" href="INST.html#INST" title="INST">
+<link rel="next" href="TLIST.html#TLIST" title="TLIST">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="LIST"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="TLIST.html#TLIST">TLIST</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="INST.html#INST">INST</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Object-File-Formats.html#Object-File-Formats">Object File Formats</a>
+<hr>
+</div>
+
+<h4 class="subsection">4.2.10 LIST Files</h4>
+
+<p>The conventional suffix for a <code>LIST</code> file is <samp><span class="file">.list</span></samp>.
+
+   <p>A list of OOGL objects
+
+   <p>Syntax:
+
+<pre class="example">     LIST
+         <var>oogl-object</var>
+         <var>oogl-object</var>
+         ...
+</pre>
+   <p>Note that there's no explicit separation between the oogl-objects, so
+they should be enclosed in curly braces ({ }) for sanity.  Likewise
+there's no explicit marker for the end of the list; unless appearing
+alone in a disk file, the whole construct should also be wrapped in
+braces, as in:
+
+<pre class="example">        { LIST { QUAD ... } { &lt; xyz.quad } }
+</pre>
+   <p>A <code>LIST</code> with no elements, i.e. <code>{ LIST }</code>, is valid, and is
+the easiest way to create an empty object.  For example, to remove a
+symbol's definition you might write
+
+<pre class="example">        { define somesymbol  { LIST } }
+</pre>
+   <!--  -->
+   </body></html>
+

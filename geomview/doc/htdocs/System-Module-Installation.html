@@ -1,0 +1,65 @@
+<html lang="en">
+<head>
+<title>System Module Installation - Geomview Manual</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Geomview Manual">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Module-Installation.html#Module-Installation" title="Module Installation">
+<link rel="prev" href="Private-Module-Installation.html#Private-Module-Installation" title="Private Module Installation">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="System-Module-Installation"></a>
+<p>
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Private-Module-Installation.html#Private-Module-Installation">Private Module Installation</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Module-Installation.html#Module-Installation">Module Installation</a>
+<hr>
+</div>
+
+<h4 class="subsection">6.7.2 System Module Installation</h4>
+
+<p>To install a module so that it is available to all Geomview users do
+the following
+
+     <dl>
+<dt>1.<dd>Create a file called <samp><span class="file">.geomview-</span><var>module</var></samp> where
+<samp><var>module</var></samp> is the name of the module.  This file should contain
+a single line which is an <code>emodule-define</code> command for that module:
+     <pre class="example">          (emodule-define "New Module" "newmodule")
+</pre>
+     <p>The first argument, <code>"New Module"</code> above, is the string that will
+appear in the <em>Modules</em> browser.  The second string,
+<code>"newmodule"</code> above, is the Bourne shell command for invoking the module. 
+It may include arguments, and you may assume that the module is on the
+$PATH searched by the shell.
+
+     <br><dt>2.<dd>Put a copy of the <samp><span class="file">.geomview-</span><var>module</var></samp> and the module
+executable itself in <samp><span class="file">/usr/local/libexec/geomview</span></samp> directory.
+
+   </dl>
+
+   <p>After these steps, the new module should appear, in alphabetical
+position, in the <em>Modules</em> browser of Geomview's <em>Main</em>
+panel next time Geomview is run.  The reason this works is that when
+Geomview is invoked it processes all the <samp><span class="file">.geomview-*</span></samp> files in its
+<samp><span class="file">modules</span></samp> directory.  It also remembers the pathname of this
+directory and prepends that path to the $PATH of the shell in which it
+invokes such a module.
+
+<!-- **************************************************************** -->
+   </body></html>
+

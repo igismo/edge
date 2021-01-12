@@ -1,0 +1,76 @@
+<html lang="en">
+<head>
+<title>COMMENT - Manual do Geomview</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Manual do Geomview">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Formatos-de-Arquivo-de-Objeto.html#Formatos-de-Arquivo-de-Objeto" title="Formatos de Arquivo de Objeto">
+<link rel="prev" href="DISCGRP.html#DISCGRP" title="DISCGRP">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="COMMENT"></a>
+<p>
+Previous:&nbsp;<a rel="previous" accesskey="p" href="DISCGRP.html#DISCGRP">DISCGRP</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Formatos-de-Arquivo-de-Objeto.html#Formatos-de-Arquivo-de-Objeto">Formatos de Arquivo de Objeto</a>
+<hr>
+</div>
+
+<h4 class="subsection">4.2.14 Objetos do Tipo COMMENT</h4>
+
+<p>O objeto COMMENT &eacute; um mecanismo para codificar dados arbitr&aacute;rios dentro de um
+objeto OOGL. O objeto COMMENT pode ser usado para manter trilhas de dados ou para passagem de dados de retorno e
+passar dados adiante entre m&oacute;dulos externos.
+
+   <p>Sintaxe:
+
+<pre class="example">     COMMENT                 # palavra chave
+     
+     <var>nome</var> <var>tipo</var>   # nome individual e especificador de tipo
+     { ... }             # dados arbitr&aacute;rios
+</pre>
+   <p>Os dados, que devem ser contidos dentro de chaves, podem incluir qualquer coisa
+exceto chaves n&atilde;o balanceadas (aberta mas sem o fechamento correspondente ou fechada mas sem a abertura correspondente).  O campo <var>tipo</var> pode ser usado para
+identificar dados de interesse de um programa em particular apesar de nomear
+conven&ccedil;&otilde;es.
+
+   <p>Objetos <code>COMMENT</code> s&atilde;o intendidos como estando associados com outros objetos
+apesar da inclus&atilde;o em um objeto <code>LIST</code>. (Veja <a href="LIST.html#LIST">LIST</a>.)  A sintaxe da cerquilha
+"#" OOGL de coment&aacute;rio n&atilde;o &eacute; suficiente para troca de dados uma vez que esses coment&aacute;rios
+s&atilde;o removidos quando um objeto OOGL &eacute; lido dentro do Geomview.  O
+objeto <code>COMMENT</code> &eacute; preservado quando chamado dentro do Geomview e &eacute;
+mantido intacto na sa&iacute;da.
+
+   <p>Aqui est&aacute; um exemplo associando uma localiza&ccedil;&atilde;o na internet a uma pe&ccedil;a de
+geometria:
+
+<pre class="example">     { LIST
+      { &lt; Tetrahedron}
+      {COMMENT GCHomepage HREF { http://www.geomview.org/ }}
+     }
+</pre>
+   <p>Um formato de <code>COMMENT</code> bin&aacute;rio &eacute; aceito. Esse formato bin&aacute;rio de coment&aacute;rio n&atilde;o &eacute; consistente
+com outros formatos bin&aacute;rios OOGL. Veja <a href="Formato-binario.html#Formato-binario">Formato binario</a>. O
+<code>nome</code> e o <code>tipo</code> s&atilde;o seguidos por
+
+<pre class="example">     <var>N</var> <var>Byte1</var> <var>Byte2</var> ... <var>ByteN</var>
+</pre>
+   <p>Em lugar de dados contidos dentro de chaves.
+
+<!-- ================================================================ -->
+   </body></html>
+

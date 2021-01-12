@@ -1,0 +1,90 @@
+<html lang="en">
+<head>
+<title>TLIST - Manual do Geomview</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Manual do Geomview">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Formatos-de-Arquivo-de-Objeto.html#Formatos-de-Arquivo-de-Objeto" title="Formatos de Arquivo de Objeto">
+<link rel="prev" href="LIST.html#LIST" title="LIST">
+<link rel="next" href="GROUP.html#GROUP" title="GROUP">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="TLIST"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="GROUP.html#GROUP">GROUP</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="LIST.html#LIST">LIST</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Formatos-de-Arquivo-de-Objeto.html#Formatos-de-Arquivo-de-Objeto">Formatos de Arquivo de Objeto</a>
+<hr>
+</div>
+
+<h4 class="subsection">4.2.11 Arquivos do Tipo TLIST</h4>
+
+<p>O sufixo convencional para um arquivo <code>TLIST</code> &eacute; <samp><span class="file">.grp</span></samp> ("grupo")
+ou <samp><span class="file">.prj</span></samp> (matrizes "projetivas").
+
+   <p>Cole&ccedil;&otilde;es de matrizes 4x4, usadas na se&ccedil;&atilde;o <code>transforms</code> de/e
+objeto <code>INST</code>.
+
+   <p>Sintaxe:
+
+<pre class="example">     TLIST			# palavra chave
+     &lt;matriz 4x4 (16 n&uacute;meros em ponto flutuante)&gt;
+     ...				# qualquer n&uacute;mero de matrizes 4x4
+     transform {             # refer&ecirc;ncia a um objeto de transforma&ccedil;&atilde;o
+     &lt;objeto de transforma&ccedil;&atilde;o (pode ser um manipulador)&gt;
+     }
+     tlist {                 # TLIST aninhada
+     &lt;objeto TLIST OOGL (pode ser um manipulador)&gt;
+     }
+</pre>
+   <p>Objetos <code>TLIST</code> s&atilde;o usados somente dentro de cl&aacute;usulas <code>transforms</code> de um
+objeto <code>INST</code>.  Objetos <code>TLIST</code> fazem com que os objetos <code>geom</code> <code>INST</code>s sejam
+instanciados uma vez sob cada uma das transforma&ccedil;&otilde;es na <code>TLIST</code>. 
+O efeito &eacute; como aquele de um <code>LIST</code> de <code>INST</code>s cada uma com uma
+transforma&ccedil;&atilde;o simples, e todas as transforma&ccedil;&otilde;es referindo-se ao mesmo objeto, mas &eacute; mais
+eficiente.
+
+   <p><code>TLIST</code>s podem ser aninhadas: efetivamente isto significa que todas as
+transforma&ccedil;&otilde;es em cada objeto <code>TLIST</code> aninhado s&atilde;o multiplicadas (&agrave;
+esquerda) atrav&eacute;s das transforma&ccedil;&otilde;es no objeto <code>TLIST</code> mais externo.
+
+   <p>Esteja informado de que uma <code>TLIST</code> &eacute; um tipo de geom, distinto de um
+objeto <code>transform</code>.  Alguns contextos esperam um geom,
+alguns contextos esperam um <code>transform</code>.  Por exemplo em
+<pre class="example">     INST transform { : <var>meuT</var> } geom { ... }
+</pre>
+   <p class="noindent"><var>meuT</var> deve ser um objeto transform, que pode ter sido
+criado com a GCL
+<pre class="example">     (read transform { define meuT 1 0 0 1 ... })
+</pre>
+   <p class="noindent">enquanto em
+<pre class="example">       INST transforms { : <var>meusTs</var> } geom { ... }
+       ou
+       INST transforms { LIST {: <var>meusTs</var>} {&lt; more.prj} } geom { ... }
+</pre>
+   <p class="noindent"><var>meusTs</var> deve ser um objeto geom, definido e.g. com
+<pre class="example">       (read geometry { define <var>meusTs</var> { TLIST 1 0 0 1 ... } })
+</pre>
+   <p>O formato <code>TLIST BINARY</code> &eacute; aceito.  Dados bin&aacute;rios iniciam-se com um
+inteiro de 32-bit fornecendo o n&uacute;meros de transforma&ccedil;&otilde;es, seguido por aquele
+n&uacute;mero de matrizes 4x4 no formato em n&uacute;mero de ponto flutuante de 32-bit.  A ordena&ccedil;&atilde;o dos
+elementos da matriz &eacute; a mesma do formato ASCII.
+
+<!--  -->
+   </body></html>
+

@@ -1,0 +1,93 @@
+<html lang="en">
+<head>
+<title>Painel de Materiais - Manual do Geomview</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Manual do Geomview">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Aparencia.html#Aparencia" title="Aparencia">
+<link rel="prev" href="Painel-de-Aparencia.html#Painel-de-Aparencia" title="Painel de Aparencia">
+<link rel="next" href="Painel-de-Iluminacao.html#Painel-de-Iluminacao" title="Painel de Iluminacao">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Painel-de-Materiais"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Painel-de-Iluminacao.html#Painel-de-Iluminacao">Painel de Iluminacao</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Painel-de-Aparencia.html#Painel-de-Aparencia">Painel de Aparencia</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Aparencia.html#Aparencia">Aparencia</a>
+<hr>
+</div>
+
+<h4 class="subsection">3.6.2 O Painel de Materiais</h4>
+
+<p>O painel de materiais (<em>Materials</em>) controla as propriedades materiais das surperf&iacute;cies. 
+O painel de materiais trabalha com o objeto alvo da mesma forma que o
+painel de apar&ecirc;ncia (<em>Appearance</em>) faz. 
+<div class="float">
+<a name="figmatpanel"></a><img src="figs/mat.png" alt="figs/mat.png">
+
+   <p><strong class="float-caption">Figura 3.7: O Painel de Materiais.</strong></p></div>
+
+     <dl>
+<dt><em>Translucent</em><dd>
+Esse bot&atilde;o determina se a capacidade de ser transl&uacute;cido est&aacute; habilitada. Geomview
+suporta tr&ecirc;s diferentes formas da capacidade de ser transl&uacute;cido (transluc&ecirc;ncia):
+
+          <dl>
+<dt><em>Alpha-blending com BSP-tree depth-sorting</em><dd>Esse &eacute; o n&iacute;vel mais acurado de prefer&ecirc;ncia de visualiza&ccedil;&atilde;o imediata, mas consome vastos
+montantes de tempo de computa&ccedil;&atilde;o e mem&oacute;ria. No modo simples de transluc&ecirc;ncia
+objetos s&atilde;o mostrados corretamente em rela&ccedil;&atilde;o a si mesmos; todavia
+multiplos objetos transl&uacute;cidos podem aparecer na ordem inadequada na
+tela. A no&ccedil;&atilde;o <em>objeto</em> significa aqui: geometria de n&iacute;vel mais alto como
+mostrado no navegador de alvo de geometria.
+
+          <br><dt><em>Screen Door Translucency</em><dd>Se a m&aacute;quina suporta OpenGL ent&atilde;o existe suporte para tipo de
+transluc&ecirc;ncia por mascaramento de sa&iacute;da (completamente) de pixels transparentes por meio de
+uma mascara de ponteamento. Essa forma &eacute; atualmente muito experimental, e o resultado &eacute;
+de certa forma o ideal, mas funciona e &eacute; r&aacute;pido.
+
+          <br><dt><em>Alphe-blending sem depth-sorting</em><dd>Esse &eacute; a antiga forma de fazer uma transluc&ecirc;ncia r&aacute;pida e com muitas falhas. Essa &eacute;
+r&aacute;pida, mas os resultados s&atilde;o completamente incorretos. 
+</dl>
+
+     <p>Quando a transpar&ecirc;ncia estiver habilitada, um instant&acirc;neo RenderMan ir&aacute; conter a
+informa&ccedil;&atilde;o alfa, um renderizador obediente pode ent&atilde;o gerar
+figuras de alta qualidade, incluindo a transluc&ecirc;ncia correta.
+
+     <br><dt><em>Alpha</em><dd>O bot&atilde;o deslizante determina a opacidade/transpar&ecirc;ncia quando a transpar&ecirc;ncia estiver
+habilitada.  0 (zero) significa totalmente transparente, 1 significa totalmente opaco.
+
+     <br><dt><em>Diffuse Reflectance</em><dd>Esse bot&atilde;o deslizante controla a reflect&acirc;ncia difusa de uma superf&iacute;cie.  Isso tem
+a ver com o quanto a superf&iacute;cie dispersa a luz que reflete.
+
+     <br><dt><em>Shininess</em><dd>Esse bot&atilde;o deslizante controla o quanto brilhante a superf&iacute;cie &eacute;. Esse bot&atilde;o  determina o
+tamanho de destaques especulares sobre a superf&iacute;cie.  Valores pequenos fornecem &agrave;
+superf&iacute;cie uma apar&ecirc;ncia sombria.
+
+     <br><dt><em>Ambient Reflectance</em><dd>Esse bot&atilde;o deslizante controla o quanto da luz ambiente uma superf&iacute;cie reflete.
+
+     <br><dt><em>Specular Reflectance</em><dd>Esse bot&atilde;o deslizante controla a reflect&acirc;ncia especular de uma  superf&iacute;cie.  Isso tem
+a ver com como a superf&iacute;cie reflete diretamente os raios luminosos.  Valores
+maiores fornecem destaques de brilho especular.
+
+     <br><dt><em>Done</em><dd>Esse bot&atilde;o dispensa o painel de materiais (<em>Materials</em>).
+
+   </dl>
+
+<!--  -->
+   </body></html>
+

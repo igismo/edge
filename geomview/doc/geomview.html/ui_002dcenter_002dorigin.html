@@ -1,0 +1,53 @@
+<html lang="en">
+<head>
+<title>ui-center-origin - Geomview Manual</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Geomview Manual">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="GCL-Reference.html#GCL-Reference" title="GCL Reference">
+<link rel="prev" href="ui_002dcenter.html#ui_002dcenter" title="ui-center">
+<link rel="next" href="ui_002demotion_002dprogram.html#ui_002demotion_002dprogram" title="ui-emotion-program">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="ui-center-origin"></a>
+<a name="ui_002dcenter_002dorigin"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="ui_002demotion_002dprogram.html#ui_002demotion_002dprogram">ui-emotion-program</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="ui_002dcenter.html#ui_002dcenter">ui-center</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="GCL-Reference.html#GCL-Reference">GCL Reference</a>
+<hr>
+</div>
+
+<h4 class="subsection">7.2.143 ui-center-origin</h4>
+
+<p><a name="index-ui_002dcenter_002dorigin-151"></a>
+     <dl>
+<dt><code>(ui-center-origin [origin|bbox-center])</code><dd>Set the origin of the coordinate system of the <code>CENTER</code> object for
+user interface (i.e. mouse) controlled motions.  The keyword
+<code>origin</code> means to use the origin of the coordinate system of the
+currently selected object, while <code>bbox-center</code> means to use the
+center of the bounding box of the current object.  The keyword
+<code>bbox-center</code> makes no sense if the geometry is
+non-Euclidean. Using either <code>bbox-center</code> or <code>origin</code> does not
+make a difference if the center object is not a <em>geometry</em>, e.g. if
+it is a camera. Same holds if the World is the currently selected
+object. 
+</dl>
+
+   </body></html>
+

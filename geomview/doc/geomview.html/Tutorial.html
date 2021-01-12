@@ -1,0 +1,237 @@
+<html lang="en">
+<head>
+<title>Tutorial - Geomview Manual</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Geomview Manual">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="prev" href="Overview.html#Overview" title="Overview">
+<link rel="next" href="Interaction.html#Interaction" title="Interaction">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Tutorial"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Interaction.html#Interaction">Interaction</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Overview.html#Overview">Overview</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="index.html#Top">Top</a>
+<hr>
+</div>
+
+<h2 class="chapter">2 Tutorial</h2>
+
+<p>This chapter leads you through some of the basics of using Geomview. 
+Work through this chapter in front of a computer where you can try
+out the examples given here to get a feel for what you can do with
+Geomview.
+
+   <p>To start Geomview, login to the computer and get a shell window.  A
+shell window is a window in which you can type Unix commands; the prompt
+in the window usually ends with a '%'.  In the shell window (the mouse
+cursor must be in the window) type the following (<kbd>&lt;Enter&gt;</kbd> here
+means hit the "Enter" key):
+
+<pre class="example">     geomview tetra dodec &lt;Enter&gt;
+</pre>
+   <p>This command starts up Geomview and loads two example objects, a
+tetrahedron and a dodecahedron.  After a few seconds three windows
+should appear; see <a href="figinitial.html#figinitial">Figure</a>.
+
+   <div class="float">
+<a name="figinitial"></a><img src="figs/initial.png" alt="figs/initial.png">
+
+   <p><strong class="float-caption">Figure 2.1: Initial Geomview display.</strong></p></div>
+
+   <p>The panel on the left is Geomview's main control panel; it's called
+the <em>Main</em> panel.  The skinny panel in the middle is the
+<em>Tools</em> panel and is for selecting different kinds of motions. 
+The window on the right is the camera window and in it you see a
+large tetrahedron and a dodecahedron which is partially obscured
+by the tetrahedron.
+
+   <p>Geomview has lots of panels but by default it displays only these three. 
+We'll describe some aspects of these and a couple of the others in this
+tutorial.  You can read more about these and other panels in the later
+chapters of this manual.
+
+   <p>Put the mouse cursor in the camera window and press down and hold the
+left mouse button.  Now, while holding down the button, slowly move the
+mouse around.  You should see the picture rotate in the direction you
+move the mouse.    If you lift up on the mouse button while moving the
+mouse, the picture continues rotating.  To stop it, hold the mouse very
+still and click down and up on the left mouse button.
+
+   <p>Geomview uses the <em>glass sphere</em> model for mouse-based motion.  This
+means you are supposed to think of the object as being inside an
+invisible sphere and the mouse cursor is a gripper outside the sphere. 
+When you hold down the left mouse button, the gripper grabs the
+sphere; when you let go of the button, the gripper releases the
+sphere.  Moving the mouse while holding the button down causes the
+sphere (and hence the object) to move in the same direction as the
+mouse.
+
+   <p>In addition to the two solids you should also see two wire-frame
+boxes in the camera window.  These are the "bounding boxes" of the two
+objects.  By default Geomview puts a bounding box around each object
+that it displays so that you have an idea of how large it is.
+
+   <p>Notice that as you move the mouse around the tetrahedron and
+dodecahedron move as a unit.  That is because by default what you are
+actually moving is the "World".  To move an individual object instead of
+the whole world, move the mouse cursor to the <em>Targets</em> browser in
+the <em>Main</em> panel.  Click (any button) on the word <em>tetra</em>. 
+This makes the tetrahedron be the "target object".  Now move the cursor
+back to the camera window and you can rotate just the tetrahedron.
+
+   <p>The motion that you have been applying up to now has been rotation,
+because that is the motion mode that is selected in the <em>Tools</em>
+panel.  To translate instead, click on the <em>Translate</em> button. 
+Now when you move the mouse in the camera window while holding down the
+left button, the tetrahedron (which should still be the target object
+from before) will translate in the direction you move the mouse.  Notice
+that you can translate it beyond the edge of the window as long as you
+keep holding the left mouse button down.  If you lift up on the mouse
+button while moving the mouse, the tetrahedron will keep going.  It
+moves rather rapidly so it is very easy to lose track of where it is.
+
+   <p>If you accidentally lose the tetrahedron by translating it too far out
+of the view of the window, you can get it back by clicking on the
+<em>Center</em> button in the <em>Tools</em> panel.  This causes it to
+come back to its initial position.
+
+   <p>Click on the <em>Center</em> button to bring the tetrahedron home, and
+then translate it off to one side so that you can completely see the
+dodecahedron.
+
+   <p>Your world now has two objects in it that are beside each other.  You
+should see the dodecahedron in the middle of the window and maybe part
+of the tetrahedron off to one side.  Go back to the <em>Targets</em>
+browser in the <em>Main</em> panel and click on "World" to select the
+whole world again.  Now click on the <em>Look At</em> button in the
+<em>Tools</em> panel. You should see the dodecahedron and the tetrahedron
+in the middle of the window next to each other (see <a href="figlookatworld.html#figlookatworld">Figure</a>).  The <em>Look At</em> button positions the camera in such a way
+that the target object is centered in the window. 
+<div class="float">
+<a name="figlookatworld"></a><img src="figs/fig2.png" alt="figs/fig2.png">
+
+   <p><strong class="float-caption">Figure 2.2: Looking at the world.</strong></p></div>
+Now put the cursor over the middle of the dodecahedron and double-click
+the right mouse button.  This means click it down-and-up two times in
+rapid succession.  Notice that the dodecahedron becomes the target
+object; you can see this in the <em>Targets</em> browser in the
+<em>Main</em> panel.  Double-clicking the right mouse button on an object
+is another way to make it the target object.
+
+   <div class="float">
+<a name="figappearance"></a><img src="figs/ap.png" alt="figs/ap.png">
+
+   <p><strong class="float-caption">Figure 2.3: The Appearance Panel.</strong></p></div>
+Go to the <em>Inspect</em> menu at the top of the <em>Main</em> panel and select
+<em>Appearance</em>.  This brings up the <em>Appearance</em>
+panel.  When it appears, if it partially obscures another Geomview window
+you can move it off to one side by dragging its frame with the middle
+mouse button down.
+
+   <p>The <em>Appearance</em> panel lets you control various things about the
+way Geomview draws objects.  Note the buttons labeled <em>[af] Faces</em> and
+<em>[ae] Edges</em>.  Click on the <em>[ae] Edges</em> one, and notice
+that Geomview is now drawing the edges of the dodecahedron.  Click on it
+again and the edges go away.  Click several times and watch the edges
+come and go.  When you've had enough of this, leave the edges on
+and click the <em>[af] Faces</em> button.  This toggles the faces
+on and off.  Click the button again to turn them back on.
+
+   <p>Now click on the <em>[Cf] Faces</em> button under the word <em>COLOR</em>. A
+color chooser panel should appear (see <a href="figcolorchooser.html#figcolorchooser">Figure</a>). 
+<div class="float">
+<a name="figcolorchooser"></a><img src="figs/color.png" alt="figs/color.png">
+
+   <p><strong class="float-caption">Figure 2.4: Color Chooser Panel.</strong></p></div>
+
+   <p>Note the three sliders, <em>H</em>, <em>S</em>, and <em>V</em>,
+controlling the color's hue, saturation, and value (lightness). 
+Clicking the <em>HSV</em> button gives a different set of sliders,
+one each for red, green, and blue. 
+Numerical values for both RGB and HSV color systems
+can be seen or edited at the bottom of the panel. 
+The dodecahedron's previous colors were specified in the file
+<samp><span class="file">dodec</span></samp> that you loaded when we started Geomview.  The color that
+you specify with the color
+panel overrides the old colors.  You can adjust the intensity of the
+color with the <em>Intensity</em> slider.  When you find a color that
+you like, click the <em>Done</em> button.
+
+   <p>Now put the cursor somewhere over the gray background and double-click
+the right mouse button; this picks "World" as the target object. 
+Click the <em>Look At</em> button to look at the world again.
+
+   <p>Notice that in the <em>Appearance</em> panel the settings of the buttons
+have changed from the way you left them with the dodecahedron.  That's
+because the <em>Appearance</em> panel always displays the settings for
+the target object, which is now the world, which still has its
+default settings.
+
+   <p>Click on the <em>[ab] BBox</em> button under the word <em>Draw</em>. 
+The bounding boxes go away.  Now put the cursor back in the camera
+window.  At the keyboard, type the keys <kbd>a </kbd>b.  Notice that the
+bounding boxes come back.  <kbd>a </kbd>b is the keyboard shortcut for
+the bounding box toggle button; the string "[ab]" appears on the
+button to indicate this.  Most of Geomview's buttons have keyboard
+shortcuts that you can use instead if you want.  This is useful once
+you are familiar with Geomview and don't want to have to move around
+among lots of panels.
+
+   <p>Now select the tetrahedron, either by double-clicking the right mouse
+button on it, or by selecting "tetra" in the <em>Targets</em> browser. 
+Then click on the <em>Delete</em> button in the <em>Main</em> panel.  The
+tetrahedron should disappear.  This is how you get rid of an object.
+
+   <p>You can also load objects from within Geomview.  Click on the <em>File</em>
+menu in the <em>Main</em> panel and choose <em>Open</em>. 
+The <em>Files</em> panel will appear. 
+Below the middle of this panel is a browser with three lines in it; the
+second line is a directory with lots of Geomview example files in it. 
+Click on that second line; see <a href="figfilespanel.html#figfilespanel">Figure</a>. Scroll down in
+the list of files until you see <samp><span class="file">tref.off</span></samp>.  Click on that line,
+and then click on the <em>OK</em> button.  A large trefoil-shaped tube
+will appear in your window.  Click the <em>Hide</em> button in the
+<em>Files</em> panel to dismiss the panel.
+
+   <div class="float">
+<a name="figfilespanel"></a><img src="figs/secondlinelist.png" alt="figs/secondlinelist.png">
+
+   <p><strong class="float-caption">Figure 2.5: The Files Panel.</strong></p></div>
+
+   <p>Now click on the <em>Reset</em> button in the <em>Tools</em> panel.  This
+causes everything to return to its home position.  You should see a
+dodecahedron and a trefoil knot (see <a href="figtrefdodec.html#figtrefdodec">Figure</a>).
+
+   <p>Play around with the trefoil knot and the dodecahedron.  Experiment with
+some of the other buttons in the <em>Tools</em> panel.  Try coloring the
+trefoil knot with the <em>Appearance</em> panel.
+
+   <p>For a tutorial on how to create your own objects to load into Geomview,
+see file <samp><span class="file">doc/oogltour</span></samp> distributed with Geomview.  The things in
+that file will be incorporated into a future version of this manual.
+
+   <div class="float">
+<a name="figtrefdodec"></a><img src="figs/trefdodecinter.png" alt="figs/trefdodecinter.png">
+
+   <p><strong class="float-caption">Figure 2.6: Trefoil and Dodecahedron.</strong></p></div>
+
+<!-- **************************************************************** -->
+   </body></html>
+

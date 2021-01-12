@@ -1,0 +1,208 @@
+<html lang="en">
+<head>
+<title>Keyboard Shortcuts - Geomview Manual</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Geomview Manual">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Interaction.html#Interaction" title="Interaction">
+<link rel="prev" href="Commands.html#Commands" title="Commands">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Keyboard-Shortcuts"></a>
+<p>
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Commands.html#Commands">Commands</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Interaction.html#Interaction">Interaction</a>
+<hr>
+</div>
+
+<h3 class="section">3.10 Keyboard Shortcuts</h3>
+
+<p>Most actions that you can do through Geomview's panels have equivalent
+keyboard shortcuts so that you can do the same action by typing a
+sequence of keys on the keyboard.  This is useful for advanced users who
+are familiar with Geomview's capabilities and want to work quickly
+without having to have lots of panels cluttering up the screen. 
+Keyboard shortcuts usually are indicated in square brackets ([ ]) near
+the corresponding item in a panel.  For example, the keyboard shortcut
+for <em>Rotate</em> mode is 'r'; this is indicated by "[r]" appearing
+before the word "Rotate" in the <em>MOTION MODE</em> browser.  To
+use this keyboard shortcut just hit the <kbd>r</kbd> key while the mouse
+cursor is in any Geomview window.  You don't need to press the <kbd>&lt;Enter&gt;</kbd>
+or <kbd>&lt;SPACE&gt;</kbd> keys.
+
+   <p>Some keyboard shortcuts consist of more than one key.  In these cases
+just type the keys one after the other, with no <kbd>&lt;Enter&gt;</kbd>
+afterwards.  Keyboard shortcuts are case sensitive.  You can cancel a
+multi-key keyboard shortcut that you have started by typing any invalid
+key, for example the space bar.
+
+   <p>Keyboard commands apply while the cursor is in any camera window and
+most control panels.
+
+   <p>Many keyboard shortcuts allow numeric arguments which you type as a
+prefix to the command key(s).  For example, the shortcut for
+<em>Near clip</em> in the camera panel is <kbd>v n</kbd>.  To set the near
+clip plane to &lsquo;<samp><span class="samp">0.5</span></samp>&rsquo;, type <kbd>0.5vn</kbd>.  Commands that don't take a
+numeric prefix toggle or reset the current value.
+
+   <p>Most commands allow one of the following selection prefixes.  If none is
+provided the command applies to the target object.
+
+     <dl>
+<dt><kbd>g</kbd><dd>world geom
+<br><dt><kbd>g#</kbd><dd>#'th geom
+<br><dt><kbd>g*</kbd><dd>All geoms
+<br><dt><kbd>c</kbd><dd>current camera
+<br><dt><kbd>c#</kbd><dd>#'th camera
+<br><dt><kbd>c*</kbd><dd>All cameras
+</dl>
+
+   <p>For example, <kbd>g4af</kbd> means toggle the face drawing of object
+<em>g4</em>.
+
+   <p>Simply typing a selection prefix, like <kbd>g4</kbd>, doesn't yet select an object;
+that only happens when a command, like <kbd>ae</kbd>, follows the prefix. 
+To select an object as the target without doing anything else to it,
+use the <kbd>p</kbd> command.  So <kbd>g3p</kbd> selects object g3.
+
+   <p>The text field in the upper left corner of the <em>Main</em> panel
+shows the state of the current keyboard shortcut.
+
+   <p>In addition to the keyboard shortcuts for the panel commands, there is
+also a shortcut for picking a target object: type the short name of the
+object followed by <kbd>p</kbd>.  For example, to select object <em>g3</em>,
+type <kbd>g 3 p</kbd>.  This only works with the short names &mdash; the ones
+that appear in square brackets ([ ]) in the <em>Targets</em> browser of
+the <em>Main</em> panel.
+
+   <p>Below is a summary of all keyboard shortcuts.
+
+     <dl>
+<dt>Draw<dd>
+          <dl>
+    <dt><kbd>af</kbd><dd>    Faces
+    <br><dt><kbd>ae</kbd><dd>    Edges
+    <br><dt><kbd>an</kbd><dd>    Normals
+    <br><dt><kbd>ab</kbd><dd>    Bounding Boxes
+    <br><dt><kbd>aV</kbd><dd>    Vectors
+    </dl>
+     <br><dt>Shading<dd>
+          <dl>
+    <dt><kbd>0as</kbd><dd>    Constant
+    <br><dt><kbd>1as</kbd><dd>    Flat
+    <br><dt><kbd>2as</kbd><dd>    Smooth
+    <br><dt><kbd>3as</kbd><dd>    Smooth, non-lighted
+    <br><dt><kbd>aT</kbd><dd>    allow transparency
+    <br><dt><kbd>at</kbd><dd>    texture mapping
+    </dl>
+     <br><dt>Other<dd>
+          <dl>
+    <dt><kbd>av</kbd><dd>    eVert normals: always face viewer
+    <br><dt><kbd>#aw</kbd><dd>    Line Width (pixels)
+    <br><dt><kbd>aC</kbd><dd>    handle concave polygons
+    <br><dt><kbd>#vc</kbd><dd>    edges Closer than faces (try 5-100)
+    </dl>
+     <br><dt>Color<dd>
+          <dl>
+    <dt><kbd>Cf</kbd><dd>    faces
+    <br><dt><kbd>Ce</kbd><dd>    edges
+    <br><dt><kbd>Cn</kbd><dd>    normals
+    <br><dt><kbd>Cb</kbd><dd>    bounding boxes
+    <br><dt><kbd>CB</kbd><dd>    background
+    </dl>
+     <br><dt>Motions<dd>
+          <dl>
+    <dt><kbd>r</kbd><dd>    rotate
+    <br><dt><kbd>t</kbd><dd>    translate
+    <br><dt><kbd>z</kbd><dd>    zoom FOV
+    <br><dt><kbd>f</kbd><dd>    fly
+    <br><dt><kbd>o</kbd><dd>    orbit
+    <br><dt><kbd>s</kbd><dd>    scale
+    <br><dt><kbd>w</kbd><dd>    recenter target
+    <br><dt><kbd>W</kbd><dd>    recenter all
+    <br><dt><kbd>h</kbd><dd>    halt
+    <br><dt><kbd>H</kbd><dd>    halt all
+    <br><dt><kbd>@</kbd><dd>    select center of motion (e.g. <kbd>g 3 @</kbd>)
+    <br><dt><kbd>L</kbd><dd>    Look At object
+    </dl>
+     <br><dt>Viewing<dd>
+          <dl>
+    <dt><kbd>0vp</kbd><dd>    Orthographic view
+    <br><dt><kbd>1vp</kbd><dd>    Perspective view
+    <br><dt><kbd>vd</kbd><dd>    Draw other views' cameras
+    <br><dt><kbd>#vv</kbd><dd>    field of View
+    <br><dt><kbd>#vn</kbd><dd>    near clip distance
+    <br><dt><kbd>#vf</kbd><dd>    far clip distance
+    <br><dt><kbd>v+</kbd><dd>    add new camera
+    <br><dt><kbd>vx</kbd><dd>    cursor on/off
+    <br><dt><kbd>vb</kbd><dd>    backfacing poly cull on/off
+    <br><dt><kbd>#vl</kbd><dd>    focal length
+    <br><dt><kbd>v~</kbd><dd>    Software shading on/off
+    </dl>
+     <br><dt>Panels<dd>
+          <dl>
+    <dt><kbd>Pm</kbd><dd>    Main
+    <br><dt><kbd>Pa</kbd><dd>    Appearance
+    <br><dt><kbd>Pl</kbd><dd>    Lighting
+    <br><dt><kbd>Po</kbd><dd>    Obscure
+    <br><dt><kbd>Pt</kbd><dd>    Tools
+    <br><dt><kbd>Pc</kbd><dd>    Cameras
+    <br><dt><kbd>PC</kbd><dd>    Commands
+    <br><dt><kbd>Pf</kbd><dd>    Files
+    <br><dt><kbd>Ps</kbd><dd>    Save
+    <br><dt><kbd>P-</kbd><dd>    read commands from tty
+    <br><dt><kbd>PA</kbd><dd>    Credits ("about")
+    </dl>
+     <br><dt>Lights<dd>
+          <dl>
+    <dt><kbd>ls</kbd><dd>    show lights
+    <br><dt><kbd>le</kbd><dd>    edit lights
+    </dl>
+     <br><dt>Space<dd>
+          <dl>
+    <dt><kbd>me</kbd><dd>    Euclidean
+    <br><dt><kbd>mh</kbd><dd>    Hyperbolic
+    <br><dt><kbd>ms</kbd><dd>    Spherical
+    </dl>
+     <br><dt>Model<dd>
+          <dl>
+    <dt><kbd>mv</kbd><dd>    Virtual
+    <br><dt><kbd>mp</kbd><dd>    Projective
+    <br><dt><kbd>mc</kbd><dd>    Conformal
+    </dl>
+     <br><dt>Other<dd>
+          <dl>
+    <dt><kbd>0N</kbd><dd>    normalization: none
+    <br><dt><kbd>1N</kbd><dd>    normalization: each
+    <br><dt><kbd>2N all</kbd><dd>    normalization: all
+    <br><dt><kbd>ui</kbd><dd>    motion: Inertia
+    <br><dt><kbd>uc</kbd><dd>    motion: Constrain to axis
+    <br><dt><kbd>uo</kbd><dd>    motion: object's Own coordinates
+    <br><dt><kbd>&lt;</kbd>    <br><dt><kbd>Pf</kbd><dd>    load geometry/command file
+    <br><dt><kbd>dd</kbd><dd>    delete target object
+    <br><dt><kbd>&gt;</kbd>    <br><dt><kbd>Ps</kbd><dd>    save state to file
+    <br><dt><kbd>TV</kbd><dd>    NTSC mode toggle
+    <br><dt><kbd>p</kbd><dd>    pick as target object (e.g. <kbd>g 3 p</kbd>)
+    With no prefix, selects the object under the
+    mouse cursor (like double-clicking the right mouse)
+    </dl>
+     </dl>
+
+<!-- **************************************************************** -->
+   </body></html>
+

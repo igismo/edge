@@ -1,0 +1,79 @@
+<html lang="en">
+<head>
+<title>SPHERE - Geomview Manual</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Geomview Manual">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Object-File-Formats.html#Object-File-Formats" title="Object File Formats">
+<link rel="prev" href="SKEL.html#SKEL" title="SKEL">
+<link rel="next" href="INST.html#INST" title="INST">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="SPHERE"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="INST.html#INST">INST</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="SKEL.html#SKEL">SKEL</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Object-File-Formats.html#Object-File-Formats">Object File Formats</a>
+<hr>
+</div>
+
+<h4 class="subsection">4.2.8 SPHERE Files</h4>
+
+<p>The conventional suffix for <code>SPHERE</code> files is <samp><span class="file">.sph</span></samp>.
+
+<pre class="example">     [ST][E|H|S]SPHERE # Keyword
+     # auto-generated texture co-ordinates, only allowed with <em>ST</em>SPHERE objects
+     [SINUSOIDAL|CYLINDRICAL|RECTANGULAR|STEREOGRAPHIC|ONEFACE]
+     # next four fields are required
+     <var>Radius</var>
+     <var>Xcenter</var> <var>Ycenter</var> <var>Zcenter</var>
+</pre>
+   <p>The key word is  <code>[ST][E|H|S]SPHERE</code>. 
+The optional prefix characters mean:
+
+     <dl>
+<dt>&lsquo;<samp><span class="samp">ST</span></samp>&rsquo;<dd>The sphere carries automatically generated texture co-ordinates. See below. 
+<br><dt>&lsquo;<samp><span class="samp">E</span></samp>&rsquo;<dd>The sphere lives in Euclidean space. 
+<br><dt>&lsquo;<samp><span class="samp">H</span></samp>&rsquo;<dd>The sphere lives in Hyperbolic space. See <a href="Non_002dEuclidean-Geometry.html#Non_002dEuclidean-Geometry">Non-Euclidean Geometry</a>. 
+<br><dt>&lsquo;<samp><span class="samp">S</span></samp>&rsquo;<dd>The sphere lives in spherical space. See <a href="Non_002dEuclidean-Geometry.html#Non_002dEuclidean-Geometry">Non-Euclidean Geometry</a>. 
+</dl>
+
+   <p>Sphere objects are drawn using meshes which are rectangular in a polar
+co-ordinate system, with the equatorial plane parallel to the
+<code>x,y</code>-plane. Their smoothness, and the time taken to draw them,
+depends on the setting of the dicing level, 10x10 by default.  From
+Geomview, the Appearance panel, the <code>&lt;N&gt;ad</code> keyboard command, or a
+<code>dice nu nv</code> Appearance attribute sets this.
+
+   <p>Texture co-ordinates are generated for <code>STSPHERE</code> objects; the
+keyword following the initial <code>STSPHERE</code> keyword defines the way
+this is done. It follows the conventions of the <samp><span class="command">mktxmesh</span></samp>
+Perl-script which comes with the <em>Orrery</em>.
+
+     <dl>
+<dt><var>SINUSOIDAL</var><dd>sinusoidal equal-area projection
+<br><dt><var>CYLINDRICAL</var><dd>cylindrical proj: <var>s</var> is the longitude, <var>t</var> is the latitude
+<br><dt><var>RECTANGULAR</var><dd>rectangular proj: <var>s</var> is the longitude, <var>t</var> is <code>sin(latitude)</code>
+(i.e. <code>z</code> co-ordinate in the sphere's co-ordinate system)
+<br><dt><var>STEREOGRAPHIC</var><dd>stereographic projection from the south (<code>z=-1</code>) pole
+<br><dt><var>ONEFACE</var><dd>stretch orthographic view of <code>+y</code> hemisphere over both, mirroring
+</dl>
+
+<!--  -->
+   </body></html>
+

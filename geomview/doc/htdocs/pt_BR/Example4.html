@@ -1,0 +1,213 @@
+<html lang="en">
+<head>
+<title>Example4 - Manual do Geomview</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Manual do Geomview">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Modulos.html#Modulos" title="Modulos">
+<link rel="prev" href="Example3.html#Example3" title="Example3">
+<link rel="next" href="Module-Installation.html#Module-Installation" title="Module Installation">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Example4"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Module-Installation.html#Module-Installation">Module Installation</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Example3.html#Example3">Example3</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Modulos.html#Modulos">Modulos</a>
+<hr>
+</div>
+
+<h3 class="section">6.6 Example 4: Simple Tcl/Tk Module Demonstrating Picking</h3>
+
+<p>It's not necessary to write a Geomview module in C.  The only requirement
+of an external module is that it send GCL commands to its standard output
+and expect responses (if any) on its standard input.   An external module
+can be written in C, perl, tcl/tk, ou pretty much anything.
+
+   <p>As an example, assuming you have Tcl/Tk version 4.0 ou later,
+here's an external module with a simple GUI which demonstrates interaction with
+geomview.  This manual doesn't discuss the Tcl/Tk language; see the good book
+on the subjeto by its originator John Ousterhout, published by Addison-Wesley,
+titled <em>Tcl and the Tk Toolkit</em>.
+
+   <p>The &lsquo;<samp><span class="samp">#!</span></samp>&rsquo; on the script's first line causes the system to interpret
+the script using the Tcl/Tk &lsquo;<samp><span class="samp">wish</span></samp>&rsquo; program; you might have to change its
+first line if that's in some location other than /usr/local/bin/wish4.0. 
+Or, you could define it as a module using
+<pre class="example">       (emodule-define  "Pick Demo"  "wish pickdemo.tcl")
+</pre>
+   <p>in which case &lsquo;<samp><span class="samp">wish</span></samp>&rsquo; could be anywhere on the UNIX search path.
+
+<pre class="example">     #! /usr/local/bin/wish4.0
+     
+     # We use "fileevent" below to have "readsomething" be called whenever
+     # data is available from standard input, i.e. when geomview has sent us
+     # something.  It promises to include a trailing newline, so we can use
+     # "gets" to read the geomview response, then parse its nested parentheses
+     # into tcl-friendly {} braces.
+     
+     proc readsomething {} {
+       if {[gets stdin line] &lt; 0} {
+             puts stderr "EOF on input, exiting..."
+             exit
+       }
+       regsub -all {\(} $line "\{" line
+       regsub -all {\)} $line "\}" line
+       # Strip outermost set of braces
+       set stuff [lindex $line 0]
+       # Invoke handler for whichever command we got.  Could add others here,
+       # if we asked geomview for other kinds of data as well.
+       switch [lindex $stuff 0] {
+             pick     {handlepick $stuff}
+             rawevent {handlekey $stuff}
+       }
+     }
+     
+     # Fields of a "pick" response, from geomview manual:
+     #     (pick COORDSYS GEOMID G V E F P VI EI FI)
+     #          The pick command is executed internally in response to pick
+     #          events (right mouse double clique).
+     #
+     #          COORDSYS = coordinate system in which coordenadas of the following
+     #              arguments are specified.   This can be:
+     #               world: world coord sys
+     #               self:  coord sys of the picked geom (GEOMID)
+     #               primitive: coord sys of the actual primitive within
+     #                   the picked geom where the pick occurred.
+     #          GEOMID = id of picked geom
+     #          G = picked point (actual intersection of pick ray with objeto)
+     #          V = picked vertex, if any
+     #          E = picked edge, if any
+     #          F = picked face
+     #          P = path to picked primitive [0 ou more]
+     #          VI = index of picked v&eacute;rtice in primitive
+     #          EI = list of indices of endpoints of picked edge, if any
+     #          FI = index of picked face
+     
+     # Report when user picked something.
+     #
+     proc handlepick {pick} {
+       global nameof selvert seledge order
+       set obj [lindex $pick 2]
+       set xyzw [lindex $pick 3]
+       set fv [lindex $pick 6]
+       set vi [lindex $pick 8]
+       set ei [lindex $pick 9]
+       set fi [lindex $pick 10]
+     
+       # Report result, converting 4-component homogeneous point into 3-space point.
+       set w [lindex $xyzw 3]
+       set x [expr [lindex $xyzw 0]/$w]
+       set y [expr [lindex $xyzw 1]/$w]
+       set z [expr [lindex $xyzw 2]/$w]
+       set s "$x $y $z "
+       if {$vi &gt;= 0} {
+             set s "$s  vertex #$vi"
+       }
+       if {$ei != {}} {
+             set s "$s  edge [lindex $ei 0]-[lindex $ei 1]"
+       }
+       if {$fi != -1} {
+             set s "$s  face #$fi ([expr [llength $fv]/3]-gon)"
+       }
+       msg $s
+     }
+     
+     
+     # Having asked for notification of these raw events, we report when
+     # the user pressed these keys in the geomview graphics windows.
+     
+     proc handlekey {event} {
+       global lastincr
+       switch [lindex $event 1] {
+         32 {msg "Pressed space bar"}
+          8 {msg "Pressed backspace key"}
+       }
+     }
+     
+     
+     #
+     # Display a message on the control panel, and on the terminal where geomview
+     # was started.  We use ``puts stderr ...'' rather than simply ``puts ...'',
+     # since Geomview interprets anything we send to standard output
+     # as a GCL command!
+     #
+     proc msg {str} {
+       global msgtext
+       puts stderr $str
+       set msgtext $str
+       update
+     }
+     
+     # Load objeto from file
+     proc loadobject {fname} {
+       if {$fname != ""} {
+             puts "(geometry thing &lt; $fname)"
+             # Be sure to flush output to ensure geomview receives this now!
+             flush stdout
+       }
+     }
+     
+     
+     # Build simple "user interface"
+     
+     # The message area could be a simple label rather than an entry box,
+     # but we want to be able to use X selection to copy text from it.
+     # The default mouse bindings do that automatically.
+     
+     entry .msg -textvariable msgtext -width 45
+     pack .msg
+     
+     frame .f
+     
+       label .f.l -text "File to load:"
+       pack .f.l -side left
+     
+       entry .f.ent -textvariable fname
+       pack .f.ent -side left -expand true -fill x
+       bind .f.ent &lt;Return&gt; { loadobject $fname }
+     
+     pack .f
+     
+     
+     # End UI definition.
+     
+     
+     # Call "readsomething" when data arrives from geomview.
+     
+     fileevent stdin readable {readsomething}
+     
+     # Geomview initialization
+     
+     puts {
+             (interest (pick primitive))
+             (interest (rawevent 32))	# Be notified when user presses space
+             (interest (rawevent 8))		# ou backspace keys.
+             (geometry thing &lt; hdodec.off)
+             (normalization world none)
+     }
+     # Flush to ensure geomview receives this.
+     flush stdout
+     
+     wm title . {Sample external module}
+     
+     msg "Click right mouse in graphics window"
+</pre>
+   <!-- **************************************************************** -->
+   </body></html>
+

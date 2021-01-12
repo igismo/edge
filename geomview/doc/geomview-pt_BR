@@ -1,0 +1,293 @@
+This is ../../doc/geomview-pt_BR, produced by makeinfo version 4.13
+from ../../doc/geomview-pt_BR.texi.
+
+INFO-DIR-SECTION Graphics Applications
+START-INFO-DIR-ENTRY
+* Geomview: (geomview-pt_BR).         Programa interativo de visualizac,a~o tridimensional.
+END-INFO-DIR-ENTRY
+
+
+
+
+Indirect:
+geomview-pt_BR-1: 279
+geomview-pt_BR-2: 294475
+
+Tag Table:
+(Indirect)
+Node: Top279
+Node: Intro1871
+Node: Distrib3401
+Node: Copiando5104
+Node: Historia38588
+Node: Autores41757
+Node: Plantaformas42517
+Node: Pronuncia43190
+Node: Visao Geral43768
+Node: Tutorial46944
+Ref: figinitial47925
+Ref: figlookatworld52729
+Ref: figappearance53233
+Ref: figcolorchooser54472
+Ref: figfilespanel57510
+Ref: figtrefdodec58220
+Node: Interacao58254
+Node: Iniciando o Geomview59094
+Node: Opcoes de Linha de Comando59778
+Node: Interacao Basica65072
+Ref: figmainpanel65716
+Node: Chamando71889
+Ref: figmyfilelist72327
+Ref: figloadpanel75770
+Node: Movimentos do Mouse76130
+Ref: figtools76985
+Node: Ponto de Interesse87860
+Node: Aparencia91277
+Node: Painel de Aparencia93397
+Ref: figap93685
+Ref: figcolorchooserpanel95389
+Node: Painel de Materiais102175
+Ref: figmatpanel102559
+Node: Painel de Iluminacao105272
+Node: Cameras108227
+Ref: figcamerapanel108661
+Node: Gravando116486
+Ref: figsavepanel116813
+Node: Comandos123349
+Ref: figcommandpanel124009
+Node: Atalhos de Teclado124081
+Node: Formatos dos Arquivos da OOGL130506
+Node: Convencoes131364
+Node: Sintaxe comum132282
+Node: Nomes de arquivos133894
+Node: Vertices134484
+Node: ND-Vertices136273
+Node: Direcoes de superficies normais137776
+Node: Matrizes de transformacao138602
+Node: Matrizes de transformacao ND139699
+Node: Formato binario140749
+Node: Referencias142825
+Node: Aparencias145760
+Node: Mapeamento de Textura157905
+Node: Formatos de Arquivo de Objeto164414
+Node: QUAD165589
+Node: MESH167155
+Node: BBOX170321
+Node: BBP and BEZ171520
+Node: OFF175374
+Node: VECT180309
+Node: SKEL183723
+Node: SPHERE186655
+Node: INST188892
+Node: Exemplos INST195652
+Node: LIST196780
+Node: TLIST197743
+Node: GROUP200003
+Node: DISCGRP200582
+Node: COMMENT200943
+Node: Objetos nao-geometricos202744
+Node: Objetos de aparencia203524
+Node: image objects203969
+Node: transform objects215945
+Node: ntransform objects219031
+Node: Objeto camera223326
+Node: window objects229258
+Node: Customizacao230918
+Node: Modulos233436
+Node: Interface234950
+Node: Example1237187
+Node: Example2245340
+Node: XForms254712
+Node: Example3255560
+Node: Example4277417
+Node: Module Installation283661
+Node: Private Module Installation284407
+Node: System Module Installation285897
+Node: GCL287518
+Node: Argument Conventions291119
+Node: GCL Reference294475
+Node: shell-shortcut304770
+Node: lt304945
+Node: eq305234
+Node: gt305509
+Node: mul305787
+Node: div305957
+Node: add306124
+Node: sub306291
+Node: help-shortcut306468
+Node: morehelp-shortcut306917
+Node: emodule-run-shortcut307226
+Node: all307407
+Node: and307924
+Node: ap-override308167
+Node: backcolor308494
+Node: background-image308735
+Node: bbox-color309424
+Node: bbox-draw309684
+Node: camera309976
+Node: camera-draw310461
+Node: camera-prop310718
+Node: camera-reset311401
+Node: car311607
+Node: cdr311777
+Node: clock311965
+Node: command312258
+Node: cons312592
+Node: copy312858
+Node: cursor-still313197
+Node: cursor-twitch313559
+Node: defun313916
+Node: delete315289
+Node: dice315468
+Node: dimension315826
+Node: dither316289
+Node: draw316507
+Node: dump-handles316748
+Node: echo317057
+Node: emodule-clear317568
+Node: emodule-define317801
+Node: emodule-defined318300
+Node: emodule-isrunning318793
+Node: emodule-path319286
+Node: emodule-run319743
+Node: emodule-sort321206
+Node: emodule-start321442
+Node: emodule-transmit321770
+Node: escale322289
+Node: eval322509
+Node: event-keys323049
+Node: event-mode323304
+Node: event-pick324251
+Node: evert324450
+Node: exit324844
+Node: ezoom324989
+Node: freeze325190
+Node: geometry325567
+Node: geomview-version326124
+Node: hdefine326401
+Node: hdelete327188
+Node: help328458
+Node: hmodel328783
+Node: hsphere-draw329063
+Node: if329469
+Node: inhibit-warning329844
+Node: input-translator330276
+Node: interest331064
+Node: lambda332869
+Node: let334138
+Node: lines-closer335038
+Node: load335917
+Node: load-path336659
+Node: look337097
+Node: look-encompass337974
+Node: look-encompass-size338567
+Node: look-recenter339329
+Node: look-toward340033
+Node: merge340675
+Node: merge-ap341122
+Node: merge-base-ap341488
+Node: merge-baseap341748
+Node: mod342141
+Node: morehelp342326
+Node: name-object342589
+Node: ND-axes343041
+Node: ND-color344659
+Node: ND-xform346041
+Node: ND-xform-get346596
+Node: ND-xform-set347138
+Node: new-alien347801
+Node: new-camera348711
+Node: new-center349120
+Node: new-geometry349653
+Node: new-reset350217
+Node: NeXT350435
+Node: normalization350723
+Node: not352194
+Node: or352492
+Node: pick352812
+Node: pick-invisible354769
+Node: pickable355127
+Node: position355421
+Node: position-at355651
+Node: position-toward356030
+Node: process-events356484
+Node: progn357082
+Node: quit357425
+Node: quote357596
+Node: rawevent357907
+Node: rawpick358338
+Node: read358652
+Node: real-id359350
+Node: redraw359897
+Node: regtable360198
+Node: rehash-emodule-path360381
+Node: replace-geometry361101
+Node: rib-display361380
+Node: rib-snapshot362203
+Node: scale362621
+Node: scene363579
+Node: set-clock363789
+Node: set-conformal-refine364154
+Node: set-emodule-path364891
+Node: set-load-path365696
+Node: set-motionscale366249
+Node: setenv366984
+Node: setq367338
+Node: sgi368374
+Node: shell368599
+Node: sleep-for368901
+Node: sleep-until369253
+Node: snapshot369876
+Node: soft-shader371624
+Node: space371867
+Node: stereowin372082
+Node: time-interests373029
+Node: transform373931
+Node: transform-incr375832
+Node: transform-set376667
+Node: truncate377024
+Node: ui-cam-focus377213
+Node: ui-center378314
+Node: ui-center-origin378570
+Node: ui-emotion-program379388
+Node: ui-emotion-run379706
+Node: ui-freeze380003
+Node: ui-html-browser380233
+Node: ui-motion380792
+Node: ui-panel382619
+Node: ui-pdf-viewer383730
+Node: ui-target384287
+Node: uninterest384837
+Node: update385158
+Node: update-draw385479
+Node: while385842
+Node: window386043
+Node: winenter386460
+Node: write386765
+Node: write-comments387903
+Node: write-handle389315
+Node: write-sexpr389645
+Node: xform389942
+Node: xform-incr390193
+Node: xform-set390525
+Node: zoom390790
+Node: Geometrias Nao-Euclidianas391017
+Node: Mathematica393509
+Node: OOGL.m395021
+Node: Geomview.m396935
+Node: RenderMan399655
+Node: Remote Display402356
+Node: Networked Geomview403099
+Node: Chunks405009
+Node: Package Details406507
+Node: Package Installation407997
+Node: Instalacao412321
+Node: Unix Binary Installation413451
+Node: Unix Binary Detail416691
+Node: Source Code Installation419582
+Node: Suporte423627
+Node: Contribuindo424799
+Node: Indice de Funcoes426401
+Node: Lista de Figuras439203
+
+End Tag Table

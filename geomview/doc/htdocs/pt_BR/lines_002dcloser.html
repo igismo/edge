@@ -1,0 +1,51 @@
+<html lang="en">
+<head>
+<title>lines-closer - Manual do Geomview</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Manual do Geomview">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="GCL-Reference.html#GCL-Reference" title="GCL Reference">
+<link rel="prev" href="let.html#let" title="let">
+<link rel="next" href="load.html#load" title="load">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="lines-closer"></a>
+<a name="lines_002dcloser"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="load.html#load">load</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="let.html#let">let</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="GCL-Reference.html#GCL-Reference">GCL Reference</a>
+<hr>
+</div>
+
+<h4 class="subsection">7.2.70 lines-closer</h4>
+
+<p><a name="index-lines_002dcloser-77"></a>
+     <dl>
+<dt><code>(lines-closer CAM-ID DIST)</code><dd>Desenha linhas (incluindo arestas) pr&oacute;ximo &agrave; c&acirc;mera do pol&iacute;gonos
+a uma dist&acirc;ncia DIST / 10^5  do intervalo contido na &aacute;rea de armazenamento tempor&aacute;rio de mem&oacute;ria que controla as coordenadas do eixo Z.  DIST = 3.0 por padr&atilde;o. 
+Se DIST for muito pequena, uma linha aproxumada sobre uma superf&iacute;cie pode ser
+pontilhada ou invis&iacute;vel, dependendo do ponto de vista. 
+Se DIST for muito grande, linhas podem aparecer em frente das superf&iacute;cies
+que elas atualmente aproximam por tr&aacute;s.  Bons valores para DIST variam com
+a cena, ponto de vis&atilde;o, e dist&acirc;ncias entre planos de corte pr&oacute;ximo e
+distante.  Esse recurso &eacute; um remendo, mas pode ser de grande ajuda. 
+</dl>
+
+   </body></html>
+

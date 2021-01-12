@@ -1,0 +1,85 @@
+<html lang="en">
+<head>
+<title>Visao Geral - Manual do Geomview</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Manual do Geomview">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="prev" href="Pronuncia.html#Pronuncia" title="Pronuncia">
+<link rel="next" href="Tutorial.html#Tutorial" title="Tutorial">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Visao-Geral"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Tutorial.html#Tutorial">Tutorial</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Pronuncia.html#Pronuncia">Pronuncia</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="index.html#Top">Top</a>
+<hr>
+</div>
+
+<h2 class="chapter">1 Vis&atilde;o Geral</h2>
+
+<p>O principal objetivo do Geomview &eacute; mostrar objetos cuja geometria &eacute; fornecida,
+permitindo controle interativo sobre detalhes tais como ponto de vis&atilde;o, velocidade
+de movimento, apar&ecirc;ncia de superf&iacute;cies e linhas, e assim por diante.  Geomview pode
+manusear qualquer n&uacute;mero de objetos e permite controle coletivo ou
+separado sobre eles.
+
+   <p>A maneira mais simples de usar Geomview &eacute; como um visualizador independente para ver
+e controlar objetos.  Geomview pode mostrar objetos descritos em uma variedade
+de formatos de arquivo.  Geomview &eacute; acompanhado com uma larga variedade de objetos como exemplo, e
+voc&ecirc; pode criar seus pr&oacute;prios objetos.
+
+   <p>Voc&ecirc; pode tamb&eacute;m usar Geomview para manusear os dados a serem mostrados provenientes de
+outro programa que est&aacute; sendo executado simult&acirc;neamente.  Como o outro programa
+modifica os dados, a imagem no Geomview reflete as modifica&ccedil;&otilde;es.  Programas
+que geram objetos e utilizam o Geomview para mostr&aacute;-los s&atilde;o chamados
+<em>m&oacute;dulos externos</em>.  M&oacute;dulos externos podem controlar quase todos os
+aspectos do Geomview.  A id&eacute;ia aqui &eacute; que muitos aspectos de visualiza&ccedil;&atilde;o
+e partes da intera&ccedil;&atilde;o de programas geom&eacute;tricos s&atilde;o independentes do
+conte&uacute;do geom&eacute;trico e podem ser coletados conjuntamente em uma pe&ccedil;a simples de
+programa que pode ser usada em uma larga variedade de situa&ccedil;&otilde;es.  O autor
+de um m&oacute;dulo externo pode concentrar-se sobre a implementa&ccedil;&atilde;o dos algor&iacute;tmos
+desejados e deixar os aspectos de visualiza&ccedil;&atilde;o ao Geomview.  Geomview &eacute; acompanhado
+por uma cole&ccedil;&atilde;o de m&oacute;dulos externos a t&iacute;tulo de exemplo, e esse manual descreve
+como escrever seu pr&oacute;prio <em>m&oacute;dulo externo</em>.
+
+   <p>Geomview &eacute; o produto de um esfor&ccedil;o no <dfn>Geometry Center</dfn> para disponibilizar
+um <dfn>software</dfn> de geometria interativa que &eacute; particularmente apropriado para
+pesquisa matem&aacute;tica e educa&ccedil;&atilde;o.  Em particular, Geomview pode mostrar
+coisas no espa&ccedil;o hiperb&oacute;lico e no espa&ccedil;o esf&eacute;rico bem como no espa&ccedil;o Euclidiano.
+
+   <p>Geomview permite m&uacute;ltiplos objetos e c&acirc;meras que s&atilde;o controlados
+independentemente.  As c&acirc;meras fornecem controle interativo para movimento, apar&ecirc;ncias
+(incluindo ilumina&ccedil;&atilde;o, sombreamento, e materiais), selecionando um objeto,
+aresta ou n&iacute;vel de v&eacute;rtice, instant&acirc;neos em um arquivo de imagem SGI ou no formato
+Renderman RIB, a adi&ccedil;&atilde;o ou apagamento de objetos &eacute; poss&iacute;vel atrav&eacute;s do controle
+direto do mouse, pain&eacute;is de controle, e teclas de atalho via teclado.
+
+   <p>Geomview suporta os seguintes tipos de dados simples: poliedros com
+v&eacute;rtices compartilhados (.off), quadril&aacute;teros, malhas retangulares, vetores,
+e ajustes em superf&iacute;cies de Bezier de grau arbitr&aacute;rio incluindo ajustes
+racionais. Hierarqu&iacute;as de objetos podem ser constru&iacute;das com listas de objetos
+e inst&acirc;ncias de objeto(s) transformado(s) por uma ou mais matrizes 4x4. 
+Por&ccedil;&otilde;es arbitr&aacute;rias de modifica&ccedil;&otilde;es de hierarqu&iacute;as podem ser transmitidas por meio
+da cria&ccedil;&atilde;o de refer&ecirc;ncias nomeadas.
+
+   <p>Geomview pode mostrar sa&iacute;das gr&aacute;ficas tridimensionais provenientes do Mathematica e do Maple.
+
+<!-- **************************************************************** -->
+   </body></html>
+

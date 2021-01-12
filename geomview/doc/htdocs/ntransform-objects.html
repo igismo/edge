@@ -1,0 +1,124 @@
+<html lang="en">
+<head>
+<title>ntransform objects - Geomview Manual</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Geomview Manual">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Non_002dgeometric-objects.html#Non_002dgeometric-objects" title="Non-geometric objects">
+<link rel="prev" href="transform-objects.html#transform-objects" title="transform objects">
+<link rel="next" href="camera-objects.html#camera-objects" title="camera objects">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="ntransform-objects"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="camera-objects.html#camera-objects">camera objects</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="transform-objects.html#transform-objects">transform objects</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Non_002dgeometric-objects.html#Non_002dgeometric-objects">Non-geometric objects</a>
+<hr>
+</div>
+
+<h4 class="subsection">4.3.4 ND-Transform Objects</h4>
+
+<p>Where &ndash; in the context of ND-viewing &ndash; a single (N+1)x(N+1) matrix is
+expected &ndash; as in the <code>INST</code> <code>ntransform</code> field, or the
+<code>ND-xform*</code> (see <a href="GCL.html#GCL">GCL</a>) commands &ndash; use an <code>ntransform</code> object.
+
+   <p><code>ntransform</code> are <var>NRows</var> x <var>NCols</var> transformation matrix
+where usually <var>NRows</var> = <var>N+1</var> in the context of
+<var>N</var>-dimensional objects and viewing. The homogeneous component of an
+<code>ntransform</code> sits at column zero (in contrast to ordinary
+<code>transform</code> objects where it is located at column
+three). <code>ntransform</code> objects operate on points of any dimension: if
+a point is to be transformed by an <code>ntransform</code> object and the
+dimension of the point does not match the number of rows of the
+<code>ntransform</code> object, then either the point is implicitly padded
+with zeros to match <var>NRows</var> or the matrix is implicitly padded with
+ones down its diagonal (and zeros everywhere else) such that it will
+operate as identity on the excess dimensions of the input point.
+
+   <p>Syntax for an <code>ntransform</code> object is
+
+<pre class="example">     &lt;ntransform&gt; ::=
+       [ "{" ]             (curly brace, generally needed to make
+                            the end of the object unambiguous.)
+     
+        [ "ntransform" ]    (optional keyword; unnecessary if the type
+                            is determined by the context, which it
+                            usually is.)
+     
+        [ "define" &lt;name&gt; ]
+                            (defines a transform named &lt;name&gt;, setting
+                            its value from the stuff which follows)
+     
+          <var>NRows</var> <var>NCols</var>
+                            (number of rows and columns of the matrix,
+                            typically <var>N+1</var> <var>N+1</var>, but any dimensions
+                            are possible)
+          &lt;<var>NRows</var> x <var>NCols</var> floating-point numbers&gt;
+                            (interpreted as a <var>NRows</var> x <var>NCols</var>
+                            homogeneous transform given row by row, intended
+                            to apply to a row vector multiplied on its LEFT,
+                            so that e.g. Euclidean translations appear in the
+                            <b>top</b> row -- in contrast to the ordinary
+                            transform objects where the translations appear
+                            in the bottom row)
+        |
+           "&lt;" &lt;filename&gt;  (meaning: read transform from that file)
+        |
+           ":" &lt;name&gt;      (meaning: use variable &lt;name&gt;,
+                           defined elsewhere; if undefined the initial
+                           value is the identity transform)
+     
+      [ "}" ]             (matching curly brace)
+</pre>
+   <p>The whole should be enclosed in { braces }.  Braces are not
+necessarily essential, so e.g. two integers &ndash; <var>NRows</var> <var>NCols</var>
+&ndash; followed by a <var>NRows</var> x <var>NCols</var> array of floats standing alone
+may but needn't have braces.
+
+   <p>Some examples, in contexts where they might be used:
+
+<pre class="example">     # Example 1: A GCL command to define a <code>6x6</code> transform called
+     # "fred", a mere translation by the vector <code>-3 0 1 1 0</code>. This
+     # transform is meant for a five dimensional space, with an homogeneous
+     # component a index zero.
+     
+     (read ntransform { ntransform  define fred
+              6 6
+              1 -3 0 1 1 0
+              0  1 0 0 0 0
+              0  0 1 0 0 0
+              0  0 0 1 0 0
+              0  0 0 0 1 0
+              0  0 0 0 0 1
+         }
+     )
+</pre>
+   <pre class="example">     # Example 2: Set the ND-xform of an object -- a geometry or a camera
+     # cluster. Given the definition above, this puts the object at (-3 0 1 1
+     # 0) in the five dimensional space.
+     
+     (ND-xform-set focus : fred)
+     
+     # or
+     
+     (ND-xform-set g1 : fred)
+</pre>
+   <!--  -->
+   </body></html>
+

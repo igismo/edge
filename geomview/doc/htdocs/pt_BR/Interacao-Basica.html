@@ -1,0 +1,151 @@
+<html lang="en">
+<head>
+<title>Interacao Basica - Manual do Geomview</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Manual do Geomview">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Interacao.html#Interacao" title="Interacao">
+<link rel="prev" href="Opcoes-de-Linha-de-Comando.html#Opcoes-de-Linha-de-Comando" title="Opcoes de Linha de Comando">
+<link rel="next" href="Chamando.html#Chamando" title="Chamando">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Interacao-Basica"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Chamando.html#Chamando">Chamando</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Opcoes-de-Linha-de-Comando.html#Opcoes-de-Linha-de-Comando">Opcoes de Linha de Comando</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Interacao.html#Interacao">Interacao</a>
+<hr>
+</div>
+
+<h3 class="section">3.3 Interacao Basica: O Painel Principal</h3>
+
+<p>Normalmente quando voc&ecirc; invoca Geomview, tr&ecirc;s janelas aparecem: O
+painel principal (<em>Main</em>), o painel de ferramentas (<em>Tools</em>), e uma janela de c&acirc;mera. 
+Geomview tem muitas outras janelas mas muitas coisas podem ser realizadas com essas
+tr&ecirc;s de forma que por padr&atilde;o as outras n&atilde;o aparecem.  Essa se&ccedil;&atilde;o do
+manual introduz alguns conceitos b&aacute;sicos que s&atilde;o usados nas se&ccedil;&otilde;es restantes
+do manual e descreve o painel principal (<em>Main</em>). 
+<div class="float">
+<a name="figmainpanel"></a><img src="figs/main.png" alt="figs/main.png">
+
+   <p><strong class="float-caption">Figura 3.1: O Painel Principal</strong></p></div>
+Geomview pode mostrar um n&uacute;mero arbitr&aacute;rio de objetos simultaneamente.  O
+navegador <em>Targets</em> no painel principal (<em>Main</em>) mostra uma lista de todos
+os objetos dos quais Geomview atualmente abertos.  Esse navegador tem uma
+linha para cada objeto que voc&ecirc; tiver chamado, adicionalmente algumas linhas para outros
+objetos.  Um desses outros objetos &eacute; chamado <code>World</code> e corresponde a
+todos os objetos atualmente chamados, tratados como se eles fossem um
+objeto.  A maioria das opera&ccedil;&otilde;es que voc&ecirc; pode fazer sobre um objeto, tais como
+aplicar um movimento ou mudar uma cor, pode tamb&eacute;m ser feita para o objeto
+"World".
+
+   <p>O navegador de alvos (<em>Targets</em>) tamb&eacute;m possui uma entrada para cada c&acirc;mera.  Por
+padr&atilde;o existe somente uma c&acirc;mera; &eacute; poss&iacute;vel adicionar mais delas atrav&eacute;s da
+entrada <em>New Camera</em> do painel principal (<em>Main</em>) via menu <em>File</em>. 
+Geomview trata c&acirc;meras na maioria das vezes como
+trata objetos geom&eacute;tricos.  Por exemplo, voc&ecirc; pode mover c&acirc;meras pelas pro-ximidades
+e adicion&aacute;-las e apag&aacute;-las como objetos geom&eacute;tricos.  C&acirc;meras n&atilde;o
+s&atilde;o mostradas na tela como um objeto que voc&ecirc; v&ecirc;.  Cada
+c&acirc;mera tem uma janela de c&acirc;mera separada que mostra a vis&atilde;o como vista atrav&eacute;s da lente
+daquela c&acirc;mera.  (&Eacute; poss&iacute;vel para cada c&acirc;mera mostrar uma representa&ccedil;&atilde;o
+geom&eacute;trica de outras c&acirc;meras.  Veja <a href="Cameras.html#Cameras">Cameras</a>.)
+
+   <p>Devido ao fato de Geomview tratar c&acirc;meras e objetos geom&eacute;tricos muito similarmente,
+o termo <dfn>objeto</dfn> nessa documenta&ccedil;&atilde;o &eacute; usado para referir-se a qualquer dos dois
+indistintamente.  Quando precisamos distinguir entre os dois tipos de objetos, usamos
+o termo "<dfn>geom</dfn>" para denotar um objeto geom&eacute;trico e a palavra
+<dfn>c&acirc;mera</dfn> para denotar uma c&acirc;mera.
+
+   <p>O objeto que est&aacute; selecionado (luminosidade alta) no navegador
+"<em>Targets</em>" &eacute; chamado objeto alvo.  Esse &eacute; o objeto que
+recebe quaisquer a&ccedil;&otilde;es que voc&ecirc; faz com o mouse ou com o teclado.  Voc&ecirc; pode
+mudar o objeto alvo selecionando uma linha diferente no
+navegador de alvos (<em>Targets</em>).  Outro caminho de modificar o objeto alvo &eacute;
+colocar o cursor do mouse diretamente sobre um geom na janela de c&acirc;mera
+e rapidamente dar um duplo clique no bot&atilde;o direito do mouse.  Esse processo &eacute; chamado
+<dfn>selecionar</dfn>; o objeto selecionado torna-se o novo alvo.
+
+   <p>Objetos do Geomview s&atilde;o todos conhecidos por dois nomes, ambos dos quais s&atilde;o mostrados no
+navegador de alvos (<em>Targets</em>).  O primeiro nome l&aacute; fornecido, que aparece
+entre colch&ecirc;tes ([ ]), &eacute; um nome curto atribuido pelo Geomview quando voc&ecirc;
+chama o objeto.  Esse nome consiste da letra `g' para geometria e da letra `c' para
+c&acirc;meras, seguindo por um n&uacute;mero.  O segundo nome &eacute; maior e mais
+descritivo; por padr&atilde;o esse &eacute; o nome do arquivo do qual o
+objeto foi chamado.  Os dois nomes s&atilde;o equivalentes no que diz respeito ao
+Geomview; em qualquer ponto onde voc&ecirc; precisar especificar um nome voc&ecirc; pode fornecer
+qualquer dos dois.
+
+   <p>Para controlar um objeto, garanta que aquele objeto que voc&ecirc; quer mover seja o
+objeto alvo, e coloque o cursor do mouse em uma janela de c&acirc;mera.  Movimentos s&atilde;o
+aplicados pressionando ou o bot&atilde;o esquerdo ou o bot&atilde;o do meio do mouse e
+movendo o mouse.  Existem muitos modos de movimento diferentes, cada modo de movimento
+aplicando um diferente tipo de movimento.  O navegador de modos de movimento (<em>MOTION MODE</em>)
+no painel principal indica o modo de movimento atual.  O
+padr&atilde;o &eacute; a rota&ccedil;&atilde;o ("Rotate").  Voc&ecirc; pode mudar o modo corrente de movimento
+selecionando um novo modo de movimento no navegador de modos de movimento (<em>MOTION MODE</em>), ou usando o
+painel de ferramentas (<em>Tools</em>).  Para maiores informa&ccedil;&otilde;es sobre modos de movimento,
+veja <a href="Movimentos-do-Mouse.html#Movimentos-do-Mouse">Movimentos do Mouse</a>.
+
+   <p>O navegador de m&oacute;dulos (<em>Modules</em>) lista m&oacute;dulos externos do Geomview.  Um
+m&oacute;dulo externo &eacute; um programa separado que interage com Geomview para
+extender suas funciona-lidades.  Para informa&ccedil;&otilde;es sobre m&oacute;dulos externos,
+veja <a href="Modulos.html#Modulos">Modulos</a>.
+
+   <p>A barra de menu no topo do painel principal oferece menus para opera&ccedil;&otilde;es comuns.
+
+   <p>Para criar novas janelas, chame novos objetos, grave os objetos ou outras informa&ccedil;&otilde;es,
+ou saia do Geomview, veja o menu <em>File</em>.
+
+   <p>Para copiar ou apagar objetos, veja o menu <em>Edit</em>.
+
+   <p>Voc&ecirc; pode chamar qualquer painel a partir do menu <em>Inspect</em>.
+
+   <p>O menu <em>Space</em> permite a voc&ecirc; escolher se Geomview trabalha
+no modo Euclidiano, Hiperbolico ou Esf&eacute;rico.  O modo Euclideano &eacute; usado
+por padr&atilde;o.  Para detalhes sobre a utiliza&ccedil;&atilde;o do modo espa&ccedil;o <em>Hyperbolic</em> e do modo
+<em>Spherical</em>, veja <a href="Geometrias-Nao_002dEuclidianas.html#Geometrias-Nao_002dEuclidianas">Geometrias Nao-Euclidianas</a>.
+
+   <p>A maioria das a&ccedil;&otilde;es que voc&ecirc; pode fazer atrav&eacute;s dos pain&eacute;is do Geomview possuem equivalentes
+atalhos de teclado de forma que voc&ecirc; pode fazer a mesma a&ccedil;&atilde;o atav&eacute;s de digita&ccedil;&atilde;o de uma
+sequ&ecirc;ncia de teclas no teclado.  Isso &eacute; &uacute;til para usu&aacute;rios avan&ccedil;ados que
+est&atilde;o familiarizados com as capacidades do Geomview e querem trabalhar rapidamente
+sem ter montanhas de pain&eacute;is amontoando-se na tela. 
+Atalhos de teclado s&atilde;o usualmente indicados ente colch&ecirc;tes ([ ]) pr&oacute;ximo
+ao item correspondente em um painel.  Por exemplo, o atalho de teclado
+para o modo <em>Rotate</em> &eacute; 'r'; isso &eacute; indicado par "[r]" que aparece
+antes da palavra "Rotate" no navegador <em>MOTION MODE</em>.  Para
+usar esse atalaho de teclado, apenas pressione a tecla <kbd>r</kbd> enquanto o cursor do
+mouse estiver em qualquer janela  do Geomview.  N&atilde;o &eacute; necess&aacute;rio pressionar a tecla <kbd>&lt;Enter&gt;</kbd>
+posteriormente.
+
+   <p>Alguns atalhos de teclado consistem em mais de uma tecla.  Nesses caso
+apenas digite as teclas uma ap&oacute;s a outra, sem pressionar <kbd>&lt;Enter&gt;</kbd>
+posteriormente ou entre as teclas pressionadas.  Atalhos de teclado s&atilde;o sens&iacute;veis &agrave; caixa alta/baixa.
+
+   <p>Muitas teclas de atalho podem ser precedidas de um par&acirc;metro num&eacute;rico. 
+Por exemplo, digitando <code>ae</code> muda o estado do desenho de arestas,
+enquanto <code>1ae</code> sempre habilita o desenho de arestas.
+
+   <p>O campo <em>keyboard</em> no canto superior esquerdo do painel principal
+(<em>Main</em>), imediatamente acima da palavra "Targets", ecoa o estado atual das teclas de atalho.
+
+   <p>Para uma lista de todas as teclas de atalho, pressione a telca <code>?</code>.
+
+<!-- ================================================================ -->
+   </body></html>
+

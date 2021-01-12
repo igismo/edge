@@ -1,0 +1,157 @@
+<html lang="en">
+<head>
+<title>Mapeamento de Textura - Manual do Geomview</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Manual do Geomview">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Convencoes.html#Convencoes" title="Convencoes">
+<link rel="prev" href="Aparencias.html#Aparencias" title="Aparencias">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Mapeamento-de-Textura"></a>
+<p>
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Aparencias.html#Aparencias">Aparencias</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Convencoes.html#Convencoes">Convencoes</a>
+<hr>
+</div>
+
+<h4 class="subsection">4.1.11 Mapeamento de Textura</h4>
+
+<p>Alguns programas que trabalham sem contato direto com o usu&aacute;rio suportam objetos mapeados em textura, atualmente apenas
+o OpenGL e a interface RenderMan no momento dessa
+escrita. Existe tamb&eacute;m alguns recursos com a interface RMan quando em uso
+um canal alfa na imagem de textura. Aqueles programas que n&atilde;o trabalham diretamente com  o usu&aacute;rio cujo
+suporte a textura n&atilde;o existe silenciosamente ignoram tentativas de uso de mapeamento
+de textura. Uma textura &eacute; especificada como parte de uma estrutura de apar&ecirc;ncia
+(Veja <a href="Aparencias.html#Aparencias">Aparencias</a>).  Resumidamente, se fornece uma imagem de textura
+(Veja tamb&eacute;m <a href="image.html#image">Objetos de imagem</a>), a qual &eacute; considerada contida em um quadrado
+no espa&ccedil;o parametrizado <code>(s,t)</code> no intervalo 0 &lt;= s &lt;= 1, 0 &lt;= t &lt;= 1. 
+Ent&atilde;o se fornece uma primitiva geom&eacute;trica, com cada v&eacute;rtice acompanhado com
+as coordenadas de textura <code>(s,t)</code>.  Se a texturiza&ccedil;&atilde;o estiver habilitada, a
+por&ccedil;&atilde;o apropriada da imagem de textura &eacute; colada sobre cada face do
+objeto texturizado.
+
+   <p>N&atilde;o existe (atualmente) nenhuma provis&atilde;o para heran&ccedil;a de parte de uma estrutura de
+textura; se a palavra chave <code>texture</code> &eacute; mencionada em uma apar&ecirc;ncia,
+essa mens&atilde;o suplanta qualquer outra especifica&ccedil;&atilde;o de textura.
+
+   <p>O atributo de apar&ecirc;ncia <code>texturing</code> controla se texturas s&atilde;o
+usadas; n&atilde;o existe perda de performace tendo campos "texture { <small class="dots">...</small> }"
+definidos quando a utiliza&ccedil;&atilde;o de texturas est&aacute; desabilitada.
+
+   <p>Os campos de textura dispon&iacute;veis s&atilde;o:
+
+<pre class="example">     clamp   none  -ou-  s  -ou-  t  -ou-  st
+       Determina o significado de coordenadas de textura fora do intervalo
+       0..1. Com <code>clamp none</code>, o padr&atilde;o, coordenadas s&atilde;o
+       interpretadas modulo 1, ent&atilde;o (s,t) = (1.25,0), (.25,0), e (-.75,0)
+       referem-se todos ao mesmo ponto no espa&ccedil;o das texturas.  Com
+       <code>clamp s</code> ou <code>clamp t</code> ou <code>clamp st</code>, individualmente
+       ou ambos de s-coordenadas ou t-coordenadas menor que 0 ou
+       maior que 1 s&atilde;o remapeadas para 1 ou para 0, respectivamente.
+     
+     image { &lt;especifica&ccedil;&atilde;o de imagem&gt; (<a href="image.html#image">Objetos de imagem</a>) }
+       Especifica a atual imagem de textura. Imagens de textura podem ter
+       1, 2, 3 ou 4 canais:
+         1 canal:  lumin&acirc;ncia
+         2 canais: lumin&acirc;ncia e alfa (opcidade:0 transparente, 1 opaco)
+         3 canais: dados RGB
+         4 canais: dados RGBA
+     
+       Veja <a href="image.html#image">Objetos de imagem</a>, para a defini&ccedil;&atilde;o atual de
+       objetos de imagem. O canal usado por alfa &eacute; somente interpretado
+       como m&aacute;scara: onde a m&aacute;cara &eacute; zero, pixels s&atilde;o simplesmente
+       omitidos. Uma exce&ccedil;&atilde;o &eacute; o caso onde <em>apply</em>
+       &eacute; igual a <em>modulate</em> e a transluc&ecirc;ncia est&aacute; habilitada:
+       nesse caso o valor de alfa resultante &eacute; o resultado da
+       multiplica&ccedil;&atilde;o da cor da superf&iacute;cie pelo valor de alfa do
+       canal alfa da textura.
+     
+     file      nomearquivo
+     alphafile nomearquivo
+       <em>Isso &eacute; considerado obsoleto, e somente mantido por compatibilidade,
+       o moderno caminho &eacute; usar o novo objeto imagem OOGL. Veja
+       <a href="image.html#image">Objetos de imagem</a>.  O material documentado aqui pode
+       ainda funcionar apesar disso</em>
+     
+       Especifica arquivos de imagem contendo a textura.
+     
+       A palavra chave <em>file</em> especifica um arquivo com informa&ccedil;&otilde;es de cor
+       ou de brilho; <em>alphafile</em> se presente, especifica uma m&aacute;scara de
+       transpar&ecirc;ncia ("alpha"); onde a m&aacute;scara for zero, pixels simplesmente
+       s&atilde;o omitidos.  Muitos formatos de arquivo de imagem est&atilde;o
+       dispon&iacute;veis; o tipo de arquivo deve ser indicado pelos &uacute;ltmos poucos
+       caracteres do nome do arquivo:
+         .ppm ou .ppm.Z ou .ppm.gz  24-bit 3-color imagem no formato PPM
+         .pgm ou .pgm.Z ou .pgm.gz  8-bit tons de cinza imagem no formato PGM
+         .sgi ou .sgi.Z ou .sgi.gz  8-bit, 24-bit, ou 32-bit imagem SGI
+         .tiff                      8-bit ou 24-bit imagem TIFF
+         .gif                       imagem GIF
+       Para esse recurso trabalhar, alguns programas devem estar dispon&iacute;veis
+       no caminho de busca do Geomview:
+         zcat  para arquivo .Z
+         gzip  para arquivos .gz
+         tifftopnm para arquivos .tiff
+         giftoppm para arquivos .gif
+     
+       Se uma imagem <code>alphafile</code> for fornecida, essa imagem deve ser do mesmo
+       tamanho que a imagem <code>file</code>.
+     
+       <em>Objetos imagem fornecem um caminho mais flex&iacute;vel para especificar dados de
+       textura. Veja <a href="image.html#image">Objetos de imagem</a>.</em>
+     
+     apply   modulate  -ou-  blend  -ou-  decal
+       Indica como a imagem de textura &eacute; aplicada &agrave; superf&iacute;cie.
+       Aqui a "surface color" (cor da superf&iacute;cie) significa a cor que a
+       superf&iacute;cie pode ter   na aus&ecirc;ncia de mapeamento de textura.
+     
+       Com <code>modulate</code>, o padr&atilde;o, a cor de textura (ou ilumina&ccedil;&atilde;o,
+       se texturizado por meio de uma imagem de escala de cinza) &eacute; multiplicada
+       pela cor da superf&iacute;cie.
+     
+       Com <code>blend</code>, textura harmoniza-se entre cor de fundo (<code>background</code>)
+       e a cor da superf&iacute;cie.  O par&acirc;metro <code>file</code> deve especificar uma
+       imagem de escala de cinza.  Onde a imagem de textura &eacute; 0, a cor da
+       superf&iacute;cie permanece inalterada; onde for 1, a superf&iacute;cie &eacute;
+       colorida na cor dada por <code>background</code>; e cor &eacute; interpolada para
+       valores imediatos.
+     
+       Com <code>decal</code>, o par&acirc;metro <code>file</code> deve especificar uma
+       imagem de tres cores.  Se um par&acirc;metro <code>alphafile</code> estiver presente,
+       seus valores interpolam-se entre a cor da superf&iacute;cie (onde alpha=0)
+       e a cor de textura (onde alpha=1).  Ilumina&ccedil;&atilde;o n&atilde;o afeta a
+       cor de textura no modo <code>decal</code>; efetivamente a textura &eacute;
+       tonalidademente constante.
+     
+     background  R G B A
+       Especifica uma cor com 4 componentes, com n&uacute;meros R, G, B, e A em
+       ponto flutuante normalmente no intervalo 0..1, usados quando
+       <code>apply blend</code> for selecionado.
+     
+     transform <code>matriz-de-transforma&ccedil;&atilde;o</code>
+       Espera uma lista de 16 n&uacute;meros, ou um dos outros caminhos de
+       representar uma transforma&ccedil;&atilde;o (<code>: nomecabe&ccedil;alho</code> ou
+       <code>&lt; nomearquivo</code>). A matriz 4x4 de transforma&ccedil;&atilde;o &eacute;
+       aplicada a coordenadas de textura, no sentido de um vetor linha de
+       4 componentes (s,t,0,1) multiplicado &agrave; esquerda pela matriz, para
+       produzir novas coordenadas (s',t') &agrave;s quais atualmente indexam a
+       textura.
+</pre>
+   <!-- ================================================================ -->
+   </body></html>
+

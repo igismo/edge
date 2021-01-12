@@ -1,0 +1,95 @@
+<html lang="en">
+<head>
+<title>References - Geomview Manual</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Geomview Manual">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Conventions.html#Conventions" title="Conventions">
+<link rel="prev" href="Binary-format.html#Binary-format" title="Binary format">
+<link rel="next" href="Appearances.html#Appearances" title="Appearances">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="References"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Appearances.html#Appearances">Appearances</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Binary-format.html#Binary-format">Binary format</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Conventions.html#Conventions">Conventions</a>
+<hr>
+</div>
+
+<h4 class="subsection">4.1.9 Embedded objects and external-object references</h4>
+
+<p>Some object types (<code>LIST</code>, <code>INST</code>) allow references to other
+OOGL objects, which may appear literally in the data stream, be loaded
+from named disk files, or be communicated from elsewhere via named
+objects.  GCL commands also accept geometry in these forms.
+
+   <p>The general syntax is
+
+<pre class="example">      &lt;oogl-object&gt;  ::=
+             [ "{" ]
+                 [ "define" <code>symbolname</code> ]
+                 [ ["="] <code>object-keyword</code> ...
+                      | "&lt;" <code>filename</code>
+                      | ":" <code>symbolname</code> ]
+             [ "}" ]
+</pre>
+   <p>where "quoted" items are literal strings (which appear without the
+quotes), [bracketed] items are optional, and | denotes alternatives. 
+Curly braces, when present, must match; the outermost set of curly
+braces is generally required when the object is in a larger context,
+e.g. when it is part of a larger object or embedded in a Geomview
+command stream.
+
+   <p>For example, each of the following three lines:
+<pre class="example">             { define fred   QUAD 1 0 0  0 0 1  0 1 0  1 0 0 }
+     
+             { define fred = QUAD 1 0 0  0 0 1  0 1 0  1 0 0 }
+     
+             { appearance { +edge } LIST { &lt; "file1" } { : fred } }
+     
+             VECT 1 2 0   2 0   0 0 0   1 1 2
+</pre>
+   <p class="noindent">is a valid OOGL object.  The last example is only valid when it is
+delimited unambiguously by residing in its own disk file.
+
+   <p>The ":" construct allows references to symbols, created with
+<code>define</code>. A symbol's initial value is a null object.  When a
+symbol is (re)defined, all references to it are automatically changed.
+
+   <p>The "<code>define</code> NAME" construct allows to define a global symbol for
+the given object. If "NAME" already references an object, then the old
+object is discarded and replaced by the new
+definition. See <a href="read.html#read"><code>(read ...)</code></a>. See <a href="hdefine.html#hdefine"><code>(hdefine ...)</code></a>.
+
+   <p>The "&lt;" construct causes a disk file to be read.  Note that this isn't a
+general textual "include" mechanism; a complete OOGL object must appear
+in the referenced file.
+
+   <p>Files read using "&lt;" are sought first in the directory of the file which
+referred to them, if any; failing that, the normal search path
+(see <a href="load_002dpath.html#load_002dpath"><code>(load-path ...)</code></a>) is used.  The default search
+looks first in the current directory, then in the Geomview data
+directories.
+
+   <p>Again, white space and line breaks are insignificant, and "#" comments
+may appear anywhere.
+
+<!--  -->
+   </body></html>
+

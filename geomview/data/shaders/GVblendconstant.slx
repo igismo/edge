@@ -1,0 +1,122 @@
+surface
+AQSIS_V 2
+
+
+segment Data
+
+USES 442371
+
+param uniform  string texturename
+param uniform  color bgcolor
+param uniform  float At
+varying  color Ct
+varying  float Ot
+varying  float channels
+
+
+segment Init
+	pushis ""
+	pop texturename
+	pushif 0
+	setfc
+	pop bgcolor
+	pushif 1
+	pop At
+
+
+segment Code
+	pushv Cs
+	pop Ci
+	pushv Os
+	pop Oi
+	S_CLEAR
+	pushis ""
+	pushv texturename
+	ness
+	pushif 1
+	pushis "channels"
+	pushv texturename
+	textureinfo channels
+	eqff
+	land
+	S_GET
+	RS_PUSH
+	RS_GET
+	RS_JZ 0
+	S_CLEAR
+	pushif 3
+	pushv channels
+	lsff
+	S_GET
+	RS_PUSH
+	RS_GET
+	RS_JZ 2
+	pushif 0
+	pushis "channel"
+	pushif 0
+	pushis "width"
+	pushv texturename
+	pushif 4
+	ftexture1
+	setfc
+	pop Ct
+	pushif 1
+	pushis "channel"
+	pushif 0
+	pushis "width"
+	pushif 1
+	pushis "fill"
+	pushv texturename
+	pushif 6
+	ftexture1
+	pop Ot
+:2
+	RS_INVERSE
+	RS_JZ 1
+	pushif 0
+	pushis "width"
+	pushv texturename
+	pushif 2
+	ctexture1
+	pop Ct
+	pushif 3
+	pushis "channel"
+	pushif 0
+	pushis "width"
+	pushif 1
+	pushis "fill"
+	pushv texturename
+	pushif 6
+	ftexture1
+	pop Ot
+:1
+	RS_POP
+	pushv bgcolor
+	pushv Ct
+	mulcc
+	pushv Ci
+	pushv Ct
+	pushif 1
+	subfc
+	mulcc
+	addcc
+	pop Ci
+	pushv Ot
+	pushv At
+	mulff
+	pushv At
+	pushif 1
+	subff
+	addff
+	pop Ot
+	pushv Ot
+	setfc
+	pushv Oi
+	mulcc
+	pop Oi
+:0
+	RS_POP
+	pushv Oi
+	pushv Ci
+	mulcc
+	pop Ci

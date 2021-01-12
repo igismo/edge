@@ -1,0 +1,80 @@
+<html lang="en">
+<head>
+<title>Customizacao - Manual do Geomview</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Manual do Geomview">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="prev" href="Formatos-dos-Arquivos-da-OOGL.html#Formatos-dos-Arquivos-da-OOGL" title="Formatos dos Arquivos da OOGL">
+<link rel="next" href="Modulos.html#Modulos" title="Modulos">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Customizacao"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Modulos.html#Modulos">Modulos</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Formatos-dos-Arquivos-da-OOGL.html#Formatos-dos-Arquivos-da-OOGL">Formatos dos Arquivos da OOGL</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="index.html#Top">Top</a>
+<hr>
+</div>
+
+<h2 class="chapter">5 Customiza&ccedil;&atilde;o: arquivos <samp><span class="file">.geomview</span></samp></h2>
+
+<p>Quando Geomview &eacute; inciado, ele chama e executa comando em um
+arquivo de inicializa&ccedil;&atilde;o dependente do sistema operacional chamado <samp><span class="file">.geomview</span></samp>.  Esse arquivo est&aacute; no
+subdiret&oacute;rio <samp><span class="file">data</span></samp> do diret&oacute;rio de distribui&ccedil;&atilde;o do Geomview
+e
+cont&eacute;m comandos GCL para configurar Geomview de uma forma
+comum para todos os usu&aacute;rios no sistema.
+
+   <p>A seguir, Geomview procura o arquivo <samp><span class="file">~/.geomview</span></samp> (<samp><span class="file">~</span></samp>
+corresponde a seu diret&oacute;rio base).  Voc&ecirc; pode usar esse arquivo para configurar
+seu pr&oacute;prio comportamento padr&atilde;o do Geomview de forma que ele se ajuste &agrave;s suas prefer&ecirc;ncias.
+
+   <p>Ap&oacute;s a leitura de <samp><span class="file">~/.geomview</span></samp>, Geomview procura por um arquivo chamado
+<samp><span class="file">.geomview</span></samp> no diret&oacute;rio atual.  Se tal arquivo existir
+Geomview l&ecirc; esse arquivo, a menos que esse arquivo seja o mesmo que <samp><span class="file">~/.geomview</span></samp> (o que
+pode ser o caso se voc&ecirc; estiver executando o Geomview a partir de seu diret&oacute;rio base). 
+Voc&ecirc; pode usar o <samp><span class="file">.geomview</span></samp> do diret&oacute;rio atual para criar uma personaliza&ccedil;&atilde;o no
+Geomview espec&iacute;fica para um certo projeto.
+
+   <p>Voc&ecirc; pode usar arquivos <samp><span class="file">.geomview</span></samp> para controlar todos os tipos de coisa no
+Geomview.  Eles podem conter quaisquer declara&ccedil;&otilde;es GCL v&aacute;lidas.  Especialmente &uacute;til
+&eacute; o comando <code>ui-panel</code> que controla a localiza&ccedil;&atilde;o inicial dos
+pain&eacute;is do Geomview.  Para um exemplo veja o arquivo dependente do sistema
+<samp><span class="file">.geomview</span></samp> mencionado acima.  Veja <a href="GCL.html#GCL">GCL</a>. Veja <a href="ui_002dpanel.html#ui_002dpanel"><code>(ui-panel ...)</code></a>.
+
+   <p>Uma boa id&eacute;ia colocar juntos todos os comandos que voc&ecirc; coloca em um
+arquivo <samp><span class="file">.geomview</span></samp> em uma declara&ccedil;&atilde;o <code>progn</code> com o objetivo de fazer com que
+Geomview execute todos de uma s&oacute; vez.  Caso voc&ecirc; n&atilde;o fa&ccedil;a isso Geomview possivelmente pode executar
+esses comando sequ&ecirc;ncialmente sobre os primeiros poucos ciclos de atualiza&ccedil;&atilde;o ap&oacute;s a incializa&ccedil;&atilde;o.
+
+   <p>Para modificar, e.g. a pol&iacute;tica de focaliza&ccedil;&atilde;o da janela de c&acirc;mera de forma que ela
+selecione a pol&iacute;tica de focaliza&ccedil;&atilde;o do gerenciador de janela (em lugar de ser
+ativada quando o cursor do mouse cruza a janela), voc&ecirc; pode colocar o
+seguinte no seu arquivo <samp><span class="file">~/.geomview</span></samp>:
+
+<pre class="example">     (progn
+       (ui-cam-focus focus-change)
+       ... # other stuff
+     )
+</pre>
+   <p>Voc&ecirc; pode colocar qualquer comando <code>GCL</code> v&aacute;lido nos seus arquivos
+<samp><span class="file">.geomview</span></samp>, Veja <a href="GCL.html#GCL">GCL</a>. Veja <a href="progn.html#progn"><code>(progn ...)</code></a>. Veja <a href="ui_002dcam_002dfocus.html#ui_002dcam_002dfocus"><code>(ui-cam-focus ...)</code></a>.
+
+<!-- **************************************************************** -->
+   </body></html>
+

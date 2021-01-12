@@ -1,0 +1,173 @@
+<html lang="en">
+<head>
+<title>INST - Manual do Geomview</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Manual do Geomview">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Formatos-de-Arquivo-de-Objeto.html#Formatos-de-Arquivo-de-Objeto" title="Formatos de Arquivo de Objeto">
+<link rel="prev" href="SPHERE.html#SPHERE" title="SPHERE">
+<link rel="next" href="LIST.html#LIST" title="LIST">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="INST"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="LIST.html#LIST">LIST</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="SPHERE.html#SPHERE">SPHERE</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Formatos-de-Arquivo-de-Objeto.html#Formatos-de-Arquivo-de-Objeto">Formatos de Arquivo de Objeto</a>
+<hr>
+</div>
+
+<h4 class="subsection">4.2.9 Arquivos do Tipo INST</h4>
+
+<p>O sufixo convencional para um arquivo <code>INST</code> &eacute; <samp><span class="file">.inst</span></samp>.
+
+   <p>N&atilde;o existe formato INST BINARY.
+
+   <p>Um <code>INST</code> aplica uma transforma&ccedil;&atilde;o 4x4 (ou <var>(N+1)</var>x<var>(N+1)</var> no contexto de
+ND-viewing) a outro objeto OOGL.  Um arquivo do tipo <code>INST</code> inicia-se com
+<code>INST</code> seguido de as se&ccedil;&otilde;es mostradas adiante que podem vir em qualquer ordem:
+<pre class="example">     geom <var>oogl-object</var>
+</pre>
+   <p class="noindent">especifica o objeto OOGL a ser instanciado.  Veja <a href="Referencias.html#Referencias">Referencias</a>, para
+a sintaxe de um <var>oogl-object</var>.   palavra chave <code>unit</code> &eacute; um
+sin&ocirc;nimo para <code>geom</code>.
+<pre class="example">     transform   ["{"] <code>transforma&ccedil;&atilde;o 4x4</code> ["}"]
+</pre>
+   <p class="noindent">especifica uma matriz de transforma&ccedil;&atilde;o simples.  Ou a
+matriz pode aparecer literalmente como 16 n&uacute;meros, ou a matriz pode aparecer
+como uma refer&ecirc;ncia a um objeto "transform", i.e.
+<pre class="example">         "&lt;" arquivo-contendo-matriz-4x4
+</pre>
+   <p>ou
+<pre class="example">         ":" s&iacute;mbolo-representando-transforma&ccedil;&atilde;o-de-objeto
+</pre>
+   <p>Outra forma de especificar a transforma&ccedil;&atilde;o &eacute;
+<pre class="example">     transforms
+         <var>objeto-oogl</var>
+</pre>
+   <p>O <var>objeto-oogl</var> deve ser um objeto <code>TLIST</code> (lista de
+transforma&ccedil;&otilde;es), ou uma <code>LIST</code> cujos membros dessa lista s&atilde;o objetos
+<code>TLIST</code> mais recentes.  Com efeito, a palavra chave <code>transforms</code> toma uma
+cole&ccedil;&atilde;o de matrizes 4x4 e replica o objeto <code>geom</code>, fazendo
+uma c&oacute;pia para cada matriz 4x4.
+
+   <p>Se nem a palavra chave <code>transform</code> nem a palavra chave <code>transforms</code> aparecerem, ne-nhuma
+transforma&ccedil;&atilde;o &eacute; aplicada (atualmente a identidade &eacute; aplicada).  Voc&ecirc; pode
+usar isso para, e.g., empacotar uma apar&ecirc;ncia em torno de um objeto externo
+fornecido, atrav&eacute;s de uma LIST de membros simples pode-se fazer isso mais eficientemente.
+
+   <p>Veja <a href="Matrizes-de-transformacao.html#Matrizes-de-transformacao">Matrizes de transformacao</a>, para o formato de matriz.
+
+   <p>A c&oacute;pia de um objeto geom&eacute;trico simples por meio de um objeto <code>TLIST</code>
+(veja &lsquo;<samp><span class="samp">transforms</span></samp>&rsquo; acima) pode ser &uacute;til para transformar coordenadas de
+textura atrav&eacute;s de outra lista de transforma&ccedil;&otilde;es; essa lista pode ser
+especificada por
+<pre class="example">     txtransforms
+         <var>objeto-TLIST</var>
+</pre>
+   <p>O n&uacute;mero de transoforma&ccedil;&otilde;es de textura deve coincidir com o n&uacute;mero de transforma&ccedil;&otilde;es
+geom&eacute;tricas. O objeto <code>SPHERE</code> (Veja <a href="SPHERE.html#SPHERE">Sphere Objects</a>) utiliza essa t&eacute;cnica para gerar um esfera completamente texturizada fora
+de alguma fra&ccedil;&atilde;o de uma esfera (usualmente um octante).
+
+   <p>Uma transforma&ccedil;&atilde;o <var>(N+1)</var>-dimensional pode ser especificada por
+
+<pre class="example">     ntransform ["{"] <var>N+1</var> <var>N+1</var> <code>(N+1)x(N+1) floats</code> ["}"]
+</pre>
+   <p class="noindent">A linha acima fornece uma matriz de transforma&ccedil;&atilde;o <var>N+1</var>-dimensional.  Ou
+a matriz pode aparecer literalmente como <var>(N+1)</var>x<var>(N+1)</var> n&uacute;meros, ou
+pode existir uma refer&ecirc;ncia a um objeto &lsquo;<samp><span class="samp">ntransform</span></samp>&rsquo;, i.e.
+<pre class="example">         "&lt;" arquivo-contendo-matriz-<var>(N+1)</var>x<var>(N+1)</var>
+</pre>
+   <p>ou
+<pre class="example">         ":" s&iacute;mbolo-representando-objeto-ntransform
+</pre>
+   <p>Veja <a href="Matrizes-de-transformacao-ND.html#Matrizes-de-transformacao-ND">Matrizes de transformacao ND</a>, para o formato de matriz.
+
+   <p>Mais dois campos INST s&atilde;o aceitos: <code>location</code> e <code>origin</code>.
+
+   <p>Note que <code>location</code> bem como <code>origin</code> s&atilde;o ignorados se esse
+objeto <code>INST</code> realiza uma <code>ntransform</code>. Tamb&eacute;m, se a visualiza&ccedil;&atilde;o ND est&aacute;
+ativada (comando <code>ND-axes</code>, veja <a href="GCL.html#GCL">GCL</a>) ent&atilde;o objetos <code>INST</code>
+com <code>origin</code> diferente de <code>local</code> n&atilde;o ir&atilde;o ser desenhados, embora o
+material <code>location</code> possa trabalhar (ou n&atilde;o).
+
+<pre class="example">     location [global ou camera ou ndc ou screen ou local]
+</pre>
+   <p>Normalmente um INST especifica uma posi&ccedil;&atilde;o relativa a seu objeto pai;
+o campo <code>location</code> permite colocar um objeto em qualquer lugar.
+     <ul>
+<li><code>location global</code> anexa o objeto ao ambiente do sistema de coordenadas global
+(tamb&eacute;m conhecido como "universe") &ndash; o mesmo dos objetos mundo do Geomview,
+das geometrias alien&iacute;genas, e c&acirc;meras s&atilde;o colocados. 
+<li><code>location camera</code> coloca o pai do objeto como sendo uma c&acirc;mera. 
+(Dessa forma se houverem multiplas visualiza&ccedil;&otilde;es, essas visualiza&ccedil;&otilde;es podem aparecer em uma diferente
+posi&ccedil;&atilde;o espacial em cada visualiza&ccedil;&atilde;o.)  O centro de vis&atilde;o da camera
+est&aacute; em volta da parte negativa do seu eixo z; X positivo est&aacute; &agrave; direita e adiante, Y positivo est&aacute; acima e adiante. 
+Normalmente as unidades do espa&ccedil;o da c&acirc;mera s&atilde;o as mesmas das coordenadas globais. 
+Quando uma c&acirc;mera &eacute; colocada de volta &agrave; sua posi&ccedil;&atilde;o inicial, a or&iacute;gem global est&aacute; localizada em (0,0,-3.0). 
+<li><code>location ndc</code> coloca os parentes do objeto no cubo unit&aacute;rio
+normalizado no qual a proje&ccedil;&atilde;o da c&acirc;mera (perspectiva ou ortogr&aacute;fica)
+mapeia o objeto mundo vis&iacute;vel.  X, Y, e Z est&atilde;o no intervalo de -1 a +1,
+com Z = -1 estando mais pr&oacute;ximo e Z = +1 adiante do plano de corte, e X e Y
+nas dire&ccedil;&otilde;es &agrave; direita e adiante e acima e adiante respectivamente. 
+Dessa forma alguma coisa como
+     <pre class="example">          INST  transform  1 0 0 0  0 1 0 0  0 0 1 0  -.9 -.9 -.999 1
+                location ndc
+                geom &lt; label.vect
+</pre>
+     <p>cola <code>label.vect</code> dentro do canto infeiror esquerdo de cada janela,
+e em frente de tudo mais que estiver pr&oacute;ximo, assumindo o conte&uacute;do
+<code>label.vect</code> como localizado no quadrante positivo do plano XY. 
+&Eacute; tentado usar -1 em lugar de como a componente Z da
+posi&ccedil;&atilde;o, mas o -1 pode colocar o objeto apenas nas proximidades em lugar de muito perto do
+plano de corte e tornar o objeto (parcialmente) invis&iacute;vel, devido a algum erro de c&aacute;lculo com n&uacute;meros em ponto flutuante. 
+<li><code>location screen</code> coloca o objeto objeto em coordenadas de tela. 
+O intervalo de Z &eacute; ainda de -1 a +1 como para coordenadas ndc;
+X e Y s&atilde;o medidos em pixels, e a posi&ccedil;&atilde;o de (0,0) localiza-se no canto
+<em>inferior esquerdo</em> da janela, avan&ccedil;ado para a direita e adiante e para cima e adiante. 
+</ul>
+
+   <p><code>location local</code> &eacute; o padr&atilde;o; o objeto est&aacute; posicionado relativametne
+a seus genitores.
+
+<pre class="example">     origin [global ou camera ou ndc ou screen ou local] x y z
+</pre>
+   <p>O campo <code>origin</code> reposiciona o conte&uacute;do da INST de forma que
+o local da or&iacute;gem seja o ponto especificado do sistema de coordenadas fornecido. 
+A menos que <code>location</code> seja especificado, essa op&ccedil;&atilde;o n&atilde;o muda a orienta&ccedil;&atilde;o, somente a escolha da
+or&iacute;gem.  Ambas as op&ccedil;&otilde;es <code>location</code> e <code>origin</code> podem ser usadas juntas.
+
+   <p>Ent&atilde;o por exemplo
+<pre class="example">     { INST
+       location screen
+       origin ndc 0 0 -.99
+       geom { &lt; xyz.vect }
+       transform { 100 0 0 0  0 100 0 0  0 0 -.009 0   0 0 0 1 }
+     }
+</pre>
+   <p>coloca a or&iacute;gem de xyz.vect no centro da janela, apenas transformando o
+plano de corte mais pr&oacute;ximo.  O comprimento da unidade das arestas X e Y s&atilde;o ajustados proporcionalmente para ter o comprimento de apenas 100
+unidades de tela &ndash; pixels &ndash; , independentemente do tamanho da janela.
+
+<ul class="menu">
+<li><a accesskey="1" href="Exemplos-INST.html#Exemplos-INST">Exemplos INST</a>:                alguns exemplos de arquivos do tipo <code>INST</code>. 
+</ul>
+
+<!-- ................................................................ -->
+   </body></html>
+

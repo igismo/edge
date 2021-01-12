@@ -1,0 +1,15 @@
+Eclipes install for SAVI
+
+- install C++ 64bit eclipse
+- sudo apt-get install tcl*
+- sudo apt-get install tk*
+- sudo apt-get install ActiveT*
+-
+  On Ubuntu/Debian etc. try:            sudo apt-get install zlib1g-dev
+
+  On Ubuntu/Debian etc. try:            sudo apt-get install zlib1g-dev
+sudo apt-get install geomview
+sudo apt-get install gifsicle
+sudo apt-get install zlib1g-dev
+\
+

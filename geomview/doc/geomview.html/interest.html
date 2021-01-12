@@ -1,0 +1,62 @@
+<html lang="en">
+<head>
+<title>interest - Geomview Manual</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Geomview Manual">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="GCL-Reference.html#GCL-Reference" title="GCL Reference">
+<link rel="prev" href="input_002dtranslator.html#input_002dtranslator" title="input-translator">
+<link rel="next" href="lambda.html#lambda" title="lambda">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="interest"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="lambda.html#lambda">lambda</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="input_002dtranslator.html#input_002dtranslator">input-translator</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="GCL-Reference.html#GCL-Reference">GCL Reference</a>
+<hr>
+</div>
+
+<h4 class="subsection">7.2.67 interest</h4>
+
+<p><a name="index-interest-74"></a>
+     <dl>
+<dt><code>(interest (COMMAND [args]))</code><dd>Allows you to express interest in a command.  When geomview executes
+that command in the future it will echo it to the communication pool
+from which the interest command came. <var>COMMAND</var> can be any command. 
+Args specify restrictions on the values of the arguments; if args are
+present in the interest command, geomview will only echo calls to the
+command in which the arguments match those given in the interest
+command.  Two special argument values may appear in the argument list. 
+<code>*</code> matches any value. <code>nil</code> matches any value but supresses
+the reporting of that value; its value is reported as <code>nil</code>.
+
+     <p>The purpose of the interest command is to allow external
+modules to find out about things happening inside geomview. 
+For example, a module interested in knowing when a geom called
+<code>foo</code> is deleted could say <code>(interest (delete foo))</code> and would
+receive the string <code>(delete foo)</code> when foo is deleted.
+
+     <p>Picking is a special case of this.  For most modules interested in pick
+events the command <code>(interest (pick world))</code> is sufficient.  This
+causes geomview to send a string of the form <code>(pick world ...)</code>
+every time a pick event (right mouse double click).  See the <a href="pick.html#pick"><code>(pick ...)</code></a> command for details. 
+</dl>
+
+   </body></html>
+

@@ -1,0 +1,58 @@
+<html lang="en">
+<head>
+<title>Sintaxe comum - Manual do Geomview</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Manual do Geomview">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Convencoes.html#Convencoes" title="Convencoes">
+<link rel="prev" href="Convencoes.html#Convencoes" title="Convencoes">
+<link rel="next" href="Nomes-de-arquivos.html#Nomes-de-arquivos" title="Nomes de arquivos">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Sintaxe-comum"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Nomes-de-arquivos.html#Nomes-de-arquivos">Nomes de arquivos</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Convencoes.html#Convencoes">Convencoes</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Convencoes.html#Convencoes">Convencoes</a>
+<hr>
+</div>
+
+<h4 class="subsection">4.1.1 Sintaxe Comum a Todos os Formatos de Arquivo da OOGL</h4>
+
+<p>A maioria dos formatos de arquivo de objeto OOGL s&atilde;o do formato livre ASCII &mdash; qualquer quantidade de
+espa&ccedil;os em branco (caracteres n&atilde;o imprim&iacute;veis, tabula&ccedil;&otilde;es, caractere de nova linha) pode aparecer entre os sinalizadores (n&uacute;meros,
+palavras chave, etc.).  Paradas de linha s&atilde;o na maioria das vezes sempre insignificantes, com
+algumas excess&otilde;es devidamente ressaltadas.  Coment&aacute;rios come&ccedil;am com # e continuam at&eacute;
+o fim da linha; esses coment&aacute;rios s&atilde;o permitidos em qualquer lugar onde um caractere de nova linha for permitido tamb&eacute;m.
+
+   <p>Formatos bin&aacute;rios s&atilde;o tamb&eacute;m definidos para muitos objetos; Veja <a href="Formato-binario.html#Formato-binario">Formato binario</a>, e as descri&ccedil;&otilde;es individuais do objeto.
+
+   <p>Objetos t&iacute;picos OOGL come&ccedil;am com uma palavra chave designando o tipo de objeto,
+possivelmente com modificadores indicando a presen&ccedil;a de informa&ccedil;&otilde;es de cor, etc. 
+Em alguns formatos a palavra chave &eacute; opcional, por quest&otilde;es de compatibilidade com formatos
+de arquivo definidos em outros lugares.  O tipos de objeto &eacute; ent&atilde;o determinado por
+suposi&ccedil;&atilde;o sobre o sufixo do arquivo (se houver) ou pelos dados em si mesmos.
+
+   <p>Palavras chave s&atilde;o sens&iacute;veis &agrave; caixa alta/baixa.  Algumas palavras chave possuem letras de prefixo adicionais
+indicando a presen&ccedil;a de cor ou outros dados; nesse caso a ordem dos
+prefixos &eacute; importante, e.g. <code>CNMESH</code> &eacute; significativo mas
+<code>NCMESH</code> &eacute; inv&aacute;lido.
+
+<!--  -->
+   </body></html>
+

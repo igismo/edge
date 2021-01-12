@@ -1,0 +1,242 @@
+1.9.5 March 2014
+
+   * vastly extended lisp-interpreter, including lambda-expression, defun,
+     let, while, setq, eval
+
+   * `(process-events)' lisp function to branch out of a command-script
+     and temporarily give the control back to the main command-loop
+
+   * Proper handling of quoted input tokens: those cannot serve as
+     function or variable names
+
+   * other bug-fixes (notably: multi-object geometry-only files work again)
+
+   * memory allocation fixes
+
+   * compilation and build fixes
+
+1.9.4 August 2007
+
+   * Translation of the manual to Brazilian Portuguese, courtesy of
+     Jorge Barros de Abreu <ficmatin10@solar.com.br>.
+
+   * Image-stream filter bug fixes.
+
+   * Fixed (transform ...), (transform-incr ...) interests (broken by
+     previous change since 1.9.0)
+
+   * Improved computation of averaged per-vertex polygon normals
+     (taking the relative orientation of the facets in to account).
+
+   * Loading of textured meshes was broken by a previous change since
+     1.9.0, fix that.
+
+   * GEOMROOT environment variable has been resurrected, needed by
+     some external modules (e.g. StageTools).
+
+1.9.3 June 2007
+
+   * Drawing of spheres was severely broken.
+
+1.9.2 June 2007
+
+   * Bug-fix release for 1.9.0 (see ChangeLog)
+
+   * ND-picking was not fully implemented; should work now
+
+   * PICKFUNC() interface has changed
+
+1.9.1 May 2007
+
+   * Bug-fix release for 1.9.0
+
+   * versions strings were wrong in some places
+
+   * textures would not be reloaded after deleting all cameras (OpenGL
+     MG-backend)
+
+1.9.0 April 2007
+
+   * the OpenGL `MG' back-end is now able to display translucent
+     object _correctly_. More specifically: translucency will be
+     displayed correctly for each separate top-level object (those
+     which appear in the object browser). Different translucent
+     top-level objects will not be rendered correctly w.r.t. to each
+     other. Translucency also works for non-flat or concave polygons
+     if the Geomview is configured for OpenGL and if libGLU is found;
+     in that case the GLU tesselator is used to compute a
+     triangulation of concave or even self-intersecting polygons.
+
+   * new GCL object: Image. Image data for textures or background can
+     now be embedded into the ordinary GCL data stream. Images can be
+     given symbolic names via (read image { define ... }) and
+     (hdefine...).
+
+   * Appearances can now be given symbolic names via `define' and `hdefine'
+
+   * RenderMan output now supports texturing. I had to write some more
+     shaders to support this. The new shaders do not seem to work with
+     the old BMRT (Blue Moon Render Tools) package, because BMRT does
+     not seem to understand the `textureinfo' command. More recent
+     renderers like Aqsis, 3Delight and Pixie seem to work. Also, writing
+     bianry RIB files was broken on Big-Endian machines in all previous
+     releases of Geomview.
+
+   * Textures can be applied in "replace" mode: the texture colour
+     simply replaces the surface color.
+
+   * support for translucent textures
+
+   * The Sphere OOGL objects now have support for texture-xmapping; the
+     details are documented in the Geomview manual.
+
+   * new GCL command `hdelete' (lazy deletion of global handles)
+
+   * new GCL commands (dump-handles) and (write-handle FILENAME) to aid
+     debugging
+
+   * All emodules which need the XForms library have been moved to the
+     separate package `gvemodules-xforms', the `ndutils', `NDview',
+     `Crayola' and `Labeler' emodules have been moved to separate packages.
+
+   * External extension modules ("emodules") no longer neeed to be
+     compiled inside the Geomview source-tree; they can now be built
+     separately, using an installed version of the OOGL library and
+     the header files. Compiling external add-ons inside the source
+     tree is no longer supported. I have ported `Maniview' and the
+     `Orrery' to this new scheme.
+
+   * another bunch of internal fixes, most notably fixing of reference
+     counts
+
+   * The manual now has cross-references for individual GCL commands.
+
+   cH <Claus-Justus.Heine@IANS.Uni-Stuttgart.DE>
+
+1.8.2 November 2006 (never released)
+
+   * I/O with release <= 1.8.1 was just broken, they used internals of
+     opaque data-types (e.g. the FILE handle of the stdio library)
+   * Maple V8 interface
+   * VRML2 interface
+   * build-system fixes (ported to recent automake/autoconf combo)
+   * standard GNU installation paths: PREFIX/bin, PREFIX/share/geomview,
+     PREFIX/libexec/geomview etc.
+   * variable argument fixes, was also broken in <= 1.8.1 releases.
+   * Documentation can be regenerated with recent texinfo releases.
+   * OpenGL is now optional
+   * one big shared libgeomview library
+   * fmemopen() by using temporary files (not using stdio internals)
+   * I have resurrected a couple of old modules: NDview, clipboard,
+     cplxview, crayola, flythrough, gvclock, hinge, labeler, ndutils.
+   * New "BBox Center" toggle in the tools menu (use the center of the
+     current object's bouding box for the CENTER object)
+   * optionally use the window-manager's idea of the focus for the camera
+     windows instead of forcing a mouse-cross policy -- new GCL function
+     (ui-cam-focus [focus-change|mouse-cross])
+   * Fixed a couple (Ups!) of long-standing memory leaks.
+
+   * The Nd code in Geomview was one big ugly memory leak. Fixed that.
+   * ND transformations and vectors now have their homogeneous component
+     at index 0.
+   * It is now possible to define handles for "ntransform" objects, i.e.
+     "(read ntransfrom { define fred ... })" works now.
+   * Each camera of a cluster now has it's (additional) private 3d transform,
+     the focal-length hack has gone.
+   * The look commands work now in the context of ND-viewing.
+   * Basic INST support for ND transformations.
+   * Picking works now with ND-viewing.
+
+   cH <Claus-Justus.Heine@IANS.Uni-Stuttgart.DE>
+
+1.8.1	March, 2001
+
+   This is a bugfix release.
+
+   * No segfaults at startup on linux.
+   * Toggle buttons are visible again.
+   * Binary I/O on linux works.
+
+1.8.0   November 17, 2000
+
+   The software in this release is almost the same as in the 1.7.*
+   series. The main difference is that it has an improved configure
+   script and Makefiles that allow for several new things.
+
+   (a) VPATH builds now supported
+
+   (b) Additional external modules can simply be dropped into place in
+       the "src/bin" directory, and Geomview's configure script will
+       notice their presence and configure/build them when you
+       configure/build Geomview.  (This only works with module
+       distributions that have been specifically packed up for this
+       purpose; see http://www.geomview.org/download for more
+       details.)
+
+   (c) The binary Intel/Linux XFORMS distribution is no longer a part
+       of the Geomview source distribution.  Users who want it can
+       download it separately, unpack it into the Geomview source
+       tree, and Geomview's configure script will notice it's there
+       and use it.  (This works with the binary XFORMS distribution
+       for any system, not just Intel/Linux.)
+
+   (d) 'togeomview' program now included in the release (this program,
+       used to facilitate communication between Geomview and other
+       programs, got temporarily dropped in release 1.7.0, but now is
+       back).
+
+   (e) a few minor bug fixes; see ChangeLog for details
+
+
+1.7.10  Nov 1, 2000
+
+   Attempted to fix bug which caused Geomview to crash immediately
+   upon startup on some newer GNU/Linux systems.  The bug has to do
+   with Geomview's use of the 'fmemopen' system function.  This
+   release attempts to autodetect which version of this function to
+   use.  If it still crashes for you, pass the flag
+   "--enable-fstropen-1" to "configure" and try again.  If you still
+   have problems, let me [mbp@geomtech.com] know.
+
+   Misc fixes to allow compilation on wider variety of platforms
+
+
+1.7.9  Oct 20, 2000
+
+   Minor change to allow compilation with Mesa-3.3 (related to how
+   Mesa-3.3 declares prototypes for GL extention functions).  No
+   change in functionality, but this version compiles without errors
+   with Mesa-3.3, which previous versions didn't.
+
+1.7.8  Oct 14, 2000     
+
+   Fixed bug which prevented compressed textures from working on
+   some Linux systems
+        
+   Fixed several compilation/configuration problems.  Now tested on:
+       Linux:  RedHat 6.1, 7.0
+	       Mandrake 7.0
+	       Caldera-2.3
+	       Mandrake-7.0
+	       Slackware-7.0
+       Solaris-2.6 (SunOS 5.6)
+       AIX 4.3.2
+       IRIX 6.3
+
+
+
+1.7.7   August 22, 2000
+
+   Added some of the external modules to the distribution, but haven't
+   actually tested them.  Updated the documentation to reflect the
+   fact that the geomview-users mailing list is now hosted at
+   lists.sourceforge.net.
+
+1.7.6   May 25, 2000
+
+   This is the first release of Geomview to use GNU autoconf.  The
+   autoconf script has been tested on Linux (RedHat 6.1), IRIX 6.3,
+   and AIX 4.3.2.  It's untested on other platforms and may need
+   tweaking to work on them.  Also, note that this release does not
+   include the external modules.  If you want any of them, use an
+   older release, or wait for a future one.

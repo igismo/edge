@@ -1,0 +1,70 @@
+<html lang="en">
+<head>
+<title>Interface - Geomview Manual</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Geomview Manual">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Modules.html#Modules" title="Modules">
+<link rel="prev" href="Modules.html#Modules" title="Modules">
+<link rel="next" href="Example1.html#Example1" title="Example1">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Interface"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Example1.html#Example1">Example1</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Modules.html#Modules">Modules</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Modules.html#Modules">Modules</a>
+<hr>
+</div>
+
+<h3 class="section">6.1 How External Modules Interface with Geomview</h3>
+
+<p>External modules appear in the <em>Modules</em> browser in Geomview's
+<em>Main</em> panel.  To run a module, click the left mouse button on
+the module's entry in the browser.  While the module is running, an
+additional line for that module will appear in the browser. 
+This line begins with a number in brackets, which indicates the
+<em>instace</em> number of the module.  (For some modules it makes sense
+to have more than one instance of the module running at the same
+time.)  You can kill an external module by clicking on its
+instance entry.
+
+   <p>By default when Geomview starts, it displays all the modules that have
+been installed on your system.
+
+   <p>For instructions on installing a module on your system so that it will
+appear in the <em>Modules</em> browser every time Geomview is run by
+anyone on your system, See <a href="Module-Installation.html#Module-Installation">Module Installation</a>.
+
+   <p>When Geomview invokes an external module, it creates pipes connected
+to the module's standard input and output. (Pipes are like files
+except they are used for communication between programs rather than
+for storing things on a disk.)  Geomview interprets anything that the
+module writes to its standard output as a GCL command. 
+Likewise, if the external module requests any data from Geomview,
+Geomview writes that data to the module's standard input.  Thus all a
+module has to do in order to communicate with Geomview is write
+commands to standard output and (optionally) receive data on standard
+input.  Note that this means that the module cannot use standard input
+and output for communicating with the user.  If a module needs to
+communicate with the user it can do so either through a control
+panel of its own or else by responding to certain events that it finds
+out about from Geomview.
+
+   </body></html>
+

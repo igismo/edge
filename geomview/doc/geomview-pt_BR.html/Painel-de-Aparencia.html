@@ -1,0 +1,203 @@
+<html lang="en">
+<head>
+<title>Painel de Aparencia - Manual do Geomview</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Manual do Geomview">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Aparencia.html#Aparencia" title="Aparencia">
+<link rel="prev" href="Aparencia.html#Aparencia" title="Aparencia">
+<link rel="next" href="Painel-de-Materiais.html#Painel-de-Materiais" title="Painel de Materiais">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Painel-de-Aparencia"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Painel-de-Materiais.html#Painel-de-Materiais">Painel de Materiais</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Aparencia.html#Aparencia">Aparencia</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Aparencia.html#Aparencia">Aparencia</a>
+<hr>
+</div>
+
+<h4 class="subsection">3.6.1 The Appearance Panel</h4>
+
+<p>O painel de Apar&ecirc;ncia (<em>Appearance</em>) leva voc&ecirc; a modificar as mais comuns propriedades de
+apar&ecirc;ncia do objeto alvo. 
+<div class="float">
+<a name="figap"></a><img src="figs/ap.png" alt="figs/ap.png">
+
+   <p><strong class="float-caption">Figura 3.5: O Painel de Apar&ecirc;ncia.</strong></p></div>
+Se o alvo for um geom individual, ent&atilde;o modifica&ccedil;&atilde;oes que voc&ecirc; fizer no
+painel de apar&ecirc;ncias aplicam-se a apar&ecirc;ncia daquele objeto geom&eacute;trico.  Se o alvo for o
+"World", ent&atilde;o as modifica&ccedil;&otilde;es no painel de apar&ecirc;ncias aplicam-se &agrave; apar&ecirc;nca do objeto atual
+<em>e</em> a apar&ecirc;ncia de todos os outros objetos individuais.  (Usu&aacute;rios acham que
+esse comportamento &eacute; mais desej&aacute;vel que ter as modifica&ccedil;&otilde;es somente aplicadas a apar&ecirc;ncia do
+"World".)  Se o alvo for uma c&acirc;mera, ent&atilde;o as modifica&ccedil;&otilde;es do painel de apar&ecirc;ncia
+aplica-se ao geom que ocupou mais recentemente a posi&ccedil;&atilde;o de alvo.
+
+   <p>Os cinco bot&otilde;es pr&oacute;ximos ao canto superior esquerdo sob a palavra
+<em>Show</em> (mostrar) controlam que partes do geom alvo s&atilde;o desenhadas.
+
+     <dl>
+<dt><em>Faces</em><dd>Esse bot&atilde;o especifica se faces s&atilde;o desenhadas.
+
+     <br><dt><em>Edges</em><dd>Esse bot&atilde;o especifica se arestas s&atilde;o desenhadas.
+
+     <br><dt><em>Normals</em><dd>Esse bot&atilde;o especifica se vetores normais &agrave; superf&iacute;cie s&atilde;o desenhados.
+
+     <br><dt><em>BBox</em><dd>Esse bot&atilde;o especifica se a caixa associada &eacute; desenhada.
+
+     <br><dt><em>Vects</em><dd>Esse bot&atilde;o especifica se objetos VECT s&atilde;o desenhados.  VECTs s&atilde;o um tipo
+de objeto OOGL que representa pontos e segmentos de reta em espa&ccedil;o tridimencional;
+os VECTs s&atilde;o distintos de arestas ou de outros tipos de objetos, e &eacute; desej&aacute;vel
+algumas vezes ter controle separado sobre se eles s&atilde;o desenhados.
+
+   </dl>
+
+   <p>Os quatro bot&otilde;es sob <em>Color</em> rotulados <em>Faces</em>, Arestas (<em>Edges</em>),
+Normais (<em>Normals</em>), e <em>BBox</em> permitem a voc&ecirc; especificar a cor do
+aspecto correspondente de um geom alvo.  Clicando sobre um
+deles faz com que apare&ccedil;a um painel de escolha de cores. 
+<div class="float">
+<a name="figcolorchooserpanel"></a><img src="figs/color.png" alt="figs/color.png">
+
+   <p><strong class="float-caption">Figura 3.6: Painel de Escolha de Cor.</strong></p></div>
+Esse painel oferece dois conjuntos de bot&otilde;es deslizantes: H(ue) S(Saturation) V(alue), ou
+R(ed) G(reen) B(lue), cada um no intervalo real fechado de 0 a 1.  O quadrado
+mostra a cor atual, que &eacute; fornecida numericamente em ambos os sitemas HSV e RGB
+nas caixas de texto correspondentes.
+
+   <p>No sistema de cores HSV, hue H mostra vermelho em 0, verde em .333, azul em .667,
+e volta ao vermelho em 1.0.  Satura&ccedil;&atilde;o fornece a fra&ccedil;&atilde;o de branco misturada
+na cor, de 0 para cinza puro a 1 para a cor pura.  Valor fornece o
+brilho, de 0 para preto a 1 para brilho m&aacute;ximo.
+
+   <p>Pressionado o bot&atilde;o <em>RGB</em> ou o bot&atilde;o <em>HSV</em> ao centro do topo do painel alterna
+os bot&otilde;es deslizantes para outro sistema de cores.  Voc&ecirc; pode ajustar cores ou atrav&eacute;s dos
+bot&otilde;es deslizantes, ou atrav&eacute;s de digita&ccedil;&atilde;o nas caixas de texto RGB ou HSV.
+
+   <p>Clique <em>OK</em> para aceitar as cores que voc&ecirc; tiver escolhido, ou
+<em>Cancel</em> para reter as escolhas anteriores de cor.
+
+   <p>O navegador <em>SHADING</em> permite a voc&ecirc; especificar o modelo de sombreamento que
+Geomview utilizar&aacute; para desenhar o geom alvo.
+
+     <dl>
+<dt><code>Constant</code><dd>Toda face do objeto &eacute; desenhada com uma cor constante que n&atilde;o
+depende da localiza&ccedil;&atilde;o da face, nem da c&acirc;mera, nem tamb&eacute;m das fontes de luz. 
+Se o objeto n&atilde;o contiver cores por face ou por v&eacute;rtice, a
+cor difusa de apar&ecirc;ncia do objeto &eacute; usada.  Se o objeto
+contiver cores por face, essas cores ser&atilde;o usadas.  Se o objeto contiver
+cores por v&eacute;rtice, cada face &eacute; pintada usando a cor de seu primeiro
+v&eacute;rtice.
+
+     <br><dt><code>Flat</code><dd>Cada face do objeto &eacute; desenhada com uma cor que depende da
+localiza&ccedil;&atilde;o relaiva da face, da c&acirc;mera, e das fontes de luz. 
+A cor &eacute; constante ao longo da face mas pode mudar conforme muda a face,
+a c&acirc;mera, ou o movimento das luzes.
+
+     <br><dt><code>Smooth</code><dd>Cada face do objeto &eacute; desenhada com cores lisamente interpoladas baseadas
+nos vetores normais em cada v&eacute;rtice.  Se o objeto n&atilde;o contiver
+normais por v&eacute;rtice, "Smooth" tem o mesmo efeito que o modo de sombreamento "Flat".  Se o
+objeto tiver normais por v&eacute;rtice raso&aacute;veis, o efeito &eacute; alisamento
+sobre as arestas e entre as faces.
+
+     <br><dt><code>CSmooth</code><dd>Cada face do objeto &eacute; desenhada com as cores exatamente especificada(s),
+independente de ilumina&ccedil;&atilde;o, orienta&ccedil;&atilde;o, e propriedades de material.  Se o
+objeto for definido com cores por v&eacute;rtice, as cores ser&atilde;o interpoladas
+lisamente ao longo da face; de outra forma o efeito &eacute; o mesmo que ocorre no
+estilo de sombreamento "Constant".
+
+     <br><dt><code>VCflat</code><dd>Uma combina&ccedil;&atilde;o de <code>CSmooth</code> e sombreamento <code>Flat</code>. Dessa forma o sombreamento
+&eacute; constante em cada face, de acordo com a orienta&ccedil;&atilde;o relativa das
+fontes de luz, a c&acirc;mera e a superf&iacute;cie normal da face.
+
+   </dl>
+
+   <p>O bot&atilde;o <em>Facing Normals</em> no painel de apar&ecirc;ncia (<em>Appearance</em>)
+indica se Geomview pode arranjar aqueles vetores normais ou se n&atilde;o pode
+sempre conforme a visualiza&ccedil;&atilde;o.  Se um vetor normal direciona-se afastando-se do visualizador
+a cor da face correspondente ou v&eacute;rtice correspondente usualmente &eacute; mais forte do que &eacute;
+desejado.  Geomview pode evitar isso atrav&eacute;s do uso da normal oposta em
+c&aacute;lculos de sombreamento.  Esse comportamento &eacute; o padr&atilde;o.  Usando <em>Facing Normals</em>
+podemos fornecer estranha suavidade pesada ou estranhos efeitos de tonalidade de luz, embora, proximo
+ao horizonte de um objet distantemente liso facetado. 
+Pressione esse bot&atilde;o para usar as normais fornecidas com o objeto.
+
+   <p>Os tr&ecirc;s campos no canto inferior esquerdo do painel de apar&ecirc;ncia
+(<em>Appearance</em>) s&atilde;o:
+
+     <dl>
+<dt><em>Line Width</em><dd>A espessura, em pixels, para linhas desenhadas pelo Geomview.
+
+     <br><dt><em>Normal Length</em><dd>Isso &eacute; atualmente um fator de homotetia; quando vetores normais forem desenhados, Geomview
+desenha-os de forma que tenham um comprimento que &eacute; seu comprimento natural vezes esse
+n&uacute;mero.
+
+     <br><dt><em>Patch Dicing</em><dd>Geomview desenha retalhos de Bezier primeiro convertendo-so em malhas.  Esse
+par&acirc;metro especifica a resolu&ccedil;&atilde;o da malha: se <em>Patch Dicing</em>
+for <var>n</var>, ent&atilde;o uma malha <var>n</var> por <var>n</var> &eacute; usada para desenhar cada retalho de
+Bezier.  Se <em>Patch Dicing</em> for 1, a resolu&ccedil;&atilde;o reverte-se para um
+valor padr&atilde;o interno.
+
+   </dl>
+
+   <p>O bot&atilde;o <em>Revert</em> no painel de apar&ecirc;ncia (<em>Appearance</em>) desfaz todas
+as escolhas na apar&ecirc;ncia do alvo.  Isso faz com que o geom alvo
+herde todas as suas propriedades de apar&ecirc;ncia de seus pais.
+
+   <p>O bot&atilde;o do painel de apar&ecirc;ncia (<em>Appearance</em>) determina se
+controles de apar&ecirc;ncia devem sobrescrever escolhas feitas nos objetos em si mesmos &ndash;
+por exemplos, escolhendo a cor de face ir&aacute; afetar todas as faces de objetos com
+faces multicoloridas.  De outra forma, controles de apar&ecirc;ncia somente fornecem escolhas
+que n&atilde;o forem especificadas nos objetos em si mesmos n&atilde;o especificarem. 
+Por padr&atilde;o, <em>Override</em> est&aacute; habilitado.  Esse bot&atilde;o aplica-se a todos os objetos,
+e a todos os pain&eacute;is relacionados a apar&ecirc;ncia.
+
+   <p>Normaliza&ccedil;&atilde;o &eacute; um tipo de homotetia; Geomview pode alterar o tamanho de um objeto proporcionalmente de forma que
+esse objeto se ajuste dentro de uma certa regi&atilde;o.  O objetivo principal da normaliza&ccedil;&atilde;o &eacute;
+permitir a voc&ecirc; facilmente visualizar um objeto sem ter que se preocupar com
+o tamanho do mesmo.  Estamos substituindo gradualmente o recurso de normaliza&ccedil;&atilde;o
+do Geomview por recursos mais robustos de posicionamento de c&acirc;mera.  Em geral, o
+melhor caminho de garantir que voc&ecirc; est&aacute; vendo tudo de um objeto &eacute; usar o
+bot&atilde;o <em>Look At</em> do painel de ferramentas (<em>Tools</em>).  A normaliza&ccedil;&atilde;o pode
+ser completamente substitu&iacute;da por esse bot&atilde;o do painel de ferramentas e por outros recursos em uma vers&atilde;o futura do
+Geomview.
+
+   <p>Normaliza&ccedil;&atilde;o &eacute; uma propriedade que aplica-se a cada geom separadamente.  o
+navegador <em>NORMALIZE GEOMETRY</em> afeta a propriedade de normaliza&ccedil;&atilde;o
+do geom alvo.  Se o geom alvo for "World", a normaliza&ccedil;&atilde;o afetar&aacute; todos os geoms.
+
+     <dl>
+<dt><em>None</em><dd>Sem normaliza&ccedil;&atilde;o.
+
+     <br><dt><em>Individual</em><dd>Normaliza o geom atual para ajustar-se dentro de uma esfera unit&aacute;ria.
+
+     <br><dt><em>Sequence</em><dd>Assemelha-se a "Individual", exceto quando um objeto est&aacute; mudando.  Ent&atilde;o,
+"Individual" com muita precis&atilde;o ajusta a caixa associada em torno do objeto quando esse objeto
+modifica-se e normaliza-se adequadamente, enquanto "Sequence" normaliza a
+uni&atilde;o de todas as variantes do objeto e normaliza ade-quadamente.
+
+     <br><dt><em>Keep</em><dd>Mantem a transforma&ccedil;&atilde;o de normaliza&ccedil;&atilde;o inalterada quando o
+objeto modifica-se.  <em>Keep</em> pode ser &uacute;til para aplicar a normaliza&ccedil;&atilde;o "Individual" ou a normaliza&ccedil;&atilde;o
+"Sequence" &agrave; primeira vers&atilde;o de um objeto que se modifica para trazer
+esse mesmo objeto ao campo de vis&atilde;o.
+
+   </dl>
+
+<!--  -->
+   </body></html>
+

@@ -1,0 +1,111 @@
+surface
+AQSIS_V 2
+
+
+segment Data
+
+USES 509959
+
+param uniform  float Ka
+param uniform  float Kd
+param uniform  float Ks
+param uniform  float roughness
+param uniform  color specularcolor
+param uniform  string texturename
+varying  normal Nf
+varying  vector V
+varying  color Ct
+varying  float Ot
+
+
+segment Init
+	pushif 1
+	pop Ka
+	pushif 0.5
+	pop Kd
+	pushif 0.5
+	pop Ks
+	pushif 0.100000001
+	pop roughness
+	pushif 1
+	setfc
+	pop specularcolor
+	pushis ""
+	pop texturename
+
+
+segment Code
+	pushv Cs
+	pop Ci
+	pushv Os
+	pop Oi
+	pushv I
+	pushv N
+	normalize
+	faceforward
+	pop Nf
+	pushv I
+	normalize
+	negp
+	pop V
+	pushv roughness
+	pushv V
+	pushv Nf
+	specular
+	pushv Ks
+	setfc
+	pushv specularcolor
+	mulcc
+	mulcc
+	pushv Nf
+	diffuse
+	pushv Kd
+	mulfc
+	ambient
+	pushv Ka
+	mulfc
+	addcc
+	pushv Ci
+	mulcc
+	addcc
+	pop Ci
+	S_CLEAR
+	pushis ""
+	pushv texturename
+	ness
+	S_GET
+	RS_PUSH
+	RS_GET
+	RS_JZ 0
+	pushif 0
+	pushis "width"
+	pushv texturename
+	pushif 2
+	ctexture1
+	pop Ct
+	pushif 3
+	pushis "channel"
+	pushif 0
+	pushis "width"
+	pushif 1
+	pushis "fill"
+	pushv texturename
+	pushif 6
+	ftexture1
+	pop Ot
+	pushv Ct
+	pushv Ot
+	mulfc
+	pushv Ci
+	pushv Ot
+	pushif 1
+	subff
+	mulfc
+	addcc
+	pop Ci
+:0
+	RS_POP
+	pushv Os
+	pushv Ci
+	mulcc
+	pop Ci

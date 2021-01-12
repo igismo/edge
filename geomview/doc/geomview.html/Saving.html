@@ -1,0 +1,144 @@
+<html lang="en">
+<head>
+<title>Saving - Geomview Manual</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Geomview Manual">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Interaction.html#Interaction" title="Interaction">
+<link rel="prev" href="Cameras.html#Cameras" title="Cameras">
+<link rel="next" href="Commands.html#Commands" title="Commands">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Saving"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Commands.html#Commands">Commands</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Cameras.html#Cameras">Cameras</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Interaction.html#Interaction">Interaction</a>
+<hr>
+</div>
+
+<h3 class="section">3.8 Saving your work</h3>
+
+<p>Geomview's <em>Save</em> panel lets you store Geomview objects and other
+information in files that you can read back into Geomview or other
+programs. 
+<div class="float">
+<a name="figsavepanel"></a><img src="figs/save.png" alt="figs/save.png">
+
+   <p><strong class="float-caption">Figure 3.9: The Save Panel.</strong></p></div>
+To use the <em>Save</em> panel you select the desired format in the
+browser next to the word <em>Save</em>, enter the name of the object you
+want to save in the text field next to the word <em>for</em>, and enter
+the name of the file you wish to save to in the long text field next to
+the word <em>in</em>.  You can then either hit <kbd>&lt;Enter&gt;</kbd> or click
+on the <em>OK</em> button.  When the file has been written, the <em>Save</em>
+panel disappears.  If you want to dismiss the <em>Save</em> panel without
+writing a file, click the <em>Cancel</em> button.
+
+   <p>If you specify <samp><span class="file">-</span></samp> as the file name, Geomview will write the file
+to standard output, i.e. in the shell window from which you invoked
+Geomview.
+
+   <p>The possible formats are given below.  The kind of object that can
+be written with each format is given in parentheses.
+
+     <dl>
+<dt><em>Commands (any object)</em><dd>This write a file of GCL commands containing all information about
+the object.  Loading this file later will restore the object as well as
+all other information about it, such as appearance, transformations,
+etc.
+
+     <br><dt><em>Geometry alone (geom)</em><dd>This writes an OOGL file containing just the geometry of the object.
+
+     <br><dt><em>Geometry [in world] (geom)</em><dd>This writes an OOGL file containing just the geometry of the object,
+transformed under Geomview's current transformation for this object. 
+Use this if you have moved the object from its initial position and want
+to save the new position relative to the world.
+
+     <br><dt><em>Geometry [in universe] (geom)</em><dd>This writes an OOGL file containing just the geometry of the geom,
+transformed under both the object's transformation and the world's
+transformation.
+
+     <br><dt><em>RMan [-&gt;tiff] (camera)</em><dd>Writes a RenderMan file which when rendered creates a tiff
+image. Transparency and texturing (the latter only to some extent) will
+be available.
+
+     <br><dt><em>RMan [-&gt;frame] (camera)</em><dd>Writes a RenderMan file which when rendered causes an image to appear in
+a window on the screen. Transparency and texturing (the latter only to
+some extent) will be available.
+
+     <br><dt><em>SGI snapshot (camera)</em><dd>Write an SGI raster file.  A bell rings when the snapshot is complete. 
+Only available on SGI systems.
+
+     <br><dt><em>PPM GLX-offscreen snapshot (camera)</em><dd>Render the complete scene anew into off-screen memory; GLX provides the
+means to use a Pixmap as rendering area. The advantage of rendering into
+<em>off</em>-screen memory over taking screen snapshot is that the camera
+windows need not be mapped and even raised at the time the snapshot is
+taken. So with off-screen snapshot one can safely iconify the camera
+window (but do not close it!), activate the screen-saver and go to bed
+while some script advances the scenes and takes snapshots.
+
+     <br><dt><em>PPM Screen snapshot (camera)</em><dd>Take a snapshot of the given window and save it as a PPM image. 
+If you specify a string beginning with a vertical bar (<kbd>|</kbd>)
+as the file name, it's interpreted as a Bourne shell command
+to which the PPM data should be piped, as in
+&lsquo;<samp><span class="samp">| pnmtotiff &gt; snap.tiff</span></samp>&rsquo; or &lsquo;<samp><span class="samp">| convert -geometry 50% ppm:- snap.gif</span></samp>&rsquo;.
+
+     <p>PPM screen snapshots are only available with GL and Open GL, not plain X
+graphics.  The window should be entirely on the screen.  Geomview will
+ensure that no other windows cover it while the snapshot is taken. It is
+probably a better idea to use GLX-<em>off-screen</em> snapshots, as
+explained above.
+
+     <br><dt><em>PPM software snapshot (camera)</em><dd>Writes a snapshot of that window's current view, as a PPM image, to the
+given file.  The file name may be a Bourne shell command preceded by a vertical
+bar (<kbd>|</kbd>), as with the PPM screen snapshot.  The software snapshot, though,
+is produced by using a built-in software renderer (related to the X-windows
+renderer).  It doesn't matter whether the window is visible or not,
+and doesn't depend on GL or OpenGL.  It also doesn't support some features,
+such as texture mapping.
+
+     <br><dt><em>Postscript snapshot (camera)</em><dd>Writes a Postscript snapshot of the camera's view.  It's made by
+breaking up the scene into lines and polygons, sorting by depth, and
+generating Postscript lines and polygons for each one.  Advantages over
+pixel-based snapshot images: resolution is very high, so edges
+look sharp even on high-resolution printers, or comparable-resolution images
+are typically much more compact.  Disadvantages: depth-sorting
+gives good results on some scenes, but can be wildly wrong as a hidden-surface
+removal algorithm for other scenes.  Also, Postscript doesn't offer
+smoothly interpolated shading, only flat shading for each facet.
+
+     <br><dt><em>Camera (camera)</em><dd>Writes an OOGL file of a camera.
+
+     <br><dt><em>Transform [to world] (any object)</em><dd>Writes an OOGL transform file giving Geomview's transform for the object.
+
+     <br><dt><em>Transform [to universe] (any object)</em><dd>Writes an OOGL transform file giving a transform which is the
+composition of Geomview's transform for the object and the transform for
+the world.
+
+     <br><dt><em>Window (camera)</em><dd>Writes an OOGL window file for a camera.
+
+     <br><dt><em>Panels</em><dd>Writes a GCL file containing commands which record
+the state of all the Geomview panels.  Loading this file later will
+restore the positions of all the panels.
+
+   </dl>
+
+<!-- ================================================================ -->
+   </body></html>
+

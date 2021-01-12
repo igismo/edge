@@ -1,0 +1,146 @@
+<html lang="en">
+<head>
+<title>Objeto camera - Manual do Geomview</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Manual do Geomview">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Objetos-nao_002dgeometricos.html#Objetos-nao_002dgeometricos" title="Objetos nao-geometricos">
+<link rel="prev" href="ntransform-objects.html#ntransform-objects" title="ntransform objects">
+<link rel="next" href="window-objects.html#window-objects" title="window objects">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Objeto-camera"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="window-objects.html#window-objects">window objects</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="ntransform-objects.html#ntransform-objects">ntransform objects</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Objetos-nao_002dgeometricos.html#Objetos-nao_002dgeometricos">Objetos nao-geometricos</a>
+<hr>
+</div>
+
+<h4 class="subsection">4.3.5 c&acirc;mera</h4>
+
+<p>Um objeto c&acirc;mera especifica as seguintes propriedades de uma c&acirc;mera:
+
+     <dl>
+<dt>posi&ccedil;&atilde;o e orienta&ccedil;&atilde;o<dd>especificada por ou uma transforma&ccedil;&atilde;o camera para o objeto mundo ou uma transforma&ccedil;&atilde;o de objeto mundo para a c&acirc;mera;
+essa transforma&ccedil;&atilde;o n&atilde;o inclui a proje&ccedil;&atilde;o, de forma que essa transforma&ccedil;&atilde;o &eacute; tipicamente
+apenas uma composi&ccedil;&atilde;o de transla&ccedil;&atilde;o e rota&ccedil;&atilde;o.  Especificado como um
+objeto transform, tipicamente uma matriz 4x4. 
+<br><dt>"focus" - dist&acirc;ncia focal<dd>Ao inv&eacute;s de sugerir uma dist&acirc;ncia t&iacute;pica da c&acirc;mera ao objeto de
+interesse; usada para o posicionamento padr&atilde;o da c&acirc;mera (a c&acirc;mera &eacute; colocada em
+(X,Y,Z) = (0,0,focus) quando resetada) e para ajustar o campo de vis&atilde;o quando
+alternando entre os modos de visualiza&ccedil;&atilde;o ortogr&aacute;fico e perspectivo. 
+<br><dt>raz&atilde;o de aspecto da janela<dd>A verdadeira raz&atilde;o de aspecto no sentido &lt;Xsize&gt;/&lt;Ysize&gt;.  Essa raz&atilde;o de aspecto normalmente pode
+concordar com a raz&atilde;o de aspecto da janela de camera.  Geomview normalmente
+ajusta a raz&atilde;o de aspecto de suas c&acirc;meras para coincidir com suas janelas
+associadas. 
+<br><dt>dist&acirc;ncia de plano de corte pr&oacute;ximo e distante<dd>Note que ambas as dist&acirc;ncias devem ser estritamente maiores que zero.  Raz&otilde;es de dist&acirc;ncia
+&lt;distante&gt;/&lt;pr&oacute;ximo&gt; muito grandes fazem com que a &aacute;rea de armazenamento tempor&aacute;rio do eixo Z comporte-se de forma p&eacute;ssima; parte de um
+objeto pode ser vis&iacute;vel mesmo se estiver em algum lugar mais distante que outro. 
+<br><dt>campo de vis&atilde;o<dd>Especificado em uma das duas formas a seguir.
+          <dl>
+  <dt>&lsquo;<samp><span class="samp">fov</span></samp>&rsquo;<dd>&eacute; o campo de vis&atilde;o &ndash; em graus se perpectivo, ou dist&acirc;ncia
+linear se ortogr&aacute;fico &ndash; na <em>menor</em> dire&ccedil;&atilde;o. 
+  <br><dt>&lsquo;<samp><span class="samp">halfyfield</span></samp>&rsquo;<dd>&eacute; metade do campo projetado no eixo Y, em coordenadas do objeto mundo (n&atilde;o angulo!),
+em unidades de dist&acirc;ncia a partir da c&acirc;mera.  Para uma c&acirc;mera em perpectiva, halfyfield
+&eacute; relacionado ao campo angular:
+
+          <div align="center">halfyfield = tan( Y_axis_angular_field / 2 )</div>
+
+          <p>enquanto para uma c&acirc;mera em vis&atilde;o ortogr&aacute;fica temos simplesmente:
+
+          <div align="center">halfyfield = Y_axis_linear_field / 2</div>
+
+     </dl>
+
+     <p>Essa defini&ccedil;&atilde;o singular de visualiza&ccedil;&atilde;o &eacute; (a) maneira f&aacute;cil de fazer c&aacute;lculos que a envolvam e
+(b) &eacute; bem definida em ambas as formas de visualiza&ccedil;&atilde;o ortogr&aacute;fica e perspectiva.
+
+     <br><dt>cor de fundo<dd>Argumentavelmente (de forma discut&iacute;vel) n&atilde;o &eacute; uma propriedade de uma c&acirc;mera, mas da cena (do cen&aacute;rio). Todavia, como
+n&atilde;o existe o objeto "cordefundo" no OOGL, e a cor de fundo pode
+n&atilde;o ser uma propriedade do equipamento de desenho, essa propriedade pode ser especificada aqui. No
+momento em que esse manual est&aacute; sendo escrito, todavia, a interface gr&aacute;fica de usu&aacute;rio (GUI) sempre sobrescreve a
+cor de fundo com suas pr&oacute;prias escolhas.
+
+     <br><dt>imagem de fundo<dd>Pelas mesmas raz&otilde;es mostradas acima,somente a referida GUI n&atilde;o sobrescreve essa
+op&ccedil;&atilde;o. A imagem &eacute; centralizada em "Normalized-Device-Coordinates"/NDC <code>(0,0,-1)</code>; a imagem
+n&atilde;o &eacute; redimensonada, apenas dese-nhada por tr&aacute;s de tudo mais como &eacute;. Veja <a href="image.html#image">Objetos de imagem</a>.
+
+   </dl>
+
+   <p>A sintaxe para uma c&acirc;mera &eacute;:
+
+<pre class="example">     &lt;nomecamera&gt; ::=
+     
+        [ "camera" ]                 (palavra chave opcional)
+         [ "{" ]                    (abertura de chave, geralmente requerida)
+             [ "define" &lt;nome&gt; ]
+     
+             "&lt;" &lt;nomearquivo&gt;
+           |
+             ":" &lt;nome&gt;
+           |
+                                     (ou qualquer n&uacute;mero dos seguintes,
+                                      em qualquer ordem...)
+     
+             "perspective"  {"0" | "1"}            (padr&atilde;o 1)
+                                             (de outra forma "ortographic")
+     
+             "stereo"       {"0" | "1"}            (padr&atilde;o 0)
+                                             (de outra forma mono)
+     
+             "worldtocam" &lt;transforma&ccedil;&atilde;o&gt;        (veja a sintaxe de transfor-
+                                             ma&ccedil;&atilde;o acima)
+     
+             "camtoworld" &lt;transforma&ccedil;&atilde;o&gt;
+                                     (nenhum ponto na especifica&ccedil;&atilde;o de ambos
+                                      camtoworld e worldtocam; se &eacute;
+                                      restingido para ser o inverso de                                                the other)
+     
+             "halfyfield" &lt;meio-campo-linear-Y-em-unidade-de-dist&acirc;ncia&gt;
+                                     (o padr&atilde;o &eacute; tan 40/2 graus)
+                                     Nota de tradu&ccedil;&atilde;o:40 &eacute; o valor padr&atilde;o
+                                     do campo de vis&atilde;o (fov).
+     
+             "fov"           (campo de vis&atilde;o angular se "perspective",
+                              campo de vis&atilde;o linear em caso contr&aacute;rio.
+                              Medido em qualquer dire&ccedil;&atilde;o &eacute; menor,
+                              dando a raz&atilde;o aspecto.  Quando a raz&atilde;o de
+                              aspecto muda -- e.g. quando uma janela &eacute;
+                              reajustada -- "fov" &eacute; preservado.)
+     
+             "frameaspect" &lt;raz&atilde;o-de-aspecto&gt;    (X/Y) (padr&atilde;o 1.333)
+     
+             "near"  &lt;dist&acirc;ncia-de-corte-pr&oacute;xima&gt;        (padr&atilde;o 0.1)
+     
+             "far"   &lt;dist&acirc;ncia-de-corte-afastada&gt;     (padr&atilde;o 10.0)
+     
+             "focus" &lt;dist&acirc;ncia-focal&gt;                 (padr&atilde;o 3.0)
+     
+             "bgcolor" &lt;cor RGB(A) em ponto flutuanter&gt;
+                                                     (padr&atilde;o 1/3 1/3 1/3 1)
+     
+             "bgimage" { &lt;especifica&ccedil;&atilde;o de imagem&gt; }
+                                             (padr&atilde;o nenhuma imagem de fundo)
+     
+     
+          [ "}" ]                       (correspondente fechamento de chave)
+</pre>
+   <!--  -->
+   </body></html>
+

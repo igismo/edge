@@ -1,0 +1,97 @@
+<html lang="en">
+<head>
+<title>GCL - Manual do Geomview</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Manual do Geomview">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="prev" href="Modulos.html#Modulos" title="Modulos">
+<link rel="next" href="Geometrias-Nao_002dEuclidianas.html#Geometrias-Nao_002dEuclidianas" title="Geometrias Nao-Euclidianas">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="GCL"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Geometrias-Nao_002dEuclidianas.html#Geometrias-Nao_002dEuclidianas">Geometrias Nao-Euclidianas</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Modulos.html#Modulos">Modulos</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="index.html#Top">Top</a>
+<hr>
+</div>
+
+<h2 class="chapter">7 GCL: a Linguagem de Comandos do Geomview</h2>
+
+<p>GCL tem a sintaxe do lisp &ndash; i.e. uma express&atilde;o da forma (f a b
+<small class="dots">...</small>) significa informar os vallores de a, b, <small class="dots">...</small> para a fun&ccedil;&atilde;o f. 
+GCL &eacute; muito limitado e GCL n&atilde;o &eacute; de forma alguma uma implementa&ccedil;&atilde;o de lisp.  GCL
+&eacute; simplesmente uma linguagem para expressar comandos que s&atilde;o executados na ordem
+fornecida, ao contr&aacute;rio de uma linguagem de programa&ccedil;&atilde;o.  GCL n&atilde;o suporta vari&aacute;vel
+ou defini&ccedil;&atilde;o de fun&ccedil;&atilde;o.
+
+   <p>GCL &eacute; a linguagem que Geomview entende para arquivos que chama
+bem como para comunica&ccedil;&atilde;o com outros programas. 
+Para executar um comando GCL interativamente, voc&ecirc; pode trazer o
+painel de comandos (<em>Commands</em>) que tr&aacute;s sua digita&ccedil;&atilde;o em um comando; Geomview
+executa o comando quando voc&ecirc; pressiona a tecla &lt;Enter&gt;.  A sa&iacute;da de tais
+comandos &eacute; mostrada na sa&iacute;da padr&atilde;o.  Alternativamente, voc&ecirc; pode invocar
+Geomview com <code>geomview -c -</code> que faz com que o Geomview leia comandos GCL
+a partir da entrada padr&atilde;o.
+
+   <p>Fun&ccedil;&otilde;es GCL retornam um valor, e voc&ecirc; pode concaenar chamadas de fun&ccedil;&atilde;o de forma
+que outras fun&ccedil;&otilde;es usem esse valor retornado.  Por exemplo
+<pre class="example">     (f (g a b))
+</pre>
+   <p>avalia <code>(g a b)</code> e ent&atilde;o avalia <code>(f x)</code> onde <code>x</code>
+&eacute; o resultado retornado por <code>(g a b)</code>.  Geomview mant&eacute;m esses
+valores de retorno internamente normalmente n&atilde;o fornece sa&iacute;da alguma com os resultados guardados. 
+Para mostrar um valor de retorno esse valor de retorno deve ser fornecido &agrave; fun&ccedil;&atilde;o <code>echo</code>. 
+Por exemplo a fun&ccedil;&atilde;o <code>geomview-version</code> retorna uma sequ&ecirc;ncia de caracteres
+representado a vers&atilde;o do Geomview que est&aacute; sendo executada, e
+<pre class="example">     (echo (geomview-version))
+</pre>
+   <p>mostra essa sequ&ecirc;ncia de caracteres.
+
+   <p>Muitas fun&ccedil;&atilde;o simplesmente retornam <code>t</code> ( de "true" - verdadeiro) caso tenham sido executadas como esperado ou <code>nil</code> ( nenhum )
+ em caso de falha; esse &eacute; o caso se a documenta&ccedil;&atilde;o para a fun&ccedil;&atilde;o n&atilde;o
+fornece o retorno esperado.  Esses s&atilde;o os s&iacute;mbolos do lisp para verdadeiro e falso,
+respectivamente.  (Eles correspondem &agrave;s vari&aacute;veis definidas em C <code>Lt</code> e
+<code>Lnil</code> que voc&ecirc; ver&aacute; se olhar no c&oacute;digo fonte
+do Geomview ou em algum dos m&oacute;dulos externos.)
+
+   <p>Nas descri&ccedil;&otilde;es ds comandos acima muitas refer6encias s&atilde;o feitas a
+formatos "OOGL" formats.  OOGL &eacute; a linguagem de descri&ccedil;&atilde;o dos dados que Geomview
+utiliza para descrever objetos geom&eacute;tricos, c&acirc;meras, apar&ecirc;ncias, e outos objetos
+b&aacute;sicos.  Para detalhes dos formatos OOGL, veja <a href="Formatos-dos-Arquivos-da-OOGL.html#Formatos-dos-Arquivos-da-OOGL">Formatos dos Arquivos da OOGL</a>. 
+(Ou equivalentemente, veja a p&aacute;gina de manual oogl(5), distributed with Geomview
+in the file /share/man/man5/oogl.5gv.
+
+   <p>Os comandos GCL e tipos de argumentos s&atilde;o listados abaixo.  A maioria
+da documenta&ccedil;&atilde;o nessa se&ccedil;&atilde;o do manual est&aacute; dispon&iacute;vel dentro do
+Geomview via comandos <code>?</code> e <code>??</code>.  O comando <code>(? 
+</code><var>comando</var><code>)</code> faz com que Geomview mostre na tela um sum&aacute;rio de uma linha da
+sintaxe de <var>comando</var>, e <code>(?? </code><var>comando</var><code>)</code> mostra na tela uma
+explana&ccedil;&atilde;o de o que <var>comando</var> faz.  Voc&ecirc; pode incluir o caractere
+coringa <code>*</code> no <var>comando</var> para mostrar informa&ccedil;&otilde;es para um frupo de
+comandos coincidindo com um modelo.  Por exemplo, <code>(?? *emodule*)</code> ir&aacute;
+mostrar todas as informa&ccedil;&otilde;es sobre todos os comandos contendo a sequ&ecirc;ncia de caracteres
+<code>emodule</code>.  <code>(? *)</code> ir&aacute; mostrar um lista curta de todos os comandos.
+
+<ul class="menu">
+<li><a accesskey="1" href="Argument-Conventions.html#Argument-Conventions">Argument Conventions</a>:         Conven&ccedil;&otilde;es usadas ao se descrever tipos de argumentos. 
+<li><a accesskey="2" href="GCL-Reference.html#GCL-Reference">GCL Reference</a>:                Documenta&ccedil;&atilde;o para cada comandoo GCL. 
+</ul>
+
+   </body></html>
+

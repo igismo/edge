@@ -1,0 +1,60 @@
+<html lang="en">
+<head>
+<title>lambda - Geomview Manual</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Geomview Manual">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="GCL-Reference.html#GCL-Reference" title="GCL Reference">
+<link rel="prev" href="interest.html#interest" title="interest">
+<link rel="next" href="let.html#let" title="let">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="lambda"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="let.html#let">let</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="interest.html#interest">interest</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="GCL-Reference.html#GCL-Reference">GCL Reference</a>
+<hr>
+</div>
+
+<h4 class="subsection">7.2.68 lambda</h4>
+
+<p><a name="index-lambda-75"></a>
+     <dl>
+<dt><code>(lambda (ARG1 ...) EXPR1 ... EXPRN)</code><dd>A lambda expression is like a function. To &ldquo;call&rdquo; a lambda expression,
+it has to be evoked like a function: <code>((lambda (arg) (+ 1 arg))
+2)</code>. In this example, the value of the entire expression would be 3.  In
+general, the value of the call will be the value of <var>EXPRN</var>. The
+first list serves to define formal parameters. The lambda expression
+itself is just a list, starting with the key-word lambda, followed by
+several quoted lists.  See <a href="defun.html#defun"><code>(defun ...)</code></a>. 
+See <a href="setq.html#setq"><code>(setq ...)</code></a>.  See <a href="let.html#let"><code>(let ...)</code></a>. 
+Note the argument list may contain the special keywords
+          <dl>
+<dt><code>&amp;optional</code><dd>giving values to the following identifiers is optional,
+their default value will be <code>nil</code>
+<br><dt><code>&amp;rest</code><dd>all excess arguments will be collected in a list, and that list will be
+assigned to the following argument, like so:
+          <pre class="example">               ((lambda (&amp;rest rest) (echo rest)) a b c d)
+</pre>
+          <p>The output would be <code>(a b c d)</code>. 
+</dl>
+     </dl>
+
+   </body></html>
+

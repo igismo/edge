@@ -1,0 +1,156 @@
+<html lang="en">
+<head>
+<title>Cameras - Manual do Geomview</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Manual do Geomview">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Interacao.html#Interacao" title="Interacao">
+<link rel="prev" href="Aparencia.html#Aparencia" title="Aparencia">
+<link rel="next" href="Gravando.html#Gravando" title="Gravando">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Cameras"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Gravando.html#Gravando">Gravando</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Aparencia.html#Aparencia">Aparencia</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Interacao.html#Interacao">Interacao</a>
+<hr>
+</div>
+
+<h3 class="section">3.7 Cameras</h3>
+
+<p>Uma c&acirc;mera no Geomview &eacute; o objeto que corresponde a uma janela de c&acirc;mera. 
+Por padr&atilde;o existe somente uma c&acirc;mera, mas &eacute; poss&iacute;vel ter tantas quantas
+voc&ecirc; quiser.  Voc&ecirc; pode controlar certos aspectos do objeto vis&iacute;vel atualmente na janela de c&acirc;mera
+arrastando em cada janela de c&acirc;mera via o painel <em>Cameras</em>. 
+<div class="float">
+<a name="figcamerapanel"></a><img src="figs/cam.png" alt="figs/cam.png">
+
+   <p><strong class="float-caption">Figura 3.8: O Painel de C&acirc;mera.</strong></p></div>
+Se o objeto alvo for uma c&acirc;mera, o painel de c&acirc;meras (<em>Cameras</em>) afeta essa
+c&acirc;mera.  Se o objeto alvo n&atilde;o for uma c&acirc;mera, o painel de c&acirc;meras (<em>Cameras</em>)
+afeta a c&acirc;mera atual (<dfn>current camera</dfn>).  A c&acirc;mera atual &eacute; a  c&acirc;mera da
+janela que o cursor do mouse est&aacute; nela, ou estava mais recentemente se o
+cursor n&atilde;o estiver em uma janela de c&acirc;mera.  Dessa forma, se voc&ecirc; usa teclas
+de atalho para as a&ccedil;&otilde;es no painel de c&acirc;meras (<em>Cameras</em>) enquanto o cursor
+estiver em uma janela de c&acirc;mera, as a&ccedil;&otilde;es aplicam-se a aquela  c&acirc;mera, a menos que voc&ecirc; tenha
+explicitamente selecionado outra c&acirc;mera.
+
+   <p>Para criar novas janelas de c&acirc;mera, use a tecla de atalho <kbd>v+</kbd>,
+ou veja o menu arquivo (<em>File</em>) no painel principal (<em>Main</em>).
+
+     <dl>
+<dt><em>Single-Buffering</em><dd>Normalmente, janelas do Geomview s&atilde;o armazenadas em &aacute;reas de mem&oacute;ria duplas (<em>double-buffered</em>): Geomview desenha a
+figura seguinte em uma janela escondida, ent&atilde;o alterna as &aacute;reas de mem&oacute;ria para fazer
+essa janela completamente vis&iacute;vel em algum momento.  Sobre muitos sistemas operacionais, a mem&oacute;ria para a &aacute;rea de mem&oacute;ria escondida
+vem da apropria&ccedil;&atilde;o indevida de metade dos bits de cada pixel de tela, reduzindo a resolu&ccedil;&atilde;o de
+cor.  Quando a op&ccedil;&atilde;o &aacute;rea de mem&oacute;ria simples (single-buffering) for habilitada, as pel&iacute;culas de tela de cada
+cena est&aacute; sendo desenhada, mas voc&ecirc; pode pegar imagens planas com redu&ccedil;&atilde;o de granularidade
+estremecendo artefatos.  &Aacute;rea de mem&oacute;ria simples &eacute; poss&iacute;vel se Geomview for compilado com
+GL ou com OpenGL, mas n&atilde;o com gr&aacute;ficos desenhados com recursos &uacute;nicos e exclusivos do X.
+
+     <br><dt><em>Dither</em><dd>Muitos monitores oferecem menos que 24 bits por pixel (8 bits para cada vermelho, verde,
+e azul) convencionalmente suficiente para mostrar grada&ccedil;&otilde;es de cor simplesmente. 
+Quando tenta mostrar uma cor n&atilde;o acuradamente dispon&iacute;vel no monitor,
+Geomview normalmente estremece (<em>dithers</em>), modificando as cores do pixel para algumas vezes mais brilhante,
+algumas vezes mais escuro que o valor desejado, de forma que a cor dispon&iacute;vel sobre uma &aacute;rea
+&eacute; uma melhor aproxima&ccedil;&atilde;o para a cor verdadeira que um pixel simples pode ter. 
+Efetivamente perdas de resolu&ccedil;&atilde;o espacial s&atilde;o para ganhar resolu&ccedil;&atilde;o de cor. 
+Esse compartamento n&atilde;o &eacute; sempre desej&aacute;vel, todavia.  Desabilitando <em>Dither</em>
+fornece menor granularidade, mas a precis&atilde;o de cores &eacute; menor, das imagens.
+
+     <br><dt><em>Software Shading</em><dd>Esse bot&atilde;o controla se Geomview faz c&aacute;lculos de sombreamento via software. 
+O padr&atilde;o &eacute; permitir que o hardware manuseie esses c&aacute;lculos, e no espa&ccedil;o Euclideano
+esse caminho &eacute; o melhor sempre porque &eacute; o caminho mais r&aacute;pido.  No espa&ccedil;o hiperb&oacute;lico e
+tamb&eacute;m no espa&ccedil;o esf&eacute;rico, todavia, os c&aacute;lculos de sombreamento que o hardware
+faz s&atilde;o incorretos.  Clique sobre esse bot&atilde;o para habilitar a forma correta mas lenta
+do c&aacute;lculo de sombreamento via software.
+
+     <br><dt><em>Background Color</em><dd>Esse bot&atilde;o faz surgir um modificador de cores que voc&ecirc; pode usar para escolher a
+cor de fundo da janela da c&acirc;mera.
+
+     <br><dt><em>PROJECTION</em><dd>Esse navegador permite a voc&ecirc; selecionar entre proje&ccedil;&atilde;o perspectiva ou proje&ccedil;&atilde;o ortogr&aacute;fica
+para essa c&acirc;mera.
+
+     <br><dt><em>Near clip</em><dd>Essa caixa de texto determina a dist&acirc;ncia nas coordenadas do objeto mundo do pr&oacute;ximo plano de
+corte a partir do ponto de vis&atilde;o.  Deve ser um n&uacute;mero positivo.
+
+     <br><dt><em>Far clip</em><dd>Essa caixa de texto determina a dist&acirc;ncia nas coordenadas do objeto mundo do plano de corte
+mais distante a partir do ponto de vis&atilde;o.  Deve ser um n&uacute;mero positivo e em geral
+deve ser maior que o valor de <em>Near clip</em>.
+
+     <br><dt><em>FOV</em><dd>Essa caixa de texto &eacute; o campo de vis&atilde;o da c&acirc;mera, medido em sua menor dire&ccedil;&atilde;o. 
+No modo perspectiva, essa caixa corresponde a um &acirc;ngulo em graus.  No modo ortogr&aacute;fico,
+essa caixa de texto corresponde ao tamanho linear do campo de vis&atilde;o.  Esse n&uacute;mero pode ser modificado
+com o mouse no modo <em>Cam Zoom</em>.
+
+     <br><dt><em>Focal Length</em><dd>A dist&acirc;ncia focal pretende pretende sugerir a dist&acirc;ncia da c&acirc;mera a
+um plano imagin&aacute;rio de interesse.  Seu valor &eacute; usado quando alternamos
+entre as visualiza&ccedil;&otilde;es ortogr&aacute;fica e perspectiva (e durante visualiza&ccedil;&atilde;o stereo),
+de forma a preservar o tamanho aparente de objetos sendo desonesto quanto &agrave; dist&acirc;ncia focal
+da c&acirc;mera.  Dist&acirc;ncia focal tamb&eacute;m afeta a interpola&ccedil;&atilde;o de movimentos de transla&ccedil;&atilde;o
+efetuados usando o mouse.  A velocidade do movimento para adiante (nos modos transla&ccedil;&atilde;o, v&ocirc;o e
+no modo orbital) &eacute; proporcional &agrave; dist&acirc;ncia focal; e objetos desonestos quanto &agrave;
+dist&acirc;ncia focal da c&acirc;mera translacionam lateralmente na mesma raz&atilde;o que
+o cursor do mouse.  Finalmente, no modo de proje&ccedil;&atilde;o N-Dimencional, c&acirc;meras s&atilde;o substitu&iacute;das
+de volta atrav&eacute;s da dist&acirc;ncia focal a partir da proje&ccedil;&atilde;o tridimensional da or&iacute;gem do objeto mundo.
+
+     <br><dt><em>Lines Closer</em><dd>Esse n&uacute;mero tem a ver com o caminho pelo qual as linhas s&atilde;o desenhadas.  Normalmente a &aacute;rea de armazenamento tempor&aacute;rio do algor&iacute;tmo que controla as
+coordenadas do eixo z podem confundir-se na hora de desenhar linhas que localizam-se
+exatamente sobre superf&iacute;cies (tais como as arestas de um objeto); devido a erros de arredondamento
+de m&aacute;quina, algumas vezes as linhas parecem estar em frente &agrave;
+superf&iacute;cie e algumas vezes elas parecem estar por detr&aacute;s da superf&iacute;cie.  O valor
+<em>Lines Closer</em> &eacute; um fator de corre&ccedil;&atilde;o &mdash; Geomview modifica sutilmente todas as linhas que o algor&iacute;tmo da &aacute;rea de armazanamento tempor&aacute;ria desenha
+fechando para a c&acirc;mera atrav&eacute;s desse fator.  O n&uacute;mero deve ser um inteiro
+pequeno; tente 5 ou 10.  O valor zero (0) desabilita esse recurso completamente.  Escolhendo
+valores grandes tornar&aacute; as linhas vis&iacute;veis mesmo quando elas devam ser
+escondidas.
+
+     <br><dt><em>SPACE MODEL</em><dd>Essa op&ccedil;&atilde;o determina o modelo usado para desenhar o objeto mundo.  &Eacute; mais &uacute;til em
+espa&ccedil;os hiperb&oacute;licos e esf&eacute;ricos.  Voc&ecirc; provavelmente n&atilde;o necessitar&aacute; tocar esse
+navegador se voc&ecirc; permanecer no espa&ccedil;o Euclideano.  Para mais informa&ccedil;&atilde;o sobre
+esses modelos, veja <a href="Geometrias-Nao_002dEuclidianas.html#Geometrias-Nao_002dEuclidianas">Geometrias Nao-Euclidianas</a>.
+          <dl>
+<dt><em>Virtual</em><dd>Esse &eacute; o modelo padr&atilde;o e representa a visualiza&ccedil;&atilde;o natural de dentro
+do espa&ccedil;o.
+
+          <br><dt><em>Projective</em><dd>Corresponde ao modelo projetivo do espa&ccedil;o hiperb&oacute;lico e do espa&ccedil;o esf&eacute;rico.  Geoms movem-se
+obedecendo as isometrias do espa&ccedil;o, e c&acirc;meras movem-se atrav&eacute;s de movimentos Euclideanos. 
+Por padr&atilde;o em modelos projetivos, a esfera unit&aacute;ria Euclidiana &eacute; desenhada. 
+No espa&ccedil;o hiperb&oacute;lico essa esfera localiza-se no infinito.  No espa&ccedil;o Euclideano
+o modelo projetivo &eacute; o mesmo que o modelo virtual exceto que a
+esferea &eacute; desenhada por padr&atilde;o.
+
+          <br><dt><em>Conformal</em><dd>Corresponde ao modelo conformal do espa&ccedil;o hiperb&oacute;lico e do espa&ccedil;o esf&eacute;rico.  Geoms movem-se obedecendo
+as isometrias do espaco, e c&acirc;meras move-se atrav&eacute;s de movimentos Euclideanos.  No
+espa&ccedil;o Euclidiano, o modelo conformal equivale a inverter tudo na
+esfera unit&aacute;ria. 
+</dl>
+
+     <br><dt><em>Draw Sphere</em><dd>Essa op&ccedil;&atilde;o controla se Geomview desenha a esfera unit&aacute;ria ou n&atilde;o.  Por padr&atilde;o a
+esfera unit&aacute;ria aparece no modelo projetivo e no modelo conformal.  No
+espa&ccedil;o hiperb&oacute;lico a esfera &eacute; colocada no infinito.  No espa&ccedil;o esf&eacute;rico corresponde
+&agrave; esfera equatorial.
+
+     <br><dt><em>Done</em><dd>Esse bot&atilde;o dispensa o painel de <em>Cameras</em>.
+
+   </dl>
+
+<!-- ================================================================ -->
+   </body></html>
+

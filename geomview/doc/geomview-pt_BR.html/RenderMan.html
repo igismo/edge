@@ -1,0 +1,99 @@
+<html lang="en">
+<head>
+<title>RenderMan - Manual do Geomview</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Manual do Geomview">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Mathematica.html#Mathematica" title="Mathematica">
+<link rel="prev" href="Geomview_002em.html#Geomview_002em" title="Geomview.m">
+<link rel="next" href="Remote-Display.html#Remote-Display" title="Remote Display">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="RenderMan"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Remote-Display.html#Remote-Display">Remote Display</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Geomview_002em.html#Geomview_002em">Geomview.m</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Mathematica.html#Mathematica">Mathematica</a>
+<hr>
+</div>
+
+<h3 class="section">9.3 Using Mathematica to generate RenderMan files</h3>
+
+<p>In addition to the <code>WriteOOGL</code> and <code>Geomview</code> commands
+described above, the package <samp><span class="file">OOGL.m</span></samp> also defines the command
+<code>WriteRIB</code> which writes a 3D graphics objeto to a RenderMan RIB
+file:  <code>WriteRIB[</code><var>file</var><code>, </code><var>graphics</var><code>]</code> writes <var>graphics</var>
+to file <var>file</var>.  RenderMan is a commercial rendering system available
+from Pixar, Inc., which can produce extremely high quality images.
+<pre class="example">     In[1] := &lt;&lt;OOGL.m
+     
+     In[2] := &lt;&lt;Graphics/Polyhedra.m
+     
+     In[3] := Graphics3D[Cube[]]
+     
+     Out[3] := -Graphics3D-
+     
+     In[4] := WriteRIB["cube.rib", %3]
+     
+     Out[4] := -Graphics3D-
+</pre>
+   <p class="noindent">This generates the file <samp><span class="file">math.ri</span></samp>b.  This is a ready-to-render RIB
+file da given objeto geom&eacute;trico, using a default c&acirc;mera position, lighting,
+and the &ldquo;plastic&rdquo; shader. In a shell janela, type <code>render
+cube.ri</code>b to generate the image file <samp><span class="file">mma.tiff</span></samp>. Of course, you
+need to have RenderMan installed for this to work. A shortcut to render
+from inside Mathematica is <code>WriteRIB["!render", foo]</code>.
+
+   <p><code>WriteRI</code>b works by first converting the Mathematica graphics
+objeto to OOGL format using <code>WriteOOGL</code> and then calls an external
+program <samp><span class="file">oogl2ri</span></samp>b to convert OOGL to RIB format.  The
+oogl2rib program takes several options which you can specify in a
+sequ&ecirc;ncia de caracteres as an optional terceiro argumento to <code>WriteRI</code>b.  The default
+option sequ&ecirc;ncia de caracteres is <code>" -n mma.tiff "</code>, which indicates that the RIB
+file should generate a rendered TIFF file named <samp><span class="file">mma.tiff</span></samp>.  A
+particularly useful option is <code>-g</code>, which tells oogl2rib to
+convert only the objeto geom&eacute;trico into a RIB fragment. You can insert that
+fragment into a full RIB file of your own making with c&acirc;mera positions
+and shaders of your choice, to harness the full power of RenderMan.
+
+   <p>The full usage of oogl2rib is:
+<pre class="example">     oogl2rib [-n <var>name</var>] [-B <var>r</var>,<var>g</var>,b] [-w <var>width</var>] [-h <var>height</var>] [-fgb] [<var>infile</var>] [<var>outfile</var>]
+</pre>
+   <p class="noindent">By default it reads from stdin and writes to stdout. 
+Either <var>infile</var> ou <var>outfile</var> may be <samp><span class="file">-</span></samp>, which means
+use stdin/stdout.  The options are:
+     <dl>
+<dt><code>-n </code><var>name</var><dd>Use <var>name</var> for the name do rendered TIFF file (default
+"geom.tiff") ou framebuffer janela (default "geom.rib").
+
+     <br><dt><code>-B </code><var>r</var><code>,</code><var>g</var><code>,</code><code>b</code><dd>Use background color (<var>r</var>,<var>g</var>,b).  Each component ranges
+from 0 to 1. Default: none.
+
+     <br><dt><code>-w </code><var>width</var><code> -h </code><var>height</var><dd>Rendered frame will be <var>width</var> by <var>height</var> pixels.
+
+     <br><dt><code>-f</code><dd>RIB file renders to on-screen framebuffer instead of TIFF file.
+
+     <br><dt><code>-g</code><dd>Output only the objeto geom&eacute;trico in RIB format.
+
+     <br><dt><code>-b</code><dd>Output only a Quick Renderman clip objeto.  Ignores -nBwhf.
+
+   </dl>
+
+<!-- ================================================================ -->
+   </body></html>
+

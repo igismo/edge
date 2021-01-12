@@ -1,0 +1,60 @@
+<html lang="en">
+<head>
+<title>normalization - Geomview Manual</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Geomview Manual">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="GCL-Reference.html#GCL-Reference" title="GCL Reference">
+<link rel="prev" href="NeXT.html#NeXT" title="NeXT">
+<link rel="next" href="not.html#not" title="not">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="normalization"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="not.html#not">not</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="NeXT.html#NeXT">NeXT</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="GCL-Reference.html#GCL-Reference">GCL Reference</a>
+<hr>
+</div>
+
+<h4 class="subsection">7.2.96 normalization</h4>
+
+<p><a name="index-normalization-103"></a>
+     <dl>
+<dt><code>(normalization GEOM-ID {each|none|all|keep})</code><dd>Set the normalization status of GEOM-ID.
+          <dl>
+<dt><code>none</code><dd>suppresses all normalization. 
+<br><dt><code>each</code><dd>normalizes the object's bounding box to fit into the unit
+sphere, with the center of its bounding box translated
+to the origin.  The box is scaled such that its long diagonal,
+sqrt((xmax-xmin)^2 + (ymax-ymin)^2 + (zmax-zmin)^2), is 2. 
+<br><dt><code>all</code><dd>resembles <code>each</code>, except when an object is changing
+(e.g. when its geometry is being changed by an external program). 
+Then, <code>each</code> tightly fits the bounding box around the
+object whenever it changes and normalizes accordingly,
+while <code>all</code> normalizes the union of all variants of the object
+and normalizes accordingly. 
+<br><dt><code>keep</code><dd>leaves the current normalization transform unchanged
+when the object changes.  It may be useful to apply <code>each</code> or
+<code>all</code> normalization apply to the first version of a changing
+object to bring it in view, then switch to <code>keep</code>. 
+</dl>
+     </dl>
+
+   </body></html>
+

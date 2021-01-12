@@ -1,0 +1,189 @@
+sudo apt-get install libmotif-dev
+
+
+$Id: INSTALL.Geomview,v 1.18 2008/05/17 13:29:57 rotdrop Exp $
+
+	Instructions for using Geomview's `configure' script
+
+Geomview uses the GNU autoconf configuration system.  The way to
+configure and compile Geomview is the same as with any piece of
+GNU-style software:
+
+	./configure
+	make
+	make install
+
+Once `make' completes you can run Geomview without doing `make install'
+by running the script `geomview' in the top-level directory.  In
+order for this to work you'll need to be in that directory.
+
+The `reconf' script in the top-level directory will regenerate the
+`configure' script, using autoreconf, part of the autoconf system.
+This is useful if no useful `configure' script is already present,
+which is normal only for copies of Geomview that have been taken
+directly from developer CVS. See the `README.cvs' textfile for hints
+on building Geomview from developer CVS.
+
+The default installation prefix for Geomview is no longer
+`/usr/local/Geomview/', but just `/usr/local/'. The directory layout
+below the prefix follows the conventions of any other GNU package:
+binaries below `PREFIX/bin/', data below `PREFIX/share/geomview/',
+executable code below `PREFIX/libexec/geomview/' (here live the
+modules). The documentation is installed below
+`PREFIX/share/doc/geomview-VERSION/'. See the file `INSTALL' for
+generic installation instructions.
+
+Geomview requires Motif and benefits from OpenGL; you need to make
+sure Motif is installed on your system before you can compile (or run)
+Geomview.  Both of these are commercial software packages but Geomview
+will also work with their free counterparts Lesstif or OpenMotif
+(www.lesstif.org or www.openmotif.org) and Mesa (www.mesa3d.org) [But
+Linux users see the comments in the 'Linux' section below about
+Lesstif/OpenMotif.]  If either of these is installed on your system in
+a directory that your compiler doesn't look in by default, you can use
+the following options to Geomview's configure script to tell Geomview
+where to find them:
+
+	--with-opengl=DIR
+	    You can use this option if the OpenGL header files and
+	    libraries on your system are installed in some place that
+	    your compiler doesn't recognize by default.  This option
+	    specifies that OpenGL (or Mesa) is installed on your
+	    system in the directory DIR.  DIR should have a
+	    subdirectory called `include' which has the GL header
+	    files, and a subdirectory called `lib' which has the
+	    library files in it.  You don't need this option if your
+	    compiler can find the OpenGL header files and libraries in
+	    the standard places that it looks.  If you're not sure
+	    about this option, try configuring without it.
+	    'configure' will abort with an error if your compiler
+	    can't find the appropriate header files and libraries.
+            You can use `--without-opengl' or `--with-opengl=no' to
+            disable the use of OpenGL.
+
+	--with-motif=DIR
+	    You can use this option if the Motif header files and
+	    libraries on your system are installed in some place that
+	    your compiler doesn't recognize by default.  This option
+	    specifies that Motif is installed on your system in the
+	    directory DIR.  DIR should have a subdirectory called
+	    `include' which has the Motif header files, and a
+	    subdirectory called `lib' which has the library files in
+	    it.  You don't need this option if your compiler can find
+	    the Motif header files and libraries in the standard
+	    places that it looks.  If you're not sure about this
+	    option, try configuring without it.  'configure' will
+	    abort with an error if your compiler can't find the
+	    appropriate header files and libraries.
+
+You can use evironment variables to override various default settings
+in 'configure' (such as which compiler to use and which options to
+pass to it).  There are many such variables that are generic to all
+GNU autoconf 'configure' scripts; see the file INSTALL for details on
+this.  In addition to these generic settings, the following
+variables are specific to Geomview:
+
+	MOTIFLIBS
+	    '-l' options to pass to the linker for linking with the
+	    Motif libaraies.  Defaults to "-lXm", but some versions of
+	    Motif apparently need additional libararies, such as
+	    '-lXp'.  To specify this, do
+		MOTIFLIBS='-lXm -lXp' ./configure
+	    Note that MOTIFLIBS should NOT include any -L options to
+	    specify the location of the libraries; use the
+	    --with-motif configure argument for that.  The MOTIFLIBS
+	    variable is just for specifying the list of libraries
+	    themselves.
+
+========================================================================
+
+PLATFORM SPECIFIC NOTES:
+
+Up-to-date instructions can also be accessed through the Geomview
+web-pages at
+
+              http://www.geomview.org/download/
+
+
+LinuxPPC
+--------
+
+On at least one LinuxPPC system with MetroX it was necessary to
+specify -lXp when linking with the Motif libraries
+("MOTIFLIBS='-lXm -lXp' ./configure").
+
+
+Solaris
+-------
+
+On the Solaris 2.6 system that I tested, the 'example' external module
+in 'src/bin/example' failed to link because of an error of the form
+    ld: warning: relocation error: R_SPARC_32: file main.o: symbol .LLC1:
+	external symbolic relocation against non-allocatable section .stab;
+	cannot be processed at runtime: relocation ignored
+    Undefined                       first referenced
+     symbol                             in file
+    .LLC1                               main.o
+This was when using GNU gcc to compile and Sun's ld to link, and I
+believe this error may be due to an incompatibility between these two
+programs, or at least the versions that were on this system.  If
+this happens to you, you can build with "make -k" to force "make" to
+continue building the rest of the distribution in spite of this error.
+The only thing you'll be missing is this one external module, which
+isn't necessary for Geomview itself.  If you find a way to fix this
+problem, let me [mbp@geomtech.com] know.
+
+
+IRIX
+----
+
+Older IRIX systems may require compiling with -XSVR4.  This flag
+had disappeared by IRIX 5.3, so you're unlikely to run into this.
+
+On the IRIX 6.3 system that I tested (using CC=cc), the linker crashed
+when trying to link several of the external modules.  I suspect it may
+be due to a broken compiler installation on that particular machine,
+but I'm not sure.  I'll try to get access to a more recent IRIX
+installation soon and will check it out more.  In the meantime, if you
+compile Geomview on IRIX and run into any problems, please let me
+[mbp@geomtech.com] know.
+
+Cygwin and various older Unix-like system
+-----------------------------------------
+
+Nowadays Xorg installs itself using the usual directory layout below a
+PREFIX path, just like many other GNU packages. Former version
+installed themselves below PFX/X11R<VERSION> (e.g. /usr/X11R6). In
+this case, the following switches are needed:
+
+./configure --with-motif=/usr/X11R6 --with-opengl=/usr/X11R6 OTHERSWICHES
+
+
+Mac OS X
+--------
+
+Reported by Raphael Straub:
+
+X11 (on the Mac OS X Install DVD) and the X11SDK (part of the Xcode
+Developer Tools) must be installed before Geomview can be
+compiled. OpenMotif or Lesstif can be manually compiled from source or
+installed with a package manager like Fink (http://www.finkproject.org/)
+or MacPorts (http://www.macports.org/). Both package managers also provide
+their own Geomview package.
+
+On Mac OS X 10.5 please execute the following line before running
+configure (see: http://developer.apple.com/qa/qa2007/qa1567.html)
+
+export LDFLAGS="-dylib_file \
+  /System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGL.dylib:\
+/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGL.dylib"
+
+In most cases Geomview can be configured with
+
+./configure --with-opengl=/usr/X11R6 --with-htmlbrowser=open \
+  --with-pdfviewer=open \
+  --with-motif=/path/to/your/motif/installation
+
+This enables OpenGL support and uses your default HTML browser and PDF
+viewer for viewing the Geomview documentation.
+

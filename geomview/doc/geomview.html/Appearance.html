@@ -1,0 +1,72 @@
+<html lang="en">
+<head>
+<title>Appearance - Geomview Manual</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Geomview Manual">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Interaction.html#Interaction" title="Interaction">
+<link rel="prev" href="Mouse-Motions.html#Mouse-Motions" title="Mouse Motions">
+<link rel="next" href="Cameras.html#Cameras" title="Cameras">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Appearance"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Cameras.html#Cameras">Cameras</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Mouse-Motions.html#Mouse-Motions">Mouse Motions</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Interaction.html#Interaction">Interaction</a>
+<hr>
+</div>
+
+<h3 class="section">3.6 Changing the Way Things Look</h3>
+
+<p>Geomview uses a hierarchy of appearances to control the way things look. 
+An <dfn>appearance</dfn> is a specification of information about how
+something should be drawn.  This can include many things such things as
+color, lighting, material properties, and more.  Appearances work in a
+hierarchal manner: if a certain appearance property, for example face
+color, is not specified in a particular object's appearance, that object
+is drawn using that property from the parent appearance.  If both the
+parent and the child appearance specify a property, the child's setting
+takes precedence unless the parent appearance is set to override.
+
+   <p>Every geom in Geomview has an appearance associated with it.  There is
+also an appearance associated with the "World" geom, which serves as the
+parent of each individual geom's appearance.  Finally, there is a
+global "base" appearance, which is the parent of the World appearance.
+
+   <p>The base appearance specifies reasonable values for all appearance
+information, and by default none of the other appearances specify
+anything, which means they inherit their values from the base
+appearance.  This means that by default all objects are drawn using the
+base appearance.
+
+   <p>If you change a certain appearance property for a geom, that property
+is used in drawing that geom.  The parent appearance is used for any
+properties that you do not explicitly set.
+
+   <p>Geomview has three panels which let you modify appearances.
+
+<ul class="menu">
+<li><a accesskey="1" href="Appearance-Panel.html#Appearance-Panel">Appearance Panel</a>:             Color etc. 
+<li><a accesskey="2" href="Materials-Panel.html#Materials-Panel">Materials Panel</a>:              Surface Material properties. 
+<li><a accesskey="3" href="Lighting-Panel.html#Lighting-Panel">Lighting Panel</a>:               Lighting Parameters. 
+</ul>
+
+<!--  -->
+   </body></html>
+

@@ -1,0 +1,70 @@
+<html lang="en">
+<head>
+<title>Interface - Manual do Geomview</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Manual do Geomview">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Modulos.html#Modulos" title="Modulos">
+<link rel="prev" href="Modulos.html#Modulos" title="Modulos">
+<link rel="next" href="Example1.html#Example1" title="Example1">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Interface"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Example1.html#Example1">Example1</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Modulos.html#Modulos">Modulos</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Modulos.html#Modulos">Modulos</a>
+<hr>
+</div>
+
+<h3 class="section">6.1 Como M&oacute;dulos Externos Interagem com o Geomview</h3>
+
+<p>M&oacute;dulos externos aparecem no navegador de M&oacute;dulos (<em>Modules</em>) no painel
+principal (<em>Main</em>) do Geomview.  Para executar um m&oacute;dulo, clique no bot&atilde;o esquerdo do mouse sobre
+a entrada do m&oacute;dulo no navegador.  Enquanto o m&oacute;dulo estiver sendo executado, uma
+linha adicional para aquele m&oacute;dulo ir&aacute; aparecer no navegador. 
+Essa linha inicia-se com um n&uacute;mero entre colch&ecirc;tes, que indica o
+n&uacute;mero de <em>inst&acirc;ncia</em> do m&oacute;dulo.  (Para alguns m&oacute;dulos faz sentido
+ter mais de uma inst&acirc;ncia do m&oacute;dulo sendo executado ao mesmo
+tempo.)  Voc&ecirc; pode encerrar um m&oacute;dulo externo atrav&eacute;s de um clique sobre sua entrada
+vermelha de inst&acirc;ncia.
+
+   <p>Por padr&atilde;o quando Geomview inicia, mostra todos os m&oacute;dulos que tiverem
+sido insta-lados no seu sistema.
+
+   <p>Para instru&ccedil;&otilde;es sobre intala&ccedil;&atilde;o de algum m&oacute;dulo no seu sistema de forma que esse m&oacute;dulo
+apare&ccedil;a no navegador de m&oacute;dulos (<em>Modules</em>) toda vez que Geomview estiver sendo executado por
+algu&eacute;m no seu sistema, veja <a href="Module-Installation.html#Module-Installation">Module Installation</a>.
+
+   <p>Quando Geomview chama um m&oacute;dulo externo, cria pipes conectados
+&agrave;s sa&iacute;das e &agrave;s entradas padr&atilde;o do modulo. (Pipes s&atilde;o como arquivos
+exceto que eles s&atilde;o usados para comunica&ccedil;&atilde;o entre programas em lugar de
+armazenar coisas em um disco.)  Geomview interpreta qualquer coisa que o
+modulo escreve em sua sa&iacute;da padr&atilde;o como um comando GCL. 
+Da mesma forma, Se um m&oacute;dulo externo requisita qualquer dado do Geomview,
+Geomview escreve aquele dado para a entrada padr&atilde;o do m&oacute;dulo.  Dessa forma tudo que um
+m&oacute;dulo tem de fazer com o objetivo de comunicar-se com Geomview &eacute; escrever
+comandos para sua sa&iacute;da padr&atilde;o e (opcionalmente) receber dados de sua entrada
+padr&atilde;o.  Note que isso significa que o m&oacute;dulo n&atilde;o pode usar a entrada padr&atilde;o e
+a sa&iacute;da padr&atilde;o para comunicar-se com o usu&aacute;rio.  Se um m&oacute;dulo precisar
+comunicar-se com o usu&aacute;rio isso pode ser feito ou atrav&eacute;s de um painel de
+controle nele pr&oacute;prio ou em caso contr&aacute;rio atrav&eacute;s de respostas a certos eventos que esse m&oacute;dulo encontrar
+como sa&iacute;da vinda do Geomview.
+
+   </body></html>
+

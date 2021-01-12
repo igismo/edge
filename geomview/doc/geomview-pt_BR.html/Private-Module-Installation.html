@@ -1,0 +1,61 @@
+<html lang="en">
+<head>
+<title>Private Module Installation - Manual do Geomview</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Manual do Geomview">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Module-Installation.html#Module-Installation" title="Module Installation">
+<link rel="prev" href="Module-Installation.html#Module-Installation" title="Module Installation">
+<link rel="next" href="System-Module-Installation.html#System-Module-Installation" title="System Module Installation">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Private-Module-Installation"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="System-Module-Installation.html#System-Module-Installation">System Module Installation</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Module-Installation.html#Module-Installation">Module Installation</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Module-Installation.html#Module-Installation">Module Installation</a>
+<hr>
+</div>
+
+<h4 class="subsection">6.7.1 Private Module Installation</h4>
+
+<p>O comando <code>emodule-define</code> providencia que um m&oacute;dulo apare&ccedil;a no
+navegador de m&oacute;dulos (<em>Modules</em>) do Geomview. O comando recebe dois arumentos que s&atilde;o
+sequ&ecirc;ncias de caractere; o primeiro &eacute; o nome que ir&aacute; aparecer no navegador de
+m&oacute;dulos (<em>Modules</em>).  O segundo &eacute; o comando de shell para executar o m&oacute;dulo; esse nome de shell
+pode incluir argumentos (veja <a href="emodule_002ddefine.html#emodule_002ddefine"><code>(emodule-define ...)</code></a>). 
+Geomview executa esse comando em um subshell quando voc&ecirc; d&aacute; um clique sobre a
+entrada do m&oacute;dulo no navegador.  Por exemplo
+
+<pre class="example">     (emodule-define "Foo" "/u/home/modules/foo -x")
+</pre>
+   <p class="noindent">adiciona uma linha rotulada "Foo" ao navegador de m&oacute;dulos (<em>Modules</em>) o qual
+faz com que o comando "/u/home/modules/foo -x" seja executado quando selecionado.
+
+   <p>Voc&ecirc; pode colocar comandos <code>emodule-define</code> no seu arquivo
+<samp><span class="file">~/.geomview</span></samp> para providenciar que certos m&oacute;dulos estejam dispon&iacute;veis sempre que voc&ecirc; execute
+Geomview; veja <a href="Customizacao.html#Customizacao">Customizacao</a>.  voc&ecirc; pode tamb&eacute;m executar
+comandos <code>emodule-define</code> a partir do painel de comandos (<em>Commands</em>)
+para adicionar um m&oacute;dulo a uma c&oacute;pia do Geomview que j&aacute; esteja sendo executada.
+
+   <p>Existem muitos outros comandos GCL para controlar as entradas
+no navegador de m&oacute;dulos (<em>Modules</em>); para detalhes, veja <a href="GCL.html#GCL">GCL</a>.
+
+<!--  -->
+   </body></html>
+

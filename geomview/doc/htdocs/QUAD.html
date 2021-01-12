@@ -1,0 +1,70 @@
+<html lang="en">
+<head>
+<title>QUAD - Geomview Manual</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Geomview Manual">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Object-File-Formats.html#Object-File-Formats" title="Object File Formats">
+<link rel="prev" href="Object-File-Formats.html#Object-File-Formats" title="Object File Formats">
+<link rel="next" href="MESH.html#MESH" title="MESH">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="QUAD"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="MESH.html#MESH">MESH</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Object-File-Formats.html#Object-File-Formats">Object File Formats</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Object-File-Formats.html#Object-File-Formats">Object File Formats</a>
+<hr>
+</div>
+
+<h4 class="subsection">4.2.1 QUAD: collection of quadrilaterals</h4>
+
+<p>The conventional suffix for a <code>QUAD</code> file is <samp><span class="file">.quad</span></samp>.
+
+   <p>The file syntax is
+
+<pre class="example">        [C][N][4]QUAD  -or-  [C][N][4]POLY              # Key word
+        <var>vertex</var>  <var>vertex</var>  <var>vertex</var>  <var>vertex</var>  # 4*N vertices for some N
+        <var>vertex</var>  <var>vertex</var>  <var>vertex</var>  <var>vertex</var>
+        ...
+</pre>
+   <p>The leading key word is <code>[C][N][4]QUAD</code> or <code>[C][N][4]POLY</code>,
+where the optional <code>C</code> and <code>N</code> prefixes indicate that each vertex
+includes colors and normals respectively.  That is, these files
+begin with one of the words
+
+   <p><code>QUAD</code> <code>CQUAD</code> <code>NQUAD</code> <code>CNQUAD</code> <code>POLY</code>
+<code>CPOLY</code> <code>NPOLY</code> <code>CNPOLY</code>
+
+   <p>(but not <code>NCQUAD</code> or <code>NCPOLY</code>).  <code>QUAD</code> and <code>POLY</code>
+are synonymous; both forms are allowed just for compatibility with
+ChapReyes.
+
+   <p>Following the key word is an arbitrary number of groups of four
+vertices, each group describing a quadrilateral.  See the Vertex syntax
+above.  The object ends at end-of-file, or with a close-brace if
+incorporated into an object reference (see above).
+
+   <p>A <code>QUAD BINARY</code> file format is accepted; See <a href="Binary-format.html#Binary-format">Binary format</a>.  The
+first word of binary data must be a 32-bit integer giving the number of
+quads in the object; following that is a series of 32-bit floats,
+arranged just as in the ASCII format.
+
+<!--  -->
+   </body></html>
+

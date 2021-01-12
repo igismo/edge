@@ -1,0 +1,52 @@
+<html lang="en">
+<head>
+<title>new-alien - Geomview Manual</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Geomview Manual">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="GCL-Reference.html#GCL-Reference" title="GCL Reference">
+<link rel="prev" href="ND_002dxform_002dset.html#ND_002dxform_002dset" title="ND-xform-set">
+<link rel="next" href="new_002dcamera.html#new_002dcamera" title="new-camera">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="new-alien"></a>
+<a name="new_002dalien"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="new_002dcamera.html#new_002dcamera">new-camera</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="ND_002dxform_002dset.html#ND_002dxform_002dset">ND-xform-set</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="GCL-Reference.html#GCL-Reference">GCL Reference</a>
+<hr>
+</div>
+
+<h4 class="subsection">7.2.90 new-alien</h4>
+
+<p><a name="index-new_002dalien-97"></a>
+     <dl>
+<dt><code>(new-alien name [GEOMETRY])</code><dd>Create a new alien (geom not in the world) with the given name (a
+string). <var>GEOMETRY</var> is a string giving an OOGL geometry
+specification. If <var>GEOMETRY</var> is omitted, the new alien is given an
+empty geometry.  If an object with that name already exists, the new
+alien is given a unique name.  The light beams that are used to move
+around the lights are an example of aliens. They're drawn but are not
+controllable the way ordinary objects are: they don't appear in the
+object browser and the user can't move them with the normal motion
+modes. 
+</dl>
+
+   </body></html>
+

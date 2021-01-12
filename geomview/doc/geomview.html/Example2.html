@@ -1,0 +1,259 @@
+<html lang="en">
+<head>
+<title>Example2 - Geomview Manual</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Geomview Manual">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Modules.html#Modules" title="Modules">
+<link rel="prev" href="Example1.html#Example1" title="Example1">
+<link rel="next" href="XForms.html#XForms" title="XForms">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Example2"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="XForms.html#XForms">XForms</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Example1.html#Example1">Example1</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Modules.html#Modules">Modules</a>
+<hr>
+</div>
+
+<h3 class="section">6.3 Example 2: Simple External Module with FORMS Control Panel</h3>
+
+<p>This section gives a new version of the above module &mdash; one that
+includes a user interface panel for controlling the velocity of the
+oscillation.  We use the FORMS library by Mark Overmars for the control
+panel.  The FORMS library is a public domain user interface toolkit for
+IRISes. <!-- For more information @xref{Forms}. -->
+
+   <p>To try out this example, make a copy of the file
+<samp><span class="file">example2.c</span></samp> (distributed with Geomview in the <samp><span class="file">doc</span></samp>
+subdirectory) in your directory and compile it with the command
+
+<pre class="example">     cc -I/u/gcg/ngrap/include -o example2 example2.c \
+       -L/u/gcg/ngrap/lib/sgi -lforms -lfm_s -lgl_s -lm
+</pre>
+   <p>You should
+replace the string <samp><span class="file">/u/gcg/ngrap</span></samp> above with the pathname of the
+Geomview distribution directory on your system.  (The forms library is
+distributed with Geomview and the <code>-I</code> and <code>-L</code> options above
+tell the compiler where to find it.)
+
+   <p>Then put the line
+
+<pre class="example">     (emodule-define "Example 2" "./example2")
+</pre>
+   <p class="noindent">in a file called <samp><span class="file">.geomview</span></samp> in the current directory and invoke
+Geomview from that directory.  Click on the "Example 2" entry in the
+<em>Modules</em> browser to invoke the module.  A small control panel
+should appear.  You can then control the velocity of the mesh
+oscillation by moving the slider.
+
+<pre class="example">     <!-- #include "example2.c" -->
+     /*
+      * example2.c: oscillating mesh with FORMS control panel
+      *
+      * This example module is distributed with the Geomview manual.
+      * If you are not reading this in the manual, see the "External
+      * Modules" chapter of the manual for an explanation.
+      *
+      * This module creates an oscillating mesh and has a FORMS control
+      * panel that lets you change the speed of the oscillation with a
+      * slider.
+      */
+     
+     #include &lt;math.h&gt;
+     #include &lt;stdio.h&gt;
+     #include &lt;sys/time.h&gt;           /* for struct timeval below */
+     
+     #include "forms.h"              /* for FORMS library */
+     
+     FL_FORM *OurForm;
+     FL_OBJECT *VelocitySlider;
+     float dt;
+     
+     /* F is the function that we plot
+      */
+     float F(x,y,t)
+          float x,y,t;
+     {
+       float r = sqrt(x*x+y*y);
+       return(sin(r + t)*sqrt(r));
+     }
+     
+     /* SetVelocity is the slider callback procedure; FORMS calls this
+      * when the user moves the slider bar.
+      */
+     void SetVelocity(FL_OBJECT *obj, long val)
+     {
+       dt = fl_get_slider_value(VelocitySlider);
+     }
+     
+     /* Quit is the "Quit" button callback procedure; FORMS calls this
+      * when the user clicks the "Quit" button.
+      */
+     void Quit(FL_OBJECT *obj, long val)
+     {
+       exit(0);
+     }
+     
+     /* create_form_OurForm() creates the FORMS panel by calling a bunch of
+      * procedures in the FORMS library.  This code was generated
+      * automatically by the FORMS designer program; normally this code
+      * would be in a separate file which you would not edit by hand.  For
+      * simplicity of this example, however, we include this code here.
+      */
+     create_form_OurForm()
+     {
+       FL_OBJECT *obj;
+       FL_FORM *form;
+       OurForm = form = fl_bgn_form(FL_NO_BOX,380.0,120.0);
+       obj = fl_add_box(FL_UP_BOX,0.0,0.0,380.0,120.0,"");
+       VelocitySlider = obj = fl_add_valslider(FL_HOR_SLIDER,20.0,30.0,
+                                               340.0,40.0,"Velocity");
+         fl_set_object_lsize(obj,FL_LARGE_FONT);
+         fl_set_object_align(obj,FL_ALIGN_TOP);
+         fl_set_call_back(obj,SetVelocity,0);
+       obj = fl_add_button(FL_NORMAL_BUTTON,290.0,75.0,70.0,35.0,"Quit");
+         fl_set_object_lsize(obj,FL_LARGE_FONT);
+         fl_set_call_back(obj,Quit,0);
+       fl_end_form();
+     }
+     
+     main(argc, argv)
+          char **argv;
+     {
+       int xdim, ydim;
+       float xmin, xmax, ymin, ymax, dx, dy, t;
+       int fdmask;
+       static struct timeval timeout = {0, 200000};
+     
+       xmin = ymin = -5;             /* Set x and y            */
+       xmax = ymax = 5;              /*    plot ranges         */
+       xdim = ydim = 24;             /* Set x and y resolution */
+       dt = 0.1;                     /* Time increment is 0.1  */
+     
+       /* Forms panel setup.
+        */
+       foreground();
+       create_form_OurForm();
+       fl_set_slider_bounds(VelocitySlider, 0.0, 1.0);
+       fl_set_slider_value(VelocitySlider, dt);
+       fl_show_form(OurForm, FL_PLACE_SIZE, TRUE, "Example 2");
+     
+     
+       /* Geomview setup.
+        */
+       printf("(geometry example { : foo })\n");
+       fflush(stdout);
+     
+       /* Loop until killed.
+        */
+       for (t=0; ; t+=dt) {
+         fdmask = (1 &lt;&lt; fileno(stdin)) | (1 &lt;&lt; qgetfd());
+         select(qgetfd()+1, &amp;fdmask, NULL, NULL, &amp;timeout);
+         fl_check_forms();
+         UpdateMesh(xmin, xmax, ymin, ymax, xdim, ydim, t);
+       }
+     }
+     
+     /* UpdateMesh sends one mesh iteration to Geomview
+      */
+     UpdateMesh(xmin, xmax, ymin, ymax, xdim, ydim, t)
+          float xmin, xmax, ymin, ymax, t;
+          int xdim, ydim;
+     {
+       int i,j;
+       float x,y, dx,dy;
+     
+       dx = (xmax-xmin)/(xdim-1);
+       dy = (ymax-ymin)/(ydim-1);
+     
+       printf("(read geometry { define foo \n");
+       printf("MESH\n");
+       printf("%1d %1d\n", xdim, ydim);
+       for (j=0, y = ymin; j&lt;ydim; ++j, y += dy) {
+         for (i=0, x = xmin; i&lt;xdim; ++i, x += dx) {
+           printf("%f %f %f\t", x, y, F(x,y,t));
+         }
+         printf("\n");
+       }
+       printf("})\n");
+       fflush(stdout);
+     }
+     <!-- #end include -->
+</pre>
+   <p>The code begins by including some header files needed for the event loop
+and the FORMS library.  It then declares global variables for holding a
+pointer to the slider FORMS object and the velocity <code>dt</code>.  These
+are global because they are needed in the slider callback procedure
+<code>SetVelocity</code>, which forms calls every time the user moves the
+slider bar. <code>SetVelocity</code> sets <code>dt</code> to be the new value of the
+slider.
+
+   <p><code>Quit</code> is the callback procedure for the <em>Quit</em> button;
+it provides a graceful way for the user to terminate the program.
+
+   <p>The procedure <code>create_panel</code> calls a bunch of FORMS library
+procedures to set up the control panel with slider and button.  For more
+information on using FORMS to create interface panels see the FORMS
+documentation.  In particular, FORMS comes with a graphical panel
+designer that lets you design your panels interactively and generates
+code like that in <code>create_panel</code>.
+
+   <p>This example's main program is similar to the previous example, but
+includes extra code to deal with setting up and managing the FORMS
+panel.
+
+   <p>To set up the panel we call the GL procedure <code>foreground</code> to cause
+the process to run in the foreground.  By default GL programs run in the
+background, and for various reasons external modules that use FORMS
+(which is based on GL) need to run in the foreground.  We then call
+<code>create_panel</code> to create the panel and <code>fl_set_slider_value</code>
+to set the initial value of the slider.  The call to <code>fl_show_form</code>
+causes the panel to appear on the screen.
+
+   <p>The first three lines of the main loop, starting with
+<pre class="example">     fdmask = (1 &lt;&lt; fileno(stdin)) | (1 &lt;&lt; qgetfd());
+</pre>
+   <p class="noindent">check for and deal with events in the panel.  The call to <code>select</code>
+imposes a delay on each pass through the main loop.  This call returns
+either after a delay of 1/5 second or when the next GL event occurs, or
+when data appears on standard input, whichever comes first.  The
+<code>timeout</code> variable specifies the amount of time to wait on this
+call; the first member (0 in this example) gives the number of seconds,
+and the second member (200000 in this example) gives the number of
+microseconds.  Finally, <code>fl_check_forms()</code> checks for and processes
+any FORMS events that have happened; in this case this means calling
+<code>SetVelocity</code> if the user has moved the slider or calling
+<code>Quit</code> if the user has clicked on the <em>Quit</em> button.
+
+   <p>The purpose of the delay in the loop is to keep the program from using
+excessive amounts of CPU time running around its main loop when there
+are no events to be processed.  This is not so crucial in this example,
+and in fact may actually slow down the animation somewhat, but in
+general with external modules that have event loops it is important to
+do something like this because otherwise the module will needlessly take
+CPU cycles away from other running programs (such as Geomview!)  even
+when it isn't doing anything.
+
+   <p>The last line of the main loop in this example, the call to
+<code>UpdateMesh</code>, is the same as in the previous example.
+
+<!-- ================================================================ -->
+   </body></html>
+

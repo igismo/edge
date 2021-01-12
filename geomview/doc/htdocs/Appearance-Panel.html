@@ -1,0 +1,203 @@
+<html lang="en">
+<head>
+<title>Appearance Panel - Geomview Manual</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Geomview Manual">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Appearance.html#Appearance" title="Appearance">
+<link rel="prev" href="Appearance.html#Appearance" title="Appearance">
+<link rel="next" href="Materials-Panel.html#Materials-Panel" title="Materials Panel">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Appearance-Panel"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Materials-Panel.html#Materials-Panel">Materials Panel</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Appearance.html#Appearance">Appearance</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Appearance.html#Appearance">Appearance</a>
+<hr>
+</div>
+
+<h4 class="subsection">3.6.1 The Appearance Panel</h4>
+
+<p>The <em>Appearance</em> panel lets you change most common appearance
+properties of the target object. 
+<div class="float">
+<a name="figap"></a><img src="figs/ap.png" alt="figs/ap.png">
+
+   <p><strong class="float-caption">Figure 3.5: The Appearance Panel.</strong></p></div>
+If the target is an individual geom, then changes you make in the
+appearance panel apply to that geometry's appearance.  If the target is the
+World, then appearance panel changes apply to the World appearance
+<em>and</em> to all individual geom appearances.  (Users have found that
+this is more desirable than having the changes only apply to the World
+appearance.)  If the target is a camera, then appearance panel changes
+apply to the geom that was most recently the target.
+
+   <p>The five buttons near the upper left corner under the word
+<em>Show</em> control what parts of the target geom are drawn.
+
+     <dl>
+<dt><em>Faces</em><dd>This button specifies whether faces are drawn.
+
+     <br><dt><em>Edges</em><dd>This button specifies whether edges are drawn.
+
+     <br><dt><em>BBox</em><dd>This button specifies whether the bounding box is drawn.
+
+     <br><dt><em>Vects</em><dd>This button specifies whether VECT objects are drawn.  VECTs are a type
+of OOGL object that represent points and line segments in 3-space;
+they are distinct from edges of other kinds of objects, and it is sometimes
+desirable to have separate control over whether they are drawn.
+
+     <br><dt><em>Normals</em><dd>This button specifies whether surface normal vectors are drawn.
+
+   </dl>
+
+   <p>The four buttons under <em>Color</em> labeled <em>Faces</em>, <em>Edges</em>,
+<em>Normals</em>, and <em>BBox</em> let you specify the color of
+the corresponding aspect of the target geom.  Clicking on one
+of them brings up a color chooser panel. 
+<div class="float">
+<a name="figcolorchooserpanel"></a><img src="figs/color.png" alt="figs/color.png">
+
+   <p><strong class="float-caption">Figure 3.6: Color Chooser Panel.</strong></p></div>
+This panel offers two sets of sliders: H(ue) S(aturation) V(alue), or
+R(ed) G(reen) B(lue), each in the range 0 through 1.  The square
+shows the current color, which is given numerically in both HSV and RGB systems
+in the corresponding text boxes.
+
+   <p>In the HSV color system, hue H runs from red at 0, green at .333, blue at .667,
+and back to red at 1.0.  Saturation gives the fraction of white mixed
+into the color, from 0 for pure gray to 1 for pure color.  Value gives the
+brightness, from 0 for black to 1 for full brightness.
+
+   <p>Pressing the <em>RGB</em> or <em>HSV</em> button at top center switches
+the sliders to the other color system.  You can adjust colors either via
+the sliders, or by typing in either the RGB or HSV text boxes.
+
+   <p>Click <em>OK</em> to accept the color that you have chosen, or
+<em>Cancel</em> to retain the previous color setting.
+
+   <p>The <em>SHADING</em> browser lets you specify the shading model that
+Geomview uses to paint the target geom.
+
+     <dl>
+<dt><code>Constant</code><dd>Every face of the object is drawn with a constant color which does not
+depend on the location of the face, the camera, or the light sources. 
+If the object does not contain per-face or per-vertex colors, the
+diffuse color of the object's appearance is used.  If the object
+contains per-face colors, they are used.  If the object contains
+per-vertex colors, each face is painted using the color of its first
+vertex.
+
+     <br><dt><code>Flat</code><dd>Each face of the object is drawn with a color that depends on the
+relative location of the face, the camera, and the light sources. 
+The color is constant across the face but may change as the face,
+camera, or lights move.
+
+     <br><dt><code>Smooth</code><dd>Each face of the object is drawn with smoothly interpolated colors based
+on the normal vectors at each vertex.  If the object does not contain
+per-vertex normals, this has the same effect as flat shading.  If the
+object has reasonable per-vertex normals, the effect is to smooth
+over the edges between the faces.
+
+     <br><dt><code>CSmooth</code><dd>Each face of the object is drawn with exactly the specified color(s),
+independent of lighting, orientation, and material properties.  If the
+object is defined with per-vertex colors, the colors are interpolated
+smoothly across the face; otherwise the effect is the same as in
+Constant shading style.
+
+     <br><dt><code>VCflat</code><dd>A combination of <code>CSmooth</code> and <code>Flat</code> shading. So the shading
+is constant on each face, depending on the relative orientation of the
+light sources, the camera and the surface normal of the face.
+
+   </dl>
+
+   <p>The <em>Facing Normals</em> button on the <em>Appearance</em> panel
+indicates whether or not Geomview should arrange that normal vectors
+always face the viewer.  If a normal vector points away from the viewer
+the color of the corresponding face or vertex usually is darker than is
+desired.  Geomview can avoid this by using the opposite normal in
+shading calculations.  This is the default.  Using <em>Facing Normals</em>
+can give strange flickering dark or light shading effects, though, near
+the horizon of a fairly smooth facetted object. 
+Press this button to use the normals given with the object.
+
+   <p>The three text fields in the lower left corner of the <em>Appearance</em>
+panel are:
+
+     <dl>
+<dt><em>Line Width</em><dd>The width, in pixels, for lines drawn by Geomview.
+
+     <br><dt><em>Normal Length</em><dd>This is actually a scale factor; when normal vectors are drawn, Geomview
+draws them to have a length that is their natural length times this
+number.
+
+     <br><dt><em>Patch Dicing</em><dd>Geomview draws Bezier patches by first converting them to meshes.  This
+parameter specifies the resolution of the mesh: if <em>Patch Dicing</em>
+is <var>n</var>, then an <var>n</var> by <var>n</var> mesh is used to draw each Bezier
+patch.  if <em>Patch Dicing</em> is 1, the resolution reverts to a
+built-in default value.
+
+   </dl>
+
+   <p>The <em>Revert</em> button on the <em>Appearance</em> panel undoes all
+settings in the target appearance.  This causes the target geom to
+inherit all its appearance properties from its parent.
+
+   <p>The <em>Appearance</em> panel's <em>Override</em> button determines whether
+appearance controls should override settings in the objects themselves &ndash;
+for example, setting the face color will affect all faces of objects with
+multi-colored facets.  Otherwise, appearance controls only provide settings
+which the objects themselves do not specify. 
+By default, <em>Override</em> is enabled.  This button applies to all objects,
+and to all appearance-related panels.
+
+   <p>Normalization is a kind of scaling; Geomview can scale an object so that
+it fits within a certain region.  The main point of normalization is to
+allow you to easily view all of an object without having to worry about
+how big it is.  We are gradually replacing Geomview's normalization
+feature with more robust camera positioning features.  In general, the
+best way to make sure you are seeing all of an object is to use the
+<em>Look At</em> button on the <em>Tools</em> panel.  Normalization may
+be completely replaced by this and other features in a future version of
+Geomview.
+
+   <p>Normalization is a property that applies to each geom separately.  The
+<em>NORMALIZE GEOMETRY</em> browser affects the normalization property
+of target geom.  If the target geom is "World", it affects all geoms.
+
+     <dl>
+<dt><em>None</em><dd>Do no normalization.
+
+     <br><dt><em>Individual</em><dd>Normalize this geom to fit within a unit sphere.
+
+     <br><dt><em>Sequence</em><dd>This resembles "Individual", except when an object is changing.  Then,
+"Individual" tightly fits the bounding box around the object whenever it
+changes and normalizes accordingly, while "Sequence" normalizes the
+union of all variants of the object and normalizes accordingly.
+
+     <br><dt><em>Keep</em><dd>This leaves the current normalization transform unchanged when the
+object changes.  It may be useful to apply "Individual" or "Sequence"
+normalization to the first version of a changing object to bring
+it in view, then switch to "Keep".
+
+   </dl>
+
+<!--  -->
+   </body></html>
+

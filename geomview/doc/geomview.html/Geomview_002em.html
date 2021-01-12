@@ -1,0 +1,112 @@
+<html lang="en">
+<head>
+<title>Geomview.m - Geomview Manual</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Geomview Manual">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Mathematica.html#Mathematica" title="Mathematica">
+<link rel="prev" href="OOGL_002em.html#OOGL_002em" title="OOGL.m">
+<link rel="next" href="RenderMan.html#RenderMan" title="RenderMan">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Geomview.m"></a>
+<a name="Geomview_002em"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="RenderMan.html#RenderMan">RenderMan</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="OOGL_002em.html#OOGL_002em">OOGL.m</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Mathematica.html#Mathematica">Mathematica</a>
+<hr>
+</div>
+
+<h3 class="section">9.2 Using Geomview as Mathematica's Default 3D Display</h3>
+
+<p>The package <samp><span class="file">Geomview.m</span></samp> arranges for Geomview to be the
+default display program for 3D graphics in Mathematica.  To
+load it, give the command <code>&lt;&lt; Geomview.m</code> to Mathematica. 
+Thereafter, whenever you display 3D graphics with <code>Plot3D</code>
+or <code>Show</code>, Mathematica will send the graphics to Geomview.
+
+   <p>Loading <samp><span class="file">Geomview.m</span></samp> implicitly loads <samp><span class="file">OOGL.m</span></samp> as well, so you
+can use the <code>Geomview</code> and <code>WriteOOGL</code> as described above
+after loading <samp><span class="file">Geomview.m</span></samp>.  You do not have to separately load
+<samp><span class="file">OOGL.m</span></samp>.
+<pre class="example">     % math
+     Mathematica 2.0 for SGI Iris
+     Copyright 1988-91 Wolfram Research, Inc.
+      -- GL graphics initialized --
+     
+     In[1] := &lt;&lt;Geomview.m
+     
+     In[2] := Plot3D[x^2 + y^2, {x, -2, 2}, {y, -2, 2}]
+     
+     Out[2] := -SurfaceGraphics-
+</pre>
+   <p class="noindent">This invokes geomivew and loads the graphics object into it.
+<pre class="example">     In[3] := Plot3D[{x*y + 6, RGBColor[0,x,y]}, {x,0,1}, {y,0,1}]
+     
+     Out[3] := -SurfaceGraphics-
+</pre>
+   <p class="noindent">This replaces the previous Geomview object by the new object.
+<pre class="example">     In[4] := Geomview[{%2,%3}]
+     
+     Out[4] := {-SurfaceGraphics-, -SurfaceGraphics-}
+</pre>
+   <p class="noindent">This displays both objects at once.  You also can have more than one
+Mathematica object at a time on display in Geomview, and have separate
+control over them, by using the <code>Geomview</code> command with a name,
+See <a href="OOGL_002em.html#OOGL_002em">OOGL.m</a>.
+<pre class="example">     In[5] := Graphics3D[ {RGBColor[1,0,0], Line[{ {2,2,2},{1,1,1} }] }]
+     
+     Out[5] := -Graphics3D-
+     
+     In[6] := Geomview["myline", %5]
+</pre>
+   <p class="noindent">This addes the <code>Line</code> specified in <code>In[5]</code> to the existing
+Geomview display.  It can be controlled independently of the
+"Mathematica" object, which is currently the list of two plots.
+<pre class="example">     In[7] := &lt;&lt;GL.m
+</pre>
+   <p class="noindent">If you're on an SGI, loading <code>GL.m</code> returns Mathematica to its
+usual 3D graphics display.  The following
+plot will appear in a normal static Mathematica window.
+<pre class="example">     In[8] := ParametricPlot3D[{Sin[x],Sin[y],Sin[x]*Cos[y]}, {x,0,Pi},{y,0,Pi}]
+     
+     Out[8] := -Graphics3D-
+</pre>
+   <p class="noindent">We can return to Geomview graphics at any time by reloading <samp><span class="file">Geomview.m</span></samp>.
+<pre class="example">     In[9] := &lt;&lt;Geomview.m
+     
+     In[10] := Show[%8]
+     
+     Out[10] := -Graphics3D-
+     
+     In[11] := ParametricPlot3D[
+                {(2*(Cos[u] + u*Sin[u])*Sin[v])/(1 + u^2*Sin[v]^2),
+                (2*(Sin[u] - u*Cos[u])*Sin[v])/(1 + u^2*Sin[v]^2),
+                Log[Tan[v/2]] + (2*Cos[v])/(1 + u^2*Sin[v]^2)},
+               {u,-4,4},{v,.01,Pi-.01}]
+     
+     Out[11] := -Graphics3D-
+</pre>
+   <p>This last plot is Kuen's surface, a surface of constant negative
+curvature.  Parametrization from Alfred Gray's <em>Modern Differential
+Geometry of Curves and Surfaces</em> textbook.
+
+<!-- ================================================================ -->
+   </body></html>
+

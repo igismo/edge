@@ -1,0 +1,2188 @@
+This is ../../doc/geomview, produced by makeinfo version 4.13 from
+../../doc/geomview.texi.
+
+INFO-DIR-SECTION Graphics Applications
+START-INFO-DIR-ENTRY
+* Geomview: (geomview).         The interactive 3D viewing program.
+END-INFO-DIR-ENTRY
+
+
+File: geomview,  Node: ND-color,  Next: ND-xform,  Prev: ND-axes,  Up: GCL Reference
+
+7.2.86 ND-color
+---------------
+
+`(ND-color CAMID'
+     [ (( [ID] (x1 x2 ... xN) v r g b a   v r g b a  ... )
+     ((x1 ... xN)  v r g b a  v r g b a ...) ...)] ) Specifies a
+     function, applied to each N-D vertex, which determines the colors
+     of N-dimensional objects as shown in camera CAMID.  Each coloring
+     function is defined by a vector (in ID's coordinate system) [x1
+     ... xN] and by a sequence of value (v)/color(r g b a) tuples,
+     ordered by increasing v.  The inner product v = P.[x] is linearly
+     interpolated in this table to give a color.  If ID is omitted, the
+     (xi) vector is assumed in universe coordinates.  The ND-color
+     command specifies a list of such functions; each vertex is colored
+     by their sum (so e.g. green intensity could indicate projection
+     along one axis while red indicated another.  An empty list, as in
+     (ND-color CAMID ()), suppresses coloring.  With no second
+     argument, (ND-color CAMID) returns that camera's color-function
+     list.  Even when coloring is enabled, objects tagged with the
+     `keepcolor' appearance attribute are shown in their natural colors.
+
+
+File: geomview,  Node: ND-xform,  Next: ND-xform-get,  Prev: ND-color,  Up: GCL Reference
+
+7.2.87 ND-xform
+---------------
+
+`(ND-xform OBJID [ntransform { idim odim  ... }])'
+     Concatenate the given ND-transform with the current ND-transform
+     of the object (apply the ND-transform to object ID, as opposed to
+     simply setting its ND-transform). Note that ND-transforms have
+     their homogeneous coordinate at index 0, while 3D transform have
+     it at index 3.
+
+
+File: geomview,  Node: ND-xform-get,  Next: ND-xform-set,  Prev: ND-xform,  Up: GCL Reference
+
+7.2.88 ND-xform-get
+-------------------
+
+`(ND-xform-get ID [from-ID])'
+     Returns the N-D transform of the given object in the coordinate
+     system of from-ID (default `universe'), in the sense
+     <point-in-ID-coords> * Transform = <point-in-from-ID-coords>.
+     Note that ND-transforms have their homogeneous coordinate at index
+     0, while 3D transform have it at index 3.
+
+
+File: geomview,  Node: ND-xform-set,  Next: new-alien,  Prev: ND-xform-get,  Up: GCL Reference
+
+7.2.89 ND-xform-set
+-------------------
+
+`(ND-xform-set OBJID [ntransform { idim odim  ... }])'
+     Sets the N-D transform of the given object.  In dimension N, this
+     is an (N+1)x(N+1) matrix, so in that case idim and odim are
+     expected to be both equal to (N+1). Note that all cameras in a
+     camera-cluster have the same N-D transform.  Note that
+     ND-transforms have their homogeneous coordinate at index 0, while
+     3D transform have it at index 3.
+
+
+File: geomview,  Node: new-alien,  Next: new-camera,  Prev: ND-xform-set,  Up: GCL Reference
+
+7.2.90 new-alien
+----------------
+
+`(new-alien name [GEOMETRY])'
+     Create a new alien (geom not in the world) with the given name (a
+     string). GEOMETRY is a string giving an OOGL geometry
+     specification. If GEOMETRY is omitted, the new alien is given an
+     empty geometry.  If an object with that name already exists, the
+     new alien is given a unique name.  The light beams that are used
+     to move around the lights are an example of aliens. They're drawn
+     but are not controllable the way ordinary objects are: they don't
+     appear in the object browser and the user can't move them with the
+     normal motion modes.
+
+
+File: geomview,  Node: new-camera,  Next: new-center,  Prev: new-alien,  Up: GCL Reference
+
+7.2.91 new-camera
+-----------------
+
+`(new-camera name [CAMERA])'
+     Create a new camera with the given name (a string).  If a camera
+     with that name already exists, the new object is given a unique
+     name.  If CAMERA is omitted a default camera is used.
+
+
+File: geomview,  Node: new-center,  Next: new-geometry,  Prev: new-camera,  Up: GCL Reference
+
+7.2.92 new-center
+-----------------
+
+`(new-center [id])'
+     Stop id, then set id's transform to the identity.  Default id is
+     target.  Also, if the id is a camera, calls (look-recenter World
+     id).  The main function of the call to (look-recenter) is to place
+     the camera so that it is pointing parallel to the z axis toward
+     the center of the world.
+
+
+File: geomview,  Node: new-geometry,  Next: new-reset,  Prev: new-center,  Up: GCL Reference
+
+7.2.93 new-geometry
+-------------------
+
+`(new-geometry name [GEOMETRY])'
+     Create a new geom with the given name (a string). GEOMETRY is a
+     string giving an OOGL geometry specification.  If GEOMETRY is
+     omitted, the new object is given an empty geometry.  If an object
+     with that name already exists, the new object is given a unique
+     name.
+
+
+File: geomview,  Node: new-reset,  Next: NeXT,  Prev: new-geometry,  Up: GCL Reference
+
+7.2.94 new-reset
+----------------
+
+`(new-reset)'
+     Equivalent to `(progn (new-center ALLGEOMS)(new-center ALLCAMS))'.
+
+
+File: geomview,  Node: NeXT,  Next: normalization,  Prev: new-reset,  Up: GCL Reference
+
+7.2.95 NeXT
+-----------
+
+`(NeXT)'
+     Returns `t' if running on a NeXT, `nil' if not. A relict from
+     ancient work-station year.
+
+
+File: geomview,  Node: normalization,  Next: not,  Prev: NeXT,  Up: GCL Reference
+
+7.2.96 normalization
+--------------------
+
+`(normalization GEOM-ID {each|none|all|keep})'
+     Set the normalization status of GEOM-ID.
+    `none'
+          suppresses all normalization.
+
+    `each'
+          normalizes the object's bounding box to fit into the unit
+          sphere, with the center of its bounding box translated to the
+          origin.  The box is scaled such that its long diagonal,
+          sqrt((xmax-xmin)^2 + (ymax-ymin)^2 + (zmax-zmin)^2), is 2.
+
+    `all'
+          resembles `each', except when an object is changing (e.g.
+          when its geometry is being changed by an external program).
+          Then, `each' tightly fits the bounding box around the object
+          whenever it changes and normalizes accordingly, while `all'
+          normalizes the union of all variants of the object and
+          normalizes accordingly.
+
+    `keep'
+          leaves the current normalization transform unchanged when the
+          object changes.  It may be useful to apply `each' or `all'
+          normalization apply to the first version of a changing object
+          to bring it in view, then switch to `keep'.
+
+
+File: geomview,  Node: not,  Next: or,  Prev: normalization,  Up: GCL Reference
+
+7.2.97 not
+----------
+
+`(not EXPR)'
+     Evaluates `EXPR'; if `EXPR' returns a non-`nil' value, returns
+     nil, if `EXPR' returns `nil', return `t'.
+
+
+File: geomview,  Node: or,  Next: pick,  Prev: not,  Up: GCL Reference
+
+7.2.98 or
+---------
+
+`(or EXPR1 EXPR2)'
+     Evaluates `EXPR1'; if `EXPR1' returns non-`nil', return its value,
+     if `EXPR1' returns `nil', evaluate `EXPR2' and return its value.
+
+
+File: geomview,  Node: pick,  Next: pick-invisible,  Prev: or,  Up: GCL Reference
+
+7.2.99 pick
+-----------
+
+`(pick COORDSYS GEOMID G V E F P VI EI FI)'
+     The pick command is executed internally in response to pick events
+     (right mouse double click).
+
+    COORDSYS
+          = coordinate system in which coordinates of the following
+          arguments are specified.   This can be:
+         `world'
+               world coord sys
+
+         `self'
+               coord sys of the picked geom (GEOMID)
+
+         `primitive'
+               coord sys of the actual primitive within the picked geom
+               where the pick occurred.
+
+    GEOMID
+          = id of picked geom
+
+    G
+          = picked point (actual intersection of pick ray with object)
+
+    V
+          = picked vertex, if any
+
+    E
+          = picked edge, if any
+
+    F
+          = picked face
+
+    P
+          = path to picked primitive [0 or more]
+
+    VI
+          = index of picked vertex in primitive
+
+    EI
+          = list of indices of endpoints of picked edge, if any
+
+    FI
+          = index of picked face
+
+     External modules can find out about pick events by registering
+     interest in calls to `pick' via the `interest' command.
+
+     In the ND-viewing context the co-ordinates are actually ND-points.
+     They correspond to the 3D points of the pick relative to the
+     sub-space defined by the viewport of the camera where the pick
+     occurred. The co-ordinates are then padded with zeroes and
+     transformed back to the co-ordinate system defined by COORDSYS.
+
+
+File: geomview,  Node: pick-invisible,  Next: pickable,  Prev: pick,  Up: GCL Reference
+
+7.2.100 pick-invisible
+----------------------
+
+`(pick-invisible [yes|no])'
+     Selects whether picks should be sensitive to objects whose
+     appearance makes them invisible; default yes.  With no arguments,
+     returns current status.
+
+
+File: geomview,  Node: pickable,  Next: position,  Prev: pick-invisible,  Up: GCL Reference
+
+7.2.101 pickable
+----------------
+
+`(pickable GEOM-ID {yes|no})'
+     Say whether or not GEOM-ID is included in the pool of objects that
+     could be returned from the pick command.
+
+
+File: geomview,  Node: position,  Next: position-at,  Prev: pickable,  Up: GCL Reference
+
+7.2.102 position
+----------------
+
+`(position objectID otherID)'
+     Set the transform of objectID to that of otherID.
+
+
+File: geomview,  Node: position-at,  Next: position-toward,  Prev: position,  Up: GCL Reference
+
+7.2.103 position-at
+-------------------
+
+`(position-at objectID otherID [center | origin])'
+     Translate objectID to the center of the bounding box or the origin
+     of the coordinate system of otherID (parallel translation).
+     Default is center.
+
+
+File: geomview,  Node: position-toward,  Next: process-events,  Prev: position-at,  Up: GCL Reference
+
+7.2.104 position-toward
+-----------------------
+
+`(position-toward objectID otherID [center | origin])'
+     Rotate objectID so that the center of the bounding box or the
+     origin of the coordinate system of the otherID lies on the
+     positive z-axis of the first object.  Default is the center of the
+     bounding box.
+
+
+File: geomview,  Node: process-events,  Next: progn,  Prev: position-toward,  Up: GCL Reference
+
+7.2.105 process-events
+----------------------
+
+`(process-events)'
+     Pass control back to the event loop of Geomview, then continue
+     evaluating the current command-script. If the current input stream
+     has been put to sleep by one of the `(sleep-...)' commands, then
+     the control remains by the main-loop until the current input
+     streams "sleep" is over.  *Note `(sleep-until ...)': sleep-until.
+     *Note `(sleep-for ...)': sleep-for.
+
+
+File: geomview,  Node: progn,  Next: quit,  Prev: process-events,  Up: GCL Reference
+
+7.2.106 progn
+-------------
+
+`(progn STATEMENT [ ... ])'
+     evaluates each STATEMENT in order and returns the value of the
+     last one.  Use progn to group a collection of commands together,
+     forcing them to be treated as a single command.
+
+
+File: geomview,  Node: quit,  Next: quote,  Prev: progn,  Up: GCL Reference
+
+7.2.107 quit
+------------
+
+`(quit)'
+     `quit' is a synonym for *note `exit': exit.
+
+
+File: geomview,  Node: quote,  Next: rawevent,  Prev: quit,  Up: GCL Reference
+
+7.2.108 quote
+-------------
+
+`(quote EXPR)'
+     returns the symbolic lisp expression EXPR without evaluating it.
+     Note, however, that `quote' parses EXPR as if it should be
+     evaluated. *Note `(eval ...)': eval.
+
+
+File: geomview,  Node: rawevent,  Next: rawpick,  Prev: quote,  Up: GCL Reference
+
+7.2.109 rawevent
+----------------
+
+`(rawevent dev val x y t)'
+     Enter the specified raw event into the event queue.  The arguments
+     directly specify the members of the event structure used
+     internally by geomview.  This is the lowest level event handler
+     and is not intended for general use.
+
+
+File: geomview,  Node: rawpick,  Next: read,  Prev: rawevent,  Up: GCL Reference
+
+7.2.110 rawpick
+---------------
+
+`(rawpick CAMID X Y)'
+     Process a pick event in camera CAMID at location (X,Y) given in
+     integer pixel coordinates.  This is a low-level procedure not
+     intended for external use.
+
+
+File: geomview,  Node: read,  Next: real-id,  Prev: rawpick,  Up: GCL Reference
+
+7.2.111 read
+------------
+
+`(read {geometry|camera|appearance|image|ntransform|transform|command} {GEOMETRY or CAMERA or ...})'
+     Read and interpret the text in ... as containing the given type of
+     data.  Useful for defining objects using OOGL reference syntax,
+     e.g.
+          (geometry  thing { INST  transform : T    geom : fred })
+          (read  geometry  { define fred
+             QUAD
+             1 0 0  0 1 0  0 0 1  1 0 0
+          })
+          (read  transform { define T <myfile})
+     *Note References::. *Note `(hdefine ...)': hdefine. *Note
+     `(hdelete ...)': hdelete.
+
+
+File: geomview,  Node: real-id,  Next: redraw,  Prev: read,  Up: GCL Reference
+
+7.2.112 real-id
+---------------
+
+`(real-id ID)'
+     Returns a string canonically identifying the given ID, or `nil' if
+     the object does not exist.  Examples:  (if (real-id fred) (delete
+     fred)) deletes `fred' if it exists but reports no error if it
+     doesn't, and  (if (= (real-id targetgeom) (real-id World)) ()
+     (delete targetgeom)) deletes `targetgeom' if it is different from
+     the World.
+
+
+File: geomview,  Node: redraw,  Next: regtable,  Prev: real-id,  Up: GCL Reference
+
+7.2.113 redraw
+--------------
+
+`(redraw CAM-ID)'
+     States that the view in CAM-ID should be redrawn on the next pass
+     through the main loop or the next invocation of `draw'.
+
+
+File: geomview,  Node: regtable,  Next: rehash-emodule-path,  Prev: redraw,  Up: GCL Reference
+
+7.2.114 regtable
+----------------
+
+`(regtable)'
+     shows the registry table
+
+
+File: geomview,  Node: rehash-emodule-path,  Next: replace-geometry,  Prev: regtable,  Up: GCL Reference
+
+7.2.115 rehash-emodule-path
+---------------------------
+
+`(rehash-emodule-path)'
+     Rebuilds the application (external module) browser by reading all
+     .geomview-* files in all directories on the emodule-path.
+     Primarily intended for internal use; any applications defined by
+     `(emodule-define ...)' commands outside of the .geomview-* files on
+     the emodule-path will be lost.  Does not sort the entries in the
+     brower. *Note `(emodule-sort)': emodule-sort.  *Note
+     `(emodule-define ...)': emodule-define.
+
+
+File: geomview,  Node: replace-geometry,  Next: rib-display,  Prev: rehash-emodule-path,  Up: GCL Reference
+
+7.2.116 replace-geometry
+------------------------
+
+`(replace-geometry GEOM-ID PART-SPECIFICATION GEOMETRY)'
+     Replace a part of the geometry for GEOM-ID.
+
+
+File: geomview,  Node: rib-display,  Next: rib-snapshot,  Prev: replace-geometry,  Up: GCL Reference
+
+7.2.117 rib-display
+-------------------
+
+`(rib-display [frame|tiff] FILEPREFIX)'
+     Set Renderman display to framebuffer (popup screen window) or a
+     TIFF format disk file. FILEPREFIX is used to construct names of
+     the form `prefixNNNN.suffix'. (i.e. foo0000.rib) The number is
+     incremented on every call to `rib-snapshot' and reset to 0000 when
+     `rib-display' is called. TIFF files are given the same prefix and
+     number as the RIB file (i.e. foo0004.rib generates foo0004.tiff).
+     The default FILEPREFIX is `geom' and the default format is TIFF.
+     (Note that geomview just generates a RIB file, which must then be
+     rendered.)
+
+
+File: geomview,  Node: rib-snapshot,  Next: scale,  Prev: rib-display,  Up: GCL Reference
+
+7.2.118 rib-snapshot
+--------------------
+
+`(rib-snapshot CAM-ID [filename])'
+     Write Renderman snapshot (in RIB format) of CAM-ID to <filename>.
+     If no filename specified, see *note `(rib-display ...':
+     rib-display. for an explanation of the filename used.
+
+
+File: geomview,  Node: scale,  Next: scene,  Prev: rib-snapshot,  Up: GCL Reference
+
+7.2.119 scale
+-------------
+
+`(scale GEOM-ID FACTOR [FACTORY FACTORZ])'
+     Scale GEOM-ID, multiplying its size by FACTOR.  The factors should
+     be positive numbers.  If FACTORY and FACTORZ are present and
+     non-zero, the object is scaled by FACTOR in x, by FACTORY in y,
+     and by FACTORZ in z.  If only FACTOR is present, the object is
+     scaled by FACTOR in x, y, and z.  Scaling only really makes sense
+     in Euclidean space.  Mouse-driven scaling in other spaces is not
+     allowed;  the scale command may be issued in other spaces but
+     should be used with caution because it may cause the data to
+     extend beyond the limits of the space.
+
+
+File: geomview,  Node: scene,  Next: set-clock,  Prev: scale,  Up: GCL Reference
+
+7.2.120 scene
+-------------
+
+`(scene CAM-ID [GEOMETRY])'
+     Make CAM-ID look at GEOMETRY instead of at the universe.
+
+
+File: geomview,  Node: set-clock,  Next: set-conformal-refine,  Prev: scene,  Up: GCL Reference
+
+7.2.121 set-clock
+-----------------
+
+`(set-clock TIME)'
+     Adjusts the clock for this command stream to read TIME (in
+     seconds) as of the moment the command is received. *Note
+     `(sleep-until ...)': sleep-until. *Note `(clock ...)': clock.
+
+
+File: geomview,  Node: set-conformal-refine,  Next: set-emodule-path,  Prev: set-clock,  Up: GCL Reference
+
+7.2.122 set-conformal-refine
+----------------------------
+
+`(set-conformal-refine CMX [N [SHOWEDGES]])'
+     Sets the parameters for the refinement algorithm used in drawing
+     in the conformal model.  CMX is the cosine of the maximum angle an
+     edge can bend before it is refined.  Its value should be between
+     -1 and 1; the default is 0.95; decreasing its value will cause less
+     refinement.  N is the maximum number of iterations of refining;
+     the default is 6.  SHOWEDGES, which should be `no' or `yes',
+     determines whether interior edges in the refinement are drawn.
+
+
+File: geomview,  Node: set-emodule-path,  Next: set-load-path,  Prev: set-conformal-refine,  Up: GCL Reference
+
+7.2.123 set-emodule-path
+------------------------
+
+`(set-emodule-path (PATH1 ... PATHN))'
+     Sets the search path for external modules.  The PATHi should be
+     pathnames of directories containing, for each module, the module's
+     executable file and a .geomview-<modulename> file which contains
+     an (emodule-define ...) command for that module.  This command
+     implicitly calls (rehash-emodule-path) to rebuild the application
+     browser from the new path setting.  The special directory name `+'
+     is replaced by the existing path, so e.g. (set-emodule-path (mydir
+     +)) prepends mydir to the path.
+
+
+File: geomview,  Node: set-load-path,  Next: set-motionscale,  Prev: set-emodule-path,  Up: GCL Reference
+
+7.2.124 set-load-path
+---------------------
+
+`(set-load-path (PATH1 ... PATHN))'
+     Sets search path for command, geometry, files, etc.  The PATHi are
+     strings giving the pathnames of directories to be searched.  The
+     special directory name `+' is replaced by the existing path, so
+     e.g. (set-load-path (mydir +)) prepends mydir to the path.
+
+
+File: geomview,  Node: set-motionscale,  Next: setenv,  Prev: set-load-path,  Up: GCL Reference
+
+7.2.125 set-motionscale
+-----------------------
+
+`(set-motionscale X)'
+     Set the motion scale factor to X (default value 0.5).  These
+     commands scale their motion by an amount which depends on the
+     distance from the frame to the center and on the size of the
+     frame.  Specifically, they scale by         dist + scaleof(frame)
+     * motionscale where dist is the distance from the center to the
+     frame and motionscale is the motion scale factor set by this
+     function.  Scaleof(frame) measures the size of the frame object.
+
+
+File: geomview,  Node: setenv,  Next: setq,  Prev: set-motionscale,  Up: GCL Reference
+
+7.2.126 setenv
+--------------
+
+`(setenv name string)'
+     sets the environment variable `name' to the value STRING; the name
+     is visible to geomview (as in pathnames containing `$name') and to
+     processes it creates, e.g. external modules.
+
+
+File: geomview,  Node: setq,  Next: sgi,  Prev: setenv,  Up: GCL Reference
+
+7.2.127 setq
+------------
+
+`(setq SYM EXPR)'
+     Bind the symbol SYM to the value of EXPR. SYM must be an
+     unqualified symbol, i.e. not quoted, and literal: `(setq "foo"
+     bar)' will not work. Likewise `(setq (bar STUFF) foo)' will also
+     not work, even if `(bar ...)' would evaluate to an unqualified
+     symbol: varible names must be literals.  Note that calling `(setq
+     SYM ...)' will alter the value of SYM within the current
+     name-space: if SYM, e.g., is bound as local variable by a lambda,
+     let or defun expression, then `(setq SYM ...)' will change the
+     value of the local variable, the global binding will remain
+     unchanged.  It is NOT possible to un-bind a symbol. However,
+     subsequent `(setq SYM ...)' invocations will re-bind SYM to
+     another value and free the lisp-object previously bound to SYM.
+     *Note `(lambda ...)': lambda.  *Note `(defun ...)': defun.  *Note
+     `(let ...)': let.
+
+
+File: geomview,  Node: sgi,  Next: shell,  Prev: setq,  Up: GCL Reference
+
+7.2.128 sgi
+-----------
+
+`(sgi)'
+     Returns `t' if running on an sgi machine, `nil' if not. A relict
+     from the old work-station years.
+
+
+File: geomview,  Node: shell,  Next: sleep-for,  Prev: sgi,  Up: GCL Reference
+
+7.2.129 shell
+-------------
+
+`(shell SHELL-COMMAND)'
+     Execute the given UNIX SHELL-COMMAND using /bin/sh.  Geomview
+     waits for it to complete and will be unresponsive until it does.
+     A synonym is `!'.
+
+
+File: geomview,  Node: sleep-for,  Next: sleep-until,  Prev: shell,  Up: GCL Reference
+
+7.2.130 sleep-for
+-----------------
+
+`(sleep-for TIME)'
+     Suspend reading commands from this stream for TIME seconds.
+     Commands already read will still be executed; `sleep-for' inside
+     `progn' won't delay execution of the rest of the progn's contents.
+
+
+File: geomview,  Node: sleep-until,  Next: snapshot,  Prev: sleep-for,  Up: GCL Reference
+
+7.2.131 sleep-until
+-------------------
+
+`(sleep-until TIME)'
+     Suspend reading commands from this stream until TIME (in seconds).
+     Commands already read will still be executed; `sleep-until' inside
+     `progn' won't delay execution of the rest of the progn's contents.
+     Time is measured according to this stream's clock, as set by
+     `set-clock'; if never set, the first sleep-until sets it to 0 (so
+     initially (sleep-until TIME) is the same as (sleep-for TIME)).
+     Returns the number of seconds until TIME.
+
+
+File: geomview,  Node: snapshot,  Next: soft-shader,  Prev: sleep-until,  Up: GCL Reference
+
+7.2.132 snapshot
+----------------
+
+`(snapshot CAM-ID FILENAME [FORMAT [XSIZE [YSIZE]]])'
+     Save a snapshot of CAM-ID in the FILENAME (a string). The FORMAT
+     argument is optional; it may be "ppmscreen" (the default), "ps",
+     "ppm", "sgi" (on SGI machines), "ppmosmesa" (if built with
+     libOSMesa) or "ppmosglx". A "ppmscreen" snapshot is created by
+     reading the image directly from the given window; the window is
+     popped above other windows and redrawn first, then its contents
+     are written as a PPM format image. A "ppmosmesa" snapshot is drawn
+     by Mesa's software renderer into a memory buffer in RAM. A
+     "ppmosglx" snapshot is rendered into a GLX Pixmap buffer, which is
+     also off-screen but may or may not reside in video RAM.  Rendering
+     may or may not be accelerated. The problem with on-screen
+     snapshots is that the window must be mapped and not obscured by
+     other windows. So on-screen snapshots will not work in the
+     background, or when a screen saver is active. With "ps", dumps a
+     Postscript picture representing the view from that window;
+     hidden-surface removal might be incorrect. With "ppm", dumps a
+     PPM-format image produced by geomview's internal software
+     renderer; this may be of arbitrary size. If the FILENAME argument
+     begins with "|", it's interpreted as a `/bin/sh' command to which
+     the PPM or PS data should be piped. Optional XSIZE and YSIZE
+     values are relevant only for "ppm" formats, and render to a window
+     of that size (or scaled to that size, with aspect fixed, if only
+     XSIZE is given)
+
+
+File: geomview,  Node: soft-shader,  Next: space,  Prev: snapshot,  Up: GCL Reference
+
+7.2.133 soft-shader
+-------------------
+
+`(soft-shader CAM-ID {on|off|toggle})'
+     Select whether to use software or hardware shading in that camera.
+
+
+File: geomview,  Node: space,  Next: stereowin,  Prev: soft-shader,  Up: GCL Reference
+
+7.2.134 space
+-------------
+
+`(space {euclidean|hyperbolic|spherical})'
+     Set the space associated with the world.
+
+
+File: geomview,  Node: stereowin,  Next: time-interests,  Prev: space,  Up: GCL Reference
+
+7.2.135 stereowin
+-----------------
+
+`(stereowin CAM-ID [no|horizontal|vertical|colored] [gapsize])'
+     Configure CAM-ID as a stereo window.  no: entire window is a
+     single pane, stereo disabled
+     horizontal: split left/right: left is stereo eye#0, right is #1.
+     vertical: split top/bottom: bottom is eye#0, top is #1.
+     colored: panes overlap, red is stereo eye#0, cyan is #1.
+
+     A gap of `gapsize' pixels is left between subwindows; if omitted,
+     subwindows are adjacent.  If both layout and gapsize are omitted,
+     e.g. (stereowin CAM-ID), returns current settings as a `(stereowin
+     ...)' command list.  This command doesn't set stereo projection;
+     use `merge camera' or `camera' to set the stereyes transforms, and
+     `merge window' or `window' to set the pixel aspect ratio & window
+     position if needed.
+
+
+File: geomview,  Node: time-interests,  Next: transform,  Prev: stereowin,  Up: GCL Reference
+
+7.2.136 time-interests
+----------------------
+
+`(time-interests deltatime initial prefix [suffix])'
+     Indicates that all interest-related messages, when separated by at
+     least `deltatime' seconds of real time, should be preceded by the
+     string `prefix' and followed by `suffix'; the first message is
+     preceded by `initial'.  All three are printf format strings, whose
+     argument is the current clock time (in seconds) on that stream.  A
+     `deltatime' of zero timestamps every message.  Typical usage:
+     (time-interests .1 `(set-clock %g)' `(sleep-until %g)')  or
+     (time-interests .1 `(set-clock %g)'         "(sleep-until %g)
+     (progn (set-clock %g)" ")")    or
+     (time-interests .1 "(set-clock %g)"                    "(if (> 0
+     (sleep-until %g)) (" "))".
+
+
+File: geomview,  Node: transform,  Next: transform-incr,  Prev: time-interests,  Up: GCL Reference
+
+7.2.137 transform
+-----------------
+
+`(transform objectID centerID frameID [rotate|translate|translate-scaled|scale] x y z [dt [`smooth']])'
+     Apply a motion (rotation, translation, scaling) to object
+     `objectID'; that is, construct and concatenate a transformation
+     matrix with objectID's transform The 3 IDs involved are the object
+     that moves, the center of motion, and the frame of reference in
+     which to apply the motion.  The center is easiest understood for
+     rotations: if centerID is the same as objectID then it will spin
+     around its own axes; otherwise the moving object will orbit the
+     center object. There is the special keyword `bbox-center' which
+     may be used for `centerID'. As a result the motion will be
+     relative to the center of the bounding box of `objectID'. Normally
+     frameID, in whose coordinate system the (mouse) motions are
+     interpreted, is `focus', the current camera.  Translations can be
+     scaled proportional to the distance between the target and the
+     center. Support for spherical and hyperbolic as well as Euclidean
+     space is built-in: use the `space' command to change spaces.  With
+     type `rotate' x, y, and z are floats specifying angles in RADIANS.
+     For types `translate' and `translate-scaled' x, y, and z are
+     floats specifying distances in the coordinate system of the center
+     object.
+
+     The optional `dt' field allows a simple form of animation; if
+     present, the object moves by just that amount during approximately
+     `dt' seconds, then stops.  If present and followed by the `smooth'
+     keyword, the motion is animated with a 3t^2-2t^3 function, so as
+     to start and stop smoothly.  If absent, the motion is applied
+     immediately.
+
+
+File: geomview,  Node: transform-incr,  Next: transform-set,  Prev: transform,  Up: GCL Reference
+
+7.2.138 transform-incr
+----------------------
+
+`(transform-incr objectID centerID frameID [rotate|translate|translate-scaled|scale] x y z [origin|bbox-center] [dt [smooth]])'
+     Apply continuing motion: construct a transformation matrix and
+     concatenate it with the current transform of objectID every
+     refresh (sets objectID's incremental transform). Same syntax as
+     transform.  If optional `dt' argument is present, the object is
+     moved at each time step such that its average motion equals one
+     instance of the motion per `dt' seconds.  E.g.    (transform-incr
+     World World World  rotate  6.28318 0 0  10.0) rotates the World
+     about its X axis at 1 turn (2pi radians) per 10 seconds.
+
+
+File: geomview,  Node: transform-set,  Next: truncate,  Prev: transform-incr,  Up: GCL Reference
+
+7.2.139 transform-set
+---------------------
+
+`(transform-set objectID centerID frameID [rotate|translate|translate-scaled|scale] x y z [origin|bbox-center])'
+     Set objectID's transform to the constructed transform.  Same
+     syntax as transform.
+
+
+File: geomview,  Node: truncate,  Next: ui-cam-focus,  Prev: transform-set,  Up: GCL Reference
+
+7.2.140 truncate
+----------------
+
+`(truncate EXPR)'
+     Rounds EXPR towards zero.
+
+
+File: geomview,  Node: ui-cam-focus,  Next: ui-center,  Prev: truncate,  Up: GCL Reference
+
+7.2.141 ui-cam-focus
+--------------------
+
+`(ui-cam-focus [focus-change|mouse-cross])'
+     Set the focus policy for the camera windows. The default is
+     `mouse-cross': a camera is made the active camera (for interactive
+     mouse events) when the mouse cursor crosses the window. Because
+     this means it can become complicated to activate a specific camera
+     (in the context of multiple camera windows) there is also the
+     option to only change the camera focus when the window-manager
+     decides to give it the focus for input events. So, after
+     specifying `focus-change' it depends on the focus-change
+     configuration of your window-manager when a camera becomes the
+     active camera for mouse-interaction. To change this behaviour
+     permanently you could, e.g., place the following line in your
+     `${HOME}/.geomview' file (*note Customization::):
+
+          (progn
+            (ui-cam-focus focus-change)
+            ... # other stuff
+          )
+
+
+File: geomview,  Node: ui-center,  Next: ui-center-origin,  Prev: ui-cam-focus,  Up: GCL Reference
+
+7.2.142 ui-center
+-----------------
+
+`(ui-center ID)'
+     Set the center for user interface (i.e. mouse) controlled motions
+     to object ID.
+
+
+File: geomview,  Node: ui-center-origin,  Next: ui-emotion-program,  Prev: ui-center,  Up: GCL Reference
+
+7.2.143 ui-center-origin
+------------------------
+
+`(ui-center-origin [origin|bbox-center])'
+     Set the origin of the coordinate system of the `CENTER' object for
+     user interface (i.e. mouse) controlled motions.  The keyword
+     `origin' means to use the origin of the coordinate system of the
+     currently selected object, while `bbox-center' means to use the
+     center of the bounding box of the current object.  The keyword
+     `bbox-center' makes no sense if the geometry is non-Euclidean.
+     Using either `bbox-center' or `origin' does not make a difference
+     if the center object is not a _geometry_, e.g. if it is a camera.
+     Same holds if the World is the currently selected object.
+
+
+File: geomview,  Node: ui-emotion-program,  Next: ui-emotion-run,  Prev: ui-center-origin,  Up: GCL Reference
+
+7.2.144 ui-emotion-program
+--------------------------
+
+`(ui-emotion-program PROGRAM)'
+     This is an obsolete command.  Use its new eqivalent *note
+     `emodule-define': emodule-define. instead.
+
+
+File: geomview,  Node: ui-emotion-run,  Next: ui-freeze,  Prev: ui-emotion-program,  Up: GCL Reference
+
+7.2.145 ui-emotion-run
+----------------------
+
+`(ui-emotion-run EMODULE)'
+     This is an obsolete command.  Use its new eqivalent *note
+     `emodule_start': emodule-start. instead.
+
+
+File: geomview,  Node: ui-freeze,  Next: ui-html-browser,  Prev: ui-emotion-run,  Up: GCL Reference
+
+7.2.146 ui-freeze
+-----------------
+
+`(ui-freeze {on|off})'
+     Toggle updating user interface panels. Off by default.
+
+
+File: geomview,  Node: ui-html-browser,  Next: ui-motion,  Prev: ui-freeze,  Up: GCL Reference
+
+7.2.147 ui-html-browser
+-----------------------
+
+`(ui-html-browser BROWSER)'
+     Use BROWSER for viewing the HTML-version of the manual when the
+     `Manual (HTML)' menu item is selected in the `Help'-menu.  If the
+     `(ui-html-browser ...)' command was never executed, then the
+     default is to use the browser stored in the `WEBBROWSER'
+     environment variable. If the environment variable is unset then the
+     default is compile-time dependent.
+
+
+File: geomview,  Node: ui-motion,  Next: ui-panel,  Prev: ui-html-browser,  Up: GCL Reference
+
+7.2.148 ui-motion
+-----------------
+
+`(ui-motion {inertia|constrain|own-coordinates} {on|off})'
+     Enable or disable certain properties of mouse-controlled motion.
+     The purpose of this command is to give access to the respective
+     toggles of the _Main_ panel's _Motion_ menu through GCL commands.
+     *Note Mouse Motions::.
+
+    `inertia'
+          Normally, moving objects have inertia: if the mouse is still
+          moving when the button is released, the selected object
+          continues to move. When `inertia' is off, objects cease to
+          move as soon as you release the mouse.
+
+    `constrain'
+          It's sometimes handy to move an object in a direction aligned
+          with a coordinate axis: exactly horizontally or vertically.
+          Calling `(ui-motion constrain on)' changes the interpretation
+          of mouse motions to allow this; approximately-horizontal or
+          approximately-vertical mouse dragging becomes exactly
+          horizontal or vertical motion. Note that the motion is still
+          along the X or Y axes of the camera in which you move the
+          mouse, not necessarily the object's own coordinate system.
+
+    `own-coordinates'
+          It's sometimes handy to move objects with respect to the
+          coordinate system where they were defined, rather than with
+          respect to some camera's view. When `(ui-motion
+          own-coordinates on)' has been called, all motions are
+          interpreted that way: dragging the mouse rightward in
+          translate mode moves the object in its own +X direction, and
+          so on. May be especially useful in conjunction with the
+          `(ui-motion constrain on)' command.
+
+
+
+File: geomview,  Node: ui-panel,  Next: ui-pdf-viewer,  Prev: ui-motion,  Up: GCL Reference
+
+7.2.149 ui-panel
+----------------
+
+`(ui-panel PANELNAME {on|off} [WINDOW])'
+     Do or don't display the given user-interface panel.  Case is
+     ignored in panel names. Current PANELNAMES are:
+    geomview
+          main panel
+
+    tools
+          motion controls
+
+    appearance
+          appearance controls
+
+    cameras
+          camera controls
+
+    lighting
+          lighting controls
+
+    obscure
+          obscure controls (doesn't seem to exist any more)
+
+    materials
+          material properties controls
+
+    command
+          command entry box
+
+    credits
+          geomview credits
+     By default, the `geomview' and `tools' panels appear when geomview
+     starts.  If the optional Window is supplied, a `position' clause
+     (e.g. (ui-panel obscure on { position xmin xmax ymin ymax }) sets
+     the panel's default position.  (Only xmin and ymin values are
+     actually used.)  A present but empty Window, e.g.  `(ui-panel
+     obscure on {')} causes interactive positioning.
+
+
+File: geomview,  Node: ui-pdf-viewer,  Next: ui-target,  Prev: ui-panel,  Up: GCL Reference
+
+7.2.150 ui-pdf-viewer
+---------------------
+
+`(ui-pdf-viewer VIEWER)'
+     Use the executable VIEWER for viewing the PDF-version of the
+     manual when the `Manual (PDF)' menu-item is selected in the
+     `Help'-menu.  If the `(ui-pdf-viewer ...)' command was never
+     executed, then the default is to use the browser stored in the
+     `PDFVIEWER' environment variable. If the environment variable is
+     unset then the default is compile-time dependent.
+
+
+File: geomview,  Node: ui-target,  Next: uninterest,  Prev: ui-pdf-viewer,  Up: GCL Reference
+
+7.2.151 ui-target
+-----------------
+
+`(ui-target ID [yes|no])'
+     Set the target of user actions (the selected line of the target
+     object browser) to ID.  The second argument specifies whether to
+     make ID the current object regardless of its type.  If `no', then
+     ID becomes the current object of its type (geom or camera).  The
+     default is `yes'.  This command may result in a change of motion
+     modes based on target choice.
+
+
+File: geomview,  Node: uninterest,  Next: update,  Prev: ui-target,  Up: GCL Reference
+
+7.2.152 uninterest
+------------------
+
+`(uninterest (COMMAND [args]))'
+     Undoes the effect of an `interest' command.  (COMMAND [args]) must
+     be identical to those used in the *note `interest': interest.
+     command.
+
+
+File: geomview,  Node: update,  Next: update-draw,  Prev: uninterest,  Up: GCL Reference
+
+7.2.153 update
+--------------
+
+`(update [timestep_in_seconds])'
+     Apply each incremental motion once.  Uses timestep if it's present
+     and nonzero; otherwise motions are proportional to elapsed real
+     time.
+
+
+File: geomview,  Node: update-draw,  Next: while,  Prev: update,  Up: GCL Reference
+
+7.2.154 update-draw
+-------------------
+
+`(update-draw CAM-ID  [timestep_in_seconds])'
+     Apply each incremental motion once and then draw CAM-ID.  Applies
+     `timestep' seconds' worth of motion, or uses elapsed real time if
+     `timestep' is absent or zero.
+
+
+File: geomview,  Node: while,  Next: window,  Prev: update-draw,  Up: GCL Reference
+
+7.2.155 while
+-------------
+
+`(while TEST BODY)'
+     Iterate: _evaluate TEST, if non nil, evaluate BODY_.
+
+
+File: geomview,  Node: window,  Next: winenter,  Prev: while,  Up: GCL Reference
+
+7.2.156 window
+--------------
+
+`(window CAM-ID WINDOW)'
+     Specify attributes for the window of CAM-ID, e.g. its size or
+     initial position, in the OOGL Window syntax.  The special CAM-ID
+     `default' specifies properties of future windows (created by *note
+     `camera': camera. or *note `new-camera': new-camera.).
+
+
+File: geomview,  Node: winenter,  Next: write,  Prev: window,  Up: GCL Reference
+
+7.2.157 winenter
+----------------
+
+`(winenter CAM-ID)'
+     Tell geomview that the mouse cursor is in the window of CAM-ID.
+     This function is for development purposes and is not intended for
+     general use.
+
+
+File: geomview,  Node: write,  Next: write-comments,  Prev: winenter,  Up: GCL Reference
+
+7.2.158 write
+-------------
+
+`(write {command|geometry|camera|transform|ntransform|window|bbox} FILENAME [ID|(ID ...)] [self|world|universe|otherID])'
+     write description of ID in given format to FILENAME.  Last
+     parameter chooses coordinate system for geometry & transform:
+     self: just the object, no transformation or appearance (geometry
+     only) world: the object as positioned within the World.  universe:
+     object's position in universal coordinates; includes Worldtransform
+     other ID: the object transformed to otherID's coordinate system.
+
+     A filename of `-' is a special case: data are written to the stream
+     from which the 'write' command was read.  For external modules,
+     the data are sent to the module's standard input.  For commands
+     not read from an external program, `-' means geomview's standard
+     output (*note `(command ...)': command.).
+
+     The ID can either be a single id or a parenthesized list of ids,
+     like `g0' or `(g2 g1 dodec.off)'.
+
+
+File: geomview,  Node: write-comments,  Next: write-handle,  Prev: write,  Up: GCL Reference
+
+7.2.159 write-comments
+----------------------
+
+`(write-comments FILENAME GEOMID PICKPATH)'
+     write OOGL COMMENT objects in the GEOMID hierarchy at the level of
+     the pick path to FILENAME. Specifically, COMMENTS at level (a b c
+     ... f g) will match pick paths of the form (a b c ... f *) where *
+     includes any value of g, and also any values of possible further
+     indices h,i,j, etc. The pick path (returned in the `pick' command)
+     is a list of integer counters specifying a subpart of a
+     hierarchical OOGL object. Descent into a complex object (LIST or
+     INST) adds a new integer to the path. Traversal of simple objects
+     increments the counter at the current level.  Individual COMMENTS
+     are enclosed by curly braces, and the entire string of zero, one,
+     or more COMMENTS (written in the order in which they are
+     encountered during hierarchy traversal) is enclosed by parentheses.
+
+     Note that arbitrary data can only be passed through the OOGL
+     libraries as full-fledged OOGL COMMENT objects, which can be
+     attached to other OOGL objects via the LIST type as described
+     above. Ordinary comments in OOGL files (i.e. everything after '#'
+     on a line) are ignored at when the file is loaded and cannot be
+     returned.
+
+
+File: geomview,  Node: write-handle,  Next: write-sexpr,  Prev: write-comments,  Up: GCL Reference
+
+7.2.160 write-handle
+--------------------
+
+`(write-handle PREFIX FILENAME HANDLE)'
+     Writes the object underlying the given handle to FILENAME. This
+     function is intended for internal debugging use only.
+
+
+File: geomview,  Node: write-sexpr,  Next: xform,  Prev: write-handle,  Up: GCL Reference
+
+7.2.161 write-sexpr
+-------------------
+
+`(write-sexpr FILENAME LISPOBJECT)'
+     Writes the given LISPOBJECT to FILENAME. This function is intended
+     for internal debugging use only.
+
+
+File: geomview,  Node: xform,  Next: xform-incr,  Prev: write-sexpr,  Up: GCL Reference
+
+7.2.162 xform
+-------------
+
+`(xform ID TRANSFORM)'
+     Concatenate TRANSFORM with the current transform of the object
+     (apply TRANSFORM to object ID).
+
+
+File: geomview,  Node: xform-incr,  Next: xform-set,  Prev: xform,  Up: GCL Reference
+
+7.2.163 xform-incr
+------------------
+
+`(xform-incr ID TRANSFORM)'
+     Apply continual motion: concatenate TRANSFORM with the current
+     transform of the object every refresh (set object ID's incremental
+     transform to TRANSFORM).
+
+
+File: geomview,  Node: xform-set,  Next: zoom,  Prev: xform-incr,  Up: GCL Reference
+
+7.2.164 xform-set
+-----------------
+
+`(xform-set ID TRANSFORM)'
+     Overwrite the current object transform with TRANSFORM (set object
+     ID's transform to TRANSFORM).
+
+
+File: geomview,  Node: zoom,  Prev: xform-set,  Up: GCL Reference
+
+7.2.165 zoom
+------------
+
+`(zoom CAM-ID FACTOR)'
+     Zoom CAM-ID, multiplying its field of view by FACTOR.  FACTOR
+     should be a positive number.
+
+
+File: geomview,  Node: Non-Euclidean Geometry,  Next: Mathematica,  Prev: GCL,  Up: Top
+
+8 Non-Euclidean Geometry
+************************
+
+Geomview supports hyperbolic and spherical geometry as well as
+Euclidean geometry.  The three buttons at the bottom of the _Main_
+panel are for setting the current geometry type.
+
+   In each of the three geometries, three models are supported:
+_Virtual_, _Projective_, and _Conformal_.  You can change the current
+model with the _Model_ browser on the _Camera_ panel.  Each Geomview
+camera has its own model setting.
+
+   The default model is all three spaces is _Virtual_.  This
+corresponds to the camera being in the same space as, and moving under
+the same set of transformations as, the geometry itself.
+
+   In Euclidean space _Virtual_ is the most useful model.  The other
+models were implemented for hyperbolic and spherical spaces and just
+happen to work in Eucldiean space as well: _Projective_ is the same as
+_Virtual_ but by default displays the unit sphere, and _Conformal_
+displays everything inverted in the unit sphere.
+
+   In hyperbolic space, the _Projective_ model setting gives a view of
+the projective ball model of hyperbolic 3-space imbedded in Euclidean
+space.  The camera is initially outside the unit ball.  In this model,
+the camera moves by Euclidean motions and geometry moves by hyperbolic
+motions.  _Conformal_ model is similar but shows the conformal ball
+model instead.
+
+   In spherical space, the _Projective_ model gives a view of half of
+the 3-sphere imbedded in Euclidean 3-space.  Spherical motions give
+rise to projective transformations in the _Projective_ model, and to
+Moebius transformations in the _Conformal_ model.  In both of these
+models the camera moves by Euclidean motions.
+
+   In _Projective_ and _Conformal_ models, the unit sphere is drawn by
+default.  You can turn it off and on at will using the _Draw Sphere_
+button in the _Camera_ panel.  In the _Conformal_ model, polygons and
+edges are subdivided as necessary to make them look curved.  The
+parameters which determine this subdivision can be set with the
+`set-conformal-refine' GCL command. *Note `(set-conformal-refine ...)':
+set-conformal-refine.
+
+   There are several sample hyperbolic space objects in the
+`data/geom/hyperbolic' subdirectory of the Geomview directory.
+Likewise, the subdirectory `data/geom/spherical' contains several
+sample spherical space objects.
+
+
+File: geomview,  Node: Mathematica,  Next: Installation,  Prev: Non-Euclidean Geometry,  Up: Top
+
+9 Mathematica Graphics in Geomview or RenderMan
+***********************************************
+
+Geomview comes with some Mathematica packages that let you use use
+Geomview to display Mathematica graphics.  Mathematica is a commercial
+mathematical software system available from Wolfram Research, Inc.
+
+   There are two ways to do this.
+  1. Use Mathematica to write a graphics object to a file in OOGL format
+     or in RIB format.
+
+  2. Use Geomview as the default display for all 3D graphics output in
+     Mathematica.
+        You can also use these packages to save Mathematica graphics in
+RenderMan (RIB) format.
+
+   Since the format of Mathematica graphics objects is different from
+the OOGL formats, both of these methods involve translating Mathematica
+graphics to OOGL format.  Geomview is distributed with a Mathematica
+package which does this translation.  Before doing either of the above
+you must install this package.
+
+* Menu:
+
+* OOGL.m::                      Generating OOGL files in Mathematica.
+* Geomview.m::                  Geomview as Mathematica's Default 3D Display.
+* RenderMan::                   Generating RenderMan files in Mathematica.
+* Remote Display::              Using Geomview and Mathematica on different computers.
+* Package Details::             Some details about the packages.
+* Package Installation::        Installing the Mathematica->Geomview package.
+
+
+File: geomview,  Node: OOGL.m,  Next: Geomview.m,  Prev: Mathematica,  Up: Mathematica
+
+9.1 Using Mathematica to generate OOGL files
+============================================
+
+The package `OOGL.m' allows Mathematica to write graphics objects in
+OOGL format.  To use it, give the command `<< OOGL.m' to Mathematica to
+load the package.  The `WriteOOGL[FILE,GRAPHICS]' command writes an OOGL
+description of the 3D graphics object GRAPHICS to the file named FILE.
+
+   This package also provides the `Geomview' command which sends a 3D
+graphics object to Geomview.  The first time you use this command it
+starts up a copy of Geomview.  Later calls send the graphics to the
+same Geomview.  There are two ways to use the `Geomview' command.
+
+`Geomview[GRAPHICS]'
+     Sends the 3D graphics object GRAPHICS to Geomview as a geom named
+     `Mathematica'.  Subsequent usage of `Geomview[GRAPHICS]' replaces
+     the `Mathematica' object in Geomview with the new GRAPHICS.
+
+``Geomview[NAME,GRAPHICS]''
+     Sends the 3D graphics object GRAPHICS to Geomview as a geom named
+     NAME.  You can use multiple calls of this form with different
+     names to cause Geomview to display several Mathematica objects at
+     once and allow independent control over them.
+
+     % math
+     Mathematica 2.0 for SGI Iris
+     Copyright 1988-91 Wolfram Research, Inc.
+      -- GL graphics initialized --
+
+     In[1] := <<OOGL.m
+
+     In[2] := Plot3D[Sin[x + Sin[y]], {x,-2,2},{y,-2,2}]
+
+     Out[2] := -Graphics3D-
+   This displays graphics in the usual Mathematica way here.
+     In[3] := WriteOOGL["math.oogl", %2]
+
+     Out[3] := -Graphics3D-
+   This displays nothing new but writes the file `math.oogl'.  You can
+now load that file into Geomview on any computer.  Alternately, you can
+use the `Geomview' command to start up a copy of Geomview from within
+Mathematica.
+     In[5] := Geomview[%2]
+
+     Out[5] := -Graphics3D-
+
+
+File: geomview,  Node: Geomview.m,  Next: RenderMan,  Prev: OOGL.m,  Up: Mathematica
+
+9.2 Using Geomview as Mathematica's Default 3D Display
+======================================================
+
+The package `Geomview.m' arranges for Geomview to be the default
+display program for 3D graphics in Mathematica.  To load it, give the
+command `<< Geomview.m' to Mathematica.  Thereafter, whenever you
+display 3D graphics with `Plot3D' or `Show', Mathematica will send the
+graphics to Geomview.
+
+   Loading `Geomview.m' implicitly loads `OOGL.m' as well, so you can
+use the `Geomview' and `WriteOOGL' as described above after loading
+`Geomview.m'.  You do not have to separately load `OOGL.m'.
+     % math
+     Mathematica 2.0 for SGI Iris
+     Copyright 1988-91 Wolfram Research, Inc.
+      -- GL graphics initialized --
+
+     In[1] := <<Geomview.m
+
+     In[2] := Plot3D[x^2 + y^2, {x, -2, 2}, {y, -2, 2}]
+
+     Out[2] := -SurfaceGraphics-
+   This invokes geomivew and loads the graphics object into it.
+     In[3] := Plot3D[{x*y + 6, RGBColor[0,x,y]}, {x,0,1}, {y,0,1}]
+
+     Out[3] := -SurfaceGraphics-
+   This replaces the previous Geomview object by the new object.
+     In[4] := Geomview[{%2,%3}]
+
+     Out[4] := {-SurfaceGraphics-, -SurfaceGraphics-}
+   This displays both objects at once.  You also can have more than one
+Mathematica object at a time on display in Geomview, and have separate
+control over them, by using the `Geomview' command with a name, *Note
+OOGL.m::.
+     In[5] := Graphics3D[ {RGBColor[1,0,0], Line[{ {2,2,2},{1,1,1} }] }]
+
+     Out[5] := -Graphics3D-
+
+     In[6] := Geomview["myline", %5]
+   This addes the `Line' specified in `In[5]' to the existing Geomview
+display.  It can be controlled independently of the "Mathematica"
+object, which is currently the list of two plots.
+     In[7] := <<GL.m
+   If you're on an SGI, loading `GL.m' returns Mathematica to its usual
+3D graphics display.  The following plot will appear in a normal static
+Mathematica window.
+     In[8] := ParametricPlot3D[{Sin[x],Sin[y],Sin[x]*Cos[y]}, {x,0,Pi},{y,0,Pi}]
+
+     Out[8] := -Graphics3D-
+   We can return to Geomview graphics at any time by reloading
+`Geomview.m'.
+     In[9] := <<Geomview.m
+
+     In[10] := Show[%8]
+
+     Out[10] := -Graphics3D-
+
+     In[11] := ParametricPlot3D[
+                {(2*(Cos[u] + u*Sin[u])*Sin[v])/(1 + u^2*Sin[v]^2),
+                (2*(Sin[u] - u*Cos[u])*Sin[v])/(1 + u^2*Sin[v]^2),
+                Log[Tan[v/2]] + (2*Cos[v])/(1 + u^2*Sin[v]^2)},
+               {u,-4,4},{v,.01,Pi-.01}]
+
+     Out[11] := -Graphics3D-
+   This last plot is Kuen's surface, a surface of constant negative
+curvature.  Parametrization from Alfred Gray's _Modern Differential
+Geometry of Curves and Surfaces_ textbook.
+
+
+File: geomview,  Node: RenderMan,  Next: Remote Display,  Prev: Geomview.m,  Up: Mathematica
+
+9.3 Using Mathematica to generate RenderMan files
+=================================================
+
+In addition to the `WriteOOGL' and `Geomview' commands described above,
+the package `OOGL.m' also defines the command `WriteRI'b which writes a
+3D graphics object to a RenderMan RIB file:  `WriteRIB[FILE, GRAPHICS]'
+writes GRAPHICS to file FILE.  RenderMan is a commercial rendering
+system available from Pixar, Inc., which can produce extremely high
+quality images.
+     In[1] := <<OOGL.m
+
+     In[2] := <<Graphics/Polyhedra.m
+
+     In[3] := Graphics3D[Cube[]]
+
+     Out[3] := -Graphics3D-
+
+     In[4] := WriteRIB["cube.rib", %3]
+
+     Out[4] := -Graphics3D-
+   This generates the file `math.ri'b.  This is a ready-to-render RIB
+file of the given geometry, using a default camera position, lighting,
+and the "plastic" shader. In a shell window, type `render cube.ri'b to
+generate the image file `mma.tiff'. Of course, you need to have
+RenderMan installed for this to work. A shortcut to render from inside
+Mathematica is `WriteRIB["!render", foo]'.
+
+   `WriteRI'b works by first converting the Mathematica graphics object
+to OOGL format using `WriteOOGL' and then calls an external program
+`oogl2ri'b to convert OOGL to RIB format.  The oogl2rib program takes
+several options which you can specify in a string as an optional third
+argument to `WriteRI'b.  The default option string is `" -n mma.tiff
+"', which indicates that the RIB file should generate a rendered TIFF
+file named `mma.tiff'.  A particularly useful option is `-g', which
+tells oogl2rib to convert only the geometry into a RIB fragment. You
+can insert that fragment into a full RIB file of your own making with
+camera positions and shaders of your choice, to harness the full power
+of RenderMan.
+
+   The full usage of oogl2rib is:
+     oogl2rib [-n NAME] [-B R,G,b] [-w WIDTH] [-h HEIGHT] [-fgb] [INFILE] [OUTFILE]
+   By default it reads from stdin and writes to stdout.  Either INFILE
+or OUTFILE may be `-', which means use stdin/stdout.  The options are:
+`-n NAME'
+     Use NAME for the name of the rendered TIFF file (default
+     "geom.tiff") or framebuffer window (default "geom.rib").
+
+`-B R,G,b'
+     Use background color (R,G,b).  Each component ranges from 0 to 1.
+     Default: none.
+
+`-w WIDTH -h HEIGHT'
+     Rendered frame will be WIDTH by HEIGHT pixels.
+
+`-f'
+     RIB file renders to on-screen framebuffer instead of TIFF file.
+
+`-g'
+     Output only the geometry in RIB format.
+
+`-b'
+     Output only a Quick Renderman clip object.  Ignores -nBwhf.
+
+
+
+File: geomview,  Node: Remote Display,  Next: Package Details,  Prev: RenderMan,  Up: Mathematica
+
+9.4 Using Geomview and Mathematica on Different Computers
+=========================================================
+
+It is possible to use Geomview to display graphics generated by
+Mathematica running on a different computer.  If you want to use
+Mathematica on a computer that is not networked with your Geomview
+computer, you can write out _chunk_ files in Mathematica which you
+transfer to the Geomview computer and then translate to OOGL format for
+displaying in Geomview.
+
+* Menu:
+
+* Networked Geomview::          Using a networked Geomview host.
+* Chunks::                      Transporting Mathematica files to Geomview by Hand.
+
+
+File: geomview,  Node: Networked Geomview,  Next: Chunks,  Prev: Remote Display,  Up: Remote Display
+
+9.4.1 Using a Networked Geomview Host
+-------------------------------------
+
+The `Geomview' command looks at the `DISPLAY' or `REMOTEHOST'
+environment variables to try to determine if you are logged in from
+another computer.  If either of these indicates that you are,
+`Geomview' will attempt to run Geomview on that computer.  In order for
+this to work, your network must be configured such that the Mathematica
+computer can successfully `rsh' to the Geomview computer without giving
+a password.
+
+   You can also explicitly set the `DisplayHost' option to the
+`Geomview' command to a string which is the desired hostname, for
+example:
+     In[1] := << OOGL.m
+
+     In[2] := Plot3D[Sin[x + Sin[y]], {x,-2,2},{y,-2,2}]
+
+     Out[2] := -Graphics3D-
+
+     In[3] := Geomview[%3, DisplayHost->"riemann"]
+   This displays the graphics `%3' on the remote host named `riemann'.
+
+   `Geomview' recognizes the string `"local"' as a value for
+`$DisplayHost'; it forces the graphics to be displayed on the local
+machine.
+
+   In addition to knowing the name of the machine you want to run
+Geomview on, `Geomview' needs to know the type of that machine (the
+setting of the CPU variable that corresponds to the machine; *note
+Source Code Installation::).  By default, `Geomview' assumes that it is
+the same kind of computer as the one you are running Mathematica on.
+The `MachType' option lets you explicitly specify the type of the
+`DisplayHost' computer; it should be one of the strings `"sgi"' or
+`"next"' or `"x11"'.
+
+   You can use `SetOptions' to change the default `DisplayHost' and
+`MachType'.  For example,
+     In[4] := SetOptions[Geomview, DisplayHost->"riemann", MachType->"sgi"]
+   arranges for `Geomview' to run Geomview on an SGI workstation named
+`riemann'.
+
+
+File: geomview,  Node: Chunks,  Prev: Networked Geomview,  Up: Remote Display
+
+9.4.2 Transporting Mathematica Files to Geomview by Hand
+--------------------------------------------------------
+
+The auxilliary function `WriteChunk' is for those who can only use
+Mathematica on a computer that Geomview isn't installed on.
+`WriteChunk[FILE, GRAPHICS]' generates a file named FILE which contains
+the graphics object GRAPHICS in the format accepted by `math2oogl'.
+
+   You can transfer that file to a computer that has Geomview installed
+on it and then use the programs `math2oogl', `oogl2ri'b, and `geomview'
+directly from the shell.  These programs are distributed in the
+`bin/<CPU>' subdirectory of the Geomview directory, and may have been
+installed so that they are on your `path'.
+
+     In[1]:= <<OOGL.m
+
+     In[2]:= Plot3D[ Sin[x + Sin[y]], {x,-2,2}, {y,-2,2} ]
+
+     Out[2]= -SurfaceGraphics-
+
+     In[3]:= WriteChunk["mychunk",%2]
+   This writes the file `mychunk' which contains a description of the
+graphics object.  You can then transfer this file to a system with
+Geomview and type
+     math2oogl < mychunk > mma.oogl
+   to convert it to the OOGL file `mma.oogl' which you can then view
+using Geomview. This is the equivalent of the `WriteOOGL' command.
+
+   For a result equivalent to the `Geomview' or `Show' commands, type
+     math2oogl -togeomview Mathematica geomview < mychunk
+   The `WriteRI'b command can be emulated from the shell as
+     math2oogl < mychunk | oogl2rib -n mma.tiff
+
+
+File: geomview,  Node: Package Details,  Next: Package Installation,  Prev: Remote Display,  Up: Mathematica
+
+9.5 Details of the Mathematica->Geomview Package
+================================================
+
+The `OOGL.m' package uses the external program `math2oogl' to convert
+`Graphics3D' objects to OOGL format, because a compiled external
+program is able to do this conversion many times faster than
+Mathematica.
+
+   The converter will sometimes handle colored SurfaceGraphics objects
+correctly that Mathematica does not handle correctly, which means that
+Geomview[object] sometimes works where Show[object] will give errors.
+
+   The converter supports the `Polygon', `Line', and `Point' graphics
+primitives, `RGBColor Graphics3D' directives, and `SurfaceGraphics'
+objects with or without `RGBColor' directives, and lists of any
+combination of these. It silently ignores all other directives.
+
+   The Mathematica to RenderMan conversion is actually a two-step
+process: Mathematica->OOGL (math2oogl), and OOGL->RenderMan (oogl2rib).
+
+   In the `WriteOOGL' and `WriteRIB' commands, filename can either be a
+string containing a filename, an `OutputStream' object, or a string
+starting with a `!' to send the output to a command.  Object can be a
+`Graphics3D' object, a `SurfaceGraphics' object, or a list of these.
+
+   The packages work best with Mathematica 2.0 or better.  With version
+1.2, the Geomview display is always on the local host.
+
+
+File: geomview,  Node: Package Installation,  Prev: Package Details,  Up: Mathematica
+
+9.6 Installing the Mathematica Packages
+=======================================
+
+     BUG: This section is out of date. `Geomview' follows the
+     GNU-installation habits, data goes to `PREFIX/share/geomview/',
+     user executables to `PREFIX/bin/', private executables to
+     `PREFIX/libexec/geomview/', libraries to `PREFIX/lib/' where
+     `PREFIX' denotes the installation prefiex specified for the
+     `TOPSRCDIR/configure' script. Please have a look at the files
+     `TOPSRCDIR/INSTALL' and `TOPSRCDIR/INSTALL.Geomview' for
+     installation instructions.
+
+     The installed Mathematica data-files can be found in
+     `PREFIX/share/geomview/Mathematica/'.
+
+   If Geomview is properly installed on your system according to the
+instructions in *Note Installation::, then the Mathematica-to-Geomview
+packages should work as described here; there should be no need for
+additional installation procedures.  In practice, however, it is
+sometimes necessary to taylor the installation of the Mathematica
+packages and/or of Geomview itself to suit the needs of a particular
+system.  This section contains details about how the installation works;
+if the Mathematica-to-Geomview connection does not seem to work for you
+after following the Geomview installation procedure, consult this
+section to see what might need to be fixed.
+
+   In this section, the phrase _Geomview installation_ refers any of
+the procedures in *Note Installation::.  The way the Mathematica
+packages work and are installed is the same regardless of whether you
+have one of the binary distributions or the source distribution.
+
+  1. The relevant mathematica files are `OOGL.m', `Geomview.m', and
+     `BezierPlot.m'; Mathematica must be able to find these files.  They
+     are distributed in the `PREFIX/share/geomview/Mathematica'
+     subdirectory of the binary distributions, and in the
+     `TOPSRCDIR/src/bin/geomutil/math2oogl' subdirectory of the source
+     distribution.  These files need to be in a directory that is on
+     Mathematica's search path.  You can look at the value of the
+     `$Path' variable in a Mathematica session on your system to see a
+     list of the directories on Mathematica's search path.
+
+     The Geomview installation procedure puts copies of the Mathematica
+     packages into a directory that you specify (`MMAPACKAGEDIR').  This
+     should ensure that Mathematica can find them.  Alternately, you
+     could arrange to append the pathname of the Mathmematica package
+     subdirectory of the Geomview distribution to the `$Path' variable
+     each time you run Mathematica.
+
+  2. The package `OOGL.m' needs to be able to invoke the programs
+     `geomview', `math2oogl', and `oogl2rib'.  The Geomview
+     installation procedure installs these programs into a directory
+     that you specify for executables (`BINDIR').  Ideally, this
+     directory should be on your shell's `$PATH'.  More specifically,
+     it should be on the `$PATH' of the shell in which Mathematica
+     runs; the directory `/usr/local/bin' is usually a good choice.
+     You can see the list of directories on this path by giving the
+     command `!echo $path' in Mathematica.
+
+     If for some reason you can't arrange for `geomview', `math2oogl',
+     and `oogl2rib' to be in a directory on the shell's `$path', you
+     can modify `OOGL.m' to cause it to look for them using absolute
+     pathnames.  To do this, change the definitions of the variables
+     `$GeomviewPath' and `$GeomRoot', which are defined near the top of
+     the file.  Change `$GeomviewPath' to the absolute pathname of the
+     `geomview' shell script on your system.  Change `$GeomRoot' to the
+     absolute pathname of the `$GEOMROOT' directory on your system.  If
+     you do this, you should also make sure there are copies of
+     `geomview', `math2oogl', and `oogl2ri'b in the
+     `$GEOMROOT/bin/<CPU>'.
+
+  3. The `geomview' shell script, which `OOGL.m' uses to invoke
+     Geomview, needs to be able to find the geomview executable file (
+     called `gvx').  The Geomview installation procedure should have
+     been taken care of this, but if your Mathematica session doesn't
+     seem to be able to invoke Geomview, it's worth double-checking
+     that the settings in the `geomview' script are correct.
+
+
+
+File: geomview,  Node: Installation,  Next: Support,  Prev: Mathematica,  Up: Top
+
+10 Installation
+***************
+
+     BUG: This section is out of date. `Geomview' follows the
+     GNU-installation habits, data goes to `PREFIX/share/geomview/',
+     user executables to `PREFIX/bin/', private executables to
+     `PREFIX/libexec/geomview/', libraries to `PREFIX/lib/' where
+     `PREFIX' denotes the installation prefiex specified for the
+     `TOPSRCDIR/configure' script. Please have a look at the files
+     `TOPSRCDIR/INSTALL' and `TOPSRCDIR/INSTALL.Geomview' for
+     installation instructions.
+
+   What you do to install Geomview depends on which kind of computer you
+have and on whether you have the source distribution or the binary
+distribution.
+
+   In general, if you don't care about looking at Geomview's source
+code, you should get one of the binary distribution.  The binary
+installation is much easier and quicker than compiling and installing
+the source code.
+
+* Menu:
+
+* Unix Binary Installation::    Installing the Unix Binary Distribution
+* Source Code Installation::    Compiling and Installing the Source Code Distribution.
+
+
+File: geomview,  Node: Unix Binary Installation,  Next: Source Code Installation,  Prev: Installation,  Up: Installation
+
+10.1 Installing the Unix Binary Distribution
+============================================
+
+     BUG: This section is out of date. `Geomview' follows the
+     GNU-installation habits, data goes to `PREFIX/share/geomview/',
+     user executables to `PREFIX/bin/', private executables to
+     `PREFIX/libexec/geomview/', libraries to `PREFIX/lib/' where
+     `PREFIX' denotes the installation prefiex specified for the
+     `TOPSRCDIR/configure' script. Please have a look at the files
+     `TOPSRCDIR/INSTALL' and `TOPSRCDIR/INSTALL.Geomview' for
+     installation instructions.
+
+   If you have just obtained a copy of the binary distribution for a
+Unix system (Linux, SGI, Solaris, HP, etc), you should be able to run
+Geomview and make use of most of its features immediately after
+unpacking it by `cd''ing to the directory that it is in and typing
+`geomview'.
+
+   In order to fully install Geomview so that you can run it from any
+directory and use all of its features, follow the steps in this section.
+In particular, you must go through this installation procedure in order
+to use Geomview to display Mathematica graphics.
+
+   Geomview is distributed in a directory that contains various files
+and subdirectories that Geomview needs at run-time, such as data files
+and external modules.  It also contains other things distributed with
+Geomview, such as documentation and (in the soure-code distribution)
+source-code.  We refer to the root directory of this tree as the
+`$GEOMROOT' directory.  This is the directory called `Geomview' that is
+created when you unpack the distribution file.
+
+   To install Geomview on your system, arrange for the `$GEOMROOT'
+directory to be in a permanent place.  Then, in a shell window, `cd' to
+that directory and type `install'.  This runs a shell script which does
+the installation after asking you several questions about where you
+want to install the various components of Geomview.
+
+   After running the `install' script you should now be able to run
+Geomview from any directory on your system.  (You may need to give the
+`rehash' command in any shells on your computer that were started up
+before you did the installation.)
+
+   The `install' script puts copies of the files in
+`$GEOMROOT/bin/<CPU>' and `$GEOMROOT/man' into the directories you
+specified for executables and man pages, respectively.  Once you have
+done the installation you can cut down one the disk space required by
+Geomview by removing some files from these directories, since copies
+have been installed elsewhere.  You should first test that your
+installed Geomview works properly because once you remove these files
+from their distribution directories you will not be able to do the
+installation again.
+
+   In particular, the files you can remove are
+
+`$GEOMROOT/bin/<MACHTYPE>':
+     (where `<MACHTYPE>' is the type of system you are on, e.g.
+     `linux', `sgi', `hpux', etc).  Remove all files from here except
+     `gvx', which is the geomview executable file.  DO NOT REMOVE
+     `gvx'.  It is not installed elsewhere.
+
+`$GEOMROOT/man':
+     You can remove all the files in this directory.
+
+
+* Menu:
+
+* Unix Binary Detail::
+
+
+File: geomview,  Node: Unix Binary Detail,  Prev: Unix Binary Installation,  Up: Unix Binary Installation
+
+10.1.1 Details of the Unix Binary Installation
+----------------------------------------------
+
+     BUG: This section is out of date. `Geomview' follows the
+     GNU-installation habits, data goes to `PREFIX/share/geomview/',
+     user executables to `PREFIX/bin/', private executables to
+     `PREFIX/libexec/geomview/', libraries to `PREFIX/lib/' where
+     `PREFIX' denotes the installation prefiex specified for the
+     `TOPSRCDIR/configure' script. Please have a look at the files
+     `TOPSRCDIR/INSTALL' and `TOPSRCDIR/INSTALL.Geomview' for
+     installation instructions.
+
+   The `install' script should be self-explanatory; just run it and
+answer the questions.  This section gives some details for system
+administrators and other users who may want to know more about the
+installation.
+
+   The installation is actually done by `make'; the `install' script
+queries the user for the settings of the following `make' variables and
+then invokes `make install'.
+
+`GEOMROOT':
+     the absolute pathname of the Geomview root directory.  The
+     `geomview' shell script, which is what users invoke to run
+     Geomview, uses this to set various environment variables that
+     Geomview needs.  It is very important that this be an _absolute_
+     pathname -- i.e. it should start with a '/'.
+
+`BINDIR':
+     a directory where executable files are installed.  The `geomview'
+     shell script goes here, as well as various other auxiliary
+     programs that can be used in conjunction with `geomview'.  This
+     should be a directory that is on users' `$path'.  These auxiliary
+     programs are distributed in the `$GEOMROOT/bin/<MACHTYPE>'
+     directory; if you specify this directory for `BINDIR', they are
+     left in that directory.
+
+`MANDIR':
+     a directory where Unix manual pages are installed.  These are
+     distributed in the `$GEOMROOT/man' subdirectory; if you specify
+     this directory for `MANDIR', they are left in that directory.
+
+`MMAPACKAGEDIR':
+     a directory where Mathematica packages are installed.  This should
+     be a directory that Mathematica searches for packages that it
+     loads; you can see what directories your Mathematica searches by
+     looking at the value of the `$Path' variable in a Mathematica
+     session.  The installation process will install some packages
+     there which allow you to use Geomview to display Mathematica
+     graphics.  These packages are distributed in the
+     `$GEOMROOT/mathematica' subdirectory; if you specify this
+     directory for `MMAPACKAGEDIR', or if you specify the empty string
+     for `MMAPACKAGEDIR', the packages are left in that directory.  For
+     more details about the way these Mathematica packages connect to
+     Geomview, *note Package Installation::.
+
+
+
+File: geomview,  Node: Source Code Installation,  Prev: Unix Binary Installation,  Up: Installation
+
+10.2 Compiling and Installing the Source Code Distribution
+==========================================================
+
+     BUG: This section is out of date. `Geomview' follows the
+     GNU-installation habits, data goes to `PREFIX/share/geomview/',
+     user executables to `PREFIX/bin/', private executables to
+     `PREFIX/libexec/geomview/', libraries to `PREFIX/lib/' where
+     `PREFIX' denotes the installation prefiex specified for the
+     `TOPSRCDIR/configure' script. Please have a look at the files
+     `TOPSRCDIR/INSTALL' and `TOPSRCDIR/INSTALL.Geomview' for
+     installation instructions.
+
+   The main reason to get the source code distribution is to look at
+and/or work with the source code.  If you are only concered with _using_
+Geomview it is better to get the binary distribution.  It takes anywhere
+from a few minutes to an hour or more to compile the entire source
+distribution, depending on what kind of computer you have.
+
+   Let `$GEOMROOT' denote the full pathname of the Geomview source code
+directory; this is the directory called `Geomview' that is created when
+you unpack the distribution.  This directory contains the Geomview
+source code as well as various other files and subdirectories that
+Geomview needs when it runs.
+
+   Before doing any compilation you should edit the file
+`$GEOMROOT/makefiles/mk.site.default'.  This file defines some `make'
+variables which specify your local configuration.  This includes the
+pathnames of the directories into which Geomview will be installed, and
+possibly some other settings as well.  There are comments in the file
+telling you what to do.  This file is included by every Makefile in the
+source tree, so the settings you specify here are used throughout the
+source.
+
+   If you will be compiling for multiple systems, you can do them all
+in the same directory tree.  By default the Makefiles are set up to put
+the objects files, libraries, and executables in directories which
+depend on the type of computer, so the two architectures will not
+interfere with each other.  The Makefiles use a variable called `CPU'
+to determine the type of machine. Before doing any compilation you must
+arrange for this variable to have a value.  There are two ways you can
+do this.
+
+  1.  If you will always be compiling Geomview on the same type of
+     computer edit the file `$GEOMROOT/makefiles/Makedefs.global' to
+     set the `CPU' variable to one of the values `linux', `FreeBSD',
+     `sgi', `hpux', `hpux-gcc', `solaris', `sun4os4' (for Suns with
+     SunOS 4, not Solaris), `rs6000', or `alpha'.  If you're using a
+     type of system not in this list, make up a new value for CPU, and
+     write a `mk.<CPU>' file for it patterned after the other `mk.*' in
+     the `makefiles' subdirectory.
+
+  2. If you will be compiling on more than one type of computer you can
+     set a shell environment variable named `CPU' to one of the values
+     above and the Makefiles will inherit the value from the
+     environment.
+
+
+Note that many of the Makefiles refer to a variable called `MACHTYPE';
+this variable tells which type of graphics system to compile Geomview
+for.  The `mk.<CPU>' files set this variable for you; in most cases its
+value is `x11', which specifies that Geomview should be compiled for X
+windows.
+
+   Once you have configured your source tree by editing the files as
+described above and setting the `CPU' variable, you can compile and
+install Geomview by typing `make install' in the `$GEOMROOT' directory.
+You can also type `make all', or equivalently just `make', to compile
+without installing, and then type `make install' later to install.
+
+   You can use these same `make' comands in any subdirectory in the
+tree to recompile and/or install a part of Geomview or a module.
+
+   If you want to modify the complier flags used during compilation,
+edit the file `$GEOMROOT/makefiles/Makedefs.global'; the `COPTS'
+variable specifies the flags passed to the C compiler (cc).
+
+
+File: geomview,  Node: Support,  Next: Contributing,  Prev: Installation,  Up: Top
+
+Getting Technical Support for Geomview
+**************************************
+
+There are several ways to get support for Geomview.
+
+  1. Visit the Geomview web site, `http://www.geomview.org'.  It
+     contains the latest documentation, news about development, and FAQ
+     (Frequently Asked Questions) list.
+
+  2. Send email to the geomview-users@lists.sourceforge.net mailing
+     list.  This is a mailing list for discussing any issues related to
+     using Geomview.  To join the list, send an empty note with
+     'subscribe' in the subject line to
+     geomview-users-request@lists.sourceforge.net
+     (mailto:geomview-users-request@lists.sourceforge.net), or visit
+     the list web page at
+     `http://lists.sourceforge.net/mailman/listinfo/geomview-users'.
+
+  3. Contract with Geometry Technologies for support.  Geometry
+     Technologies is a contract support and programming company that
+     emerged from the Geometry Center, where Geomview was written.  For
+     more information visit the Geometry Technologies web site at
+     `http://www.geomtech.com'.
+
+
+
+File: geomview,  Node: Contributing,  Next: Function Index,  Prev: Support,  Up: Top
+
+Contributing to Geomview's Development
+**************************************
+
+If you are interested in contributing to the development of Geomview,
+there are several things you can do:
+
+  1. *Volunteer programming work*.
+
+     If you are a programmer and make an improvement to Geomview,
+     contact the other geomview authors by sending a note to the
+     `geomview-users' mailing list (see
+     `http://lists.sourceforge.net/mailman/listinfo/geomview-users').
+
+  2. *Contract with Geometry Technologies*.
+
+     Geometry Technologies, Inc. is a consulting firm that provides
+     contract technical support and custom programming services in the
+     area of 3D graphics.  This includes a wide range of services
+     related to 3D graphics, included but not limited to applications
+     involving Geomview.  To the extent that resources allow, Geometry
+     Technologies supports the developement of Geomview; in particular
+     it hosts the `http://www.geomview.org' web site, and its staff
+     make ongoing improvements to Geomview itself.  If you are in a
+     position to pay for technical support or custom programming work,
+     contracting with Geometry Technologies indirectly supports
+     Geomview.  You can also contract with with Geometry Technologies
+     to have particular features that you want added to Geomview, or to
+     port Geomview to a new platform.  For more information see
+     Geometry Technologies web site at `http://www.geomtech.com'.
+
+
+   Thank you.
+
+
+File: geomview,  Node: Function Index,  Next: List of Figures,  Prev: Contributing,  Up: Top
+
+Function Index
+**************
+
+ [index ]
+* Menu:
+
+* !, shell <1>:                          shell.                (line  6)
+* !, shell:                              shell-shortcut.       (line  6)
+* *:                                     mul.                  (line  6)
+* +:                                     add.                  (line  6)
+* -:                                     sub.                  (line  6)
+* /:                                     div.                  (line  6)
+* <:                                     lt.                   (line  6)
+* =:                                     eq.                   (line  6)
+* >:                                     gt.                   (line  6)
+* ?:                                     help-shortcut.        (line  6)
+* ??:                                    morehelp-shortcut.    (line  6)
+* all:                                   all.                  (line  6)
+* all camera:                            all.                  (line  8)
+* all emodule defined:                   all.                  (line 11)
+* all emodule running:                   all.                  (line 14)
+* all geometry:                          all.                  (line  6)
+* and:                                   and.                  (line  6)
+* ap-override:                           ap-override.          (line  6)
+* backcolor:                             backcolor.            (line  6)
+* background-image:                      background-image.     (line  6)
+* bbox-color:                            bbox-color.           (line  6)
+* bbox-draw:                             bbox-draw.            (line  6)
+* camera:                                camera.               (line  6)
+* camera-draw:                           camera-draw.          (line  6)
+* camera-prop:                           camera-prop.          (line  6)
+* camera-reset:                          camera-reset.         (line  6)
+* car:                                   car.                  (line  6)
+* cdr:                                   cdr.                  (line  6)
+* clock:                                 clock.                (line  6)
+* command:                               command.              (line  6)
+* cons:                                  cons.                 (line  6)
+* copy:                                  copy.                 (line  6)
+* cursor-still:                          cursor-still.         (line  6)
+* cursor-twitch:                         cursor-twitch.        (line  6)
+* defun:                                 defun.                (line  6)
+* delete:                                delete.               (line  6)
+* dice:                                  dice.                 (line  6)
+* dimension:                             dimension.            (line  6)
+* dither:                                dither.               (line  6)
+* draw:                                  draw.                 (line  6)
+* dump-handles:                          dump-handles.         (line  6)
+* echo:                                  echo.                 (line  6)
+* emodule-clear:                         emodule-clear.        (line  6)
+* emodule-define:                        emodule-define.       (line  6)
+* emodule-defined:                       emodule-defined.      (line  6)
+* emodule-isrunning:                     emodule-isrunning.    (line  6)
+* emodule-path:                          emodule-path.         (line  6)
+* emodule-run, | <1>:                    emodule-run.          (line  6)
+* emodule-run, |:                        emodule-run-shortcut. (line  6)
+* emodule-sort:                          emodule-sort.         (line  6)
+* emodule-start:                         emodule-start.        (line  6)
+* emodule-transmit:                      emodule-transmit.     (line  6)
+* escale:                                escale.               (line  6)
+* eval:                                  eval.                 (line  6)
+* event-keys:                            event-keys.           (line  6)
+* event-mode:                            event-mode.           (line  6)
+* event-pick:                            event-pick.           (line  6)
+* evert:                                 evert.                (line  6)
+* exit:                                  exit.                 (line  6)
+* ezoom:                                 ezoom.                (line  6)
+* freeze:                                freeze.               (line  6)
+* geometry:                              geometry.             (line  6)
+* geomview-version:                      geomview-version.     (line  6)
+* hdefine:                               hdefine.              (line  6)
+* hdelete:                               hdelete.              (line  6)
+* help:                                  help.                 (line  6)
+* hmodel:                                hmodel.               (line  6)
+* hsphere-draw:                          hsphere-draw.         (line  6)
+* if:                                    if.                   (line  6)
+* inhibit-warning:                       inhibit-warning.      (line  6)
+* input-translator:                      input-translator.     (line  6)
+* interest:                              interest.             (line  6)
+* lambda:                                lambda.               (line  6)
+* let:                                   let.                  (line  6)
+* lines-closer:                          lines-closer.         (line  6)
+* load:                                  load.                 (line  6)
+* load-path:                             load-path.            (line  6)
+* look:                                  look.                 (line  6)
+* look-encompass:                        look-encompass.       (line  6)
+* look-encompass-size:                   look-encompass-size.  (line  6)
+* look-recenter:                         look-recenter.        (line  6)
+* look-toward:                           look-toward.          (line  6)
+* merge:                                 merge.                (line  6)
+* merge-ap:                              merge-ap.             (line  6)
+* merge-base-ap:                         merge-base-ap.        (line  6)
+* merge-baseap:                          merge-baseap.         (line  6)
+* mod:                                   mod.                  (line  6)
+* morehelp:                              morehelp.             (line  6)
+* name-object:                           name-object.          (line  6)
+* ND-axes:                               ND-axes.              (line  6)
+* ND-color:                              ND-color.             (line  6)
+* ND-xform:                              ND-xform.             (line  6)
+* ND-xform-get:                          ND-xform-get.         (line  6)
+* ND-xform-set:                          ND-xform-set.         (line  6)
+* new-alien:                             new-alien.            (line  6)
+* new-camera:                            new-camera.           (line  6)
+* new-center:                            new-center.           (line  6)
+* new-geometry:                          new-geometry.         (line  6)
+* new-reset:                             new-reset.            (line  6)
+* NeXT:                                  NeXT.                 (line  6)
+* normalization:                         normalization.        (line  6)
+* not:                                   not.                  (line  6)
+* or:                                    or.                   (line  6)
+* pick:                                  pick.                 (line  6)
+* pick-invisible:                        pick-invisible.       (line  6)
+* pickable:                              pickable.             (line  6)
+* position:                              position.             (line  6)
+* position-at:                           position-at.          (line  6)
+* position-toward:                       position-toward.      (line  6)
+* process-events:                        process-events.       (line  6)
+* progn:                                 progn.                (line  6)
+* quit:                                  quit.                 (line  6)
+* quote:                                 quote.                (line  6)
+* rawevent:                              rawevent.             (line  6)
+* rawpick:                               rawpick.              (line  6)
+* read:                                  read.                 (line  6)
+* real-id:                               real-id.              (line  6)
+* redraw:                                redraw.               (line  6)
+* regtable:                              regtable.             (line  6)
+* rehash-emodule-path:                   rehash-emodule-path.  (line  6)
+* replace-geometry:                      replace-geometry.     (line  6)
+* rib-display:                           rib-display.          (line  6)
+* rib-snapshot:                          rib-snapshot.         (line  6)
+* scale:                                 scale.                (line  6)
+* scene:                                 scene.                (line  6)
+* set-clock:                             set-clock.            (line  6)
+* set-conformal-refine:                  set-conformal-refine. (line  6)
+* set-emodule-path:                      set-emodule-path.     (line  6)
+* set-load-path:                         set-load-path.        (line  6)
+* set-motionscale:                       set-motionscale.      (line  6)
+* setenv:                                setenv.               (line  6)
+* setq:                                  setq.                 (line  6)
+* sgi:                                   sgi.                  (line  6)
+* shell, ! <1>:                          shell.                (line  6)
+* shell, !:                              shell-shortcut.       (line  6)
+* sleep-for:                             sleep-for.            (line  6)
+* sleep-until:                           sleep-until.          (line  6)
+* snapshot:                              snapshot.             (line  6)
+* soft-shader:                           soft-shader.          (line  6)
+* space:                                 space.                (line  6)
+* stereowin:                             stereowin.            (line  6)
+* time-interests:                        time-interests.       (line  6)
+* transform:                             transform.            (line  6)
+* transform-incr:                        transform-incr.       (line  6)
+* transform-set:                         transform-set.        (line  6)
+* truncate:                              truncate.             (line  6)
+* ui-cam-focus:                          ui-cam-focus.         (line  6)
+* ui-center:                             ui-center.            (line  6)
+* ui-center-origin:                      ui-center-origin.     (line  6)
+* ui-emotion-program:                    ui-emotion-program.   (line  6)
+* ui-emotion-run:                        ui-emotion-run.       (line  6)
+* ui-freeze:                             ui-freeze.            (line  6)
+* ui-html-browser:                       ui-html-browser.      (line  6)
+* ui-motion:                             ui-motion.            (line  6)
+* ui-panel:                              ui-panel.             (line  6)
+* ui-pdf-viewer:                         ui-pdf-viewer.        (line  6)
+* ui-target:                             ui-target.            (line  6)
+* uninterest:                            uninterest.           (line  6)
+* update:                                update.               (line  6)
+* update-draw:                           update-draw.          (line  6)
+* while:                                 while.                (line  6)
+* window:                                window.               (line  6)
+* winenter:                              winenter.             (line  6)
+* write:                                 write.                (line  6)
+* write-comments:                        write-comments.       (line  6)
+* write-handle:                          write-handle.         (line  6)
+* write-sexpr:                           write-sexpr.          (line  6)
+* xform:                                 xform.                (line  6)
+* xform-incr:                            xform-incr.           (line  6)
+* xform-set:                             xform-set.            (line  6)
+* zoom:                                  zoom.                 (line  6)
+* |, emodule-run <1>:                    emodule-run.          (line  6)
+* |, emodule-run:                        emodule-run-shortcut. (line  6)
+
+
+File: geomview,  Node: List of Figures,  Prev: Function Index,  Up: Top
+
+List of Figures
+***************
+
+* Menu:
+
+* Figure 2.1: Initial Geomview ...:      figinitial.
+* Figure 2.2: Looking at the world.:     figlookatworld.
+* Figure 2.3: The Appearance Panel.:     figappearance.
+* Figure 2.4: Color Chooser Panel.:      figcolorchooser.
+* Figure 2.5: The Files Panel.:          figfilespanel.
+* Figure 2.6: Trefoil and ...:           figtrefdodec.
+* Figure 3.1: The Main Panel:            figmainpanel.
+* Figure 3.2: The Files Panel.:          figmyfilelist.
+* Figure 3.3: The Load Panel.:           figloadpanel.
+* Figure 3.4: The Tools Panel.:          figtools.
+* Figure 3.5: The Appearance Panel.:     figap.
+* Figure 3.6: Color Chooser Panel.:      figcolorchooserpanel.
+* Figure 3.7: The Materials Panel.:      figmatpanel.
+* Figure 3.8: The Cameras Panel.:        figcamerapanel.
+* Figure 3.9: The Save Panel.:           figsavepanel.
+* Figure 3.10: The Commands Panel.:      figcommandpanel.
+
+

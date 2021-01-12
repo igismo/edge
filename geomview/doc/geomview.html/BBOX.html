@@ -1,0 +1,77 @@
+<html lang="en">
+<head>
+<title>BBOX - Geomview Manual</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Geomview Manual">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Object-File-Formats.html#Object-File-Formats" title="Object File Formats">
+<link rel="prev" href="MESH.html#MESH" title="MESH">
+<link rel="next" href="BBP-and-BEZ.html#BBP-and-BEZ" title="BBP and BEZ">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="BBOX"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="BBP-and-BEZ.html#BBP-and-BEZ">BBP and BEZ</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="MESH.html#MESH">MESH</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Object-File-Formats.html#Object-File-Formats">Object File Formats</a>
+<hr>
+</div>
+
+<h4 class="subsection">4.2.3 BBOX: simple bounding boxes</h4>
+
+<p>This is a very simple toy-object: it takes 2 vertices and draws a
+(hyper-) cube which is the bounding box of the two vertices.
+
+   <p>Syntax:
+
+<pre class="example">       BBOX
+       <var>x</var>[0] <var>y</var>[0] <var>z</var>[0]
+       <var>x</var>[1] <var>y</var>[1] <var>z</var>[1]
+</pre>
+   <p>or
+
+<pre class="example">       4BBOX
+       <var>x</var>[0] <var>y</var>[0] <var>z</var>[0] <var>w</var>[0]
+       <var>x</var>[1] <var>y</var>[1] <var>z</var>[1] <var>w</var>[1]
+</pre>
+   <p>or
+
+<pre class="example">       nBBOX
+       <var>Ndim</var> # &gt; 3
+       <var>x</var>[0] <var>y</var>[0] <var>z</var>[0] <var>w</var>[0] ...
+       <var>x</var>[1] <var>y</var>[1] <var>z</var>[1] <var>w</var>[1] ...
+</pre>
+   <p>or
+
+<pre class="example">       4nBBOX
+       <var>Ndim</var> # &gt; 3
+       <var>d</var>[0] <var>x</var>[0] <var>y</var>[0] <var>z</var>[0] <var>w</var>[0] ...
+       <var>d</var>[0] <var>x</var>[1] <var>y</var>[1] <var>z</var>[1] <var>w</var>[1] ...
+</pre>
+   <p>There is no BBOX binary format. The <code>4</code> modifyer has different
+meanings depending on the dimension of the bounding box: <code>4BBOX</code>
+means that the 4 components of the vertices make up a 4-dimensional
+bounding-box. Using <code>4</code> in conjunction with <code>n</code> &ndash;
+<code>4nBBOX </code><var>NDim</var> &ndash; means that the vertices specified in the
+file have <var>NDim+1</var> components, but the component at index 0 is the
+homogeneous divisor (in contrast to the ordinary 3d case where the
+homogeneous divisor would be the <code>w</code> &ndash; the third &ndash; component).
+
+<!--  -->
+   </body></html>
+

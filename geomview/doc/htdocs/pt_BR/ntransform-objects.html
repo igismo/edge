@@ -1,0 +1,126 @@
+<html lang="en">
+<head>
+<title>ntransform objects - Manual do Geomview</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Manual do Geomview">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Objetos-nao_002dgeometricos.html#Objetos-nao_002dgeometricos" title="Objetos nao-geometricos">
+<link rel="prev" href="transform-objects.html#transform-objects" title="transform objects">
+<link rel="next" href="Objeto-camera.html#Objeto-camera" title="Objeto camera">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="ntransform-objects"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Objeto-camera.html#Objeto-camera">Objeto camera</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="transform-objects.html#transform-objects">transform objects</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Objetos-nao_002dgeometricos.html#Objetos-nao_002dgeometricos">Objetos nao-geometricos</a>
+<hr>
+</div>
+
+<h4 class="subsection">4.3.4 Objetos ND-Transform</h4>
+
+<p>Onde &ndash; no contexto de visualiza&ccedil;&atilde;o NDimensional &ndash; uma matriz simples (N+1)x(N+1) &eacute;
+esperada &ndash; como no campo <code>INST</code> <code>ntransform</code>, ou a
+<code>ND-xform*</code> (veja comandos <a href="GCL.html#GCL">GCL</a>) &ndash; use um objeto <code>ntransform</code>.
+
+   <p><code>ntransform</code> s&atilde;o matrizes de transforma&ccedil;&atilde;o <var>NLinhas</var> x <var>NColunas</var>
+onde usualmente <var>NLinhas</var> = <var>N+1</var> no contexto de
+objetos <var>N</var>-dimensionais e visualiza&ccedil;&atilde;o. A componente homog&ecirc;nea de uma
+<code>ntransform</code> situa-se na coluna zero (em oposi&ccedil;&atilde;o a objetos
+<code>transform</code> comuns onde a componente homog&ecirc;nea situa-se na coluna
+tr&ecirc;s). Objetos <code>ntransform</code> trabalham sobre pontos de qualquer dimens&atilde;o: se
+um ponto &eacute; para ser transformado atrav&eacute;s de um objeto <code>ntransform</code> e a
+dimens&atilde;o do ponto n&atilde;o coincide com o n&uacute;mero de linhas do
+objeto <code>ntransform</code>, ent&atilde;o ou o ponto est&aacute; implicitamente preenchido
+com zeros para coincidir com  <var>NLinhas</var> ou a matriz est&aacute; implicitamente preenchida com
+unidades abaixo de sua diagonal principal (e zeros em todas as outras posi&ccedil;&otilde;es) de forma que a matriz ir&aacute;
+trabalhar como a matriz identidade sobre as dimens&otilde;es excedentes do ponto de entrada.
+
+   <p>A sintaxe para um objeto <code>ntransform</code> &eacute;
+
+<pre class="example">     &lt;ntransform&gt; ::=
+       [ "{" ]             (abertura de chave, geralmente necess&aacute;ria para
+                            tornar o fim do objeto claramente explicitado.)
+     
+        [ "ntransform" ]    (palavra chave opcional; desnecess&aacute;ria se o tipo
+                            for determinado pelo contexto, o que
+                            comumente ocorre.)
+     
+        [ "define" &lt;nome&gt; ]
+                            (define uma transforma&ccedil;&atilde;o chamada &lt;nome&gt;,
+                            escolhendo seus valores do material adiante)
+     
+          <var>NLinhas</var> <var>NColunas</var>
+                            (n&uacute;mero de linhas e colunas da matriz,
+                            tipicamente <var>N+1</var> <var>N+1</var>, mas qualquer dimens&atilde;o
+                            &eacute; poss&iacute;vel)
+          &lt;<var>NLinhas</var> x <var>NColunas</var> n&uacute;meros em ponto flutuante&gt;
+                            (interpretados como uma transforma&ccedil;&atilde;o homog&ecirc;nea
+                            <var>NLinhas</var> x <var>NColunas</var> fornecida linha por linha,
+                            pretensamente a ser aplicada a um vetor linha
+                            multiplicado &agrave; ESQUERDA, de forma que e.g.
+                            transla&ccedil;&otilde;es Euclideanas aparecem na linha mais
+                            <b>acima</b> -- em oposi&ccedil;&atilde;o a objetos de
+                            transforma&ccedil;&atilde;o comuns onde as
+                            transla&ccedil;&otilde;es aparecem na linha mais inferior)
+        |
+           "&lt;" &lt;nomedearquivo&gt;  (significando: leia a transforma&ccedil;&atilde;o daquele
+                            arquivo)
+        |
+           ":" &lt;nome&gt;      (significando: use a vari&aacute;vel &lt;nome&gt;,
+                           definida em algum lugar; se n&atilde;o for definida o
+                           valor inicial &eacute; a transforma&ccedil;&atilde;o identidade)
+     
+      [ "}" ]             (correspondente fechamento de chave)
+</pre>
+   <p>O conjunto deve ser delimitado entre { chaves }.  Chaves n&atilde;o s&atilde;o
+necessariamente essenciais, de forma que e.g. dois inteiros &ndash; <var>NLinhas</var> <var>NColunas</var>
+&ndash; seguidos por um array composto de <var>NLinhas</var> x <var>NColunas</var> n&uacute;meros em ponto flutuante independentes
+pode mas n&atilde;o precisa ter chaves.
+
+   <p>Alguns exemplos, em contextos onde eles possivelmente podem ser usados:
+
+<pre class="example">     # Exemplo 1: Um comando GCL para definir uma transforma&ccedil;&atilde;o <code>6x6</code> chamada
+     # "fred", uma mera transla&ccedil;&atilde;o por meio do vetor <code>-3 0 1 1 0</code>. Essa
+     # transforma&ccedil;&atilde;o &eacute; significativa para um espa&ccedil;o pentadimensional, com uma componente
+     # homog&ecirc;nea um &iacute;ndice zero.
+     
+     (read ntransform { ntransform  define fred
+              6 6
+              1 -3 0 1 1 0
+              0  1 0 0 0 0
+              0  0 1 0 0 0
+              0  0 0 1 0 0
+              0  0 0 0 1 0
+              0  0 0 0 0 1
+         }
+     )
+</pre>
+   <pre class="example">     # Exemplo 2: Escolhe o ND-xform de um objeto -- um geom&eacute;trico ou um grupo de
+     # cameras. Fornecendo a defini&ccedil;&atilde;o acima, o ND-xform escolhido coloca o objeto em (-3 0 1 1
+     # 0) no espa&ccedil;o pentadimensional.
+     
+     (ND-xform-set focus : fred)
+     
+     # ou
+     
+     (ND-xform-set g1 : fred)
+</pre>
+   <!--  -->
+   </body></html>
+

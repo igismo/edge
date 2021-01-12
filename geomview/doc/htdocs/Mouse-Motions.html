@@ -1,0 +1,237 @@
+<html lang="en">
+<head>
+<title>Mouse Motions - Geomview Manual</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Geomview Manual">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Interaction.html#Interaction" title="Interaction">
+<link rel="prev" href="Loading.html#Loading" title="Loading">
+<link rel="next" href="Appearance.html#Appearance" title="Appearance">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Mouse-Motions"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Appearance.html#Appearance">Appearance</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Loading.html#Loading">Loading</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Interaction.html#Interaction">Interaction</a>
+<hr>
+</div>
+
+<h3 class="section">3.5 Using the Mouse to Manipulate Objects</h3>
+
+<p>Geomview lets you manipulate objects with the mouse.  There are six
+different mouse motion modes: <em>Rotate</em>, <em>Translate</em>,
+<em>Cam Fly</em>, <em>Cam Zoom</em>, <em>Geom Scale</em>, and
+<em>Cam Orbit</em>.  The tools panel has a button for each of these
+modes; to switch modes, click on the corresponding button.  You can also
+select these through the <em>Motion Mode</em> browser on the
+<em>Main</em> panel.
+
+   <p>This section describes basic mouse interaction.  For details,
+see <a href="Commands.html#Commands">Commands</a>.
+
+   <div class="float">
+<a name="figtools"></a><img src="figs/tools.png" alt="figs/tools.png">
+
+   <p><strong class="float-caption">Figure 3.4: The Tools Panel.</strong></p></div>
+
+   <p>Each of the motion modes uses a common paradigm for how the motion is
+applied.  In particular, each depends on the current <em>target</em>
+object and the current <em>center</em> object.  These are explained in the
+following paragraphs.
+
+   <p>The current target object is shown in the <em>Target</em> field in the
+<em>Tools</em> panel.  This is the same as the selected object in the
+<em>Targets</em> browser in the <em>Main</em> panel, and you can
+change it by either selecting a new object in the browser, by typing
+a new entry in the field, or by picking an object in a camera
+window by double-clicking the right mouse button with the cursor over
+the object.
+
+   <p>The current center object is shown in the <em>Center</em> field in the
+<em>Tools</em> panel.  Its default value is the special word "target",
+which means that the center object is whatever the target object is. 
+You can change the center to any object by typing it in the <em>Center</em>
+field.  The origin of the center object is held fixed in <em>Rotate</em> and
+<em>Orbit</em> modes.  Normally the center object is one of the existing
+geoms listed in the <em>Targets</em> browser, and the actual center of
+rotations is the origin of that object's coordinate system. 
+It is possible, however, to select an arbitrary point of interest on
+an object as the center. For details, see <a href="Point-of-Interest.html#Point-of-Interest">Point of Interest</a>.
+
+   <p>It is also possible to toggle the button <em>BBox Center</em> to set the
+center of motion to the center of the current object's bounding
+box. Once toggled, the active geometry's bounding box center will become
+the center of motion. If you select another object, then the center of
+motion will become the center of that object's bounding box. Nothing
+changes when a camera or the <em>World</em> is selected; you have to
+type in the word <code>target</code> in the <em>Center</em> field to reset to
+the default.
+
+   <p>You apply a mouse motion by holding down either the left or middle mouse
+button with the cursor in a camera window and moving the mouse.  Most of
+the modes have <em>inertia</em>, which means that if you let go of the
+button while moving the mouse, the motion will continue.  It may be
+helpful to imagine the mouse cursor as being a gripper; when you hold a
+mouse button down, it grips the target object and you can move it.  When
+you let go of the mouse button, the gripper releases the object. 
+Letting go of the mouse button while moving the mouse is like throwing
+the object &mdash; the object continues moving independent of the mouse. 
+Inertia can be turned off; see the <em>Main</em> panel's <em>Motion</em> menu,
+described below.
+
+   <p>Generally, the left mouse button controls motion in the screen plane,
+while the middle mouse controls motion along or around the forward direction.
+
+   <p>Pressing the shift key while dragging with left or middle mouse buttons
+in most motion modes gives slow-speed motions, useful for fine adjustment.
+
+   <p>You can pick any point on an object (not just its origin) as the center of
+motion by holding down the shift key while clicking the right mouse button;
+this chooses a point of interest.
+
+     <dl>
+<dt><em>Rotate</em><dd>In <em>Rotate</em> mode, hold the left mouse button down to rotate the
+target object about the center object.  Rotation proceeds in the
+direction that you move the mouse.  Specifically, the axis of rotation
+passes through the origin of the center object, is parallel to the
+camera view plane, and is perpendicular to the direction of motion of
+the mouse.  When the center is "target", this means that the target
+object rotates about its own origin.
+
+     <p>The middle mouse button in <em>Rotate</em> mode rotates the target
+object about an axis perpendicular to the view plane.
+
+     <br><dt><em>Translate</em><dd>In <em>Translate</em> mode, hold the left mouse button down to translate
+the target object in the direction of mouse motion.  The middle mouse
+button translates the target along an axis perpendicular to the view
+plane.
+
+     <p>In Euclidean space, the center object is essentially irrelevant for
+translations.  In hyperbolic and spherical spaces, where translations
+have a unique axis, this axis is chosen to go through the origin of the
+center object.
+
+     <br><dt><em>Cam Fly</em><dd><em>Cam Fly</em> is a crude flight simulator that lets you fly around
+the scene.  It works by moving the camera. 
+Move the mouse while holding the left mouse button down to
+point the camera in a different direction.  To move forward or backward,
+hold down the middle button and move the mouse vertically.  Both of
+these motions have inertia; typically the easiest way to fly around a
+scene is to give the camera a slight forward push by letting go of the
+middle button while moving the mouse upward, and then using the left
+button to steer.
+
+     <p><em>Cam Fly</em> affects the camera window that the mouse is in; it
+ignores the target object and the center object.
+
+     <br><dt><em>Cam Orbit</em><dd><em>Cam Orbit</em> mode lets you rotate the current camera around the
+current center. The left mouse button does this rotation.  The middle
+mouse button in <em>Cam Orbit</em> mode acts as in
+<em>Cam Fly</em> mode: it moves the camera forward or backward.
+
+     <p>In general <em>Cam Orbit</em> does not move the target object, although
+if the current camera is selected as the target and the center is also
+the target, it will pivot that camera about itself just as in
+<em>Cam Fly</em> mode.
+
+     <br><dt><em>Cam Zoom</em><dd><em>Cam Zoom</em> mode lets you change the current camera's field of
+view with the mouse; hold the left mouse button down and move the mouse
+to change it.  The numeric value of the field of view is shown in the
+<em>FOV</em> field in the <em>Camera</em> panel.
+
+     <br><dt><em>Geom Scale</em><dd><em>Geom Scale</em> mode lets you enlarge or shrink a geom.  It operates
+on the target object if that object is a geom.  If the target is a
+camera, <em>Geom Scale</em> operates on the geom that was most recently
+the target object.  Moving the mouse while holding down the left mouse button
+scales the object either up or down, depending on the direction of
+mouse motion.  The center of the applied scaling transformation is the
+center object.
+
+     <p>Scaling is meaningful only in Euclidean space; attempts to scale are
+ignored in other spaces.
+
+     <p><em>Geom Scale</em> mode does not have inertia.
+
+   </dl>
+
+   <p>The <em>Stop</em>, <em>Look At</em>, <em>Center</em>, and <em>Reset</em>
+buttons on the <em>Tools</em> panel perform actions related to motions
+but do not change the current motion mode.
+
+     <dl>
+<dt><em>Stop</em><dd>The <em>Stop</em> button causes all motions to stop.  It affects all
+moving objects, not just the target object.  Its keyboard shortcut
+is <kbd>H</kbd>.
+
+     <p>The keyboard command <kbd>h</kbd>, which does not correspond to a
+panel button, stops the current motion for the target object only.
+
+     <br><dt><em>Look At</em><dd>The <em>Look At</em> button causes the current camera to be moved
+to a position such that it is looking at the target object, and such
+that the target object more or less fills the window.
+
+     <p>The Look At command is unreliable in non-Euclidean spaces.
+
+     <br><dt><em>Center</em><dd>The <em>Center</em> button undoes the target object's transformation,
+moving it back to its home position, which is where it was when you
+originally loaded it into Geomview.
+
+     <br><dt><em>Reset</em><dd>The <em>Reset</em> button stops all motion and causes all objects to
+move back to their home positions.
+
+   </dl>
+
+   <p>The <em>Tools</em> panel also sports a <em>Main</em> button, to invoke the
+main panel in case it was dismissed or buried, and a <em>Done</em> button
+to close the <em>Tools</em> panel.
+
+   <p>The <em>Main</em> panel's <em>Motion</em> menu has special controls
+affecting how mouse motions are interpreted; the toggles are also
+accessible through a GCL command. See <a href="ui_002dmotion.html#ui_002dmotion"><code>(ui-motion ...)</code></a>.
+
+     <dl>
+<dt><em>[ui] Inertia</em><dd>Normally, moving objects have inertia: if the mouse is still moving
+when the button is released, the selected object continues to move. 
+When <em>Inertia</em> is off, objects cease to move as soon as you release
+the mouse.
+
+     <br><dt><em>[uc] Constrain Motion</em><dd>It's sometimes handy to move an object in a direction aligned with a
+coordinate axis: exactly horizontally or vertically.  Selecting
+<em>Constrain Motion</em> changes the interpretation of mouse motions
+to allow this; approximately-horizontal or approximately-vertical mouse dragging
+becomes exactly horizontal or vertical motion.  Note that the motion is
+still along the X or Y axes of the camera in which you move the mouse,
+not necessarily the object's own coordinate system.
+
+     <br><dt><em>[uo] Own Coordinates</em><dd>It's sometimes handy to move objects with respect to the coordinate system
+where they were defined, rather than with respect to some camera's view.  While
+<em>Own Coordinates</em> is selected, all motions are interpreted that way:
+dragging the mouse rightward in translate mode moves the object in its own +X
+direction, and so on.  May be especially useful in conjunction with
+the <em>Constrain Motion</em> button.
+
+   </dl>
+
+<!-- ================================================================ -->
+<ul class="menu">
+<li><a accesskey="1" href="Point-of-Interest.html#Point-of-Interest">Point of Interest</a>:            Point of Interest. 
+</ul>
+
+   </body></html>
+

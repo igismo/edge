@@ -1,0 +1,76 @@
+<html lang="en">
+<head>
+<title>COMMENT - Geomview Manual</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Geomview Manual">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Object-File-Formats.html#Object-File-Formats" title="Object File Formats">
+<link rel="prev" href="DISCGRP.html#DISCGRP" title="DISCGRP">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="COMMENT"></a>
+<p>
+Previous:&nbsp;<a rel="previous" accesskey="p" href="DISCGRP.html#DISCGRP">DISCGRP</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Object-File-Formats.html#Object-File-Formats">Object File Formats</a>
+<hr>
+</div>
+
+<h4 class="subsection">4.2.14 COMMENT Objects</h4>
+
+<p>The COMMENT object is a mechanism for encoding arbitrary data within an
+OOGL object. It can be used to keep track of data or pass data back and
+forth between external modules.
+
+   <p>Syntax:
+
+<pre class="example">     COMMENT                 # key word
+     
+     <var>name</var> <var>type</var>   # individual name and type specifier
+     { ... }             # arbitrary data
+</pre>
+   <p>The data, which must be enclosed by curly braces, can include anything
+except unbalanced curly braces.  The <var>type</var> field can be used to
+identify data of interest to a particular program through naming
+conventions.
+
+   <p><code>COMMENT</code> objects are intended to be associated with other objects
+through inclusion in a <code>LIST</code> object. (See <a href="LIST.html#LIST">LIST</a>.)  The "#" OOGL
+comment syntax does not suffice for data exchange since these comments
+are stripped when an OOGL object is read in to Geomview.  The
+<code>COMMENT</code> object is preserved when loaded into Geomview and is
+written out intact.
+
+   <p>Here is an example associating a WorldWide Web URL with a piece of
+geometry:
+
+<pre class="example">     { LIST
+      { &lt; Tetrahedron}
+      {COMMENT GCHomepage HREF { http://www.geomview.org/ }}
+     }
+</pre>
+   <p>A binary <code>COMMENT</code> format is accepted. Its format is not consistent
+with the other OOGL binary formats. See <a href="Binary-format.html#Binary-format">Binary format</a>. The
+<code>name</code> and <code>type</code> are followed by
+
+<pre class="example">     <var>N</var> <var>Byte1</var> <var>Byte2</var> ... <var>ByteN</var>
+</pre>
+   <p>instead of data enclosed in curly braces.
+
+<!-- ================================================================ -->
+   </body></html>
+

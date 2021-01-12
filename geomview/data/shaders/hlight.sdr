@@ -1,0 +1,109 @@
+#!version 2.2.6
+light
+#!parameters:
+uniform	float	k1	=	0.5
+uniform	float	intensity	=	1
+uniform	color	lightcolor	=	 [ 1 1 .1 ]
+uniform	point	from	=	"camera"  [ 0 0 0 ]
+#!variables:
+uniform	vector	temporary_0
+varying	float	inpro
+varying	float	hdis
+varying	float	d
+varying	float	PP
+varying	float	QQ
+varying	float	PQ
+varying	float	tmp
+varying	float	PdotP
+varying	vector	sP
+varying	vector	temporary_1
+varying	vector	temporary_2
+varying	float	temporary_3
+varying	float	temporary_4
+varying	float	temporary_5
+uniform	float	temporary_6
+uniform	float	temporary_7
+varying	float	temporary_8
+varying	float	temporary_9
+varying	float	temporary_10
+varying	float	temporary_11
+varying	vector	temporary_12
+uniform	vector	temporary_13
+varying	vector	temporary_14
+#!Init:
+	vfromf            	temporary_0 0 0 0
+	pfrom             	from "camera" temporary_0
+	return            
+#!Code:
+	vfromf            	temporary_0 0
+	vuvector           Cl temporary_0
+	vuvector           temporary_1 from
+	illuminate        	 temporary_1  #!Label8
+	vuvector           temporary_2 from
+	addvv             	sP temporary_2 L
+	dot               	PdotP sP sP
+	vufloat            temporary_4 1.0
+	fegt              	temporary_3 PdotP temporary_4
+	if                	temporary_3 #!Label9
+	vufloat            temporary_4 1.0
+	sqrt	("f=f")  temporary_5  PdotP 
+	divff             	d temporary_4 temporary_5
+	xcomp	("f=p")  temporary_5  sP 
+	mulff             	temporary_4 d temporary_5
+	setxcomp	("o=Vf")  sP  temporary_4 
+	ycomp	("f=p")  temporary_5  sP 
+	mulff             	temporary_4 d temporary_5
+	setycomp	("o=Vf")  sP  temporary_4 
+	zcomp	("f=p")  temporary_5  sP 
+	mulff             	temporary_4 d temporary_5
+	setzcomp	("o=Vf")  sP  temporary_4 
+	dot               	PdotP sP sP
+#!Label9:
+	endif             
+	vufloat            temporary_3 1.0
+	subff             	PP temporary_3 PdotP
+	vufloat            temporary_4 0
+	flt               	temporary_3 PP temporary_4
+	if                	temporary_3 #!Label11
+	vufloat            PP 0
+#!Label11:
+	endif             
+	dot               	temporary_7 from from
+	subff             	temporary_6 1.0 temporary_7
+	vufloat            QQ temporary_6
+	vufloat            temporary_3 1.0
+	vuvector           temporary_2 from
+	dot               	temporary_4 sP temporary_2
+	subff             	PQ temporary_3 temporary_4
+	mulff             	d PP QQ
+	vufloat            temporary_4 0
+	fgt               	temporary_3 d temporary_4
+	if                	temporary_3 #!Label14
+	sqrt	("f=f")  temporary_4  d 
+	divff             	inpro PQ temporary_4
+	mulff             	temporary_10 inpro inpro
+	vufloat            temporary_11 1
+	subff             	temporary_9 temporary_10 temporary_11
+	abs	("f=f")  temporary_8  temporary_9 
+	sqrt	("f=f")  temporary_5  temporary_8 
+	addff             	temporary_4 inpro temporary_5
+	log	("f=f")  hdis  temporary_4 
+	vfromf            	temporary_13 intensity
+	mulvv             	temporary_0 temporary_13 lightcolor
+	vuvector           temporary_12 temporary_0
+	vufloat            temporary_9 k1
+	mulff             	temporary_8 temporary_9 hdis
+	negf              	temporary_5 temporary_8
+	exp	("f=f")  temporary_4  temporary_5 
+	vfromf            	temporary_14 temporary_4
+	mulvv             	temporary_2 temporary_12 temporary_14
+	addvv             	Cl Cl temporary_2
+#!Label14:
+	else              	#!Label13
+	vfromf            	temporary_0 0
+	vuvector           Cl temporary_0
+#!Label13:
+	endif             
+#!Label8:
+	endilluminate     
+	return            

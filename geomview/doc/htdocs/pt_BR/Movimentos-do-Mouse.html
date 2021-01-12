@@ -1,0 +1,237 @@
+<html lang="en">
+<head>
+<title>Movimentos do Mouse - Manual do Geomview</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Manual do Geomview">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Interacao.html#Interacao" title="Interacao">
+<link rel="prev" href="Chamando.html#Chamando" title="Chamando">
+<link rel="next" href="Aparencia.html#Aparencia" title="Aparencia">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Movimentos-do-Mouse"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Aparencia.html#Aparencia">Aparencia</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Chamando.html#Chamando">Chamando</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Interacao.html#Interacao">Interacao</a>
+<hr>
+</div>
+
+<h3 class="section">3.5 Usando o Mouse para Controlar Objetos</h3>
+
+<p>Geomview permite a voc&ecirc; controlar objetos com o mouse.  Existem seis
+diferentes modos de movimento do mouse: rota&ccedil;&atilde;o (<em>Rotate</em>), transla&ccedil;&atilde;o (<em>Translate</em>),
+v&ocirc;o da c&acirc;mera (<em>Cam Fly</em>), zoom da c&acirc;mera (<em>Cam Zoom</em>), homotetia de um objeto geom&eacute;trico (<em>Geom Scale</em>), e
+&oacute;rbita de c&acirc;mera (<em>Cam Orbit</em>).  O painel de ferramentas tem um bot&atilde;o para cada um desses
+modos; para trocar os modos, clique sobre o bot&atilde;o correspondente.  voc&ecirc; pode tamb&eacute;m
+selecionar um novo modo atrav&eacute;s do navegador de modos de movimento (<em>Motion Mode</em>) no
+painel principal (<em>Main</em>).
+
+   <p>Essa se&ccedil;&atilde;o descreve a intera&ccedil;&atilde;o b&aacute;sica com o mouse.  Para detalhes,
+veja <a href="Comandos.html#Comandos">Comandos</a>.
+
+   <div class="float">
+<a name="figtools"></a><img src="figs/tools.png" alt="figs/tools.png">
+
+   <p><strong class="float-caption">Figura 3.4: O Painel de Ferramentas.</strong></p></div>
+
+   <p>Cada um dos modos de movimento usa um paradigma comum para como o movimento &eacute;
+aplicado.  Em particular, cada modo de movimento depende do objeto alvo (<em>target</em>)
+atual e do atual objeto do centro (<em>center</em>).  O objeto alvo atual e o atual objeto do centro s&atilde;o explicados
+nos par&aacute;grafos seguintes.
+
+   <p>O objeto alvo atual &eacute; mostrado no campo <em>Target</em> no
+painel de ferramentas (<em>Tools</em>).  Isso &eacute; o mesmo que o objeto selecionado no
+navegador de alvos (<em>Targets</em>) no painel principal (<em>Main</em>), e voc&ecirc; pode
+mudar o alvo ou selecionando um novo objeto no navegador, digitando
+uma nova entrada no campo, ou selecionando um objeto na janela
+de c&acirc;mera duplo-clicando no bot&atilde;o direito do mouse com o cursor sobre
+o objeto.
+
+   <p>O atual objeto do centro &eacute; mostrado no campo <em>Center</em> no
+painel de ferramentas(<em>Tools</em>).  Seu valor padr&atilde;o &eacute; a palavra especial "target",
+que significa que o objeto do centro &eacute; o objeto que estiver designado como objeto alvo. 
+Voc&ecirc; pode mudar o objeto atual do centro para qualquer objeto digitando seu nome no campo
+<em>Center</em>.  A or&iacute;gem do objeto do centro &eacute; mantida fixa no modo rota&ccedil;&atilde;o <em>Rotate</em> e
+no modo <em>Orbit</em>.  Normalmente o objeto do centro &eacute; um dos objetos geom&eacute;tricos
+(geoms) existentes listados no navegador de alvos (<em>Targets</em>), o centro atual das
+rota&ccedil;&otilde;es &eacute; a or&iacute;gem daquele sistema de coordenadas daquele objeto. 
+&Eacute; poss&iacute;vel, todavia, selecionar um ponto arbitr&aacute;rio de interesse sobre
+um objeto como o centro. Para detalhes, veja <a href="Ponto-de-Interesse.html#Ponto-de-Interesse">Ponto de Interesse</a>.
+
+   <p>Isso tamb&eacute;m &eacute; poss&iacute;vel mudando o bot&atilde;o <em>BBox Center</em> para escolher o
+centro de movimento como sendo o centro do objeto atual da caixa
+associada. Uma vez modificado o centro da caixa geom&eacute;trica ativa associada ir&aacute; tornar-se
+o centro do movimento, se voc&ecirc; selecionar outro objeto, ent&atilde;o o centro do
+movimento ir&aacute; tornar-se o centro da caixa associada &agrave; aquele objeto. Nenhuma modifica&ccedil;&atilde;o
+ocorrer&aacute; quando uma c&acirc;mera ou o objeto mundo (<em>World</em>) for selecionado; voc&ecirc; tem que
+digitar a palavra <code>target</code> no campo <em>Center</em> para retornar ao
+valor padr&atilde;o.
+
+   <p>Voc&ecirc; aplica um movimento de mouse pressionando ou o bot&atilde;o esquerdo ou o bot&atilde;o do meio
+do mouse com o cursor em uma janela de c&acirc;mera e movendo o mouse.  A maioria dos
+modos de movimento possui in&eacute;rcia (<em>inertia</em>), que significa que se voc&ecirc; soltar o
+bot&atilde;o enquanto move o mouse, o movimento ir&aacute; continuar.  Para imaginar a in&eacute;rcia pode ser
+&uacute;til imaginar o cursor do mouse como sendo uma al&ccedil;a; quando voc&ecirc; pressiona um
+bot&atilde;o do mouse para baixo, o mouse agarra firmemente no objeto alvo e voc&ecirc; pode mover esse objeto.  Quando
+voc&ecirc; libera o bot&atilde;o do mouse, a al&ccedil;a libera o objeto. 
+Liberando o bot&atilde;o do mouse enquanto move o mesmo funciona como abandonar
+o objeto &mdash; o objeto continua movendo-se independentemente do mouse. 
+In&eacute;rcia pode ser desligada; veja o menu de movimento (<em>Motion</em>) no painel principal (<em>Main</em>),
+descrito abaixo.
+
+   <p>Geralmente, o bot&atilde;o esquerdo do mouse controla movimento no plano da tela,
+enquanto o bot&atilde;o m&eacute;dio do mouse controla movimento ao longo ou em torno da dire&ccedil;&atilde;o de avan&ccedil;o.
+
+   <p>Pressionando o tecla "shift" enquanto arrasta com o bot&atilde;o esquerdo ou m&eacute;dio do mouse
+na maioria dos modos de movimento fornece movimentos de baixa velocidade , &uacute;til para ajustes finos.
+
+   <p>Voc&ecirc; pode selecionar qualquer ponto sobre um objeto (n&atilde;o apenas sua or&iacute;gem) como centro do
+movimento pressionando a tecla "shift" enquanto clica no bot&atilde;o direito do mouse;
+isso escolhe o ponto de interesse.
+
+     <dl>
+<dt><em>Rotate</em><dd>No modo rota&ccedil;&atilde;o (<em>Rotate</em>), pressione o bot&atilde;o esquerdo do mouse para rotacionar o
+objeto alvo en torno do objeto do centro.  A rota&ccedil;&atilde;o ocorre na
+dire&ccedil;&atilde;o que voc&ecirc; move o mouse.  Especificamente, o eixo de rota&ccedil;&atilde;o
+passa atrav&eacute;s da or&iacute;gem do objeto do centro, &eacute; paralelo ao
+plano de vis&atilde;o da c&acirc;mera, e &eacute; perpendicular &agrave; dire&ccedil;&atilde;o do movimento do
+mouse.  Quando o centro for o alvo ("target"), isso significa que o objeto
+alvo rotaciona em torno de sua pr&oacute;pria or&iacute;gem.
+
+     <p>O bot&atilde; do meio do mouse no modo de movimento tipo rota&ccedil;&atilde;o (<em>Rotate</em>) rotaciona o objeto
+alvo em torno de um eixo perpendicular ao plano de vis&atilde;o.
+
+     <br><dt><em>Translate</em><dd>No modo transla&ccedil;&atilde;o (<em>Translate</em>), mantenha pressionado o bot&atilde;o esquerdo do mouse para transladar
+o objeto alvo na dire&ccedil;&atilde;o do movimento do mouse.  O bot&atilde;o do meio do
+mouse translada o alvo ao longo de um eixo perpendicular ao plano de
+visualiza&ccedil;&atilde;o.
+
+     <p>No espa&ccedil;o Euclideano, o objeto do centro &eacute; essencialmente irrelevante para
+transla&ccedil;&otilde;es.  Nos espa&ccedil;os hiperb&oacute;licos e esf&eacute;ricos, onde transla&ccedil;&otilde;es
+possuem um &uacute;nico eixo, esse eixo &eacute; escolhido para ir atrav&eacute;s da or&iacute;gem do
+objeto do centro.
+
+     <br><dt><em>Cam Fly</em><dd>O V&ocirc;o de C&acirc;mera (<em>Cam Fly</em>) &eacute; um simulador de v&ocirc;o muito simples que permite a voc&ecirc; voar em torno
+da cena.  <em>Cam Fly</em> trabalha atrav&eacute;s do movimento da c&acirc;mera. 
+Movimente o mouse enquanto mant&eacute;m pressionado o bot&atilde;o esquerdo do mouse para
+posicionar a c&acirc;mera em uma dire&ccedil;&atilde;o diferente.  Para mover adiante ou para tr&aacute;s,
+mantenha pressionado o bot&atilde; do meio e mova o mouse verticalmente.  Os dois movimentos
+aqui descritos possuem in&eacute;rcia; tipicamente o caminho mais f&aacute;cil para voar em torno de uma
+cena &eacute; fornecer a c&acirc;mera um passo adiante pressionando o
+bot&atilde; do meio enquanto move-se o mouse para cima, e ent&atilde;o usar o bot&atilde;o
+esquerdo para pilotar.
+
+     <p><em>Cam Fly</em> afeta a janela de c&acirc;mera onde o mouse est&aacute; correntemente posicionado; <em>Cam Fly</em>
+ignora o objeto alvo e o objeto do centro.
+
+     <br><dt><em>Cam Orbit</em><dd>O modo &oacute;rbita de C&acirc;mera (<em>Cam Orbit</em>) permite a voc&ecirc; rotacionar a c&acirc;mera atual em torno do
+centro atual. O bot&atilde;o esquerdo do mouse faz essa rota&ccedil;&atilde;o.  O bot&atilde;o do
+do meio do mouse no modo <em>Cam Orbit</em> atua da mesma forma que no
+modo <em>Cam Fly</em>: O bot&atilde;o do do meio do mouse move a c&acirc;mera para adiante e para tr&aacute;s.
+
+     <p>Em geral <em>Cam Orbit</em> n&atilde;o move o objeto alvo, embora
+se a c&acirc;mera atual for selecionada como o alvo e o centro for tamb&eacute;m
+o alvo, <em>Cam Orbit</em> ir&aacute; apenas pivotar aquela c&acirc;mera sobre s&iacute; mesma como no
+modo <em>Cam Fly</em>.
+
+     <br><dt><em>Cam Zoom</em><dd>O modo Zoom de C&acirc;mera (<em>Cam Zoom</em>) permite a voc&ecirc; modificar o campo atual de
+vis&atilde;o com o mouse; mantenha pressionado o bot&atilde;o esquerdo do mouse e mova o mouse
+para modificar o campo de vis&atilde;o.  O valor num&eacute;rico do campo de vis&atilde;o &eacute; mostrado no
+campo <em>FOV</em> (field of view) no painel de c&acirc;mera (<em>Camera</em>).
+
+     <br><dt><em>Geom Scale</em><dd>O modo <em>Geom Scale</em> permite a voc&ecirc; ampliar ou diminuir um objeto geom&eacute;trico (geom).  <em>Geom Scale</em> atua
+sobre o objeto alvo se aquele objeto for um geom.  Se o alvo for uma
+c&acirc;mera, <em>Geom Scale</em> atual sobre o geom que foi o objeto alvo
+mais recentemente.  Movendo o mouse enquanto mantem-se pressionado o bot&atilde;o esquerdo do mouse
+homotetiza-se o objeto ou ampliando ou reduzindo o mesmo, dependendo da dire&ccedil;&atilde;o do
+movimento do mouse.  o centro da transforma&ccedil;&atilde;o homot&eacute;tica aplicada &eacute; o
+objeto do centro.
+
+     <p>Homotetia possui significado somente no espa&ccedil;o Euclideano; tentativas do palicar homotetia s&atilde;o
+ignoradas em outros espa&ccedil;os.
+
+     <p>O modo <em>Geom Scale</em> n&atilde;o possui in&eacute;rcia.
+
+   </dl>
+
+   <p>Os bot&otilde;es <em>Stop</em>, <em>Look At</em>, <em>Center</em>, e
+<em>Reset</em> no painel de ferramentas (<em>Tools</em>) executam a&ccedil;&otilde;es relacionadas a movimentos
+mas n&atilde;o modificam o modo atual de movimento (nota do tradutor: de rota&ccedil;&atilde;o para transla&ccedil;&atilde;o por exemplo).
+
+     <dl>
+<dt><em>Stop</em><dd>O bot&atilde;o <em>Stop</em> faz com que cessem todos os movimentos.  O bot&atilde;o <em>Stop</em> afeta todos
+os objetos em movimento, n&atilde;o apenas o objeto alvo.  Sua tecla de atalho
+&eacute; <kbd>H</kbd>.
+
+     <p>O comando de teclado <kbd>h</kbd>, que n&atilde;o corresponde a um
+bot&atilde;o do painel, cessa o movimento atual para o objeto alvo somente.
+
+     <br><dt><em>Look At</em><dd>O bot&atilde;o <em>Look At</em> faz com que a c&acirc;mera atual seja movida
+para uma posi&ccedil;&atilde;o tal que a referida c&acirc;mera esteja olhando para o objeto alvo, e de forma
+que o objeto alvo mais ou menos ajuste-se &agrave; janela.
+
+     <p>O comando <em>Look At</em> n&atilde;o funciona perfeitamente em espa&ccedil;os n&atilde;o Euclideanos.
+
+     <br><dt><em>Center</em><dd>O bot&atilde;o <em>Center</em> desfaz transforma&ccedil;&atilde;o do objeto alvo,
+movendo o objeto alvo de volta &agrave; sua posi&ccedil;&atilde;o inicial padr&atilde;o, que &eacute; onde ele estava quando voc&ecirc;
+originalmente o chamou a partir do Geomview.
+
+     <br><dt><em>Reset</em><dd>O bot&atilde;o <em>Reset</em> cessa todo movimento e faz com que todos os objetos sejam
+movidos de vota &agrave;s suas posi&ccedil;&otilde;es iniciais padr&atilde;o.
+
+   </dl>
+
+   <p>O painel de ferramentas (<em>Tools</em>) possui um bot&atilde;o <em>Main</em>, para invocar o
+painel principal no caso de esse painel ter sido dispensado ou sepultado, e um bot&atilde;o <em>Done</em>
+para fechar o painel de ferramentas <em>Tools</em>.
+
+   <p>O painel principal do menu de movimento (<em>Motion</em>) tem controles especiais
+que afetam como movimentos do mouse s&atilde;o interpretados; as modifica&ccedil;&otilde;es s&atilde;o tamb&eacute;m
+acess&iacute;veis atrav&eacute;s de comandos GCL. See <a href="ui_002dmotion.html#ui_002dmotion"><code>(ui-motion ...)</code></a>.
+
+     <dl>
+<dt><em>[ui] Inertia</em><dd>Normalmente, ao mover objetos tem-se in&eacute;rcia: se o mouse estiver ainda se movendo
+quando o bot&atilde;o for liberado, o objeto selecionado continua a mover-se. 
+Quando a in&eacute;rcia (<em>Inertia</em>) for desabilitada, objetos cessam seu movimento no momento em que voc&ecirc; libera
+o mouse.
+
+     <br><dt><em>[uc] Constrain Motion</em><dd>&Eacute; necess&aacute;rio algumas vezes ter ao alcance da m&atilde;o o movimento de um objeto em uma dire&ccedil;&atilde;o alinhada com um
+eixo coordenado: exatamente na horizontal ou na vertical.  Selecionando
+restringir movimento (<em>Constrain Motion</em>) a interpreta&ccedil;&atilde;o de movimentos do mouse &eacute; modificada
+para permitir isso; arrastros de mouse aproximadamente horizontais ou aproximadamente verticais
+transformam-se em movimentos exatamente horizontais ou exatamente verticais.  Note que o movimento &eacute;
+ainda ao longo dos eixos X ou Y da c&acirc;mera na qual voc&ecirc; move o mouse,
+n&atilde;o necess&aacute;riamente no sistema de coordenadas do objeto.
+
+     <br><dt><em>[uo] Own Coordinates</em><dd>&Eacute; necess&aacute;rio algumas vezes ter ao alcance da m&atilde;o o movimento de objetos objetos com rela&ccedil;&atilde;o ao sistema de coordenadas
+onde o referido objeto foi definido, em lugar de com rela&ccedil;&atilde;o ao sistema de coordenadas da c&acirc;mera atrav&eacute;s da qual esse objeto est&aacute; sendo visto.  Enquanto
+<em>Own Coordinates</em> estiver selecionado, todos os movimentos s&atilde;o interpretados da forma citada nesse item:
+arrastando o mouse para a direita no modo transla&ccedil;&atilde;o corresponde a mover o objeto em sua pr&oacute;pria dire&ccedil;&atilde;o
++X, e assim por diante.  Pode ser especialmente &uacute;til conjuntamente com
+o bot&atilde;o Restringir Movimento (<em>Constrain Motion</em>).
+
+   </dl>
+
+<!-- ================================================================ -->
+<ul class="menu">
+<li><a accesskey="1" href="Ponto-de-Interesse.html#Ponto-de-Interesse">Ponto de Interesse</a>:            Pontos de Interesse. 
+</ul>
+
+   </body></html>
+

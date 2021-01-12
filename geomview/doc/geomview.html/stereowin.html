@@ -1,0 +1,55 @@
+<html lang="en">
+<head>
+<title>stereowin - Geomview Manual</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Geomview Manual">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="GCL-Reference.html#GCL-Reference" title="GCL Reference">
+<link rel="prev" href="space.html#space" title="space">
+<link rel="next" href="time_002dinterests.html#time_002dinterests" title="time-interests">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="stereowin"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="time_002dinterests.html#time_002dinterests">time-interests</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="space.html#space">space</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="GCL-Reference.html#GCL-Reference">GCL Reference</a>
+<hr>
+</div>
+
+<h4 class="subsection">7.2.135 stereowin</h4>
+
+<p><a name="index-stereowin-143"></a>
+     <dl>
+<dt><code>(stereowin CAM-ID [no|horizontal|vertical|colored] [gapsize])</code><dd>Configure CAM-ID as a stereo window. 
+no: entire window is a single pane, stereo disabled<br>
+horizontal: split left/right: left is stereo eye#0, right is #1.<br>
+vertical: split top/bottom: bottom is eye#0, top is #1.<br>
+colored: panes overlap, red is stereo eye#0, cyan is #1.
+
+     <p>A gap of <code>gapsize</code> pixels is left between subwindows;
+if omitted, subwindows are adjacent. 
+If both layout and gapsize are omitted, e.g. (stereowin CAM-ID),
+returns current settings as a <code>(stereowin ...)</code> command list. 
+This command doesn't set stereo projection; use <code>merge camera</code> or
+<code>camera</code> to set the stereyes transforms, and <code>merge window</code> or
+<code>window</code> to set the pixel aspect ratio &amp; window position if needed. 
+</dl>
+
+   </body></html>
+

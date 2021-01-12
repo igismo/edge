@@ -1,0 +1,75 @@
+<html lang="en">
+<head>
+<title>Binary format - Geomview Manual</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Geomview Manual">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Conventions.html#Conventions" title="Conventions">
+<link rel="prev" href="ND-Transformation-matrices.html#ND-Transformation-matrices" title="ND Transformation matrices">
+<link rel="next" href="References.html#References" title="References">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Binary-format"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="References.html#References">References</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="ND-Transformation-matrices.html#ND-Transformation-matrices">ND Transformation matrices</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Conventions.html#Conventions">Conventions</a>
+<hr>
+</div>
+
+<h4 class="subsection">4.1.8 Binary format</h4>
+
+<p>Many OOGL objects accept binary as well as ASCII file formats. 
+These files begin with the usual ASCII token (e.g. <code>CQUAD</code>)
+followed by the word <code>BINARY</code>. 
+Binary data begins at the byte following the first newline after
+<code>BINARY</code>.  White space and a single comment may intervene, e.g.
+
+<pre class="example">     OFF BINARY      # binary-format "OFF" data follows
+</pre>
+   <p>Binary data comprise 32-bit integers and 32-bit IEEE-format floats, both
+in big-endian format (i.e., with most significant byte first).  This is
+the native format for 'int's and 'float's on Sun-3's, Sun-4's, and
+Irises, among others.
+
+   <p>Binary data formats resemble the corresponding ASCII formats, with ints
+and floats in just the places you'd expect.  There are some exceptions
+though, specifically in the <code>QUAD</code>, <code>OFF</code> and <code>COMMENT</code>
+file formats.  Details are given in the individual file format
+descriptions.  See <a href="QUAD.html#QUAD">QUAD</a>, See <a href="OFF.html#OFF">OFF</a>, and See <a href="COMMENT.html#COMMENT">COMMENT</a>.
+
+   <p>Binary OOGL objects may be freely mixed in ASCII object streams:
+
+<pre class="example">     LIST
+     { = MESH BINARY
+     ... binary data for mesh here ...
+     }
+     { = QUAD
+             1 0 0   0 0 1   0 1 0  0 1 0
+     }
+</pre>
+   <p>Note that ASCII data resumes immediately following the last byte of
+binary data.
+
+   <p>Naturally, it's impossible to embed comments inside a binary-format OOGL
+object, though comments may appear in the header before the beginning of
+binary data.
+
+<!--  -->
+   </body></html>
+

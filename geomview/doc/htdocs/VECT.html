@@ -1,0 +1,106 @@
+<html lang="en">
+<head>
+<title>VECT - Geomview Manual</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Geomview Manual">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Object-File-Formats.html#Object-File-Formats" title="Object File Formats">
+<link rel="prev" href="OFF.html#OFF" title="OFF">
+<link rel="next" href="SKEL.html#SKEL" title="SKEL">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="VECT"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="SKEL.html#SKEL">SKEL</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="OFF.html#OFF">OFF</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Object-File-Formats.html#Object-File-Formats">Object File Formats</a>
+<hr>
+</div>
+
+<h4 class="subsection">4.2.6 VECT Files</h4>
+
+<p>The conventional suffix for <code>VECT</code> files is <samp><span class="file">.vect</span></samp>.
+
+   <p>Syntax:
+
+<pre class="example">     [4]VECT
+     <var>NPolylines</var>  <var>NVertices</var>  <var>NColors</var>
+     
+     <var>Nv[0]</var> ... <var>Nv[NPolylines-1]</var>     # number of vertices
+                                                # in each polyline
+     
+     <var>Nc[0]</var> ... <var>Nc[NPolylines-1]</var>     # number of colors supplied
+                                                # in each polyline
+     
+     <var>Vert[0]</var> ... <var>Vert[NVertices-1]</var>  # All the vertices
+                                                # (3*NVertices floats)
+     
+     <var>Color[0]</var> ... <var>Color[NColors-1]</var>  # All the colors
+                                                # (4*NColors floats, RGBA)
+</pre>
+   <p><code>VECT</code> objects represent lists of polylines (strings of connected
+line segments, possibly closed).  A degenerate polyline can be used to
+represent a point.
+
+   <p>A <code>VECT</code> file begins with the key word <code>VECT</code> or <code>4VECT</code>
+and three integers: <var>NLines</var>, <var>NVertices</var>, and <var>NColors</var>. 
+Here <var>NLines</var> is the number of polylines in the file,
+<var>NVertices</var> the total number of vertices, and <var>NColors</var> the
+number of colors as explained below.
+
+   <p>Next come <var>NLines</var> <b>16-bit</b> integers
+
+<div align="center"><var>Nv[0]</var> <var>Nv[1]</var> <var>Nv[2]</var> <small class="dots">...</small> <var>Nv[NLines-1]</var></div>
+
+   <p>giving the number of vertices in each polyline.  A negative number
+indicates a closed polyline; 1 denotes a single-pixel point.  The sum
+(of absolute values) of the <var>Nv[i]</var> must equal <var>NVertices</var>.
+
+   <p>Next come <var>NLines</var> more <b>16-bit</b> integers <var>Nc[i]</var>: the number
+of colors in each polyline.  Normally one of three values:
+
+     <dl>
+<dt>0<dd>No color is specified for this polyline.  It's drawn in the same color
+as the previous polyline. 
+<br><dt>1<dd>A single color is specified.  The entire polyline is drawn in that
+color. 
+<br><dt>abs(<var>Nv[i]</var>)<dd>Each vertex has a color.  Either each segment is drawn in the
+corresponding color, or the colors are smoothly interpolated along the
+line segments, depending on the implementation. 
+</dl>
+
+   <p>Next come <var>NVertices</var> groups of 3 or 4 floating-point numbers: the
+coordinates of all the vertices.  If the keyword is <var>4VECT</var> then
+there are 4 values per vertex.  The first abs(<var>Nv[0]</var>) of them form
+the first polyline, the next abs(<var>Nv[1]</var>) form the second and so on.
+
+   <p>Finally <var>NColors</var> groups of 4 floating-point numbers give red,
+green, blue and alpha (opacity) values.  The first <var>Nc[0]</var> of them
+apply to the first polyline, and so on.
+
+   <p>A <var>VECT BINARY</var> format is accepted; see <a href="Binary-format.html#Binary-format">Binary format</a>.  The
+binary format exactly follows the ASCII format, with 32-bit Big-Endian
+integers where ordinary integer numbers appear, and with <b>16-bit</b>
+Big-Endian integers where 16-bit integers appear; 32-bit Big-Endian
+floats where real values appear.  <b>BIG FAT NOTE:</b> The vertex counts
+<var>Nv[i]</var> and the color counts <var>Nc[i]</var> are <b>16-bit</b> Big-Endian
+integers.
+
+<!--  -->
+   </body></html>
+

@@ -1,0 +1,89 @@
+<html lang="en">
+<head>
+<title>Unix Binary Detail - Geomview Manual</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Geomview Manual">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Unix-Binary-Installation.html#Unix-Binary-Installation" title="Unix Binary Installation">
+<link rel="prev" href="Unix-Binary-Installation.html#Unix-Binary-Installation" title="Unix Binary Installation">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Unix-Binary-Detail"></a>
+<p>
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Unix-Binary-Installation.html#Unix-Binary-Installation">Unix Binary Installation</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Unix-Binary-Installation.html#Unix-Binary-Installation">Unix Binary Installation</a>
+<hr>
+</div>
+
+<h4 class="subsection">10.1.1 Details of the Unix Binary Installation</h4>
+
+<blockquote>
+<b>BUG:</b> This section is out of date. <code>Geomview</code> follows the
+GNU-installation habits, data goes to <samp><span class="file">PREFIX/share/geomview/</span></samp>,
+user executables to <samp><span class="file">PREFIX/bin/</span></samp>, private executables to
+<samp><span class="file">PREFIX/libexec/geomview/</span></samp>, libraries to <samp><span class="file">PREFIX/lib/</span></samp> where
+<code>PREFIX</code> denotes the installation prefiex specified for the
+<samp><span class="file">TOPSRCDIR/configure</span></samp> script. Please have a look at the files
+<samp><span class="file">TOPSRCDIR/INSTALL</span></samp> and <samp><span class="file">TOPSRCDIR/INSTALL.Geomview</span></samp> for
+installation instructions. 
+</blockquote>
+
+   <p>The <code>install</code> script should be self-explanatory; just run it and
+answer the questions.  This section gives some details for system
+administrators and other users who may want to know more about the
+installation.
+
+   <p>The installation is actually done by <code>make</code>; the <code>install</code>
+script queries the user for the settings of the following <code>make</code>
+variables and then invokes <code>make install</code>.
+
+     <dl>
+<dt><code>GEOMROOT</code>:<dd>the absolute pathname of the Geomview root directory.  The
+<code>geomview</code> shell script, which is what users invoke to run
+Geomview, uses this to set various environment variables that Geomview
+needs.  It is very important that this be an <em>absolute</em> pathname
+&mdash; i.e. it should start with a '/'.
+
+     <br><dt><code>BINDIR</code>:<dd>a directory where executable files are installed.  The <code>geomview</code>
+shell script goes here, as well as various other auxiliary programs that
+can be used in conjunction with <code>geomview</code>.  This should be a
+directory that is on users' <samp><span class="file">$path</span></samp>.  These auxiliary programs are
+distributed in the <samp><span class="file">$GEOMROOT/bin/&lt;MACHTYPE&gt;</span></samp> directory; if you specify
+this directory for <code>BINDIR</code>, they are left in that directory.
+
+     <br><dt><code>MANDIR</code>:<dd>a directory where Unix manual pages are installed.  These are
+distributed in the <samp><span class="file">$GEOMROOT/man</span></samp> subdirectory; if you specify
+this directory for <code>MANDIR</code>, they are left in that directory.
+
+     <br><dt><code>MMAPACKAGEDIR</code>:<dd>a directory where Mathematica packages are installed.  This should be a
+directory that Mathematica searches for packages that it loads; you can
+see what directories your Mathematica searches by looking at the value
+of the <code>$Path</code> variable in a Mathematica session.  The
+installation process will install some packages there which allow you to
+use Geomview to display Mathematica graphics.  These packages are
+distributed in the <samp><span class="file">$GEOMROOT/mathematica</span></samp> subdirectory; if you
+specify this directory for <code>MMAPACKAGEDIR</code>, or if you specify the
+empty string for <code>MMAPACKAGEDIR</code>, the packages are left in that
+directory.  For more details about the way these Mathematica packages
+connect to Geomview, see <a href="Package-Installation.html#Package-Installation">Package Installation</a>.
+
+   </dl>
+
+<!-- ================================================================ -->
+   </body></html>
+

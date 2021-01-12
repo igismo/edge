@@ -1,0 +1,173 @@
+<html lang="en">
+<head>
+<title>INST - Geomview Manual</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Geomview Manual">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Object-File-Formats.html#Object-File-Formats" title="Object File Formats">
+<link rel="prev" href="SPHERE.html#SPHERE" title="SPHERE">
+<link rel="next" href="LIST.html#LIST" title="LIST">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="INST"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="LIST.html#LIST">LIST</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="SPHERE.html#SPHERE">SPHERE</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Object-File-Formats.html#Object-File-Formats">Object File Formats</a>
+<hr>
+</div>
+
+<h4 class="subsection">4.2.9 INST Files</h4>
+
+<p>The conventional suffix for a <code>INST</code> file is <samp><span class="file">.inst</span></samp>.
+
+   <p>There is no INST BINARY format.
+
+   <p>An <code>INST</code> applies a 4x4 (or <var>(N+1)</var>x<var>(N+1)</var> in the context of
+ND-viewing) transformation to another OOGL object.  It begins with
+<code>INST</code> followed by these sections which may appear in any order:
+<pre class="example">     geom <var>oogl-object</var>
+</pre>
+   <p class="noindent">specifies the OOGL object to be instantiated.  See <a href="References.html#References">References</a>, for
+the syntax of an <var>oogl-object</var>.  The keyword <code>unit</code> is a
+synonym for <code>geom</code>.
+<pre class="example">     transform   ["{"] <code>4x4 transform</code> ["}"]
+</pre>
+   <p class="noindent">specifies a single transformation matrix.  Either the
+matrix may appear literally as 16 numbers, or there may be
+a reference to a "transform" object, i.e.
+<pre class="example">         "&lt;" file-containing-4x4-matrix
+</pre>
+   <p>or
+<pre class="example">         ":" symbol-representing-transform-object
+</pre>
+   <p>Another way to specify the transformation is
+<pre class="example">     transforms
+         <var>oogl-object</var>
+</pre>
+   <p>The <var>oogl-object</var> must be a <code>TLIST</code> object (list of
+transformations) object, or a <code>LIST</code> whose members are ultimately
+<code>TLIST</code> objects.  In effect, the <code>transforms</code> keyword takes a
+collection of 4x4 matrices and replicates the <code>geom</code> object, making
+one copy for each 4x4 matrix.
+
+   <p>If no <code>transform</code> nor <code>transforms</code> keyword appears, no
+transformation is applied (actually the identity is applied).  You could
+use this for, e.g., wrapping an appearance around an externally-supplied
+object, though a single-membered LIST would do this more efficiently.
+
+   <p>See <a href="Transformation-matrices.html#Transformation-matrices">Transformation matrices</a>, for the matrix format.
+
+   <p>When replicating a single geometry by means of a <code>TLIST</code> object
+(see &lsquo;<samp><span class="samp">transforms</span></samp>&rsquo; above) it may be useful to transform texture
+co-ordinates by another list of transformations; that list can be
+specified by
+<pre class="example">     txtransforms
+         <var>TLIST-object</var>
+</pre>
+   <p>The number of texture transformations must match the number of geometry
+transformations. The <code>SPHERE</code> object (see <a href="SPHERE.html#SPHERE">Sphere Objects</a>) uses this technique to generate an entire textured sphere out
+of some fraction of a sphere (usually one octant).
+
+   <p>A single <var>(N+1)</var>-dimensional transformation can be specified by
+
+<pre class="example">     ntransform ["{"] <var>N+1</var> <var>N+1</var> <code>(N+1)x(N+1) floats</code> ["}"]
+</pre>
+   <p class="noindent">This gives a single <var>N+1</var>-dimensional transformation matrix.  Either
+the matrix may appear literally as <var>(N+1)</var>x<var>(N+1)</var> numbers, or
+there may be a reference to an &lsquo;<samp><span class="samp">ntransform</span></samp>&rsquo; object, i.e.
+<pre class="example">         "&lt;" file-containing-<var>(N+1)</var>x<var>(N+1)</var>-matrix
+</pre>
+   <p>or
+<pre class="example">         ":" symbol-representing-ntransform-object
+</pre>
+   <p>See <a href="ND-Transformation-matrices.html#ND-Transformation-matrices">ND Transformation matrices</a>, for the matrix format.
+
+   <p>Two more INST fields are accepted: <code>location</code> and <code>origin</code>.
+
+   <p>Note that <code>location</code> as well as <code>origin</code> are ignored if this
+<code>INST</code> object carries an <code>ntransform</code>. Also, if ND-viewing is
+active (<code>ND-axes</code> command, see <a href="GCL.html#GCL">GCL</a>) then <code>INST</code> objects
+with <code>origin</code> unequal to <code>local</code> will not be drawn, though the
+<code>location</code> stuff may work (or not).
+
+<pre class="example">     location [global or camera or ndc or screen or local]
+</pre>
+   <p>Normally an INST specifies a position relative to its parent object;
+the <code>location</code> field allows putting an object elsewhere.
+     <ul>
+<li><code>location global</code> attaches the object to the global (a.k.a. universe)
+coordinate system &ndash; the same as that in which geomview's World objects,
+alien geometry, and cameras are placed. 
+<li><code>location camera</code> places the object relative to the camera. 
+(Thus if there are multiple views, it may appear in a different
+spatial position in each view.)  The center of the camera's view
+is along its negative Z axis; positive X is rightward, positive Y upward. 
+Normally the units of camera space are the same as global coordinates. 
+When a camera is reset, the global origin is at (0,0,-3.0). 
+<li><code>location ndc</code> places the object relative to the normalized unit
+cube into which the camera's projection (perspective or orthographic)
+maps the visible world.  X, Y, and Z are each in the range from -1 to +1,
+with Z = -1 the near and Z = +1 the far clipping plane, and X and Y
+increasing rightward and upward respectively. 
+Thus something like
+     <pre class="example">          INST  transform  1 0 0 0  0 1 0 0  0 0 1 0  -.9 -.9 -.999 1
+                location ndc
+                geom &lt; label.vect
+</pre>
+     <p>pastes <code>label.vect</code> onto the lower left corner of each window,
+and in front of nearly everything else, assuming <code>label.vect</code>'s
+contents lie in the positive quadrant of the X-Y plane. 
+It's tempting to use -1 rather than -.999 as the Z component of the
+position, but that may put the object just nearer than the near clipping
+plane and make it (partially) invisible, due to floating-point error. 
+<li><code>location screen</code> places the object in screen coordinates. 
+The range of Z is still -1 through +1 as for ndc coordinates;
+X and Y are measured in pixels, and range from (0,0) at the <em>lower left</em>
+corner of the window, increasing rightward and upward. 
+</ul>
+
+   <p><code>location local</code> is the default; the object is positioned relative
+to its parent.
+
+<pre class="example">     origin [global or camera or ndc or screen or local] x y z
+</pre>
+   <p>The <code>origin</code> field translates the contents of the INST to
+place the origin at the specified point of the given coordinate system. 
+Unlike <code>location</code>, it doesn't change the orientation, only the choice
+of origin.  Both <code>location</code> and <code>origin</code> can be used together.
+
+   <p>So for example
+<pre class="example">     { INST
+       location screen
+       origin ndc 0 0 -.99
+       geom { &lt; xyz.vect }
+       transform { 100 0 0 0  0 100 0 0  0 0 -.009 0   0 0 0 1 }
+     }
+</pre>
+   <p>places xyz.vect's origin in the center of the window, just beyond the
+near clipping plane.  The unit-length X and Y edges are scaled to be just 100
+screen units &ndash; pixels &ndash; long, regardless of the size of the window.
+
+<ul class="menu">
+<li><a accesskey="1" href="INST-Examples.html#INST-Examples">INST Examples</a>:                Some example of <code>INST</code> Files. 
+</ul>
+
+<!-- ................................................................ -->
+   </body></html>
+

@@ -1,0 +1,238 @@
+<html lang="en">
+<head>
+<title>Tutorial - Manual do Geomview</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Manual do Geomview">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="prev" href="Visao-Geral.html#Visao-Geral" title="Visao Geral">
+<link rel="next" href="Interacao.html#Interacao" title="Interacao">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Tutorial"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Interacao.html#Interacao">Interacao</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Visao-Geral.html#Visao-Geral">Visao Geral</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="index.html#Top">Top</a>
+<hr>
+</div>
+
+<h2 class="chapter">2 Tutorial</h2>
+
+<p>Esse cap&iacute;tulo conduzir&aacute; voc&ecirc; atrav&eacute;s de alguns usos elementares do Geomview. 
+Traba-lhando do come&ccedil;o ao fim desse cap&iacute;tulo de frente a um computador onde voc&ecirc; pode tentar
+acompanhar os exemplos fornecidos aqui voc&ecirc; receber&aacute; um pouco do que pode ser feito com
+Geomview.
+
+   <p>Para iniciar o Geomview, coloque seu usu&aacute;rio e sua senha no computador e abra uma janela de shell.  Uma
+janela de shell &eacute; uma janela na qual voc&ecirc; pode digitar comandos Unix; o prompt
+na janela usualmente termina com um '%'.  Na janela de shell (o cursor do
+mouse deve estar posicionado sobre a janela) digite o seguinte (<kbd>&lt;Enter&gt;</kbd> aqui
+significa pressione a tecla "Enter"):
+
+<pre class="example">     geomview tetra dodec &lt;Enter&gt;
+</pre>
+   <p>Esse comando inicia o Geomview e chama dois objetos exemplo, um
+tetraedro e um dodecaedro.  Ap&oacute;s poucos segundos tr&ecirc;s janelas
+ir&atilde;o aparecer; see <a href="figinitial.html#figinitial">Figure</a>.
+
+   <div class="float">
+<a name="figinitial"></a><img src="figs/initial.png" alt="figs/initial.png">
+
+   <p><strong class="float-caption">Figura 2.1: Tela Inicial do Geomview.</strong></p></div>
+
+   <p>O painel &agrave; esquerda &eacute; o painel de controle principal do Geomview; Esse painel &eacute; chamado
+de painel <em>Main</em> (principal).  O painel menor ao centro &eacute; o
+painel <em>Tools</em> (de ferramentas) e serve para selecionar diferentes tipos de movimentos. 
+A janela do lado direito &eacute; a janela de c&acirc;mera e nessa janela voc&ecirc; v&ecirc; um
+tetraedro grande e um dodecaedro que est&aacute; parcialmente obscurecido
+pelo tetraedro.
+
+   <p>Geomview tem alguns pain&eacute;is mas por padr&atilde;o ele mostra somente esses tr&ecirc;s. 
+iremos descrever alguns aspectos desses tr&ecirc;s e alguns dos outros nesse
+tutorial.  Voc&ecirc; pode ler mais sobre esses e outros pain&eacute;is nos cap&iacute;tulos
+adiante neste manual.
+
+   <p>Coloque o cursor do mouse na janela de c&acirc;mera e pressione e mantenha pressionado o
+bot&atilde;o esquerdo do mouse.  Agora, enquanto mant&eacute;m pressionado o bot&atilde;o, lentamente mova o
+mouse com movimentos pequenos.  Voc&ecirc; ver&aacute; a figura rotacionar na dire&ccedil;&atilde;o na qual voc&ecirc;
+mover o mouse.    Se voc&ecirc; liberar o bot&atilde;o do mouse enquanto move o
+mesmo, a figura continua girando.  Para parar o movimento de rota&ccedil;&atilde;o, mantenha o mouse sobre a
+figura e pressione rapidamente o bot&atilde;o esquerdo do mesmo.
+
+   <p>Geomview utiliza o modelo da <em>esfera de vidro</em> para os movimentos iniciados atrav&eacute;s do mouse.  Isso
+significa que voc&ecirc; est&aacute; supondo o objeto como estando dentro de uma
+esfera invis&iacute;vel e o cursor do mouse como sendo uma al&ccedil;a fora da esfera provida de uma ventosa. 
+Quando voc&ecirc; mant&eacute;m pressionado o bot&atilde;o esquerdo do mouse, a ventosa da al&ccedil;a gruda na
+esfera; quando voc&ecirc; libera o bot&atilde;o do mouse, a ventosa da al&ccedil;a libera a
+esfera.  Movendo o mouse enquanto mant&eacute;m pressionado o bot&atilde;o faz com que a
+esfera (e conceq&uuml;&ecirc;ntemente o objeto) mova-se na mesma dire&ccedil;&atilde;o que o
+mouse.
+
+   <p>Adicionalmente para os dois s&oacute;lidos que est&atilde;o atualmente na tela voc&ecirc; pode tamb&eacute;m ver duas molduras de fios
+em forma de caixa na janela de c&acirc;mera.  Essas s&atilde;o as "caixas associadas" dos dois
+objetos.  Por padr&atilde;o Geomview coloca uma caixa associada em torno de cada objeto
+que &eacute; mostrada de forma que voc&ecirc; tenha uma id&eacute;ia de o quanto grande o objeto &eacute;.
+
+   <p>Note que quando voc&ecirc; move o mouse em torno do tetraedro e do
+dodecaedro eles se movem como se fossem uma &uacute;nica figura.  Isso ocorre porque por padr&atilde;o o que voc&ecirc; est&aacute;
+movendo atualmente &eacute; o "World" (objeto mundo).  Para mover um dos objetos individualmente em lugar de
+o objeto mundo como um todo, mova o cursor do mouse para o navegador de alvos (<em>Targets</em>) no
+painel principal (<em>Main</em>).  Clique (qualquer bot&atilde;o) sobre a palavra <em>tetra</em>. 
+Isso faz com que o tetraedro seja o "objeto alvo".  Agora mova o cursor
+de volta &agrave; janela de c&acirc;mera e voc&ecirc; poder&aacute; rotacionar apenas o tetraedro.
+
+   <p>O movimento que voc&ecirc; aplicou at&eacute; agora foi a rota&ccedil;&atilde;o,
+porque esse &eacute; o modo de modo de movimento selecionado no painel de ferramentas
+(<em>Tools</em>).  Para efetuar o movimento de transla&ccedil;&atilde;o em lugar do movimento de rota&ccedil;&atilde;o, clique sobre o bot&atilde;o transla&ccedil;&atilde;o (<em>Translate</em>). 
+Agora quando voc&ecirc; mover o mouse na janela de c&acirc;mera enquanto mant&eacute;m pressionado o
+bot&atilde;o esquerdo, o tetraedro (que deve ser ainda o objeto alvo
+de antes) ir&aacute; ser transladado na dire&ccedil;&atilde;o que voc&ecirc; move o mouse.  Note
+que voc&ecirc; pode transladar o tetraedro na dire&ccedil;&atilde;o da borda da janela enquanto voc&ecirc;
+mant&eacute;m pressionado o bot&atilde;o esquerdo do mouse.  Se voc&ecirc; liberar o bot&atilde;o do
+mouse enquanto move o mesmo, o tetraedro ir&aacute; continuar o movimento sozinho.  O tetraedro
+mover-se-&aacute; ao contr&aacute;rio do que ocorria antes muito rapidamente de forma que &eacute; muito f&aacute;cil perder o rastro de onde ele se encontra.
+
+   <p>Se voc&ecirc; acidentalmente perder o tetraedro atrav&eacute;s de transla&ccedil;&atilde;o para muito longe
+da janela de vis&atilde;o, voc&ecirc; pode peg&aacute;-lo de volta atrav&eacute;s de um clique sobre o
+bot&atilde;o Centro (<em>Center</em>) no painel de ferramentas (<em>Tools</em>).  Isso far&aacute; com que o tetraedro
+retorne para a sua posi&ccedil;&atilde;o inicial.
+
+   <p>Clique sobre o bot&atilde;o Centro (<em>Center</em>) para trazer o tetraedro ao centro da janela de c&acirc;mera, e
+ent&atilde;o coloque-o em uma posi&ccedil;&atilde;o de forma que voc&ecirc; possa ver completamente o
+dodecaedro.
+
+   <p>Seu objeto mundo agora tem dois objetos que est&atilde;o um ao lado do outro.  Voc&ecirc;
+pode ver o dodecaedro no meio da janela de c&acirc;mera e pode ver parte
+do tetraedro parcialmente fora da janela de c&acirc;mera.  Volte para o navegador de alvos
+(<em>Targets</em>) no painel principal (<em>Main</em>) e clique sobre o "World" para selecionar o
+referido objeto mundo novamente.  Agora clique sobre o bot&atilde;o "Olhar Para" (<em>Look At</em>) no
+painel de ferramentas (<em>Tools</em>). Voc&ecirc; pode ver o dodecaedro e o tetraedro
+ajustando-se ao meio da janela (figura
+see <a href="figlookatworld.html#figlookatworld">figlookatworld</a>).  O bot&atilde;o "Olhar Para" (<em>Look At</em>) posiciona a c&acirc;mera em uma posi&ccedil;&atilde;o tal
+que o objeto alvo fique centrado na janela. 
+<div class="float">
+<a name="figlookatworld"></a><img src="figs/fig2.png" alt="figs/fig2.png">
+
+   <p><strong class="float-caption">Figura 2.2: Olhando para o Objeto Mundo.</strong></p></div>
+Agora coloque o cursor sobre o meio do dodecaedro e d&ecirc; sobre ele um duplo clique com
+o bot&atilde;o direito do mouse.  Isso significa clicar no mouse para baixo e para cima duas vezes em
+uma r&aacute;pida sucess&atilde;o.  Note que o dodecaedro torna-se o objeto
+alvo; voc&ecirc; pode ver isso no navegador de alvos (<em>Targets</em>)
+do painel principal (<em>Main</em>).  Um duplo clique no bot&atilde;o direito do mouse sobre um objeto
+&eacute; outra forma de fazer esse objeto tornar-se o objeto alvo.
+
+   <div class="float">
+<a name="figappearance"></a><img src="figs/ap.png" alt="figs/ap.png">
+
+   <p><strong class="float-caption">Figura 2.3: A Painel Apar&ecirc;ncia.</strong></p></div>
+V&aacute; para o menu <em>Inspect</em> no topo do painel principal (<em>Main</em>) e selecione
+Apar&ecirc;ncia (<em>Appearance</em>).  Isso faz aparecer o painel "Apar&ecirc;ncia"
+(<em>Appearance</em>).  Quando ele aparece, se estiver parcialmente obscurecido por outra janela do Geomview
+voc&ecirc; pode mov&ecirc;-lo para um lado arrastando sua moldura com o bot&atilde;o
+do meio do mouse pressionado.
+
+   <p>O painel Apar&ecirc;ncia (<em>Appearance</em>) permite a voc&ecirc; controlar v&aacute;rias coisas sobre a
+maneira como o Geomview desenha objetos.  Note os bot&otilde;es rotulados com <em>[af] Faces</em> e
+<em>[ae] Edges</em> (arestas).  Clique sobre o <em>[ae] Edges</em> uma vez, e note
+que Geomview agora ressalta/destaca as arestas do dodecaedro.  Clique sobre o <em>[ae] Edges</em>
+novamente e as arestas desaparecem.  Clique muitas vezes e assista as arestas
+indo e voltando.  Quando voc&ecirc; tiver feito isso o suficiente, deixe as arestas habilitadas
+e clique sobre o bot&atilde;o <em>[af] Faces</em>.  Essa a&ccedil;&atilde;o alterna entre exibir
+ou n&atilde;o as faces.  Clique sobre o bot&atilde;o novamente para de forma que a exibi&ccedil;&atilde;o das face fique habilitada.
+
+   <p>Agora clique sobre o bot&atilde;o <em>[Cf] Faces</em> sob a palavra <em>COLOR</em>. Um
+painel de escolha de cores aparecer&aacute; (see <a href="figcolorchooser.html#figcolorchooser">Figure</a>). 
+<div class="float">
+<a name="figcolorchooser"></a><img src="figs/color.png" alt="figs/color.png">
+
+   <p><strong class="float-caption">Figura 2.4: Painel de Escolha de Cores.</strong></p></div>
+
+   <p>Note os tr&ecirc;s bot&otilde;es deslizantes, <em>H</em>, <em>S</em>, e <em>V</em>,
+controlando a matiz (<em>hue</em>), satura&ccedil;&atilde;o, e valor (ilumina&ccedil;&atilde;o). 
+Clicando sobre o bot&atilde;o <em>HSV</em> fornece um diferente conjunto de bot&otilde;es deslizantes,
+um para vermelho (<em>red</em>), outro para verde (<em>green</em>), e outro para azul (<em> blue</em>). 
+Valores num&eacute;ricos para ambos os sistemas de cores RGB e HSV
+podem ser vistos ou editados na parte inferior do painel. 
+A cor inicial do dodecaedro foi especificada no arquivo
+<samp><span class="file">dodec</span></samp> que voc&ecirc; chamou quando iniciamos o Geomview.  A cor que
+voc&ecirc; especificou com o painel de
+cores sobrescreveu as cores antigas.  Voc&ecirc; pode ajustar a intensidade da
+cor com o bot&atilde;o deslizante <em>Intensity</em>.  Quando voc&ecirc; encontrar uma cor que
+voc&ecirc; gosta, clique sobre o bot&atilde;o <em>Done</em>.
+
+   <p>Agora coloque o cursor do mouse em algum lugar sobre sobre o fundo cinza da janela de c&acirc;mera e duplo-clique
+no bot&atilde;o direito; isso seleciona "World" como objeto alvo. 
+Clique no bot&atilde;o <em>Look At</em> para para olhar para o objeto mundo novamente.
+
+   <p>Note que no painel de Apar&ecirc;ncia (<em>Appearance</em>) as escolhas dos bot&otilde;es
+se modificavam &agrave; medida que o lado esquerdo tamb&eacute;m mudava com o dodecaedro.  Isso ocorre
+porque o painel <em>Appearance</em> sempre mostra as escolhas para
+o objeto alvo, que agora &eacute; o objeto mundo, o qual ainda tem suas
+escolhas padr&atilde;o.
+
+   <p>Clique sobre o bot&atilde;o <em>[ab] BBox</em> sob a palavra <em>Draw</em>. 
+A caixa associada desaparece.  agora ponha o cursor de volta na janela de
+c&acirc;mera.  No teclado, digite as teclas <kbd>a </kbd>b.  Note que a
+caixa associada aparece novamente.  <kbd>a </kbd>b &eacute; o atalho de teclado para
+o bot&atilde;o que alterna entre a exibi&ccedil;&atilde;o ou n&atilde;o da caixa associada; a sequ&ecirc;ncia de caracteres "[ab]" aparece sobre o
+bot&atilde;o para indicar isso.  A maioria dos bot&otilde;es do Geomview possuem atalhos
+de teclado que voc&ecirc; pode usar se preferir.  Isso ser&aacute; &uacute;ltil quando voc&ecirc;
+estiver familiarizado com o Geomview e n&atilde;o quiser ter de se mover
+entre uma montanha de pain&eacute;is.
+
+   <p>Agora selecione o tetraedro, use qualquer das duas formas: duplo-clicando o bot&atilde;o direito
+do mouse sobre o tetraedro, ou selecionando "tetra" no navegador de alvos (<em>Targets</em>). 
+Ent&atilde;o clique sobre o bot&atilde;o <em>Delete</em> do menu <em>Edit</em> no painel principal (<em>Main</em>).  O
+tetraedro deve desaparecer.  Essa &eacute; a forma de voc&ecirc; se livrar de um objeto.
+
+   <p>Voc&ecirc; pode tamb&eacute;m chamar objetos de dentro do Geomview.  Clique sobre o menu
+<em>File</em> no painel principal (<em>Main</em>) e escolha abrir (<em>Open</em>). 
+O painel de arquivos (<em>Files</em>) ir&aacute; aparecer. 
+Abaixo do meio desse painel, onde se l&ecirc; <em>Path List</em>, temos um navegador com tr&ecirc;s linhas dentro dele; a
+segunda linha &eacute; um diret&oacute;rio com montanhas de exemplos do Geomview. 
+Clique sobre aquela segunda linha; see <a href="figfilespanel.html#figfilespanel">Figure</a>. Role para baixo
+na lista de arquivos at&eacute; voc&ecirc; ver <samp><span class="file">tref.off</span></samp>.  Clique sobre aquela linha,
+e ent&atilde;o clique sobre o bot&atilde;o <em>OK</em>.  Um grande tubo em forma de trevo
+ir&aacute; aparecer em sua janela.  Clique sobre o bot&atilde;o <em>Hide</em> no painel
+<em>Files</em> para dispensar o painel.
+
+   <div class="float">
+<a name="figfilespanel"></a><img src="figs/secondlinelist.png" alt="figs/secondlinelist.png">
+
+   <p><strong class="float-caption">Figura 2.5: O Painel de Arquivos.</strong></p></div>
+
+   <p>Agora clique sobre o bot&atilde;o <em>Reset</em> no painel de ferramentas (<em>Tools</em>).  Isso
+far&aacute; com que todas as figuras retornem ao centro da janela de c&acirc;mera.  Voc&ecirc; pode ver um
+dodecaedro e uma protuber&acirc;ncia do trevo (see <a href="figtrefdodec.html#figtrefdodec">Figure</a>).
+
+   <p>Brinque com a protuber&acirc;ncia do trevo e o dodecaedro.  Fa&ccedil;a experi&ecirc;ncias com
+alguns outros bot&otilde;es no painel de ferramentas (<em>Tools</em>).  Tente colorir o
+trevo com o painel de apar&ecirc;ncia (<em>Appearance</em>).
+
+   <p>Para um tutorial sobre criar seus pr&oacute;prios objetos para cham&aacute;-los dentro do Geomview,
+veja <samp><span class="file">doc/oogltour</span></samp> distribuido com Geomview.  As coisas
+naquele arquivo ir&atilde;o ser incorporadas em futuras vers&otilde;es desse manual.
+
+   <div class="float">
+<a name="figtrefdodec"></a><img src="figs/trefdodecinter.png" alt="figs/trefdodecinter.png">
+
+   <p><strong class="float-caption">Figura 2.6: Trevo e Dodecaedro.</strong></p></div>
+
+<!-- **************************************************************** -->
+   </body></html>
+

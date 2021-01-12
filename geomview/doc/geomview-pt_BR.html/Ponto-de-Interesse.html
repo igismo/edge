@@ -1,0 +1,89 @@
+<html lang="en">
+<head>
+<title>Ponto de Interesse - Manual do Geomview</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Manual do Geomview">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Movimentos-do-Mouse.html#Movimentos-do-Mouse" title="Movimentos do Mouse">
+<link rel="prev" href="Movimentos-do-Mouse.html#Movimentos-do-Mouse" title="Movimentos do Mouse">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Ponto-de-Interesse"></a>
+<p>
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Movimentos-do-Mouse.html#Movimentos-do-Mouse">Movimentos do Mouse</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Movimentos-do-Mouse.html#Movimentos-do-Mouse">Movimentos do Mouse</a>
+<hr>
+</div>
+
+<h4 class="subsection">3.5.1 Selecionando um Ponto de Interesse</h4>
+
+<p>&Eacute; algumas vezes &uacute;til especificar um ponto em particular sobre algum objeto em uma
+janela do Geomview como o ponto de centro para movimentos do mouse.  Voc&ecirc; pode fazer isso
+segurando a tecla shift e clicando o bot&atilde;o direito do mouse (i.e. clique no bot&atilde;o direito uma vez
+enquanto mant&eacute;m pressionada a tecla shift do teclado) com o cursor sobre
+o ponto desejado.  Esse ponto torna-se ent&atilde;o o <em>ponto de
+interesse</em>.  O ponto de interesse deve estar sobre um objeto existente.
+
+   <p>Selecionado um ponto de interesse simplifica o exame de uma pequena por&ccedil;&atilde;o de um
+grande objeto.  Mantendo a tecla shift pressionada e clicando sobre o ponto de interesse com o bot&atilde;o direito do mouse, e selecionando
+o modo &oacute;rbita (<em>Orbit</em>).  Use o bot&atilde; do meio do mouse para aproximar, e o
+esquerdo para orbitar o ponto, examinando a regi&atilde;o de diferentes
+dire&ccedil;&otilde;es.
+
+   <p>Quando voc&ecirc; tiver selecionado um ponto de interesse, o atual objeto do centro
+&eacute; modificado para um objeto chamado "CENTER", que &eacute; um objeto invis&iacute;vel
+localizado no ponto de interesse.  Adicionalmente, movimentos de mouse para a
+janela na qual voc&ecirc; fez a sele&ccedil;&atilde;o s&atilde;o ajustados de forma que o ponto de
+interesse acompanhe o mouse.
+
+   <p>Voc&ecirc; pode mudar o ponto de interesse a qualquer momento selecionando um novo ponto de interesse
+shift-clicando o bot&atilde;o direito do mouse novamente.  Voc&ecirc; pode cancelar
+o ponto de interesse completamente shift-clicando o bot&atilde;o
+direito do mouse com o cursor no plano de fundo (i.e. n&atilde;o sobre qualquer objeto). 
+Isso modifica o objeto do centro de volta a seu valor padr&atilde;o, "target".
+
+   <p>O objeto que possui o nome de "CENTER", que serve como um objeto do centro para o
+ponto de interesse, &eacute; um tipo especial de geom chamado "alien".  Esse "Alien"
+n&atilde;o aparece no navegador de alvos (<em>Targets</em>).  Por padr&atilde;o esse objeto "Alien" n&atilde;o tem geometria
+associada e concequ&ecirc;ntemente &eacute; invis&iacute;vel.  Voc&ecirc; pode, Todavia, explicitamente
+fornecer ao Alien alguma geometria usando um comando GCL, fazendo com que o Alien aparece no navegador de alvos.  Use
+o comando <code>geometry</code> para fazer isso: <code>(geometry CENTER
+</code><var>geometry</var><code>)</code>, onde <var>geometry</var> &eacute; qualquer geometria v&aacute;lida.  Por
+exemplo, <code>(geometry CENTER { &lt; xyz.vect })</code> faz com que o arquivo
+<samp><span class="file">xyz.vect</span></samp>, que &eacute; um dos arquivos de exemplo padronizados distribu&iacute;dos
+com Geomview, seja usado na geometria para CENTER. Veja <a href="geometry.html#geometry"><code>(geometry ...)</code></a>.
+
+   <p>O que acontece internamente quando voc&ecirc; seleciona um ponto de interesse &eacute;
+que o centro &eacute; ajustado para o objeto chamado CENTER, e aquele objeto &eacute;
+posicionado no ponto de interesse.  Adicionalmente, para que movimentos de
+mouse acompanhem o ponto de interesse, o atual comprimento focal da
+c&acirc;mera &eacute; escolhido para ser a dist&acirc;ncia da c&acirc;mera at&eacute; o ponto de
+interesse.  Voc&ecirc; pode realizar isso via GCL com os seguintes comandos:
+<pre class="example">     (if (real-id CENTER) nil (new-alien CENTER {}))
+     (ui-center CENTER)
+     (transform-set CENTER universe universe translate <var>x</var> <var>y</var> <var>z</var>)
+     (merge camera <var>cam-id</var> { focus <var>d</var> })
+</pre>
+   <p class="noindent">onde <code>(</code><var>x</var><code>,</code><var>y</var><code>,</code><var>z</var><code>)</code> s&atilde;o as coordenadas (universe)
+do ponto de interesse, e <var>d</var> &eacute; a dist&acirc;ncia daquele ponto &agrave;
+atual c&acirc;mera, <var>cam-id</var>.  O primeiro comando acima cria o
+"alien" CENTER se esse Alien n&atilde;o existir ainda.
+
+<!-- ================================================================ -->
+   </body></html>
+

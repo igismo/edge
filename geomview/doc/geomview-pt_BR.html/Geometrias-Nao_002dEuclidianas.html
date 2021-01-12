@@ -1,0 +1,87 @@
+<html lang="en">
+<head>
+<title>Geometrias Nao-Euclidianas - Manual do Geomview</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Manual do Geomview">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="prev" href="GCL.html#GCL" title="GCL">
+<link rel="next" href="Mathematica.html#Mathematica" title="Mathematica">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Geometrias-Nao-Euclidianas"></a>
+<a name="Geometrias-Nao_002dEuclidianas"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Mathematica.html#Mathematica">Mathematica</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="GCL.html#GCL">GCL</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="index.html#Top">Top</a>
+<hr>
+</div>
+
+<h2 class="chapter">8 Geometrias N&atilde;o-Euclidianas</h2>
+
+<p>Geomview supports hyperbolic and spherical objeto geom&eacute;trico as well as
+Euclidean objeto geom&eacute;trico.  The three bot&otilde;es at the bottom do <em>Main</em>
+panel are for setting the current objeto geom&eacute;trico type.
+
+   <p>In each das three geometries, three models are supported:
+<em>Virtual</em>, <em>Projective</em>, and <em>Conformal</em>.  You can
+change the current model with the <em>Model</em> browser on the
+<em>Camera</em> panel.  Each Geomview c&acirc;mera has its own model setting.
+
+   <p>The default model is all three spaces is <em>Virtual</em>.  This
+corresponds to the c&acirc;mera being in the same space as, and moving under
+the same set of transformations as, the objeto geom&eacute;trico itself.
+
+   <p>In Euclidean space <em>Virtual</em> is the most useful model. 
+The other models were implemented for hyperbolic and spherical
+spaces and just happen to work in Eucldiean space as well:
+<em>Projective</em> is the same as <em>Virtual</em> but by default
+displays the unit sphere, and <em>Conformal</em> displays everything
+inverted in the unit sphere.
+
+   <p>In hyperbolic space, the <em>Projective</em> model setting gives a view
+do projective ball model of hyperbolic 3-space imbedded in Euclidean
+space.  The c&acirc;mera is initially outside the unit ball.  In this model,
+the c&acirc;mera moves by Euclidean movimentos and objeto geom&eacute;trico moves by hyperbolic
+movimentos.  <em>Conformal</em> model is similar but shows the conformal
+ball model instead.
+
+   <p>In spherical space, the <em>Projective</em> model gives a view of half
+da 3-sphere imbedded in Euclidean 3-space.  Spherical movimentos give
+rise to projective transformations in the <em>Projective</em> model, and
+to
+Moebius
+transformations in the <em>Conformal</em> model.  In both of these
+models the c&acirc;mera moves by Euclidean movimentos.
+
+   <p>In <em>Projective</em> and <em>Conformal</em> models, the unit sphere is
+drawn by default.  You can turn it off and on at will using the
+<em>Draw Sphere</em> bot&atilde;o in the <em>Camera</em> panel.  In the
+<em>Conformal</em> model, pol&iacute;gonos and edges are subdivided as necessary
+to make them look curved.  The parameters which determine this
+subdivision can be set with the <code>set-conformal-refine</code> GCL
+command. See <a href="set_002dconformal_002drefine.html#set_002dconformal_002drefine"><code>(set-conformal-refine ...)</code></a>.
+
+   <p>There are several sample hyperbolic space objetos in the
+<samp><span class="file">data/geom/hyperbolic</span></samp> subdirectory do Geomview directory. 
+Likewise, the subdirectory <samp><span class="file">data/geom/spherical</span></samp>
+contains several sample spherical space objetos.
+
+<!-- **************************************************************** -->
+   </body></html>
+

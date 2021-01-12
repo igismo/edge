@@ -1,0 +1,99 @@
+<html lang="en">
+<head>
+<title>MESH - Manual do Geomview</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Manual do Geomview">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Formatos-de-Arquivo-de-Objeto.html#Formatos-de-Arquivo-de-Objeto" title="Formatos de Arquivo de Objeto">
+<link rel="prev" href="QUAD.html#QUAD" title="QUAD">
+<link rel="next" href="BBOX.html#BBOX" title="BBOX">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="MESH"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="BBOX.html#BBOX">BBOX</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="QUAD.html#QUAD">QUAD</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Formatos-de-Arquivo-de-Objeto.html#Formatos-de-Arquivo-de-Objeto">Formatos de Arquivo de Objeto</a>
+<hr>
+</div>
+
+<h4 class="subsection">4.2.2 MESH: Malha retangularmente conectada</h4>
+
+<p>O sufixo convencional para um arquivo <code>MESH</code> &eacute; <samp><span class="file">.mesh</span></samp>.
+
+   <p>A sintaxe do arquivo &eacute;
+
+<pre class="example">     [U][C][N][Z][4][u][v][n]MESH # Palavra chave
+     [<var>Ndim</var>]                       # Dimens&atilde;o do espa&ccedil;o, presente
+                                   # somente se nMESH
+     <var>Nu</var> <var>Nv</var>                        # dimens&otilde;es da grade da malha
+                                  # <var>Nu</var>*<var>Nv</var> v&eacute;rtices, no formato especificado
+                                  # pela palavra chave inicial
+     <var>v&eacute;rtice</var>(u=0,v=0)  <var>v&eacute;rtice</var>(1,0)  ... <var>v&eacute;rtice</var>(<var>Nu</var>-1,0)
+     <var>v&eacute;rtice</var>(0,1) ...    <var>v&eacute;rtice</var>(<var>Nu</var>-1,1)
+     ...
+     <var>v&eacute;rtice</var>(0,<var>Nv</var>-1) ... <var>v&eacute;rtice</var>(<var>Nu</var>-1,<var>Nv</var>-1)
+</pre>
+   <p>A palavra chave &eacute; <code>[U][C][N][Z][4][u][v][n]MESH</code>. 
+Os caracteres opcionais prefixados significam:
+
+     <dl>
+<dt>&lsquo;<samp><span class="samp">U</span></samp>&rsquo;<dd>Cada v&eacute;rtice inclue uma textura de 3 par&acirc;metros de espa&ccedil;o de componente. 
+As primeiras duas componentes s&atilde;o par&acirc;metros usuais de textura <code>S</code> e
+<code>T</code> para quele v&eacute;rtice; o terceiro pode ser especificado como zero. 
+<br><dt>&lsquo;<samp><span class="samp">C</span></samp>&rsquo;<dd>Cada v&eacute;rtice (veja Vertices acima) inclui uma cor de quatro componentes. 
+<br><dt>&lsquo;<samp><span class="samp">N</span></samp>&rsquo;<dd>Cada v&eacute;rtice inclui um vetor normal &agrave; superf&iacute;cie. 
+<br><dt>&lsquo;<samp><span class="samp">Z</span></samp>&rsquo;<dd>Dos valores dos 3 eixos coordenados (x , y e z) de v&eacute;rtice somente a componente Z est&aacute; presente; X e
+Y s&atilde;o omitidos, e assumidos ambos como sendo iguais &agrave;s coordenadas de malha (u,v) de forma que X
+varia de 0 .. (Nu-1), Y varia de 0 .. (Nv-1) onde Nu e Nv s&atilde;o as dimenss&otilde;es
+de malha &ndash; veja acima. 
+<br><dt>&lsquo;<samp><span class="samp">4</span></samp>&rsquo;<dd>V&eacute;rtices s&atilde;o quadridimensionais, cada v&eacute;rtice consiste em 4 valores em ponto flutuante.  <code>Z</code> e
+<code>4</code> n&atilde;o podem ambos estarem presentes ao mesmo tempo. 
+<br><dt>&lsquo;<samp><span class="samp">u</span></samp>&rsquo;<dd>A malha &eacute; ajustada na dire&ccedil;&atilde;o u, de forma que o
+(0,v)'&eacute;simo v&eacute;rtice est&aacute; conectado ao (<var>Nu</var>-1,v)'&eacute;simo para todo v. 
+<br><dt>&lsquo;<samp><span class="samp">v</span></samp>&rsquo;<dd>A malha &eacute; ajustada na dire&ccedil;&atilde;o v, de forma que o (u,0)'´esimo v&eacute;rtice est&aacute;
+conectado ao (u,<var>Nv</var>-1)'&eacute;simo para todo u.  Dessa forma uma malha
+u-ajustada ou v-ajustada &eacute; topologicamente um cilindro, enquanto uma malha uv-ajustada &eacute; um
+toro. 
+<br><dt>&lsquo;<samp><span class="samp">n</span></samp>&rsquo;<dd>Especifica uma malha cujos v&eacute;rtices existem em um espa&ccedil;o de dimens&atilde;o mais alta. 
+A dimens&atilde;o segue a palavra chave "MESH".  Cada v&eacute;rtice ent&atilde;o tem <var>Ndim</var>
+componentes. 
+</dl>
+
+   <p>Note que a ordem dos caracteres do prefixo &eacute; significativa; uma malha
+colorida, u-ajustada &eacute; uma <code>CuMESH</code> n&atilde;o uma <code>uCMESH</code>.
+
+   <p>Seguindo o cabe&ccedil;alho da malha est&atilde;o os inteiros <var>Nu</var> e <var>Nv</var>,
+as simens&otilde;es da malha.
+
+   <p>Ent&atilde;o segue-se <var>Nu</var>*<var>Nv</var> v&eacute;rtices, cada um desses v&eacute;rtices na forma fornecida atrav&eacute;s do cabe&ccedil;alho. 
+Eles aparecem na sequ&ecirc;ncia v-crescente, i.e. se chamarmos cada v&eacute;rtice de (u,v)
+ent&atilde;o os v&eacute;rtices aparecer&atilde;o na ordem
+
+<pre class="example">     (0,0) (1,0) (2,0) (3,0) ...  (<var>Nu</var>-1,0)
+     (0,1) (1,1) (2,1) (3,1) ...  (<var>Nu</var>-1,1)
+     ...
+     (0,Nv-1)		...  (<var>Nu</var>-1,<var>Nv</var>-1)
+</pre>
+   <p>O formato <code>MESH BINARY</code> &eacute; aceito; Veja <a href="Formato-binario.html#Formato-binario">Formato binario</a>.  Os
+valores de <var>Nu</var> e <var>Nv</var> s&atilde;o inteiros de 32-bit; todos os outros valores
+s&atilde;o n&uacute;meros em ponto flutuante de 32-bit.
+
+<!--  -->
+   </body></html>
+

@@ -1,0 +1,94 @@
+<html lang="en">
+<head>
+<title>SKEL - Geomview Manual</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Geomview Manual">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Object-File-Formats.html#Object-File-Formats" title="Object File Formats">
+<link rel="prev" href="VECT.html#VECT" title="VECT">
+<link rel="next" href="SPHERE.html#SPHERE" title="SPHERE">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="SKEL"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="SPHERE.html#SPHERE">SPHERE</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="VECT.html#VECT">VECT</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Object-File-Formats.html#Object-File-Formats">Object File Formats</a>
+<hr>
+</div>
+
+<h4 class="subsection">4.2.7 SKEL Files</h4>
+
+<p><code>SKEL</code> files represent collections of points and polylines, with
+shared vertices. 
+The conventional suffix for <code>SKEL</code> files is <samp><span class="file">.skel</span></samp>.
+
+   <p>Syntax:
+
+<pre class="example">     [C][4][n]SKEL
+     [<var>NDim</var>]                    # Vertex dimension, present only if nSKEL
+     <var>NVertices</var>  <var>NPolylines</var>
+     
+     <var>x</var>[0]  <var>y</var>[0]  <var>z</var>[0]  # Vertices
+                                         # if 4SKEL, each vertex has 4 components
+                                         # if nSKEL, each vertex has NDim components
+                                         # if C[4][n]SKEL vertex coordinates are
+                                         # followed by an RGBA color specification
+     ...
+     <var>x</var>[<var>NVertices</var>-1]  <var>y</var>[<var>NVertices</var>-1]  <var>z</var>[<var>NVertices</var>-1]
+     
+                             # Polylines
+                             # <var>Nv</var> = vertices on this polyline (1 = point)
+                             # <var>v</var>[0] ... <var>v</var>[<var>Nv</var>-1]: vertex indices
+                             #               in range 0..<var>NVertices</var>-1
+     <var>Nv</var>  <var>v</var>[0] <var>v</var>[1] ... <var>v</var>[<var>Nv</var>-1]  [<var>colorspec</var>]
+     ...
+                             # <var>colorspec</var> continues past <var>v</var>[<var>Nv</var>-1]
+                             # to end-of-line; may be nothing, or 3 or 4 numbers.
+                             # nothing: default color
+                             # 3 or 4 floats: RGB[A] values 0..1
+</pre>
+   <p>The syntax resembles that of <code>OFF</code> files, with a table of vertices
+followed by a sequence of polyline descriptions, each referring to vertices
+by index in the table.  Each polyline has an optional color.
+
+   <p>For <code>nSKEL</code> objects, each vertex has <var>NDim</var> components. 
+For <code>4nSKEL</code> objects, each vertex has <var>NDim+1</var> components;
+the final component is the homogeneous divisor.
+
+   <p>A <var>[4][n]SKEL BINARY</var> format is accepted; See <a href="Binary-format.html#Binary-format">Binary format</a>. 
+It resembles the ASCII format in almost the way you'd expect,
+with 32-bit integers for all counters and vertex indices and 32-bit
+floats for vertex positions.
+
+   <p>Exception: each polyline's vertex indices are followed by an integer
+indicating how many color components accompany it. Polyline color
+components must be floats, not integer values.  Thus a colorless
+polyline with 3 vertices might be represented as
+
+<pre class="example">     int int int int int
+     3   17   5   9   0
+</pre>
+   <p>while the same polyline colored red might be
+
+<pre class="example">     int int int int int float float float float
+      3  17   5   9   4   1.0   0.0   0.0   1.0
+</pre>
+   <!--  -->
+   </body></html>
+

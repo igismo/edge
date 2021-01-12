@@ -1,0 +1,76 @@
+<html lang="en">
+<head>
+<title>Exemplos INST - Manual do Geomview</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Manual do Geomview">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="INST.html#INST" title="INST">
+<link rel="prev" href="INST.html#INST" title="INST">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Exemplos-INST"></a>
+<p>
+Previous:&nbsp;<a rel="previous" accesskey="p" href="INST.html#INST">INST</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="INST.html#INST">INST</a>
+<hr>
+</div>
+
+<h5 class="subsubsection">4.2.9.1 Exemplos INST</h5>
+
+<p>Aqui est&atilde;o alguns exemplos de arquivos <code>INST</code>
+
+<pre class="example">     INST
+          unit &lt; xyz.vect
+          transform {
+             1 0 0 0
+             0 1 0 0
+             0 0 1 0
+             1 3 0 1
+          }
+</pre>
+   <pre class="example">     { appearance { +edge  material { edgecolor 1 1 0 } }
+         INST geom &lt; mysurface.quad }
+</pre>
+   <pre class="example">     {INST transform {: T} geom {&lt;dodec.off}}
+</pre>
+   <pre class="example">     { INST
+          transforms
+              { LIST
+          	{ &lt; some-matrices.prj }
+          	{ &lt; others.prj }
+          	{ TLIST &lt;still more of them&gt; }
+     
+              }
+          geom
+              { # material copiado a partir de todas as matrizes acima
+          	...
+              }
+     }
+</pre>
+   <p>O exemplo adiante assemelham-se ao exemplo de <code>origin</code> na se&ccedil;&atilde;o acima,
+mas fazem com que as arestas X e Y sejam 1/4 do tamanho da janela (1/4, n&atilde;o 1/2,
+uma vez que o intervalo das coordenadas ndc de X e Y estejam de -1 a +1).
+<pre class="example">     { INST
+       location ndc
+       geom { &lt; xyz.vect }
+       transform { .5 0 0 0  0 .5 0 0  0 0 -.009 0   0 0 -.99 1 }
+     }
+</pre>
+   <!--  -->
+   </body></html>
+

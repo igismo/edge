@@ -1,0 +1,54 @@
+<html lang="en">
+<head>
+<title>ND Transformation matrices - Geomview Manual</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Geomview Manual">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Conventions.html#Conventions" title="Conventions">
+<link rel="prev" href="Transformation-matrices.html#Transformation-matrices" title="Transformation matrices">
+<link rel="next" href="Binary-format.html#Binary-format" title="Binary format">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="ND-Transformation-matrices"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Binary-format.html#Binary-format">Binary format</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Transformation-matrices.html#Transformation-matrices">Transformation matrices</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Conventions.html#Conventions">Conventions</a>
+<hr>
+</div>
+
+<h4 class="subsection">4.1.7 ND Transformation matrices</h4>
+
+<p>In the context of <var>N</var>-dimensional space (<var>N</var> &gt; 3) some objects
+incorporate <var>(N+1)</var>x<var>(N+1)</var> real matrices for homogeneous object
+transformations.  These matrices act by multiplication on the right of
+vectors.  Thus, if p is an <var>(N+1)</var>-element row vector representing
+homogeneous coordinates of a point in the OOGL object, and A
+<var>(N+1)</var>x<var>(N+1)</var> is the matrix, then the transformed point is p'
+= p A.
+
+   <p>Note that (unlike for the 4x4 transformation matrices,
+see <a href="Transformation-matrices.html#Transformation-matrices">Transformation matrices</a>) the homogeneous component is located at
+index <b>zero</b>, so the translation components for Euclidean
+transformations appear in the <b>zero</b>-th row (first <var>(N+1)</var>
+elements). A's first column (at column index zero) is typically 1, 0,
+<small class="dots">...</small>, 0.
+
+<!--  -->
+   </body></html>
+

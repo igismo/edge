@@ -1,0 +1,51 @@
+<html lang="en">
+<head>
+<title>lines-closer - Geomview Manual</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Geomview Manual">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="GCL-Reference.html#GCL-Reference" title="GCL Reference">
+<link rel="prev" href="let.html#let" title="let">
+<link rel="next" href="load.html#load" title="load">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="lines-closer"></a>
+<a name="lines_002dcloser"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="load.html#load">load</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="let.html#let">let</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="GCL-Reference.html#GCL-Reference">GCL Reference</a>
+<hr>
+</div>
+
+<h4 class="subsection">7.2.70 lines-closer</h4>
+
+<p><a name="index-lines_002dcloser-77"></a>
+     <dl>
+<dt><code>(lines-closer CAM-ID DIST)</code><dd>Draw lines (including edges) closer to the camera than polygons
+by DIST / 10^5  of the Z-buffer range.  DIST = 3.0 by default. 
+If DIST is too small, a line lying on a surface may be
+dotted or invisible, depending on the viewpoint. 
+If DIST is too large, lines may appear in front of surfaces
+that they actually lie behind.  Good values for DIST vary with
+the scene, viewpoint, and distance between near and far clipping
+planes.  This feature is a kludge, but can be helpful. 
+</dl>
+
+   </body></html>
+

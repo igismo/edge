@@ -1,0 +1,413 @@
+surface
+AQSIS_V 2
+
+
+segment Data
+
+USES 461159
+
+param uniform  float Ka
+param uniform  float Kd
+param uniform  float Ks
+param uniform  float roughness
+param uniform  color specularcolor
+varying  point Nh
+varying  point Ih
+varying  point M
+varying  point Lh
+varying  float Ihw
+varying  float Nhw
+varying  float Mw
+varying  float Lhw
+varying  float a
+varying  float b
+varying  float d
+varying  float ss
+varying  float nn
+varying  float mag2
+varying  float PdotP
+varying  point sP
+varying  color total
+uniform  float spec
+
+
+segment Init
+	pushif 1
+	pop Ka
+	pushif 1
+	pop Kd
+	pushif 1
+	pop Ks
+	pushif 0.100000001
+	pop roughness
+	pushif 1
+	pushif 1
+	pushif 1
+	settc
+	pop specularcolor
+
+
+segment Code
+	pushv P
+	pop sP
+	pushv sP
+	pushv sP
+	dotpp
+	pop PdotP
+	S_CLEAR
+	pushif 1
+	pushv PdotP
+	geff
+	S_GET
+	RS_PUSH
+	RS_GET
+	RS_JZ 1
+	pushif 0
+	setfc
+	pop Ci
+	pushif 1
+	setfc
+	pop Oi
+:1
+	RS_INVERSE
+	RS_JZ 0
+	pushv roughness
+	pushif 1
+	divff
+	pop spec
+	pushv I
+	pushv N
+	normalize
+	faceforward
+	pop Nh
+	pushv Nh
+	pushv sP
+	dotpp
+	pop Nhw
+	pushv Nhw
+	pushv Nhw
+	mulff
+	pushv Nh
+	pushv Nh
+	dotpp
+	subff
+	sqrt
+	pop nn
+	pushv I
+	negp
+	pop Ih
+	pushif 1
+	pushv PdotP
+	subff
+	pushif 0
+	pushv sP
+	pushv Ih
+	dotpp
+	subff
+	negf
+	divff
+	pop b
+	pushv sP
+	pushv b
+	mulfp
+	pushv Ih
+	addpp
+	pop Ih
+	pushv b
+	pushif 0
+	addff
+	pop Ihw
+	pushv Ihw
+	pushv Ihw
+	mulff
+	pushv Ih
+	pushv Ih
+	dotpp
+	subff
+	abs
+	sqrt
+	pop mag2
+	S_CLEAR
+	pushif 0
+	pushv mag2
+	neff
+	S_GET
+	RS_PUSH
+	RS_GET
+	RS_JZ 3
+	pushv mag2
+	pushif 1
+	divff
+	pop mag2
+:3
+	RS_INVERSE
+	RS_JZ 2
+	pushif 1
+	pop mag2
+:2
+	RS_POP
+	pushv Ih
+	pushv mag2
+	mulfp
+	pop Ih
+	pushv Ihw
+	pushv mag2
+	mulff
+	pop Ihw
+	pushif 0
+	setfc
+	pop total
+	pushv sP
+	init_illuminance
+	jz 5
+:4
+	S_CLEAR
+	pushv sP
+	pushis ""
+	illuminance
+	S_JZ 6
+	RS_PUSH
+	RS_GET
+	pushif 1
+	pushv PdotP
+	subff
+	pushif 0
+	pushv sP
+	pushv L
+	dotpp
+	subff
+	negf
+	divff
+	pop b
+	pushv sP
+	pushv b
+	mulfp
+	pushv L
+	addpp
+	pop Lh
+	pushv b
+	pushif 0
+	addff
+	pop Lhw
+	pushv Lhw
+	pushv Lhw
+	mulff
+	pushv Lh
+	pushv Lh
+	dotpp
+	subff
+	abs
+	sqrt
+	pop mag2
+	S_CLEAR
+	pushif 0
+	pushv mag2
+	neff
+	S_GET
+	RS_PUSH
+	RS_GET
+	RS_JZ 8
+	pushv mag2
+	pushif 1
+	divff
+	pop mag2
+:8
+	RS_INVERSE
+	RS_JZ 7
+	pushif 1
+	pop mag2
+:7
+	RS_POP
+	pushv Lh
+	pushv mag2
+	mulfp
+	pop Lh
+	pushv Lhw
+	pushv mag2
+	mulff
+	pop Lhw
+	pushv nn
+	pushv Nhw
+	pushv Lhw
+	mulff
+	pushv Nh
+	pushv Lh
+	dotpp
+	subff
+	divff
+	pop d
+	S_CLEAR
+	pushif 1
+	pushv d
+	gtff
+	S_GET
+	RS_PUSH
+	RS_GET
+	RS_JZ 9
+	pushif 1
+	pop d
+:9
+	RS_POP
+	pushv Lh
+	pushv Ih
+	subpp
+	pop M
+	pushv Lhw
+	pushv Ihw
+	subff
+	pop Mw
+	pushv Mw
+	pushv Lhw
+	mulff
+	pushv M
+	pushv Lh
+	dotpp
+	subff
+	pushv Mw
+	pushv Ihw
+	mulff
+	pushv M
+	pushv Ih
+	dotpp
+	subff
+	negf
+	divff
+	pop a
+	pushv Lh
+	pushv a
+	mulfp
+	pushv Ih
+	addpp
+	pop M
+	pushv Lhw
+	pushv a
+	mulff
+	pushv Ihw
+	addff
+	pop Mw
+	S_CLEAR
+	pushif 9.99999975e-05
+	pushv Mw
+	pushv Mw
+	mulff
+	pushv M
+	pushv M
+	dotpp
+	subff
+	abs
+	lsff
+	S_GET
+	RS_PUSH
+	RS_GET
+	RS_JZ 10
+	pushv Lh
+	pop M
+	pushv Lhw
+	pop Mw
+:10
+	RS_POP
+	S_CLEAR
+	pushif 0
+	pushv Mw
+	lsff
+	S_GET
+	RS_PUSH
+	RS_GET
+	RS_JZ 11
+	pushv M
+	negp
+	pop M
+	pushv Mw
+	negf
+	pop Mw
+:11
+	RS_POP
+	pushv nn
+	pushv Mw
+	pushv Mw
+	mulff
+	pushv M
+	pushv M
+	dotpp
+	subff
+	abs
+	sqrt
+	mulff
+	pushv Nhw
+	pushv Mw
+	mulff
+	pushv Nh
+	pushv M
+	dotpp
+	subff
+	divff
+	pop ss
+	S_CLEAR
+	pushif 0
+	pushv ss
+	lsff
+	S_GET
+	RS_PUSH
+	RS_GET
+	RS_JZ 12
+	pushv ss
+	negf
+	pop ss
+:12
+	RS_POP
+	S_CLEAR
+	pushif 1
+	pushv ss
+	gtff
+	S_GET
+	RS_PUSH
+	RS_GET
+	RS_JZ 13
+	pushif 1
+	pop ss
+:13
+	RS_POP
+	pushv d
+	pushv Kd
+	mulff
+	setfc
+	ambient
+	pushv Ka
+	mulfc
+	addcc
+	pushv Cl
+	pushv Cs
+	pushv Os
+	mulcc
+	mulcc
+	mulcc
+	pushv total
+	addcc
+	pop total
+	pushv spec
+	pushv ss
+	pow
+	setfc
+	pushv Ks
+	setfc
+	pushv Cl
+	pushv specularcolor
+	pushv Os
+	mulcc
+	mulcc
+	mulcc
+	mulcc
+	pushv total
+	addcc
+	pop total
+	RS_POP
+:6
+	advance_illuminance
+	jnz 4
+:5
+	pushv total
+	pop Ci
+:0
+	RS_POP
+	pushv Os
+	pop Oi

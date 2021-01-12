@@ -1,0 +1,88 @@
+<html lang="en">
+<head>
+<title>OOGL.m - Geomview Manual</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Geomview Manual">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Mathematica.html#Mathematica" title="Mathematica">
+<link rel="prev" href="Mathematica.html#Mathematica" title="Mathematica">
+<link rel="next" href="Geomview_002em.html#Geomview_002em" title="Geomview.m">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="OOGL.m"></a>
+<a name="OOGL_002em"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Geomview_002em.html#Geomview_002em">Geomview.m</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Mathematica.html#Mathematica">Mathematica</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Mathematica.html#Mathematica">Mathematica</a>
+<hr>
+</div>
+
+<h3 class="section">9.1 Using Mathematica to generate OOGL files</h3>
+
+<p>The package <samp><span class="file">OOGL.m</span></samp> allows Mathematica to write graphics objects
+in OOGL format.  To use it, give the command <code>&lt;&lt; OOGL.m</code> to
+Mathematica to load the package.  The
+<code>WriteOOGL[</code><var>file</var><code>,</code><var>graphics</var><code>]</code> command writes an OOGL
+description of the 3D graphics object <var>graphics</var> to the file named
+<var>file</var>.
+
+   <p>This package also provides the <code>Geomview</code> command which sends a
+3D graphics object to Geomview.  The first time you use this command
+it starts up a copy of Geomview.  Later calls send the graphics to the
+same Geomview.  There are two ways to use the <code>Geomview</code> command.
+
+     <dl>
+<dt><code>Geomview[</code><var>graphics</var><code>]</code><dd>Sends the 3D graphics object <var>graphics</var> to Geomview as a geom named
+<code>Mathematica</code>.  Subsequent usage of <code>Geomview[</code><var>graphics</var><code>]</code>
+replaces the <code>Mathematica</code> object in Geomview with the new
+<var>graphics</var>.
+
+     <br><dt><code>Geomview[</code><var>name</var><code>,</code><var>graphics</var><code>]</code><dd>Sends the 3D graphics object <var>graphics</var> to Geomview as a geom named
+<var>name</var>.  You can use multiple calls of this form with different
+names to cause Geomview to display several Mathematica objects at once
+and allow independent control over them. 
+</dl>
+
+<pre class="example">     % math
+     Mathematica 2.0 for SGI Iris
+     Copyright 1988-91 Wolfram Research, Inc.
+      -- GL graphics initialized --
+     
+     In[1] := &lt;&lt;OOGL.m
+     
+     In[2] := Plot3D[Sin[x + Sin[y]], {x,-2,2},{y,-2,2}]
+     
+     Out[2] := -Graphics3D-
+</pre>
+   <p class="noindent">This displays graphics in the usual Mathematica way here.
+<pre class="example">     In[3] := WriteOOGL["math.oogl", %2]
+     
+     Out[3] := -Graphics3D-
+</pre>
+   <p class="noindent">This displays nothing new but writes the file <samp><span class="file">math.oogl</span></samp>. 
+You can now load that file into Geomview on any computer.  Alternately,
+you can use the <code>Geomview</code> command to start up a copy of Geomview
+from within Mathematica.
+<pre class="example">     In[5] := Geomview[%2]
+     
+     Out[5] := -Graphics3D-
+</pre>
+   <!-- ================================================================ -->
+   </body></html>
+

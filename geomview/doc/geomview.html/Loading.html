@@ -1,0 +1,107 @@
+<html lang="en">
+<head>
+<title>Loading - Geomview Manual</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Geomview Manual">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Interaction.html#Interaction" title="Interaction">
+<link rel="prev" href="Basic-Interaction.html#Basic-Interaction" title="Basic Interaction">
+<link rel="next" href="Mouse-Motions.html#Mouse-Motions" title="Mouse Motions">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Loading"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Mouse-Motions.html#Mouse-Motions">Mouse Motions</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Basic-Interaction.html#Basic-Interaction">Basic Interaction</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Interaction.html#Interaction">Interaction</a>
+<hr>
+</div>
+
+<h3 class="section">3.4 Loading Objects Into Geomview</h3>
+
+<p>There are several ways to load an object into Geomview.
+
+     <dl>
+<dt>the <em>Files</em> panel<dd>If you click the <em>Load</em> button in Geomview's <em>Main</em> panel,
+the <em>Files</em> panel will appear.
+
+     <div class="float">
+<a name="figmyfilelist"></a><img src="figs/myfilelist.png" alt="figs/myfilelist.png">
+
+     <p><strong class="float-caption">Figure 3.2: The Files Panel.</strong></p></div>
+This panel lets you select a file from a variety of directories. 
+The top of the panel is a standard Motif file browser.  Below this is
+a list of directories on Geomview's standard search path; click on one
+of these to browse files in that directory.
+
+        <p>To select a file, double-click on its name in the browser at upper right,
+or click on its name and press the &lt;Enter&gt; key, or type the file's name
+into the text box at the bottom of the browser and press &lt;Enter&gt;.
+
+        <p>If the selected file contains OOGL geometric data, it will be added to the
+geomview <em>Targets</em> browser.  If it contains GCL commands instead,
+the file will be interpreted. See <a href="GCL.html#GCL">GCL</a>.
+
+        <p>When the <em>Files</em> panel first appears, the directory selected in the
+directory browser is the current directory &mdash; the one from which you
+invoked Geomview.  The file browser shows <em>all</em> the files in this
+directory, including ones that are not Geomview files.  If you try to
+load a file that doesn't contain either an OOGL object or Geomview
+commands, Geomview will print out an error message.
+
+        <p>The directory browser also lists a second and third directory in
+addition to the current directory.  The second one, which ends in
+<samp><span class="file">data/geom</span></samp>, is the Geomview example data directory.  This contains
+a wide variety of sample objects.  It also contains several
+subdirectories.  In particular, the <samp><span class="file">hyperbolic</span></samp> and
+<samp><span class="file">spherical</span></samp> subdirectories have sample hyperbolic and spherical
+objects, respectively.  Directory entries in the browser look just like
+file entries; to view a subdirectory, click on it.
+
+        <p>The third directory shown in the directory browser, which ends in
+<samp><span class="file">geom</span></samp>, contains several subdirectories with other Geomview files
+in them.  These are used less frequently than the ones in the
+<samp><span class="file">data/geom</span></samp> directory.
+
+        <p>You can change the list of directories shown the <em>Files</em>
+panel's directory browser by using the <code>set-load-path</code> command;
+see <a href="set_002dload_002dpath.html#set_002dload_002dpath"><code>(set-load-path ...)</code></a>.
+
+        <br><dt>the <kbd>&lt;</kbd> keyboard shortcut:<dd>If you type <kbd>&lt;</kbd> in any Geomview window, the <em>Load</em> panel will
+appear.  This is a small version of the <em>Files</em> panel; it contains
+a text field in which you can enter the name of a file to load (or a
+GCL command surrounded by parentheses).  After typing the name of the file
+to load, type <kbd>&lt;Enter&gt;</kbd>; Geomview will
+load the file as if you had loaded it with the <em>Add</em> button in
+the <em>Files</em> panel.  If, after bringing up the small load panel
+with <kbd>&lt;</kbd>, you decide you want to use the larger <em>Files</em> panel
+after all, press the <em>File Browser</em> button. 
+<div class="float">
+<a name="figloadpanel"></a><img src="figs/load.png" alt="figs/load.png">
+
+        <p><strong class="float-caption">Figure 3.3: The Load Panel.</strong></p></div>
+
+        <br><dt>geometry loading commands:<dd>The <code>load</code>, <code>geometry</code>, <code>new-geometry</code>, and <code>read</code>
+GCL commands allow you to load an object into Geomview;
+See <a href="GCL.html#GCL">GCL</a>. See <a href="load.html#load"><code>(load ...)</code></a>. See <a href="new_002dgeometry.html#new_002dgeometry"><code>(new-geometry ...)</code></a>. See <a href="read.html#read"><code>(read ...)</code></a>.
+
+   </dl>
+
+<!-- ================================================================ -->
+   </body></html>
+

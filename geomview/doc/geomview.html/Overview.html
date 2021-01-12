@@ -1,0 +1,85 @@
+<html lang="en">
+<head>
+<title>Overview - Geomview Manual</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Geomview Manual">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="prev" href="Pronunciation.html#Pronunciation" title="Pronunciation">
+<link rel="next" href="Tutorial.html#Tutorial" title="Tutorial">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Overview"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Tutorial.html#Tutorial">Tutorial</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Pronunciation.html#Pronunciation">Pronunciation</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="index.html#Top">Top</a>
+<hr>
+</div>
+
+<h2 class="chapter">1 Overview</h2>
+
+<p>Geomview's main purpose is to display objects whose geometry is given,
+allowing interactive control over details such as point of view, speed
+of movement, appearance of surfaces and lines, and so on.  Geomview can
+handle any number of objects and allows both separate and collective
+control over them.
+
+   <p>The simplest way to use Geomview is as a stand-alone viewer to see
+and manipulate objects.  It can display objects described in a variety
+of file formats.  It comes with a wide variety of example objects, and
+you can create your own objects.
+
+   <p>You can also use Geomview to handle the display of data coming from
+another program that is running simultaneously.  As the other program
+changes the data, the Geomview image reflects the changes.  Programs
+that generate objects and use Geomview to display them are called
+<em>external modules</em>.  External modules can control almost all
+aspects of Geomview.  The idea here is that many aspects of the display
+and interaction parts of geometry software are independent of the
+geometric content and can be collected together in a single piece of
+software that can be used in a wide variety of situations.  The author
+of the external module can then concentrate on implementing the desired
+algorithms and leave the display aspects to Geomview.  Geomview comes
+with a collection of sample external modules, and this manual describes
+how to write your own.
+
+   <p>Geomview is the product of an effort at the Geometry Center to provide
+interactive geometry software that is particularly appropriate for
+mathematics research and education.  In particular, Geomview can display
+things in hyperbolic and spherical space as well as Euclidean space.
+
+   <p>Geomview allows multiple independently controllable objects and
+cameras.  It provides interactive control for motion, appearances
+(including lighting, shading, and materials), picking on an object,
+edge or vertex level, snapshots in SGI image file or Renderman RIB
+format, and adding or deleting objects is provided through direct
+mouse manipulation, control panels, and keyboard shortcuts.
+
+   <p>Geomview supports the following simple data types: polyhedra with
+shared vertices (.off), quadrilaterals, rectangular meshes, vectors,
+and Bezier surface patches of arbitrary degree including rational
+patches. Object hierarchies can be constructed with lists of objects
+and instances of object(s) transformed by one or many 4x4 matrices. 
+Arbitrary portions of changing hierarchies may be transmitted by
+creating named references.
+
+   <p>Geomview can display 3-D graphics output from Mathematica and Maple.
+
+<!-- **************************************************************** -->
+   </body></html>
+
